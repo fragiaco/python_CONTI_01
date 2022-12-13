@@ -53,7 +53,7 @@ Frame1in.place(x=15, y=768, width=500, height=60)
 # Frame 2 - right side Frame
 Frame2 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame2.place(x=590, y=85, width=1070, height=850)
-# Frame 2in - bottom side right Frame
+# Frame 2in - treeview right Frame
 Frame2in_tree = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_tree.place(x=15, y=15, width=1015, height=335)
 # Frame 2in - bottom side right Frame
@@ -375,6 +375,60 @@ B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20
 # Create striped row tags
 my_tree.tag_configure('oddrow', background="white")
 my_tree.tag_configure('evenrow', background="lightblue")
+##############################
+
+#  Record  Boxes
+# data_frame = LabelFrame(root, text="Record")
+# data_frame.pack(fill="x", expand="yes", padx=20)
+# Frame 2in - bottom side right Frame
+# Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
+# Frame2in_bottom.place(x=15, y=360, width=1015, height=470)
+
+# Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
+# Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
+
+Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Id_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+Mese_entry = Entry(Frame2in_bottom)
+Mese_entry.grid(row=0, column=1, padx=10, pady=10)
+
+Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+Anno_entry = Entry(Frame2in_bottom)
+Anno_entry.grid(row=1, column=1, padx=10, pady=10)
+
+Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Mese_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Mese_entry = Entry(Frame2in_bottom)
+Mese_entry.grid(row=2, column=1, padx=10, pady=10)
+
+Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Entrate_Uscite_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+Entrate_Uscite_entry = Entry(Frame2in_bottom)
+Entrate_Uscite_entry.grid(row=3, column=1, padx=10, pady=10)
+#
+Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Categoria_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Categorie_Entrate_entry = Entry(Frame2in_bottom)
+Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
+#
+Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Voce_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+Voce_label_entry = Entry(Frame2in_bottom)
+Voce_label_entry.grid(row=5, column=1, padx=10, pady=10)
+#
+Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+Euro_label_entry = Entry(Frame2in_bottom)
+Euro_label_entry.grid(row=6, column=1, padx=10, pady=10)
+
+
+
+
+# Bind the treeview
+# my_tree.bind("<ButtonRelease-1>", select_record)
+
+
 
 
 
