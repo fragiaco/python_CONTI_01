@@ -451,6 +451,155 @@ def select_record(e):
 my_tree.bind("<ButtonRelease-1>", select_record)
 
 
+#######################
+
+def pick_Categoria_update(e):
+    if my_combo_update.get() == "Entrate":
+        categoria_combo_update.config(values=Categorie_Entrate)
+        categoria_combo_update.current(0)
+
+    if my_combo_update.get() == "Uscite":
+        categoria_combo_update.config(values=Categorie_Uscite)
+        categoria_combo_update.current(0)
+
+
+def pick_Voce_update(e):
+    # VOCI ENTRATA
+    if categoria_combo_update.get() == "Collette_Chiesa":
+        voce_combo_update.config(values=Collette_Chiesa)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Congrua":
+        voce_combo_update.config(values=Congrua)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Interessi":
+        voce_combo_update.config(values=Interessi)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Messe celebrate":
+        voce_combo_update.config(values=Messe_celebrate)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Offerte":
+        voce_combo_update.config(values=Offerte)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Pensioni":
+        voce_combo_update.config(values=Pensioni)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Servizi_religiosi":
+        voce_combo_update.config(values=Servizi_religiosi)
+        voce_combo_update.current(0)
+
+    # VOCI USCITA
+
+    if categoria_combo_update.get() == "Acquisti_Chiesa":
+        voce_combo_update.config(values=Acquisti_Chiesa)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Acquisti_Convento":
+        voce_combo_update.config(values=Acquisti_Convento)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Acquisti_Orto_Animali":
+        voce_combo_update.config(values=Acquisti_Orto_Animali)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Cultura":
+        voce_combo_update.config(values=Cultura)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Curia_provinciale":
+        voce_combo_update.config(values=Curia_provinciale)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Domestici":
+        voce_combo_update.config(values=Domestici)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Elargizioni":
+        voce_combo_update.config(values=Elargizioni)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Utenze":
+        voce_combo_update.config(values=Utenze)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Ferie_Viaggi":
+        voce_combo_update.config(values=Ferie_Viaggi)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Igiene":
+        voce_combo_update.config(values=Igiene)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Imposte":
+        voce_combo_update.config(values=Imposte)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Lavori_Impianti":
+        voce_combo_update.config(values=Lavori_Impianti)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Posta_Cancelleria":
+        voce_combo_update.config(values=Posta_Cancelleria)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Salute":
+        voce_combo_update.config(values=Salute)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Veicoli_motore":
+        voce_combo_update.config(values=Veicoli_motore)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Vestiario":
+        voce_combo_update.config(values=Vestiario)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Vitto":
+        voce_combo_update.config(values=Vitto)
+        voce_combo_update.current(0)
+
+    if categoria_combo_update.get() == "Eccedenza_Cassa":
+        voce_combo_update.config(values=Eccedenza_Cassa)
+        voce_combo_update.current(0)
+
+# Dropbox Anno
+anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni)
+anno_combo_update.current(0)
+anno_combo_update.grid(row=1, column=4)
+# Dropbox Mesi
+mesi_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Mesi)
+mesi_combo_update.current(0)
+mesi_combo_update.grid(row=2, column=4)
+# Dropbox Entrate_Uscite
+my_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Entrate_Uscite)
+#my_combo.current(0)
+my_combo_update.grid(row=3, column=4)
+
+# Bind the ComboBox
+my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
+
+# Categoria ComboBox
+categoria_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""])
+categoria_combo_update.current(0)
+categoria_combo_update.grid(row=4, column=4)
+
+# Bind the ComboBox
+categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
+
+# Voce Entrata_Spesa ComboBox Combo Box
+voce_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""])
+voce_combo_update.current(0)
+voce_combo_update.grid(row=5, column=4)
+
+# euro ENTRY
+euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE)
+euro_update.grid(row=6, column=4)
+
 
 
 
