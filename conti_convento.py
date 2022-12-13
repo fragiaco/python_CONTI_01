@@ -389,37 +389,37 @@ my_tree.tag_configure('evenrow', background="lightblue")
 
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
-Id_entry = Entry(Frame2in_bottom)
+Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_entry.grid(row=0, column=1, padx=10, pady=10)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-Anno_entry = Entry(Frame2in_bottom)
+Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_entry.grid(row=1, column=1, padx=10, pady=10)
 
 Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Mese_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-Mese_entry = Entry(Frame2in_bottom)
+Mese_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Mese_entry.grid(row=2, column=1, padx=10, pady=10)
 
 Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Entrate_Uscite_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
-Entrate_Uscite_entry = Entry(Frame2in_bottom)
+Entrate_Uscite_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Entrate_Uscite_entry.grid(row=3, column=1, padx=10, pady=10)
 #
 Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Categoria_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
-Categorie_Entrate_entry = Entry(Frame2in_bottom)
+Categorie_Entrate_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
 #
 Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Voce_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
-Voce_entry = Entry(Frame2in_bottom)
+Voce_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Voce_entry.grid(row=5, column=1, padx=10, pady=10)
 #
 Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-Euro_entry = Entry(Frame2in_bottom)
+Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_entry.grid(row=6, column=1, padx=10, pady=10)
 
 def select_record(e):
