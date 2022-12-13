@@ -2,6 +2,7 @@ from tkinter         import *
 from tkinter         import ttk
 from Origine         import *
 import sqlite3
+import calculator
 
 conn = sqlite3.connect('database_conti')
 
@@ -376,7 +377,7 @@ B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20
 my_tree.tag_configure('oddrow', background="white")
 my_tree.tag_configure('evenrow', background="lightblue")
 ##############################
-
+Anno_var = StringVar()
 #  Record  Boxes
 # data_frame = LabelFrame(root, text="Record")
 # data_frame.pack(fill="x", expand="yes", padx=20)
@@ -394,7 +395,7 @@ Id_entry.grid(row=0, column=1, padx=10, pady=10)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=Anno_var)
 Anno_entry.grid(row=1, column=1, padx=10, pady=10)
 
 Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
@@ -422,6 +423,8 @@ Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
 Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_entry.grid(row=6, column=1, padx=10, pady=10)
 
+
+
 def select_record(e):
 	# Clear entry boxes
 	Id_entry.delete(0, END)
@@ -448,7 +451,7 @@ def select_record(e):
 
 
 # Bind the treeview
-my_tree.bind("<ButtonRelease-1>", select_record)
+my_tree.bind("<ButtonRelease-1>", select_record, print('ciao'))
 
 #######################
 
@@ -569,6 +572,7 @@ def pick_Voce_update(e):
         voce_combo_update.current(0)
 
 # Dropbox Anno
+
 anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni)
 anno_combo_update.set('')
 anno_combo_update.grid(row=1, column=4)
@@ -608,3 +612,4 @@ query_database()
 
 conn.close()
 root.mainloop()
+
