@@ -451,27 +451,7 @@ def select_record(e):
 my_tree.bind("<ButtonRelease-1>", select_record)
 
 #######################
-def loop(): #
-    # Grab record Id
-    selected_up = my_tree.focus()
-    print(selected_up)
-    # Grab record values
-    values = my_tree.item(selected_up, 'values')
-    print(values)
-    # Bind the ComboBox
-    #categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
 
-
-    # # outpus to entry boxes
-    # Id_entry.insert(0, values[0])
-    # Anno_entry.insert(0, values[1])
-    # for opt in anno_combo_update['values']: # Loop through all options of tuple
-    # #   if(opt != a.get()):
-    #     print(opt)
-    #     print('found it!')
-    #         my_new.append(opt) # Add to new list
-    # cb1['values']=my_new # assign to new list
-    # cb1.delete(0,'end') # remove from current selection text
 #######################
 
 def pick_Categoria_update(e):
@@ -625,6 +605,6 @@ euro_update.grid(row=6, column=4)
 
 
 query_database()
-loop()
+
 conn.close()
 root.mainloop()
