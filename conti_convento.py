@@ -389,8 +389,8 @@ my_tree.tag_configure('evenrow', background="lightblue")
 
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
-Mese_entry = Entry(Frame2in_bottom)
-Mese_entry.grid(row=0, column=1, padx=10, pady=10)
+Id_entry = Entry(Frame2in_bottom)
+Id_entry.grid(row=0, column=1, padx=10, pady=10)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
@@ -414,19 +414,41 @@ Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
 #
 Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Voce_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
-Voce_label_entry = Entry(Frame2in_bottom)
-Voce_label_entry.grid(row=5, column=1, padx=10, pady=10)
+Voce_entry = Entry(Frame2in_bottom)
+Voce_entry.grid(row=5, column=1, padx=10, pady=10)
 #
 Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-Euro_label_entry = Entry(Frame2in_bottom)
-Euro_label_entry.grid(row=6, column=1, padx=10, pady=10)
+Euro_entry = Entry(Frame2in_bottom)
+Euro_entry.grid(row=6, column=1, padx=10, pady=10)
 
+def select_record(e):
+	# Clear entry boxes
+	Id_entry.delete(0, END)
+	Anno_entry.delete(0, END)
+	Mese_entry.delete(0, END)
+	Entrate_Uscite_entry.delete(0, END)
+	Categorie_Entrate_entry.delete(0, END)
+	Voce_entry.delete(0, END)
+	Euro_entry.delete(0, END)
 
+	# Grab record Number
+	selected = my_tree.focus()
+	# Grab record values
+	values = my_tree.item(selected, 'values')
+
+	# outpus to entry boxes
+	Id_entry.insert(0, values[0])
+	Anno_entry.insert(0, values[1])
+	Mese_entry.insert(0, values[2])
+	Entrate_Uscite_entry.insert(0, values[3])
+	Categorie_Entrate_entry.insert(0, values[4])
+	Voce_entry.insert(0, values[5])
+	Euro_entry.insert(0, values[6])
 
 
 # Bind the treeview
-# my_tree.bind("<ButtonRelease-1>", select_record)
+my_tree.bind("<ButtonRelease-1>", select_record)
 
 
 
