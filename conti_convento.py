@@ -459,7 +459,7 @@ def select_record(e):
     entrate_uscite_stringvar=Voce_entry.insert(0, values[5])
     euro_stringvar=Euro_entry.insert(0, values[6])
 
-
+    print(Anno_entry.get())
 
 def Anno_retrive(e):
     Anno_ok=anno_stringvar.get()
