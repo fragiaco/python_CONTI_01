@@ -467,7 +467,7 @@ def Anno_retrive(e):
 
 
 # Bind the treeview
-my_tree.bind("<ButtonRelease-1>", select_record, Anno_retrive)
+my_tree.bind("<ButtonRelease-1>", select_record)
 
 #######################
 
@@ -476,6 +476,7 @@ my_tree.bind("<ButtonRelease-1>", select_record, Anno_retrive)
 def pick_Categoria_update(e):
     if my_combo_update.get() == "Entrate":
         categoria_combo_update.config(values=Categorie_Entrate)
+        #categoria_combo_update.set(Anno_entry.get())
         categoria_combo_update.current(0)
 
     if my_combo_update.get() == "Uscite":
