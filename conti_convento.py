@@ -2,6 +2,7 @@ from tkinter         import *
 from tkinter         import ttk
 from Origine         import *
 import sqlite3
+import copy
 import calculator
 
 conn = sqlite3.connect('database_conti')
@@ -388,6 +389,8 @@ euro_stringvar = StringVar()
 
 
 
+
+
 #  Record  Boxes
 # data_frame = LabelFrame(root, text="Record")
 # data_frame.pack(fill="x", expand="yes", padx=20)
@@ -401,37 +404,37 @@ euro_stringvar = StringVar()
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Id_entry.grid(row=0, column=1, padx=10, pady=10)
+Id_entry.grid(row=0, column=1)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
-Anno_entry.grid(row=1, column=1, padx=10, pady=10)
+# Anno_entry.grid(row=1, column=1, padx=10, pady=10)
 
 Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Mese_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 Mese_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Mese_entry.grid(row=2, column=1, padx=10, pady=10)
+#Mese_entry.grid(row=2, column=1, padx=10, pady=10)
 
 Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Entrate_Uscite_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 Entrate_Uscite_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Entrate_Uscite_entry.grid(row=3, column=1, padx=10, pady=10)
+#Entrate_Uscite_entry.grid(row=3, column=1, padx=10, pady=10)
 #
 Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Categoria_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 Categorie_Entrate_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
+#Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
 #
 Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Voce_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
 Voce_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Voce_entry.grid(row=5, column=1, padx=10, pady=10)
+#Voce_entry.grid(row=5, column=1, padx=10, pady=10)
 #
 Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
 Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Euro_entry.grid(row=6, column=1, padx=10, pady=10)
+#Euro_entry.grid(row=6, column=1, padx=10, pady=10)
 
 
 
@@ -461,9 +464,16 @@ def select_record(e):
 
     print(Anno_entry.get())
 
-def Anno_retrive(e):
-    Anno_ok=anno_stringvar.get()
-    print('il valore: ' )
+
+
+    #new_Anno_entry = copy.copy(Anno_entry.get())
+    # print(new_Anno_entry)
+
+
+#     Anno_retrive(e)
+# def Anno_retrive(e):
+#     new_Anno_entry= Anno_entry.get()
+#     print('il valore: ' + new_Anno_entry )
 
 
 # Bind the treeview
@@ -476,7 +486,7 @@ my_tree.bind("<ButtonRelease-1>", select_record)
 def pick_Categoria_update(e):
     if my_combo_update.get() == "Entrate":
         categoria_combo_update.config(values=Categorie_Entrate)
-        #categoria_combo_update.set(Anno_entry.get())
+        #categoria_combo_update.set(entrate_uscite_stringvar.get())
         categoria_combo_update.current(0)
 
     if my_combo_update.get() == "Uscite":
@@ -589,18 +599,19 @@ def pick_Voce_update(e):
         voce_combo_update.current(0)
 
 # Dropbox Anno
-
-anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni)
-anno_combo_update.set('')
-anno_combo_update.grid(row=1, column=4)
+anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=anno_stringvar)
+anno_combo_update.set(anno_stringvar.get())
+# anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=new_Anno_entry)
+# anno_combo_update.set(new_Anno_entry)
+anno_combo_update.grid(row=1, column=1)
 # Dropbox Mesi
 mesi_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Mesi)
 mesi_combo_update.set('')
-mesi_combo_update.grid(row=2, column=4)
+mesi_combo_update.grid(row=2, column=1)
 # Dropbox Entrate_Uscite
 my_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Entrate_Uscite)
 #my_combo.current(0)
-my_combo_update.grid(row=3, column=4)
+my_combo_update.grid(row=3, column=1)
 
 # Bind the ComboBox
 my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
@@ -608,7 +619,7 @@ my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
 # Categoria ComboBox
 categoria_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""])
 categoria_combo_update.current(0)
-categoria_combo_update.grid(row=4, column=4)
+categoria_combo_update.grid(row=4, column=1)
 
 # Bind the ComboBox
 categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
@@ -616,11 +627,11 @@ categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
 # Voce Entrata_Spesa ComboBox Combo Box
 voce_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""])
 voce_combo_update.current(0)
-voce_combo_update.grid(row=5, column=4)
+voce_combo_update.grid(row=5, column=1)
 
 # euro ENTRY
 euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE)
-euro_update.grid(row=6, column=4)
+euro_update.grid(row=6, column=1)
 
 
 
