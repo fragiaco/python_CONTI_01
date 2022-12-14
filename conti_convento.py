@@ -436,36 +436,38 @@ Euro_entry.grid(row=6, column=1, padx=10, pady=10)
 
 
 def select_record(e):
-	# Clear entry boxes
-	Id_entry.delete(0, END)
-	Anno_entry.delete(0, END)
-	Mese_entry.delete(0, END)
-	Entrate_Uscite_entry.delete(0, END)
-	Categorie_Entrate_entry.delete(0, END)
-	Voce_entry.delete(0, END)
-	Euro_entry.delete(0, END)
+# Clear entry boxes
+    Id_entry.delete(0, END)
+    Anno_entry.delete(0, END)
+    Mese_entry.delete(0, END)
+    Entrate_Uscite_entry.delete(0, END)
+    Categorie_Entrate_entry.delete(0, END)
+    Voce_entry.delete(0, END)
+    Euro_entry.delete(0, END)
 
-	# Grab record Number
-	selected = my_tree.focus()
-	# Grab record values
-	values = my_tree.item(selected, 'values')
+# Grab record Number
+    selected = my_tree.focus()
+# Grab record values
+    values = my_tree.item(selected, 'values')
 
-	# outpus to entry boxes
-	Id_entry.insert(0, values[0])
-	Anno_entry.insert(0, values[1])
-	Mese_entry.insert(0, values[2])
-	Entrate_Uscite_entry.insert(0, values[3])
-	Categorie_Entrate_entry.insert(0, values[4])
-	Voce_entry.insert(0, values[5])
-	Euro_entry.insert(0, values[6])
+# outpus to entry boxes
+    id_stringvar=Id_entry.insert(0, values[0])
+    anno_stringvar=Anno_entry.insert(0, values[1])
+    mese_stringvar=Mese_entry.insert(0, values[2])
+    entrate_uscite_stringvar=Entrate_Uscite_entry.insert(0, values[3])
+    categoria_stringvar=Categorie_Entrate_entry.insert(0, values[4])
+    entrate_uscite_stringvar=Voce_entry.insert(0, values[5])
+    euro_stringvar=Euro_entry.insert(0, values[6])
 
-def Anno_retrive():
+
+
+def Anno_retrive(e):
     Anno_ok=anno_stringvar.get()
-    print('il valore: ' + Anno_ok)
+    print('il valore: ' )
 
 
 # Bind the treeview
-my_tree.bind("<ButtonRelease-1>", select_record, Anno_retrive())
+my_tree.bind("<ButtonRelease-1>", select_record, Anno_retrive)
 
 #######################
 
