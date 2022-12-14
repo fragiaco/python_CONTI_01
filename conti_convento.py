@@ -377,7 +377,17 @@ B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20
 my_tree.tag_configure('oddrow', background="white")
 my_tree.tag_configure('evenrow', background="lightblue")
 ##############################
-Anno_var = StringVar()
+anno_stringvar = StringVar()
+mese_stringvar = StringVar()
+categoria_stringvar = StringVar()
+entrate_uscite_stringvar = StringVar()
+euro_stringvar = StringVar()
+
+
+
+
+
+
 #  Record  Boxes
 # data_frame = LabelFrame(root, text="Record")
 # data_frame.pack(fill="x", expand="yes", padx=20)
@@ -395,7 +405,7 @@ Id_entry.grid(row=0, column=1, padx=10, pady=10)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=Anno_var)
+Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
 Anno_entry.grid(row=1, column=1, padx=10, pady=10)
 
 Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
@@ -449,9 +459,13 @@ def select_record(e):
 	Voce_entry.insert(0, values[5])
 	Euro_entry.insert(0, values[6])
 
+def Anno_retrive():
+    Anno_ok=anno_stringvar.get()
+    print('il valore: ' + Anno_ok)
+
 
 # Bind the treeview
-my_tree.bind("<ButtonRelease-1>", select_record, print('ciao'))
+my_tree.bind("<ButtonRelease-1>", select_record, Anno_retrive())
 
 #######################
 
