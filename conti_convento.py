@@ -659,7 +659,56 @@ def remove_one():
 
 	# Delete From Database
     c.execute("DELETE from TABLE_Conti WHERE oid=" + Id_entry.get())
+######
+    # Update record
+# def update_record():
+#     # Grab the record number
+#     selected = my_tree.focus()
+#     # Update record
+#     my_tree.item(selected, text="", values=(Id_entry.get(), Anno_entry.get(), Mese_entry.get(), Entrate_Uscite_entry.get(), Categorie_Entrate_entry.get(), Voce_entry.get(), Euro_entry.get()))
+#
+#     # Update the database
+#     # Create a database or connect to one that exists
+#     conn = sqlite3.connect('database_conti')
+# 
+#     # Create a cursor instance
+#     c = conn.cursor()
+#
+#     c.execute("""UPDATE TABLE_Conti SET
+#     		first_name = :first,
+#     		last_name = :last,
+#     		address = :address,
+#     		city = :city,
+#     		state = :state,
+#     		zipcode = :zipcode
+#
+#     		WHERE oid = :oid""",
+#                   {
+#                       'first': fn_entry.get(),
+#                       'last': ln_entry.get(),
+#                       'address': address_entry.get(),
+#                       'city': city_entry.get(),
+#                       'state': state_entry.get(),
+#                       'zipcode': zipcode_entry.get(),
+#                       'oid': id_entry.get(),
+#                   })
+#
+#         # Commit changes
+#         conn.commit()
+#
+#         # Close our connection
+#         conn.close()
+#
+#         # Clear entry boxes
+#         fn_entry.delete(0, END)
+#         ln_entry.delete(0, END)
+#         id_entry.delete(0, END)
+#         address_entry.delete(0, END)
+#         city_entry.delete(0, END)
+#         state_entry.delete(0, END)
+#         zipcode_entry.delete(0, END)
 
+######
 
 # Commit changes
     conn.commit()
