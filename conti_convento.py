@@ -1,6 +1,6 @@
 from tkinter         import *
 from tkinter         import ttk
-
+from tkinter         import messagebox
 import calculator
 from Origine         import *
 import sqlite3
@@ -535,14 +535,6 @@ def query_database():
 #######################################
 
 
-
-# B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
-
-B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
-B_update = Button(Frame1in, text='update', width=10).grid(row=0, column=1, padx=20, pady=15)
-B_delete = Button(Frame1in, text='delete', width=10).grid(row=0, column=2, padx=20, pady=15)
-B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20, pady=15)
-
 ################treeviw
 
 
@@ -655,7 +647,29 @@ def select_record(e):
 my_tree.bind("<ButtonRelease-1>", select_record)
 
 #######################
+def remove_one():
+    x = my_tree.selection()[0]
+    my_tree.delete(x)
 
+	# Create a database or connect to one that exists
+    conn = sqlite3.connect('database_conti')
+
+	# Create a cursor instance
+    c = conn.cursor()
+
+	# Delete From Database
+    c.execute("DELETE from TABLE_Conti WHERE oid=" + Id_entry.get())
+
+
+# Commit changes
+    conn.commit()
+
+# Close our connection
+    conn.close()
+
+
+# Add a little message box for fun
+    messagebox.showinfo("Deleted!", "Your Record Has Been Deleted!")
 #######################
 
 def pick_Categoria_update(e):
@@ -808,7 +822,17 @@ voce_combo_update.grid(row=6, column=1)
 euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
 euro_update.grid(row=7, column=1)
 
+####
 
+
+# B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
+
+B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
+B_update = Button(Frame1in, text='update', width=10).grid(row=0, column=1, padx=20, pady=15)
+B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
+B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20, pady=15)
+
+#####
 
 
 query_database()
