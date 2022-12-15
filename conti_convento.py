@@ -52,6 +52,9 @@ title.pack(side=TOP, fill=X)
 # Frame 1 - left side Frame
 Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
+#FRame calcolatrice
+Frame_calc=Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
+Frame_calc.place(x=15, y=468, width=500, height=290)
 # Frame 1 - bottom side Frame
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
