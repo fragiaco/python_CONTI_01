@@ -267,7 +267,7 @@ equal.grid(row=5, column=2)
 
 clear = Button(Frame_calc, text='Clear', fg='black', bg='light grey',
 			command=clear, height=1, width=7)
-clear.grid(row=5, column='1')
+clear.grid(row=5, column=1)
 
 Decimal= Button(Frame_calc, text='.', fg='black', bg='light grey',
 				command=lambda: press('.'), height=1, width=7)
@@ -507,13 +507,15 @@ def query_database():
     records = c.fetchall()
 
 
+    count=0
 
     for record in records:
         print(record)
 
+    #record[0] = id key
 
     for record in records:
-        if record[0] % 2 == 0:
+        if count % 2 == 0:
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6]),
                            tags=('evenrow'))
@@ -522,9 +524,12 @@ def query_database():
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6]),
                            tags=('oddrow'))
 
-    child_id = my_tree.get_children()[0]  # for instance the last element in tuple
-    my_tree.focus(child_id)
-    my_tree.selection_set(child_id)
+        count +=1
+    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+    my_tree.focus(child_id) #evidenziata
+    #print(my_tree.focus(child_id)) #stampa l'anno
+    my_tree.selection_set(child_id)#oppure questo
+
 
     # Commit changes
     conn.commit()
@@ -541,6 +546,8 @@ def query_database():
 # Create striped row tags
 my_tree.tag_configure('oddrow', background="white")
 my_tree.tag_configure('evenrow', background="lightblue")
+
+
 ##############################
 anno_stringvar = StringVar()
 mese_stringvar = StringVar()
@@ -551,20 +558,6 @@ euro_stringvar = StringVar()
 
 
 
-
-
-
-
-
-#  Record  Boxes
-# data_frame = LabelFrame(root, text="Record")
-# data_frame.pack(fill="x", expand="yes", padx=20)
-# Frame 2in - bottom side right Frame
-# Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
-# Frame2in_bottom.place(x=15, y=360, width=1015, height=470)
-
-# Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
-# Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere', font=('verdana', 20, 'bold'), bg='blue', fg='white')
 Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
@@ -616,31 +609,23 @@ def select_record(e):
     Euro_entry.delete(0, END)
 
 # Grab record Number
-    selected = my_tree.focus()
+    selected = my_tree.focus() #focus restituisce l'ID key
+    print(selected) #esempio 38
 # Grab record values
     values = my_tree.item(selected, 'values')
+    print(values) #esempio ('38', '2022', 'gennaio', 'Entrate', 'Messe_celebrate', '', '39.0')
 
 # outpus to entry boxes
-    id_stringvar=Id_entry.insert(0, values[0])
-    anno_stringvar=Anno_entry.insert(0, values[1])
-    mese_stringvar=Mese_entry.insert(0, values[2])
-    entrate_uscite_stringvar=Entrate_Uscite_entry.insert(0, values[3])
-    categoria_stringvar=Categorie_Entrate_entry.insert(0, values[4])
-    voce_stringvar=Voce_entry.insert(0, values[5])
-    euro_stringvar=Euro_entry.insert(0, values[6])
+    Id_entry.insert(0, values[0]) #0 penso significa all'inizio
+    Anno_entry.insert(0, values[1])
+    Mese_entry.insert(0, values[2])
+    Entrate_Uscite_entry.insert(0, values[3])
+    Categorie_Entrate_entry.insert(0, values[4])
+    Voce_entry.insert(0, values[5])
+    Euro_entry.insert(0, values[6])
 
-    print(Anno_entry.get())
+    #print(Anno_entry.get())
 
-
-
-    #new_Anno_entry = copy.copy(Anno_entry.get())
-    # print(new_Anno_entry)
-
-
-#     Anno_retrive(e)
-# def Anno_retrive(e):
-#     new_Anno_entry= Anno_entry.get()
-#     print('il valore: ' + new_Anno_entry )
 
 
 # Bind the treeview
@@ -648,7 +633,8 @@ my_tree.bind("<ButtonRelease-1>", select_record)
 
 #######################
 def remove_one():
-    x = my_tree.selection()[0]
+    #x = my_tree.selection()[0] #restituisce l'Id key
+    x = my_tree.focus()
     my_tree.delete(x)
 
 	# Create a database or connect to one that exists
@@ -659,6 +645,17 @@ def remove_one():
 
 	# Delete From Database
     c.execute("DELETE from TABLE_Conti WHERE oid=" + Id_entry.get())
+
+    # Commit changes
+    conn.commit()
+
+    # Close our connection
+    conn.close()
+
+
+# Add a little message box for fun
+    messagebox.showinfo("Deleted!", "Your Record Has Been Deleted!")
+#######################
 ######
     # Update record
 # def update_record():
@@ -709,18 +706,6 @@ def remove_one():
 #         zipcode_entry.delete(0, END)
 
 ######
-
-# Commit changes
-    conn.commit()
-
-# Close our connection
-    conn.close()
-
-
-# Add a little message box for fun
-    messagebox.showinfo("Deleted!", "Your Record Has Been Deleted!")
-#######################
-
 def pick_Categoria_update(e):
     if my_combo_update.get() == "Entrate":
         categoria_combo_update.config(values=Categorie_Entrate)
