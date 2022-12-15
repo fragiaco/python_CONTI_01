@@ -1,9 +1,11 @@
 from tkinter         import *
 from tkinter         import ttk
+
+import calculator
 from Origine         import *
 import sqlite3
 import copy
-import calculator
+from calculator import *
 
 conn = sqlite3.connect('database_conti')
 
@@ -28,6 +30,7 @@ print('Sei connesso al database_conti')
 conn.commit()
 
 root = Tk()
+
 
 # root.title("Programma gestione conti Convento Offida")
 # root.geometry('1680x950+0+0')
@@ -640,5 +643,6 @@ euro_update.grid(row=6, column=1)
 query_database()
 
 conn.close()
+
 root.mainloop()
 
