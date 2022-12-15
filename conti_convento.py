@@ -54,7 +54,7 @@ Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
 #FRame calcolatrice
 Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-Frame_calc.place(x=220, y=468, width=275, height=185)
+Frame_calc.place(x=15, y=468, width=410, height=185)
 # Frame 1 - bottom side Frame
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
@@ -199,7 +199,7 @@ expression_field = Entry(Frame_calc, textvariable=equation)
 	# grid method is used for placing
 	# the widgets at respective positions
 	# in table like structure .
-expression_field.grid(columnspan=4, ipadx=70)
+# expression_field.grid(columnspan=4, ipadx=70)
 
 	# create a Buttons and place at a particular
 	# location inside the root window .
@@ -422,7 +422,8 @@ voce_combo.current(0)
 voce_combo.grid(row=10, column=1)
 
 # euro ENTRY
-euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE)
+# euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE)
+euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=equation)
 euro.grid(row=12, column=1)
 
 
