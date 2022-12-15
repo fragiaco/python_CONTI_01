@@ -670,7 +670,8 @@ def remove_one():
 #     # Update the database
 #     # Create a database or connect to one that exists
 #     conn = sqlite3.connect('database_conti')
-# 
+#
+
 #     # Create a cursor instance
 #     c = conn.cursor()
 #
