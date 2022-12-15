@@ -5,7 +5,7 @@ import calculator
 from Origine         import *
 import sqlite3
 import copy
-from calculator import *
+
 
 conn = sqlite3.connect('database_conti')
 
@@ -54,7 +54,7 @@ Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
 #FRame calcolatrice
 Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-Frame_calc.place(x=15, y=468, width=410, height=185)
+Frame_calc.place(x=15, y=468, width=410, height=167)
 # Frame 1 - bottom side Frame
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
@@ -573,41 +573,43 @@ euro_stringvar = StringVar()
 
 # Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
 # Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
+Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere', font=('verdana', 20, 'bold'), bg='blue', fg='white')
+Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Id_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
+Id_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', width=17)
-Id_entry.grid(row=0, column=1)
+Id_entry.grid(row=1, column=1)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Anno_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+Anno_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
-# Anno_entry.grid(row=1, column=1, padx=10, pady=10)
+# Anno_entry.grid(row=2, column=1, padx=10, pady=10)
 
 Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Mese_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Mese_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 Mese_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=mese_stringvar)
-#Mese_entry.grid(row=2, column=1, padx=10, pady=10)
+#Mese_entry.grid(row=3, column=1, padx=10, pady=10)
 
 Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Entrate_Uscite_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+Entrate_Uscite_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 Entrate_Uscite_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=entrate_uscite_stringvar)
-#Entrate_Uscite_entry.grid(row=3, column=1, padx=10, pady=10)
+#Entrate_Uscite_entry.grid(row=4, column=1, padx=10, pady=10)
 #
 Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Categoria_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Categoria_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
 Categorie_Entrate_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=categoria_stringvar)
-#Categorie_Entrate_entry.grid(row=4, column=1, padx=10, pady=10)
+#Categorie_Entrate_entry.grid(row=5, column=1, padx=10, pady=10)
 #
 Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Voce_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+Voce_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
 Voce_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=voce_stringvar)
-#Voce_entry.grid(row=5, column=1, padx=10, pady=10)
+#Voce_entry.grid(row=6, column=1, padx=10, pady=10)
 #
 Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Euro_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+Euro_label.grid(row=7, column=0, padx=10, pady=10, sticky='w')
 Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=euro_stringvar)
-#Euro_entry.grid(row=6, column=1, padx=10, pady=10)
+#Euro_entry.grid(row=7, column=1, padx=10, pady=10)
 
 
 
@@ -776,15 +778,15 @@ anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values
 anno_combo_update.set(anno_stringvar.get())
 # anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=new_Anno_entry)
 # anno_combo_update.set(new_Anno_entry)
-anno_combo_update.grid(row=1, column=1)
+anno_combo_update.grid(row=2, column=1)
 # Dropbox Mesi
 mesi_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Mesi, textvariable=mese_stringvar)
 mesi_combo_update.set(mese_stringvar.get())
-mesi_combo_update.grid(row=2, column=1)
+mesi_combo_update.grid(row=3, column=1)
 # Dropbox Entrate_Uscite
 my_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Entrate_Uscite, textvariable=entrate_uscite_stringvar)
 #my_combo.current(0)
-my_combo_update.grid(row=3, column=1)
+my_combo_update.grid(row=4, column=1)
 
 # Bind the ComboBox
 my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
@@ -792,7 +794,7 @@ my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
 # Categoria ComboBox
 categoria_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=categoria_stringvar)
 categoria_combo_update.current(0)
-categoria_combo_update.grid(row=4, column=1)
+categoria_combo_update.grid(row=5, column=1)
 
 # Bind the ComboBox
 categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
@@ -800,11 +802,11 @@ categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
 # Voce Entrata_Spesa ComboBox Combo Box
 voce_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=voce_stringvar)
 voce_combo_update.current(0)
-voce_combo_update.grid(row=5, column=1)
+voce_combo_update.grid(row=6, column=1)
 
 # euro ENTRY
 euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
-euro_update.grid(row=6, column=1)
+euro_update.grid(row=7, column=1)
 
 
 
