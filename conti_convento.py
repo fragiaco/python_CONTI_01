@@ -4,7 +4,7 @@ from tkinter         import messagebox
 import calculator
 from Origine         import *
 import sqlite3
-import copy
+import pandas as pd
 
 
 conn = sqlite3.connect('database_conti')
@@ -588,10 +588,18 @@ def query_database():
     my_tree.focus(child_id) #evidenziata
     #print(my_tree.focus(child_id)) #stampa l'anno
     my_tree.selection_set(child_id)#oppure questo
+#   ID Anno Mese  Entrate_Uscite  Categoria  Voce  Euro
+    sql = '''
+    SELECT * FROM TABLE_Conti;
+    '''
 
+    df = pd.read_sql_query(sql,conn)
+    print(df)
+#    print(df.groupby(['Anno']).count())
 
     # Commit changes
     conn.commit()
+
 
     # Close our connection
     conn.close()
