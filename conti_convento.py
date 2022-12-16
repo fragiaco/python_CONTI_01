@@ -281,10 +281,12 @@ def pick_Categoria(e):
     if my_combo.get() == "Entrate":
         categoria_combo.config(values=Categorie_Entrate)
         categoria_combo.current(0)
+        categoria_combo['state'] = 'readonly'
 
     if my_combo.get() == "Uscite":
         categoria_combo.config(values=Categorie_Uscite)
         categoria_combo.current(0)
+        categoria_combo['state'] = 'readonly'
 
 
 def pick_Voce(e):
@@ -292,118 +294,173 @@ def pick_Voce(e):
     if categoria_combo.get() == "Collette_Chiesa":
         voce_combo.config(values=Collette_Chiesa)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Congrua":
         voce_combo.config(values=Congrua)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Interessi":
         voce_combo.config(values=Interessi)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Messe celebrate":
         voce_combo.config(values=Messe_celebrate)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Offerte":
         voce_combo.config(values=Offerte)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Pensioni":
         voce_combo.config(values=Pensioni)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Servizi_religiosi":
         voce_combo.config(values=Servizi_religiosi)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     # VOCI USCITA
 
     if categoria_combo.get() == "Acquisti_Chiesa":
         voce_combo.config(values=Acquisti_Chiesa)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Acquisti_Convento":
         voce_combo.config(values=Acquisti_Convento)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Acquisti_Orto_Animali":
         voce_combo.config(values=Acquisti_Orto_Animali)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Cultura":
         voce_combo.config(values=Cultura)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Curia_provinciale":
         voce_combo.config(values=Curia_provinciale)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Domestici":
         voce_combo.config(values=Domestici)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Elargizioni":
         voce_combo.config(values=Elargizioni)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Utenze":
         voce_combo.config(values=Utenze)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Ferie_Viaggi":
         voce_combo.config(values=Ferie_Viaggi)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Igiene":
         voce_combo.config(values=Igiene)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Imposte":
         voce_combo.config(values=Imposte)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Lavori_Impianti":
         voce_combo.config(values=Lavori_Impianti)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Posta_Cancelleria":
         voce_combo.config(values=Posta_Cancelleria)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Salute":
         voce_combo.config(values=Salute)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Veicoli_motore":
         voce_combo.config(values=Veicoli_motore)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Vestiario":
         voce_combo.config(values=Vestiario)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Vitto":
         voce_combo.config(values=Vitto)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
     if categoria_combo.get() == "Eccedenza_Cassa":
         voce_combo.config(values=Eccedenza_Cassa)
         voce_combo.current(0)
+        voce_combo['state'] = 'readonly'
+
 
 
 # Dropbox Anno
 anno_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Anni)
 anno_combo.current(0)
 anno_combo.grid(row=2, column=1)
+anno_combo['state'] = 'readonly'
+
 # Dropbox Mesi
 mesi_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Mesi)
 mesi_combo.current(0)
 mesi_combo.grid(row=4, column=1)
+mesi_combo['state'] = 'readonly'
+
 # Dropbox Entrate_Uscite
 my_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Entrate_Uscite)
 #my_combo.current(0)
 my_combo.grid(row=6, column=1)
+my_combo['state'] = 'readonly'
 
 # Bind the ComboBox
 my_combo.bind("<<ComboboxSelected>>", pick_Categoria)
@@ -412,6 +469,7 @@ my_combo.bind("<<ComboboxSelected>>", pick_Categoria)
 categoria_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=[""])
 categoria_combo.current(0)
 categoria_combo.grid(row=8, column=1)
+categoria_combo['state'] = 'readonly'
 
 # Bind the ComboBox
 categoria_combo.bind("<<ComboboxSelected>>", pick_Voce)
@@ -420,6 +478,7 @@ categoria_combo.bind("<<ComboboxSelected>>", pick_Voce)
 voce_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=[""])
 voce_combo.current(0)
 voce_combo.grid(row=10, column=1)
+voce_combo['state'] = 'readonly'
 
 # euro ENTRY
 # euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE)
@@ -872,7 +931,7 @@ euro_update.grid(row=7, column=1)
 B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
 B_update = Button(Frame1in, text='update', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
-B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20, pady=15)
+B_clear = Button(Frame1in, text='excel', width=10).grid(row=0, column=3, padx=20, pady=15)
 
 #####
 
