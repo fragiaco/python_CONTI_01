@@ -673,35 +673,32 @@ def update_record():
 #
      # Create a cursor instance
     c = conn.cursor()
-"""
-my_tree['columns'] = ("Id", "Anno", "Mese", "Entrate_Uscite", "Categoria", "Voce", "Euro")
 
-"""
 #
     c.execute("""UPDATE TABLE_Conti SET
-#     		Anno = :Anno,
-#     		Mese = :Mese,
-#     		Entrate_Uscite = :Entrate_Uscite,
-#     		Categoria = :Categoria,
-#     		Voce = :Voce,
-#     		Euro = :Euro
+    		Anno = :Anno,
+    		Mese = :Mese,
+    		Entrate_Uscite = :Entrate_Uscite,
+    		Categoria = :Categoria,
+    		Voce = :Voce,
+    		Euro = :Euro
+
+     		WHERE oid = :oid""",
+           {
+                'Anno': Anno_entry.get(),
+                'Mese': Mese_entry.get(),
+                'Entrate_Uscite': Entrate_Uscite_entry.get(),
+                'Categoria': Categorie_Entrate_entry.get(),
+                'Voce': Voce_entry.get(),
+                'Euro': Euro_entry.get(),
+                'oid': Id_entry.get()
+           })
 #
-#     		WHERE oid = :oid""",
-#           {
-                'Anno': fn_entry.get(),
-#                       'last': ln_entry.get(),
-#                       'address': address_entry.get(),
-#                       'city': city_entry.get(),
-#                       'state': state_entry.get(),
-#                       'zipcode': zipcode_entry.get(),
-#                       'oid': id_entry.get(),
-#            })
-#
-#         # Commit changes
-#         conn.commit()
+#    Commit changes
+    conn.commit()
 #
 #         # Close our connection
-#         conn.close()
+    conn.close()
 #
 #         # Clear entry boxes
 #         fn_entry.delete(0, END)
