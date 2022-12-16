@@ -54,7 +54,9 @@ Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
 #FRame calcolatrice
 Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-Frame_calc.grid(column=1, row=15)
+Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
+
+
 # Frame 1 - bottom side Frame
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
@@ -280,12 +282,12 @@ Decimal.grid(row=6, column=0)
 def pick_Categoria(e):
     if my_combo.get() == "Entrate":
         categoria_combo.config(values=Categorie_Entrate)
-        categoria_combo.current(0)
+        categoria_combo.set('click!')
         categoria_combo['state'] = 'readonly'
 
     if my_combo.get() == "Uscite":
         categoria_combo.config(values=Categorie_Uscite)
-        categoria_combo.current(0)
+        categoria_combo.set('click!')
         categoria_combo['state'] = 'readonly'
 
 
@@ -293,43 +295,43 @@ def pick_Voce(e):
     # VOCI ENTRATA
     if categoria_combo.get() == "Collette_Chiesa":
         voce_combo.config(values=Collette_Chiesa)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Congrua":
         voce_combo.config(values=Congrua)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Interessi":
         voce_combo.config(values=Interessi)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Messe celebrate":
         voce_combo.config(values=Messe_celebrate)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Offerte":
         voce_combo.config(values=Offerte)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Pensioni":
         voce_combo.config(values=Pensioni)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Servizi_religiosi":
         voce_combo.config(values=Servizi_religiosi)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
@@ -337,109 +339,109 @@ def pick_Voce(e):
 
     if categoria_combo.get() == "Acquisti_Chiesa":
         voce_combo.config(values=Acquisti_Chiesa)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Acquisti_Convento":
         voce_combo.config(values=Acquisti_Convento)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Acquisti_Orto_Animali":
         voce_combo.config(values=Acquisti_Orto_Animali)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Cultura":
         voce_combo.config(values=Cultura)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Curia_provinciale":
         voce_combo.config(values=Curia_provinciale)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Domestici":
         voce_combo.config(values=Domestici)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Elargizioni":
         voce_combo.config(values=Elargizioni)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Utenze":
         voce_combo.config(values=Utenze)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Ferie_Viaggi":
         voce_combo.config(values=Ferie_Viaggi)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Igiene":
         voce_combo.config(values=Igiene)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Imposte":
         voce_combo.config(values=Imposte)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Lavori_Impianti":
         voce_combo.config(values=Lavori_Impianti)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Posta_Cancelleria":
         voce_combo.config(values=Posta_Cancelleria)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Salute":
         voce_combo.config(values=Salute)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Veicoli_motore":
         voce_combo.config(values=Veicoli_motore)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Vestiario":
         voce_combo.config(values=Vestiario)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Vitto":
         voce_combo.config(values=Vitto)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
     if categoria_combo.get() == "Eccedenza_Cassa":
         voce_combo.config(values=Eccedenza_Cassa)
-        voce_combo.current(0)
+        voce_combo.set('click!')
         voce_combo['state'] = 'readonly'
 
 
@@ -458,7 +460,7 @@ mesi_combo['state'] = 'readonly'
 
 # Dropbox Entrate_Uscite
 my_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Entrate_Uscite)
-#my_combo.current(0)
+my_combo.set('click!')
 my_combo.grid(row=6, column=1)
 my_combo['state'] = 'readonly'
 
@@ -595,7 +597,7 @@ def query_database():
 
     df = pd.read_sql_query(sql,conn)
     print(df)
-#    print(df.groupby(['Anno']).count())
+    print(df.groupby(['Voce']).count())
 
     # Commit changes
     conn.commit()
