@@ -699,15 +699,19 @@ def update_record():
 #
 #         # Close our connection
     conn.close()
-#
+# Add a little message box for fun
+    messagebox.showinfo("Deleted!", "Your Record Has Been Updated!")
+
+
+
 #         # Clear entry boxes
-#         fn_entry.delete(0, END)
-#         ln_entry.delete(0, END)
-#         id_entry.delete(0, END)
-#         address_entry.delete(0, END)
-#         city_entry.delete(0, END)
-#         state_entry.delete(0, END)
-#         zipcode_entry.delete(0, END)
+    Id_entry.delete(0, END)
+    Anno_entry.delete(0, END)
+    Mese_entry.delete(0, END)
+    Entrate_Uscite_entry.delete(0, END)
+    Categorie_Entrate_entry.delete(0, END)
+    Voce_entry.delete(0, END)
+    Euro_entry.delete(0, END)
 
 ######
 def pick_Categoria_update(e):
