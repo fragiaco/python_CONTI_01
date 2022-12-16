@@ -54,7 +54,7 @@ Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
 #FRame calcolatrice
 Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-Frame_calc.place(x=15, y=468, width=410, height=167)
+Frame_calc.grid(column=1, row=15)
 # Frame 1 - bottom side Frame
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
