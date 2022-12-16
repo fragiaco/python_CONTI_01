@@ -610,10 +610,10 @@ def select_record(e):
 
 # Grab record Number
     selected = my_tree.focus() #focus restituisce l'ID key
-    print(selected) #esempio 38
+    # print(selected) #esempio 38
 # Grab record values
     values = my_tree.item(selected, 'values')
-    print(values) #esempio ('38', '2022', 'gennaio', 'Entrate', 'Messe_celebrate', '', '39.0')
+    # print(values) #esempio ('38', '2022', 'gennaio', 'Entrate', 'Messe_celebrate', '', '39.0')
 
 # outpus to entry boxes
     Id_entry.insert(0, values[0]) #0 penso significa all'inizio
@@ -658,37 +658,44 @@ def remove_one():
 #######################
 ######
     # Update record
-# def update_record():
-#     # Grab the record number
-#     selected = my_tree.focus()
-#     # Update record
-#     my_tree.item(selected, text="", values=(Id_entry.get(), Anno_entry.get(), Mese_entry.get(), Entrate_Uscite_entry.get(), Categorie_Entrate_entry.get(), Voce_entry.get(), Euro_entry.get()))
+def update_record():
+    # Grab the record number
+    print('update')
+    selected = my_tree.focus()
+    print(selected)
+    # Update record
+    my_tree.item(selected, text="", values=(Id_entry.get(), Anno_entry.get(), Mese_entry.get(), Entrate_Uscite_entry.get(), Categorie_Entrate_entry.get(), Voce_entry.get(), Euro_entry.get()))
+
+
+    # Update the database
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_conti')
 #
-#     # Update the database
-#     # Create a database or connect to one that exists
-#     conn = sqlite3.connect('database_conti')
+     # Create a cursor instance
+    c = conn.cursor()
+"""
+my_tree['columns'] = ("Id", "Anno", "Mese", "Entrate_Uscite", "Categoria", "Voce", "Euro")
+
+"""
 #
-#     # Create a cursor instance
-#     c = conn.cursor()
-#
-#     c.execute("""UPDATE TABLE_Conti SET
-#     		first_name = :first,
-#     		last_name = :last,
-#     		address = :address,
-#     		city = :city,
-#     		state = :state,
-#     		zipcode = :zipcode
+    c.execute("""UPDATE TABLE_Conti SET
+#     		Anno = :Anno,
+#     		Mese = :Mese,
+#     		Entrate_Uscite = :Entrate_Uscite,
+#     		Categoria = :Categoria,
+#     		Voce = :Voce,
+#     		Euro = :Euro
 #
 #     		WHERE oid = :oid""",
-#                   {
-#                       'first': fn_entry.get(),
+#           {
+                'Anno': fn_entry.get(),
 #                       'last': ln_entry.get(),
 #                       'address': address_entry.get(),
 #                       'city': city_entry.get(),
 #                       'state': state_entry.get(),
 #                       'zipcode': zipcode_entry.get(),
 #                       'oid': id_entry.get(),
-#                   })
+#            })
 #
 #         # Commit changes
 #         conn.commit()
@@ -862,7 +869,7 @@ euro_update.grid(row=7, column=1)
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
 B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
-B_update = Button(Frame1in, text='update', width=10).grid(row=0, column=1, padx=20, pady=15)
+B_update = Button(Frame1in, text='update', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_clear = Button(Frame1in, text='clear', width=10).grid(row=0, column=3, padx=20, pady=15)
 
