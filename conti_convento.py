@@ -630,7 +630,6 @@ def sqlite3_to_excel():
         opener = "open" if sys.platform == "darwin" else "xdg-open"
         subprocess.call([opener, 'database_conti.xlsx'])
 
-
     # Commit changes
     conn.commit()
 
