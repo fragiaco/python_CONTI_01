@@ -1,7 +1,7 @@
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
-import calculator
+#import calculator
 from Origine         import *
 import sqlite3
 import pandas as pd
