@@ -632,6 +632,7 @@ def sqlite3_to_excel():
         subprocess.call([opener, 'database_conti.xlsx'])
 
 
+
     # Commit changes
     conn.commit()
 
