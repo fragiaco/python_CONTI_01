@@ -7,7 +7,6 @@ import sqlite3
 import pandas as pd
 import os, sys, subprocess
 
-
 conn = sqlite3.connect('database_conti')
 
 cur = conn.cursor()
