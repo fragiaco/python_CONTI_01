@@ -10,7 +10,6 @@ import os, sys, subprocess
 
 conn = sqlite3.connect('database_conti')
 
-
 cur = conn.cursor()
 try:
     cur.execute('''CREATE TABLE TABLE_Conti(ID integer not null PRIMARY KEY ,
