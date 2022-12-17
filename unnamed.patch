@@ -1,0 +1,266 @@
+Index: conti_convento.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/conti_convento.py b/conti_convento.py
+--- a/conti_convento.py	(revision 7db5a1a229e9fe5ac40ec29f00a8dade0e6697e7)
++++ b/conti_convento.py	(revision ddf6db1b3e133e06618d8a3bd84aaa1c6e18e0b4)
+@@ -5,6 +5,7 @@
+ from Origine         import *
+ import sqlite3
+ import pandas as pd
++import os, sys, subprocess
+ 
+ 
+ conn = sqlite3.connect('database_conti')
+@@ -68,7 +69,11 @@
+ Frame2in_tree.place(x=15, y=15, width=1015, height=335)
+ # Frame 2in - bottom side right Frame
+ Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
+-Frame2in_bottom.place(x=15, y=360, width=1015, height=470)
++Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
++
++#Frame update botton
++Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
++Frame_update_botton.place(x=15, y=405, width=970, height=60)
+ 
+ 
+ 
+@@ -595,9 +600,9 @@
+     SELECT * FROM TABLE_Conti;
+     '''
+ 
+-    df = pd.read_sql_query(sql,conn)
+-    print(df)
+-    print(df.groupby(['Voce']).count())
++    # df = pd.read_sql_query(sql,conn)
++    # print(df)
++    # print(df.groupby(['Voce']).count())
+ 
+     # Commit changes
+     conn.commit()
+@@ -607,8 +612,31 @@
+     conn.close()
+ 
+ #######################################
++def sqlite3_to_excel():
++
++    # Create a database or connect to one that exists
++    conn = sqlite3.connect('database_conti')
++
++    # Create a cursor instance
++    c = conn.cursor()
++
++
++    query="SELECT * FROM TABLE_Conti" # query to collect recors
++    df = pd.read_sql(query, conn, index_col='ID') # create dataframe
++    df.to_excel('database_conti.xlsx') # create excel file
+ 
++    if sys.platform == "win32":
++        os.startfile('database_conti.xlsx')
++    else:
++        opener = "open" if sys.platform == "darwin" else "xdg-open"
++        subprocess.call([opener, 'database_conti.xlsx'])
+ 
++
++    # Commit changes
++    conn.commit()
++
++    # Close our connection
++    conn.close()
+ ################treeviw
+ 
+ 
+@@ -939,9 +967,9 @@
+ # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
+ 
+ B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
+-B_update = Button(Frame1in, text='update', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
++B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
+ B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
+-B_clear = Button(Frame1in, text='excel', width=10).grid(row=0, column=3, padx=20, pady=15)
++B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
+ 
+ #####
+ 
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision ddf6db1b3e133e06618d8a3bd84aaa1c6e18e0b4)
++++ b/.idea/modules.xml	(revision e7550f612e9f5a0117dc365b14c52da6b7a57808)
+@@ -2,7 +2,6 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/../Intro-To-TKinter-Youtube-Course/.idea/Intro-To-TKinter-Youtube-Course.iml" filepath="$PROJECT_DIR$/../Intro-To-TKinter-Youtube-Course/.idea/Intro-To-TKinter-Youtube-Course.iml" />
+       <module fileurl="file://$PROJECT_DIR$/.idea/python_CONTI_01.iml" filepath="$PROJECT_DIR$/.idea/python_CONTI_01.iml" />
+     </modules>
+   </component>
+Index: .idea/python_CONTI_01.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/python_CONTI_01.iml b/.idea/python_CONTI_01.iml
+--- a/.idea/python_CONTI_01.iml	(revision ddf6db1b3e133e06618d8a3bd84aaa1c6e18e0b4)
++++ b/.idea/python_CONTI_01.iml	(revision e7550f612e9f5a0117dc365b14c52da6b7a57808)
+@@ -6,6 +6,5 @@
+     </content>
+     <orderEntry type="jdk" jdkName="Python 3.10 (python_CONTI_01)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="module" module-name="Intro-To-TKinter-Youtube-Course" />
+   </component>
+ </module>
+\ No newline at end of file
+diff --git a/database_conti b/database_conti
+index 77209a1a6d658824865dabfe7ed6e9970806ed1e..00f5d38938da448f4efe6e17521d74b2a24ddba3
+GIT binary patch
+literal 8192
+zc%1E5O>Y}T7~XYC{1w|R5E)~IPV1y;>aW<ANfi~Ejd4oaSTSh`R7hCk&3H4?dMBNo
+zjnwplpb`g=khsB-3mmzES_$Z1;K&aM5(h-2-inx=-F!MWc7s$7`^c8o>-T-$cb|FY
+zV{gB+gc$-YLfepml5|#*WoZroNs{XP>yr*3^Y58szyA$&DfiyZh#edaOZ?-(g9i^D
+zJb3Wn!Gi}69-cowp|U@oO39z58EookRheI^HY&tm_|T=VvQkx6t3ccWhyJ*{_!hth
+zLmHyMAPg9mu7mo@Voh1O18!CCfJ_Js0L3r}SgpRldO$W9K@FMcR0LInQOHo^T~oE+
+zkWWKZ;XE3l7@mq{ji{%5B8w705!4R|rXqpwrAx#2<=C&Wd$F6bWb}{d!{PhUQe-#s
+zOXSPQ2a)lSZ%5e3WcaV}PvHmQROoT&i%>oIW8mk&y?_#YI~WXp7D@&G^gs1K_J8iL
+z`(wjDJZ~d=@ZiCNhyOLM1p?A&GI>7lFHRSW8Zr!siM#7A@{<Hbriu42Koc4&q<F6U
+zk;q=1wzCs6i-)tFy;@Q4TG(W`u}m3hC<bmr9V?7cw7rc1)F@VojzJq57DL81CI*_D
+zZwXw_3)Xze*PWFgceaqhNR9W&_jDZrq$AGGS>=t{oYPiH?ys!{%t#B;HdOI=Im>g$
+z68SMvyoH)g+P!*(v^RPCRDN_d!_yMU{DhrW(k)Hjm+>~DTX-8cDAKWpiHYkJtz#96
+zXZF?R)1ujlnNAHC_@kl58ityN6^jv*^R2^d9a41z@q6U@)30oN{rZHX*o8h6<D?X}
+z`4yD!mdD-Ew}mSAJNmx`ccgP-fcErVNI9aF{C$Xa!jR1^@0M&_o8&xkm$=l1bbA1j
+z$)Ivc$dJzWuw!KdBNKKyddg8Uds!%wJYpSJ5nfxP7Hm-nZeXaAHW|;nCMr7Nr6Uz9
+zmd-2+m1dI|LT`LAv?~Qh<H>a4iZDxhOca5e6zgcehHgI(a{H`6)3kra(^GbeTgXl6
+zR_B#Bl8znnopz{LT(!m~C0p1~ZT&iK4DA$Obu>u(IyG2swGd^fs;X$6Pg~gFM|=}W
+zPjU%Yw-a(Yb^H69@R~H;f4ux*AujmS$rH!rsAh<dvq3J7Jdtu-<s*`Ht)R?~KJ%Kf
+zH2tzOg)emG9-hJ#NSl15xb-rnmmH%z8NG~tFkNSEy(p4q7P}_(zt&zYoO2A7?`EhK
+z%rJjdF*h;A%;Ls~*Uq}DeV-Eb?w}I=n2*oi+&S*j<DQ-=N8Kf^NAXV0;^oLQrR7GP
+zl_cIPO}K3V^LNT(J}lJSa{#t9qo)B1Z-(4Gu8+P>SnIO2;D0$5@z{6Ltk?)f2RQ~5
+z3z>4xKgh%%dXOC!@nh#j{EZ{=b!3>l9c(9Pc7pF=_JuyfVUyw^kUcXP`_Mq_{KS*7
+V!xO#3bGh8m&K23A?j!d1e*nf~s4V~h
+
+diff --git a/database_conti.xlsx b/database_conti.xlsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..6966dc084ff1de491d7e5b8666c3c2ac6c694369
+GIT binary patch
+literal 6540
+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
+
