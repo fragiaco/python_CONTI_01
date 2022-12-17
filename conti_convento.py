@@ -888,7 +888,7 @@ def pick_Voce_update(e):
         voce_combo_update.config(values=Ferie_Viaggi)
         voce_combo_update.current(0)
 
-    if categoria_combo_update.get() == "Igiene":
+    if categoria_combo_update.get() == " ":
         voce_combo_update.config(values=Igiene)
         voce_combo_update.current(0)
 
