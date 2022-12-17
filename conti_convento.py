@@ -5,6 +5,7 @@ import calculator
 from Origine         import *
 import sqlite3
 import pandas as pd
+import os, sys, subprocess
 
 
 conn = sqlite3.connect('database_conti')
@@ -68,7 +69,11 @@ Frame2in_tree = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_tree.place(x=15, y=15, width=1015, height=335)
 # Frame 2in - bottom side right Frame
 Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
-Frame2in_bottom.place(x=15, y=360, width=1015, height=470)
+Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
+
+#Frame update botton
+Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
+Frame_update_botton.place(x=15, y=405, width=970, height=60)
 
 
 
@@ -595,9 +600,9 @@ def query_database():
     SELECT * FROM TABLE_Conti;
     '''
 
-    df = pd.read_sql_query(sql,conn)
-    print(df)
-    print(df.groupby(['Voce']).count())
+    # df = pd.read_sql_query(sql,conn)
+    # print(df)
+    # print(df.groupby(['Voce']).count())
 
     # Commit changes
     conn.commit()
@@ -607,8 +612,32 @@ def query_database():
     conn.close()
 
 #######################################
+def sqlite3_to_excel():
+
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_conti')
+
+    # Create a cursor instance
+    c = conn.cursor()
 
 
+    query="SELECT * FROM TABLE_Conti" # query to collect recors
+    df = pd.read_sql(query, conn, index_col='ID') # create dataframe
+    df.to_excel('database_conti.xlsx') # create excel file
+
+    if sys.platform == "win32":
+        os.startfile('database_conti.xlsx')
+    else:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, 'database_conti.xlsx'])
+
+
+    # Commit changes
+    conn.commit()
+
+
+    # Close our connection
+    conn.close()
 ################treeviw
 
 
@@ -939,9 +968,9 @@ euro_update.grid(row=7, column=1)
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
 B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
-B_update = Button(Frame1in, text='update', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
+B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
-B_clear = Button(Frame1in, text='excel', width=10).grid(row=0, column=3, padx=20, pady=15)
+B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
 
 #####
 
