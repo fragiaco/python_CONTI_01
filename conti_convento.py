@@ -627,7 +627,6 @@ def sqlite3_to_excel():
         df.to_excel(writer, sheet_name='Dati', startrow=2)
     #   df2.to_excel(writer, sheet_name='Grafico')
 
-
     # print(df.tail())
     # print(df.columns)
     # for c in df.columns:
