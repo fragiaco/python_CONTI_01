@@ -1,12 +1,14 @@
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
-#import calculator
+import numpy as np
 from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
+from openpyxl import *
 from openpyxl.styles import Font
+from xlsxwriter.utility import xl_rowcol_to_cell
 
 conn = sqlite3.connect('database_conti')
 
@@ -622,11 +624,11 @@ def sqlite3_to_excel():
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn, index_col='ID') # create dataframe senza l'id index di df
-    # print(df.head())
-    with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
-        df.to_excel(writer, sheet_name='Dati', startrow=2)
+    print(df.head())
+    df.to_excel('database_conti.xlsx', index=False, sheet_name='DATI')
+    # with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
+    #     df.to_excel(writer, sheet_name='Dati', startrow=2)
     #   df2.to_excel(writer, sheet_name='Grafico')
-
     # print(df.tail())
     # print(df.columns)
     # for c in df.columns:
@@ -641,11 +643,11 @@ def sqlite3_to_excel():
 
 
 
-    if sys.platform == "win32":
-        os.startfile('database_conti.xlsx')
-    else:
-        opener = "open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'database_conti.xlsx'])
+    # if sys.platform == "win32":
+    #     os.startfile('database_conti.xlsx')
+    # else:
+    #     opener = "open" if sys.platform == "darwin" else "xdg-open"
+    #     subprocess.call([opener, 'database_conti.xlsx'])
 
     # Commit changes
     conn.commit()
