@@ -624,7 +624,10 @@ def sqlite3_to_excel():
     df = pd.read_sql(query, conn, index_col='ID') # create dataframe senza l'id index di df
     # print(df.head())
     with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
-        df.to_excel(writer, sheet_name='Dati', startrow=2)  # create excell file
+        df.to_excel(writer, sheet_name='Dati', startrow=2)
+    #   df2.to_excel(writer, sheet_name='Grafico')
+
+
     # print(df.tail())
     # print(df.columns)
     # for c in df.columns:
