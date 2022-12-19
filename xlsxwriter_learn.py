@@ -32,7 +32,21 @@ money = workbook.add_format({'num_format': '$#,##0'})
 worksheet.write(1, 9, 'Hello', bold)  # Writes a string
 worksheet.write('J3', 'Item', bold)
 worksheet.write('H42', 'Total', bold)
-#worksheet.write('H43', '=SUM(H2:H40)', money)
+worksheet.write('H43', '=SUM(H2:H40)', money)
+worksheet.set_column(1, 1, 15)
+
+
+
+cell_format_red = workbook.add_format({'bold': True, 'font_color': 'red'})
+cell_format_black = workbook.add_format({'bold': True, 'font_color': 'black'})
+
+worksheet.write('H42', 'Total', cell_format_red)
+#Formats can also be passed to the worksheet set_row() and set_column() methods
+# to define the default formatting properties for a row or column:
+
+worksheet.set_row(0, 18, cell_format_black)
+worksheet.set_column('B:C', 15, cell_format_red)
+
 
 # Get the dimensions of the dataframe.
 (max_row, max_col) = df.shape
