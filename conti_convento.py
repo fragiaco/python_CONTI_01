@@ -629,8 +629,11 @@ def sqlite3_to_excel():
     print(df.head())
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
     writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
-
-
+    df.to_excel(writer, index=False, sheet_name='report')
+    #
+    workbook = writer.book
+    worksheet = writer.sheets['report']
+    writer.close()
 
     # with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
     #     df.to_excel(writer, sheet_name='Dati', startrow=2)
