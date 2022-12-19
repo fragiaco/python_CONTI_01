@@ -2,6 +2,8 @@ from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
 import numpy as np
+import xlsxwriter
+
 from Origine         import *
 import sqlite3
 import pandas as pd
@@ -623,9 +625,13 @@ def sqlite3_to_excel():
 
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
-    df = pd.read_sql(query, conn, index_col='ID') # create dataframe senza l'id index di df
+    df = pd.read_sql(query, conn) # create dataframe
     print(df.head())
-    df.to_excel('database_conti.xlsx', index=False, sheet_name='DATI')
+    df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
+    writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
+
+
+
     # with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
     #     df.to_excel(writer, sheet_name='Dati', startrow=2)
     #   df2.to_excel(writer, sheet_name='Grafico')
