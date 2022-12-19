@@ -627,16 +627,24 @@ def sqlite3_to_excel():
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn) # create dataframe
     print(df.head())
-    df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
+    #df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
+# XlsxWriter can only create new files.
+# It cannot read or modify existing files
+# The next step is to create a new workbook object
+# using the Workbook() constructor.
+# Workbook() takes one, non-optional, argument
+# which is the filename that we want to create:
 
-    workbook = xlsxwriter.Workbook('database_conti_form01.xlsx')
+    # workbook = xlsxwriter.Workbook('database_conti_form01.xlsx')
+    # worksheet = workbook.add_worksheet('Data')
 
+    # Create a Pandas dataframe from the data
     df = pd.read_sql(query, conn)
-    df.to_excel('database_conti_form01.xlsx')  # Change the path
-    worksheet_dati = workbook.add_worksheet('Dati')
 
+    # Convert the dataframe to an XlsxWriter Excel object.
     # writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
+    #df.to_excel('database_conti_form01.xlsx')  # Change the path
 
     # #
     # workbook = writer.book
