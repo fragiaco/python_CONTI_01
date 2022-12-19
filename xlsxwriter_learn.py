@@ -1,6 +1,8 @@
+from xlsxwriter import *
 import pandas as pd
 import sqlite3
 conn = sqlite3.connect('database_conti')
+
 
 # Create a cursor instance
 c = conn.cursor()
@@ -20,12 +22,29 @@ df.to_excel(writer, sheet_name='Dati')
 workbook  = writer.book
 worksheet = writer.sheets['Dati']
 
+# Add a bold format to use to highlight cells.
+bold = workbook.add_format({'bold': True})
+
+# Add a number format for cells with money.
+money = workbook.add_format({'num_format': '$#,##0'})
+
+# data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
+worksheet.write(1, 9, 'Hello', bold)  # Writes a string
+worksheet.write('J3', 'Item', bold)
+worksheet.write('H42', 'Total', bold)
+#worksheet.write('H43', '=SUM(H2:H40)', money)
+
 # Get the dimensions of the dataframe.
 (max_row, max_col) = df.shape
 
+# Write a total using a formula.
+
+
+
+
 # Apply a conditional format to the required cell range.
-worksheet.conditional_format(1, max_col, max_row, max_col,
-                             {'type': '3_color_scale'})
+# worksheet.conditional_format(1, max_col, max_row, max_col,
+#                              {'type': '3_color_scale'})
 
 # Close the Pandas Excel writer and output the Excel file.
 writer.close()
