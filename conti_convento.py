@@ -629,6 +629,7 @@ def sqlite3_to_excel():
     print(df.head())
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
+
     workbook = xlsxwriter.Workbook('database_conti_form01.xlsx')
 
     df = pd.read_sql(query, conn)
