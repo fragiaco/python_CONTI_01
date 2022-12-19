@@ -47,6 +47,8 @@ worksheet.write('H42', 'Total', cell_format_red)
 worksheet.set_row(0, 18, cell_format_black)
 worksheet.set_column('B:C', 15, cell_format_red)
 
+for row in range(0, 5):
+    worksheet.write(row, 0, 'Hello')
 
 # Get the dimensions of the dataframe.
 (max_row, max_col) = df.shape
