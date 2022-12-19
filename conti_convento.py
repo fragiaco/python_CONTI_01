@@ -1,12 +1,16 @@
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
-#import calculator
+import numpy as np
+import xlsxwriter
+
 from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
+from openpyxl import *
 from openpyxl.styles import Font
+from xlsxwriter.utility import xl_rowcol_to_cell
 
 conn = sqlite3.connect('database_conti')
 
@@ -621,31 +625,51 @@ def sqlite3_to_excel():
 
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
-    df = pd.read_sql(query, conn, index_col='ID') # create dataframe senza l'id index di df
-    # print(df.head())
-    with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
-        df.to_excel(writer, sheet_name='Dati', startrow=2)
-    #   df2.to_excel(writer, sheet_name='Grafico')
+    df = pd.read_sql(query, conn) # create dataframe
+    print(df.head())
+    #df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
-    # print(df.tail())
+# XlsxWriter can only create new files.
+# It cannot read or modify existing files
+# The next step is to create a new workbook object
+# using the Workbook() constructor.
+# Workbook() takes one, non-optional, argument
+# which is the filename that we want to create:
+
+    # workbook = xlsxwriter.Workbook('database_conti_form01.xlsx')
+    # worksheet = workbook.add_worksheet('Data')
+
+    # Create a Pandas dataframe from the data
+    df = pd.read_sql(query, conn)
+
+    # Convert the dataframe to an XlsxWriter Excel object.
+    # writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
+    #df.to_excel('database_conti_form01.xlsx')  # Change the path
+
+    # #
+    # workbook = writer.book
+    # worksheet = writer.sheets['report']
+    # writer.close()
+
     # print(df.columns)
+
     # for c in df.columns:
     #     print(c)
+
     # # put them in a list
     # c = list(df.columns)
     # print(c)
-    # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
-    # ws=wb.active
 
+    # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
     # cells_haeder=ws
 
 
 
-    if sys.platform == "win32":
-        os.startfile('database_conti.xlsx')
-    else:
-        opener = "open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'database_conti.xlsx'])
+    # if sys.platform == "win32":
+    #     os.startfile('database_conti.xlsx')
+    # else:
+    #     opener = "open" if sys.platform == "darwin" else "xdg-open"
+    #     subprocess.call([opener, 'database_conti.xlsx'])
 
     # Commit changes
     conn.commit()
