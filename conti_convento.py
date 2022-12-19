@@ -1,14 +1,12 @@
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
-from openpyxl.workbook import Workbook
-from openpyxl import load_workbook
+#import calculator
 from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
 from openpyxl.styles import Font
-
 
 conn = sqlite3.connect('database_conti')
 
@@ -614,23 +612,19 @@ def query_database():
 
 #######################################
 def sqlite3_to_excel():
+
     # Create a database or connect to one that exists
     conn = sqlite3.connect('database_conti')
 
     # Create a cursor instance
     c = conn.cursor()
 
-    query = "SELECT * FROM TABLE_Conti"  # query to collect recors
-    df = pd.read_sql(query, conn, index_col='ID')  # create dataframe
-    df.to_excel('database_conti.xlsx')  # create excel file
 
-    wb = load_workbook('database_conti.xlsx')
-
-    # Create a worksheet
-    ws = wb.active
+    query="SELECT * FROM TABLE_Conti" # query to collect recors
+    df = pd.read_sql(query, conn, index_col='ID') # create dataframe senza l'id index di df
     # print(df.head())
-    # with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as wb:
-    #     df.to_excel(wb, sheet_name='Dati', startrow=2)
+    with pd.ExcelWriter('database_conti.xlsx', mode = 'a', engine='openpyxl', if_sheet_exists='replace') as writer:
+        df.to_excel(writer, sheet_name='Dati', startrow=2)
     #   df2.to_excel(writer, sheet_name='Grafico')
 
     # print(df.tail())
@@ -641,14 +635,10 @@ def sqlite3_to_excel():
     # c = list(df.columns)
     # print(c)
     # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
+    # ws=wb.active
 
-    cell_header= ws['A3']
-    cell_header.font = Font(
-        size=20,
-        bold=True,
-        italic=Font,
-        color='D3D3D3'
-        )
+    # cells_haeder=ws
+
 
 
     if sys.platform == "win32":
