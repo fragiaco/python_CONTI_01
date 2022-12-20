@@ -61,54 +61,22 @@ worksheet.set_column('A:A', 3)
 worksheet.set_column('D:D', 12)
 worksheet.set_column('E:E', 18)
 worksheet.set_column('F:F', 25)
-worksheet.set_column('G:G', 6)
+
 
 
 # Add a number format for cells with money.
 money_fmt = workbook.add_format({'num_format': '#,##0.00'})
 
-worksheet.set_column('G:G', 15, money_fmt)
-#worksheet.conditional_format(1, max_col, max_row, max_col,
-# #                              {'type': '3_color_scale'})
-#worksheet.set_column(1, 1, 18, money_fmt)
+worksheet.set_column('G:G', 9, money_fmt)
 
-#worksheet.set_column('G:G', 15, money_fmt)
-# # Add a bold format to use to highlight cells.
-# bold = workbook.add_format({'bold': True})
-#
-# # Add a number format for cells with money.
-# money = workbook.add_format({'num_format': '$#,##0'})
-#
+# Light red fill with dark red text.
+value_uscite = workbook.add_format({'bg_color':   '#FFC7CE', 'font_color': '#9C0006'})
+worksheet.conditional_format('D28:D41', {'type':     'text', 'criteria': 'containing', 'value':    'Entrate', 'format': value_uscite})
+# # add borders
+# worksheet.conditional_format('A4:H27', {'type':  'formula','criteria': '=$H4<1000','format':   full_border})
+
 # # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
-# worksheet.write(1, 9, 'Hello', bold)  # Writes a string
-# worksheet.write('J3', 'Item', bold)
-# worksheet.write('H42', 'Total', bold)
-# worksheet.write('H43', '=SUM(H2:H40)', money)
-# worksheet.set_column(1, 1, 15)
-#
-#
-#
-# cell_format_red = workbook.add_format({'bold': True, 'font_color': 'red'})
-# cell_format_black = workbook.add_format({'bold': True, 'font_color': 'black'})
-#
-# worksheet.write('H42', 'Total', cell_format_red)
-# #Formats can also be passed to the worksheet set_row() and set_column() methods
-# # to define the default formatting properties for a row or column:
-#
-# worksheet.set_row(0, 18, cell_format_black)
-# worksheet.set_column('B:C', 15, cell_format_red)
-#
-# for row in range(0, 5):
-#     worksheet.write(row, 0, 'Hello')
-#
-# # Get the dimensions of the dataframe.
-# (max_row, max_col) = df.shape
-#
-# # Write a total using a formula.
-#
-#
-#
-#
+
 # # Apply a conditional format to the required cell range.
 # # worksheet.conditional_format(1, max_col, max_row, max_col,
 # #                              {'type': '3_color_scale'})
