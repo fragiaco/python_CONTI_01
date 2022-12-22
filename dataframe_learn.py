@@ -1,6 +1,7 @@
 import pandas as pd
 from openpyxl.workbook import Workbook
 import sqlite3
+from xlsxwriter import *
 
 conn = sqlite3.connect('database_conti')
 # Create a cursor instance
@@ -27,6 +28,8 @@ wanted_values = df[['Categoria', 'Voce']]
 stored = wanted_values.to_excel('Stored_learn_pandas.xlsx', index=None)
 
 
+
+
 df.to_excel('Learn_Dataframe.xlsx')
 
 print(df.loc[df['Voce'] == 'fra Giacomo'])
@@ -36,6 +39,7 @@ print(df.loc[df['Voce'] == 'fra Giacomo'])
 # 29  40  2022  gennaio        Entrate   Congrua  fra Giacomo   36.0
 
 print(df.loc[(df['Voce'] == 'fra Giacomo') & (df['Mese']=='agosto')])
+
 
 
 # Commit changes
