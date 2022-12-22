@@ -87,6 +87,7 @@ print(df.shape)
 # # Close the Pandas Excel writer and output the Excel file.
 writer.close()
 
+
 # Commit changes
 conn.commit()
 
