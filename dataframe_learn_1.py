@@ -10,7 +10,7 @@ query = "SELECT * FROM TABLE_Conti"  # query to collect recors
 df = pd.read_sql(query, conn)
 
 #print dataframe
-print (df)
+print(df.drop(['ID', 'Mese', 'Entrate_Uscite'], axis=1, ).head())
 
 
 
