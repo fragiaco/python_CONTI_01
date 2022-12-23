@@ -9,8 +9,26 @@ c = conn.cursor()
 query = "SELECT * FROM TABLE_Conti"  # query to collect recors
 df = pd.read_sql(query, conn)
 
-#print dataframe
-print(df.drop(['ID', 'Mese', 'Entrate_Uscite'], axis=1, ).head())
+print('#####')
+print(type(df))
+print('#####')
+print(df.head())
+print('#####')
+print(df.info())
+print('#####')
+print(len(df))
+print('#####')
+print(df.shape)
+print(df.index)
+print(df.columns)
+print('#####')
+
+print((df['Anno']).equals(df.Anno)) ### True
+#print(df[['Anno','Mese']])
+
+
+
+
 
 
 

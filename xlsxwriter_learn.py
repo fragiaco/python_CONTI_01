@@ -16,6 +16,7 @@ df['Anno'] = df['Anno'].astype(int)
 #pd.to_datetime(df['Anno'],format="%Y/%m/%d")
 print(df.dtypes)
 
+
 startrowval = 2 # index starts from zero
 
 # Create a Pandas Excel writer using XlsxWriter as the engine.
@@ -84,7 +85,7 @@ worksheet.conditional_format('D28:D41', {'type':     'text', 'criteria': 'contai
 # # Apply a conditional format to the required cell range.
 # # worksheet.conditional_format(1, max_col, max_row, max_col,
 # #                              {'type': '3_color_scale'})
-print(df.index)
+
 
 # Get the dimensions of the dataframe.
 (max_row, max_col) = df.shape
@@ -92,6 +93,8 @@ print('max_row is:=', max_row) #max_row is:= 41
 print('max_col is:=', max_col) #max_row is:= 7
 # Set the autofilter.
 worksheet.autofilter(2, 1, max_row, max_col - 1)
+
+
 
 # # Close the Pandas Excel writer and output the Excel file.
 writer.close()
