@@ -49,7 +49,7 @@ print(df_Categoria.loc['Pensioni', 'Voce']) #
 print(df_Categoria.loc['Offerte', ['Anno','Voce']]) #
 print(df_Categoria.loc['Offerte', ['Anno','Voce']]) #
 print(df_Categoria.loc[['Offerte', 'Pensioni'], ['Anno','Voce']]) #
-print(df_Categoria.loc[:, ['Anno','Voce']]) # Di tutte le categorie stampa le voci
+print(df_Categoria.loc[:, ['Anno','Voce']].sort_index(ascending=True, inplace=False)) # Di tutte le categorie stampa le voci
 
 
 
