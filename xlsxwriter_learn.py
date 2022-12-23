@@ -11,10 +11,10 @@ c = conn.cursor()
 
 query = "SELECT * FROM TABLE_Conti"  # query to collect recors
 df = pd.read_sql(query, conn)
-print(df.dtypes)
-df['Anno'] = df['Anno'].astype(int)
-#pd.to_datetime(df['Anno'],format="%Y/%m/%d")
-print(df.dtypes)
+# print(df.dtypes)
+# df['Anno'] = df['Anno'].astype(int)
+# #pd.to_datetime(df['Anno'],format="%Y/%m/%d")
+# print(df.dtypes)
 
 
 startrowval = 2 # index starts from zero

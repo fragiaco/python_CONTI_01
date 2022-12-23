@@ -1,5 +1,6 @@
+from xlsxwriter import *
+from xlsxwriter.utility import xl_rowcol_to_cell
 import pandas as pd
-from openpyxl.workbook import Workbook
 import sqlite3
 
 conn = sqlite3.connect('database_conti')
@@ -50,11 +51,20 @@ df = pd.read_sql(query, conn)
 # print(df_Categoria.loc[['Offerte', 'Pensioni'], ['Anno','Voce']]) #
 # print(df_Categoria.loc[:, ['Anno','Voce']].sort_index(ascending=True, inplace=False)) # Di tutte le categorie stampa le voci
 
+#pivot_table
+# df_Categoria = df.set_index('Categoria')
+# table=pd.pivot_table(df_Categoria, index=['Anno','Categoria','Voce'],  columns=['Mese'],  values=['Euro'],fill_value=0, aggfunc='sum')
+# print(table)
 
-df_Categoria = df.set_index('Categoria')
 
-table=pd.pivot_table(df_Categoria, index=['Anno','Categoria','Voce'],  columns=['Mese'],  values=['Euro'],fill_value=0, aggfunc='sum')
-print(table)
+print(df.head())
+# print(df_Categoria['Mese']=='gennaio') #restituisce True - False
+
+mask_voce=(df['Voce']=='fra giaco') #restituisce True - False
+mask_anno=(df['Anno']=='2023')
+print('°°°°°°°°°°°°°°°°°°°°°°')
+print(df.loc[mask_voce & mask_anno, :]) #restituisce i valori
+
 
 
 
