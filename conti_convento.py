@@ -665,6 +665,8 @@ def sqlite3_to_excel():
 
 
 
+
+
     # if sys.platform == "win32":
     #     os.startfile('database_conti.xlsx')
     # else:
