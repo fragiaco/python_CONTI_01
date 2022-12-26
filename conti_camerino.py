@@ -16,10 +16,39 @@ print()
 
 #salvo il file con un nome diverso
 df_conti_camerino.to_excel('conti_camerino_modified.xlsx')
-# Leggo il nuovo file, creo nuovo dataframe
+# Leggo il nuovo file, creo nuovo dataframe senza colonna indice
 df_conti_camerino_modified = pd.read_excel('conti_camerino_modified.xlsx', index_col=0)
+
 # Stampo le prime 5 righe. Potrei anche usare .head()
 print(df_conti_camerino_modified.iloc[0:5])
 
 #print(df_conti_camerino_modified.head())
 print(df_conti_camerino_modified.info())
+
+#seleziona solo le colonne desiderate
+#wanted_columns = df_conti_camerino_modified[['Anno', 'Mese']]
+#salva il fle come hai fatto prima con un nome diverso .to_excel
+# Leggo il nuovo file, creo nuovo dataframe senza colonna indice
+
+#Creo una colonna Entrate-Uscite e confronto con questi dati
+'''
+['Curia',
+'Collette-Chiesa',
+'Congrua',
+'Interessi',
+'Messe celebrate',
+'Offerte',
+'Pensioni',
+'Predicazione',
+'Servizi religiosi',
+'Stipendi',
+'Sussidi',
+'Rimborsi',
+'Vendite varie',
+'Eccedenza Cassa']
+'''
+
+
+
+print(df_conti_camerino_modified.loc[df_conti_camerino_modified['Categoria']=='Sussidi'])
+
