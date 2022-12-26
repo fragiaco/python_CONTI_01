@@ -30,23 +30,7 @@ print(df_conti_camerino_modified.info())
 #salva il fle come hai fatto prima con un nome diverso .to_excel
 # Leggo il nuovo file, creo nuovo dataframe senza colonna indice
 
-#Creo una colonna Entrate-Uscite e confronto con questi dati
-'''
-['Curia',
-'Collette-Chiesa',
-'Congrua',
-'Interessi',
-'Messe celebrate',
-'Offerte',
-'Pensioni',
-'Predicazione',
-'Servizi religiosi',
-'Stipendi',
-'Sussidi',
-'Rimborsi',
-'Vendite varie',
-'Eccedenza Cassa']
-'''
+
 
 #pulizia delle righe con valori nulli
 print(df_conti_camerino_modified.isnull().sum())
@@ -58,29 +42,26 @@ print(df_conti_camerino_modified.isnull().sum())
 # print(df_conti_camerino_modified.loc
 #       [df_conti_camerino_modified['Categoria']=='Sussidi'])
 
-'''
-print(df_conti_camerino_modified.loc
-        [(df_conti_camerino_modified['Categoria']=='Curia') |
-        (df_conti_camerino_modified['Categoria']=='Collette-Chiesa') |
-        (df_conti_camerino_modified['Categoria']=='Congrua') |
-        (df_conti_camerino_modified['Categoria']=='Interessi') |
-        (df_conti_camerino_modified['Categoria']=='Messe celebrate') |
-        (df_conti_camerino_modified['Categoria']=='Offerte') |
-        (df_conti_camerino_modified['Categoria']=='Pensioni') |
-        (df_conti_camerino_modified['Categoria']=='Predicazione') |
-        (df_conti_camerino_modified['Categoria']=='Servizi religiosi') |
-        (df_conti_camerino_modified['Categoria']=='Stipendi') |
-        (df_conti_camerino_modified['Categoria']=='Rimborsi') |
-        (df_conti_camerino_modified['Categoria']=='Sussidi') |
-        (df_conti_camerino_modified['Categoria']=='Vendite varie') |
-        (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
-         ])
-'''
 
-#df['name_match'] = df['first_name'].apply(lambda x: 'Match' if x == 'Bill' else 'Mismatch')
 
 df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply\
-    (lambda x: 'Entrate' if x=='Vendite varie' else 'Uscite')
+    (lambda x: 'Entrate'    if  x=='Vendite varie' or
+                                x=='Salute' or
+                                x=='Curia' or
+                                x=='Collette-Chiesa' or
+                                x=='Congrua' or
+                                x=='Interessi' or
+                                x=='Messe celebrate' or
+                                x=='Offerte' or
+                                x=='Pensioni' or
+                                x=='Predicazione' or
+                                x=='Servizi religiosi' or
+                                x=='Stipendi' or
+                                x=='Sussidi' or
+                                x=='Rimbosi' or
+                                x=='Vendite varie' or
+                                x=='Eccedenza Cassa'
+                            else 'Uscite')
 
 
 
