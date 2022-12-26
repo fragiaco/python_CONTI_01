@@ -76,42 +76,14 @@ print(df_conti_camerino_modified.loc
         (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
          ])
 '''
-'''
-print(df_conti_camerino_modified
-        [(df_conti_camerino_modified['Categoria']=='Curia') |
-        (df_conti_camerino_modified['Categoria']=='Collette-Chiesa') |
-        (df_conti_camerino_modified['Categoria']=='Congrua') |
-        (df_conti_camerino_modified['Categoria']=='Interessi') |
-        (df_conti_camerino_modified['Categoria']=='Messe celebrate') |
-        (df_conti_camerino_modified['Categoria']=='Offerte') |
-        (df_conti_camerino_modified['Categoria']=='Pensioni') |
-        (df_conti_camerino_modified['Categoria']=='Predicazione') |
-        (df_conti_camerino_modified['Categoria']=='Servizi religiosi') |
-        (df_conti_camerino_modified['Categoria']=='Stipendi') |
-        (df_conti_camerino_modified['Categoria']=='Rimborsi') |
-        (df_conti_camerino_modified['Categoria']=='Sussidi') |
-        (df_conti_camerino_modified['Categoria']=='Vendite varie') |
-        (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
-         ])
-'''
+
+#df['name_match'] = df['first_name'].apply(lambda x: 'Match' if x == 'Bill' else 'Mismatch')
+
+df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply\
+    (lambda x: 'Entrate' if x=='Vendite varie' else 'Uscite')
 
 
-#df['status'] = df['points'].apply(lambda x: 'Bad' if x < 20 else 'Good')#creo una nuova colonna
-df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply(lambda x: 'Entrate'
-        if x ==[(df_conti_camerino_modified['Categoria']=='Curia') |
-                (df_conti_camerino_modified['Categoria']=='Collette-Chiesa') |
-                (df_conti_camerino_modified['Categoria']=='Congrua') |
-                (df_conti_camerino_modified['Categoria']=='Interessi') |
-                (df_conti_camerino_modified['Categoria']=='Messe celebrate') |
-                (df_conti_camerino_modified['Categoria']=='Offerte') |
-                (df_conti_camerino_modified['Categoria']=='Pensioni') |
-                (df_conti_camerino_modified['Categoria']=='Predicazione') |
-                (df_conti_camerino_modified['Categoria']=='Servizi religiosi') |
-                (df_conti_camerino_modified['Categoria']=='Stipendi') |
-                (df_conti_camerino_modified['Categoria']=='Rimborsi') |
-                (df_conti_camerino_modified['Categoria']=='Sussidi') |
-                (df_conti_camerino_modified['Categoria']=='Vendite varie') |
-                (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
-                 ] else 'Uscite')
 
-print(df_conti_camerino_modified.tail(10))
+print(df_conti_camerino_modified.head())
+
+df_conti_camerino_modified.to_excel('conti_camerino_modified_excel.xlsx')
