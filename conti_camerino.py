@@ -114,4 +114,4 @@ df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Catego
                 (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
                  ] else 'Uscite')
 
-print(df_conti_camerino_modified.head())
+print(df_conti_camerino_modified.tail(10))
