@@ -76,6 +76,7 @@ print(df_conti_camerino_modified.loc
         (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
          ])
 '''
+'''
 print(df_conti_camerino_modified
         [(df_conti_camerino_modified['Categoria']=='Curia') |
         (df_conti_camerino_modified['Categoria']=='Collette-Chiesa') |
@@ -92,6 +93,9 @@ print(df_conti_camerino_modified
         (df_conti_camerino_modified['Categoria']=='Vendite varie') |
         (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
          ])
+'''
+
+
 #df['status'] = df['points'].apply(lambda x: 'Bad' if x < 20 else 'Good')#creo una nuova colonna
 df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply(lambda x: 'Entrate'
         if x ==[(df_conti_camerino_modified['Categoria']=='Curia') |
@@ -110,3 +114,4 @@ df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Catego
                 (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
                  ] else 'Uscite')
 
+print(df_conti_camerino_modified.head())
