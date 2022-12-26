@@ -64,7 +64,7 @@ df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Catego
                             else 'Uscite')
 
 
-
+df_conti_camerino_modified = df_conti_camerino_modified[['Anno', 'Mese','Entrate_Uscite', 'Categoria', 'Voce','Euro']]
 print(df_conti_camerino_modified.head())
 
 df_conti_camerino_modified.to_excel('conti_camerino_modified_excel.xlsx')
