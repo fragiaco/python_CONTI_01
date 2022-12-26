@@ -49,6 +49,9 @@ print(df_conti_camerino_modified.info())
 '''
 
 
+print(df_conti_camerino_modified.isnull().sum())
+print(df_conti_camerino_modified.dropna(inplace=True))
+print(df_conti_camerino_modified.isnull().sum())
 
 # print(df_conti_camerino_modified.loc
 #       [df_conti_camerino_modified['Categoria']=='Sussidi'])
@@ -69,3 +72,6 @@ print(df_conti_camerino_modified.loc
         (df_conti_camerino_modified['Categoria']=='Vendite varie') |
         (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
          ])
+
+
+print(df_conti_camerino_modified.isnull().sum())
