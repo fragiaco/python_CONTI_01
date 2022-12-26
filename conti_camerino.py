@@ -50,5 +50,22 @@ print(df_conti_camerino_modified.info())
 
 
 
-print(df_conti_camerino_modified.loc[df_conti_camerino_modified['Categoria']=='Sussidi'])
+# print(df_conti_camerino_modified.loc
+#       [df_conti_camerino_modified['Categoria']=='Sussidi'])
 
+print(df_conti_camerino_modified.loc
+        [(df_conti_camerino_modified['Categoria']=='Curia') |
+        (df_conti_camerino_modified['Categoria']=='Collette-Chiesa') |
+        (df_conti_camerino_modified['Categoria']=='Congrua') |
+        (df_conti_camerino_modified['Categoria']=='Interessi') |
+        (df_conti_camerino_modified['Categoria']=='Messe celebrate') |
+        (df_conti_camerino_modified['Categoria']=='Offerte') |
+        (df_conti_camerino_modified['Categoria']=='Pensioni') |
+        (df_conti_camerino_modified['Categoria']=='Predicazione') |
+        (df_conti_camerino_modified['Categoria']=='Servizi religiosi') |
+        (df_conti_camerino_modified['Categoria']=='Stipendi') |
+        (df_conti_camerino_modified['Categoria']=='Rimborsi') |
+        (df_conti_camerino_modified['Categoria']=='Sussidi') |
+        (df_conti_camerino_modified['Categoria']=='Vendite varie') |
+        (df_conti_camerino_modified['Categoria']=='Eccedenza Cassa')
+         ])
