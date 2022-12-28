@@ -1,5 +1,5 @@
 # provo ad importare conti_camerino
-
+from xlsxwriter import *
 import pandas as pd
 #leggo e creo dataframe sensa indici colonna
 df_conti_camerino=pd.read_excel('conti_camerino_da_importare.xlsx', header=None)
@@ -81,6 +81,15 @@ df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_
 # df2=df.loc[(df['Discount'] >= 1200) | (df['Fee'] >= 23000 )]
 # print(df2)
 
+
+
+# Create a Pandas Excel writer using XlsxWriter as the engine.
+writer = pd.ExcelWriter('conti_camerino_multiple.xlsx', engine='xlsxwriter')
+
+
+
+
+
 df_conti_camerino_pivot_tabellone_anno_entrate = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
@@ -90,6 +99,9 @@ df_conti_camerino_pivot_tabellone_anno_uscite = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+
+
 
 print(df_conti_camerino_pivot_tabellone_anno_entrate.head())
 
@@ -111,4 +123,29 @@ pivot_gennaio_uscite = np.round(pd.pivot_table
 
 print(pivot_gennaio_entrate)
 print(pivot_gennaio_uscite)
+
+# Write each dataframe to a different worksheet.
+df_conti_camerino_pivot_tabellone_anno_entrate.to_excel(writer, sheet_name='gennaio_entrate')
+df_conti_camerino_pivot_tabellone_anno_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#df_conti_camerino_multiple.to_excel(writer, sheet_name='multiple')
+# with pd.ExcelWriter('conti_camerino_multiple.xlsx', engine='openpyxl', mode='a') as writer:
+#     df_conti_camerino_pivot_tabellone_anno_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+
+
+# Write to Multiple Sheets
+# with pd.ExcelWriter('Courses.xlsx') as writer:
+#     df.to_excel(writer, sheet_name='Technologies')
+#     df2.to_excel(writer, sheet_name='Schedule')
+#
+# # Append DataFrame to existing excel file
+# with pd.ExcelWriter('Courses.xlsx',mode='a') as writer:
+#     df.to_excel(writer, sheet_name='Technologies')
+
+
+
+
+print (df_conti_camerino_pivot_tabellone_anno_uscite.shape)
+# Close the Pandas Excel writer and output the Excel file.
+writer.close()
+
 pivot_gennaio_uscite.to_excel('conti_camerino_modified_excel.xlsx')
