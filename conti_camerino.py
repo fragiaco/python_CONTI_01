@@ -86,15 +86,29 @@ df_conti_camerino_pivot_tabellone_anno_entrate = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
+df_conti_camerino_pivot_tabellone_anno_uscite = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'gennaio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
 print(df_conti_camerino_pivot_tabellone_anno_entrate.head())
 
-pivot_anno_entrate = np.round(pd.pivot_table
-                              (df_conti_camerino_pivot_tabellone_anno_entrate,
+pivot_gennaio_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_tabellone_anno_entrate,
                                values='Euro',
                                index=['Entrate_Uscite','Categoria','Voce'],
                                columns='Mese',
                                fill_value=0,
                                margins=True),2)
 
-print(pivot_anno_entrate)
-pivot_anno_entrate.to_excel('conti_camerino_modified_excel.xlsx')
+pivot_gennaio_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_tabellone_anno_uscite,
+                               values='Euro',
+                               index=['Entrate_Uscite','Categoria','Voce'],
+                               columns='Mese',
+                               fill_value=0,
+                               margins=True),2)
+
+print(pivot_gennaio_entrate)
+print(pivot_gennaio_uscite)
+pivot_gennaio_uscite.to_excel('conti_camerino_modified_excel.xlsx')
