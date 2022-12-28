@@ -107,6 +107,7 @@ pivot_gennaio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
+                               margins_name= 'Entrate gennaio',
                                fill_value=0),2)
 
 
@@ -118,6 +119,7 @@ pivot_gennaio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite','Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
+                               margins_name= 'Uscite gennaio',
                                fill_value=0),2)
 
 print(pivot_gennaio_entrate)
