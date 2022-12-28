@@ -104,18 +104,21 @@ print(df_conti_camerino_pivot_tabellone_anno_entrate.head())
 pivot_gennaio_entrate = np.round(pd.pivot_table
                             (df_conti_camerino_pivot_tabellone_anno_entrate,
                                values='Euro',
-                               index=['Entrate_Uscite','Categoria','Voce'],
-                               columns='Mese',
-                               fill_value=0,
-                               margins=True),2)
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               fill_value=0),2)
+
+
+
 
 pivot_gennaio_uscite = np.round(pd.pivot_table
                             (df_conti_camerino_pivot_tabellone_anno_uscite,
                                values='Euro',
                                index=['Entrate_Uscite','Categoria','Voce'],
-                               columns='Mese',
-                               fill_value=0,
-                               margins=True),2)
+                               aggfunc='sum',
+                               margins=True,
+                               fill_value=0),2)
 
 print(pivot_gennaio_entrate)
 print(pivot_gennaio_uscite)
