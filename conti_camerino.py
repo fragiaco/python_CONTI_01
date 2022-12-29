@@ -217,5 +217,14 @@ print(ws_multiple['D8'].value)
 for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
     cell = row[3]             # column C
     cell.number_format = '#,##0.00€'
+    cell.alignment = Alignment(horizontal="right")
+
+for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+    cell = row[2]  # column C
+    cell.alignment = Alignment(horizontal="right")
+
+for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+    cell = row[1]  # column C
+    cell.alignment = Alignment(horizontal="center", vertical="center")
 
 wb.save("conti_camerino_styled.xlsx")
