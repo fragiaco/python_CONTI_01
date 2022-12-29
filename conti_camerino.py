@@ -167,11 +167,23 @@ ws_multiple.column_dimensions['C'].width = 30
 ws_multiple.column_dimensions['D'].width = 15
 
 
+from openpyxl.styles import numbers
+
+#ws_multiple['D21'].number_format = '_-* #.##0,00 €_-;-* #.##0,00 €_-;_-* "-"?? €_-;_-@_-'
+# ws_multiple['D21'].number_format = '_-* #.##0,00 €_-;-* #.##0,00 €_-;_-* "-"?? €_-;_-@_-'
+# ws_multiple.number_format = numbers.FORMAT_PERCENTAGE
+center_align = Alignment(horizontal='center', vertical='center')
+###################
 
 
 
 
-ws_multiple.merge_cells('A1:D1' )
+# for c in ws_multiple['D']:
+#     # c[0].border = no_right_side
+#     # c[0].alignment = center_align
+#     ws_multiple.number_format = '_-* #.##0,00 €_-;-* #.##0,00 €_-;_-* "-"?? €_-;_-@_-'
+
+ws_multiple.merge_cells('A1:D1')
 top_left_cell = ws_multiple['A1']
 top_left_cell.value = "Conti mese di gennaio"
 top_left_cell.font=Font(name='Calibri',
@@ -200,6 +212,10 @@ print(ws_entrate['D18'].value)
 print(ws_uscite['D18'].value)
 print(ws_multiple['D8'].value)
 
-# Close the Pandas Excel writer and output the Excel file.
+# center align column H in the default sheet:
+#ws = wb.active
+for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+    cell = row[3]             # column C
+    cell.number_format = '#,##0.00€'
 
 wb.save("conti_camerino_styled.xlsx")
