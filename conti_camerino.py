@@ -143,48 +143,12 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
                     ) as writer:
-                    pivot_gennaio_entrate.to_excel(writer, sheet_name="multiple", startrow=5)
-                    pivot_gennaio_uscite.to_excel(writer, sheet_name="multiple", startrow=(len(pivot_gennaio_entrate)+10))
-
-########################
-########################
-from openpyxl.styles import colors
-from openpyxl.styles import Font, Color
-from openpyxl import Workbook
-from openpyxl import load_workbook
-wb = load_workbook(filename = "conti_camerino_multiple.xlsx")
-ws_entrate = wb['gennaio_entrate']
-ws_uscite=wb['gennaio_uscite']
-ws_multiple=wb['multiple']
+                    pivot_gennaio_entrate.to_excel(writer, sheet_name="multiple")
+                    pivot_gennaio_uscite.to_excel(writer, sheet_name="multiple", startrow=(len(pivot_gennaio_entrate)+5))
 
 
 
-ws_multiple.merge_cells('A1:F1', )
-top_left_cell = ws_multiple['A1']
-top_left_cell.value = "Conti mese di gennaio"
-top_left_cell.font=Font(name='Calibri',
-                        size=25,
-                        bold=True,
-                        italic=False,
-                        vertAlign='baseline',
-                        underline='none',
-                        strike=False,
-                        color='a81a1a')
-
-
-print('type')
-print(wb.sheetnames)
-print(type(ws_uscite))
-print(type(ws_entrate))
-print(type(ws_multiple))
-
-print('type')
-
-print('valoreeee')
-print(ws_entrate['D18'].value)
-print(ws_uscite['D18'].value)
-print(ws_multiple['D8'].value)
 
 # Close the Pandas Excel writer and output the Excel file.
+#writer.close()
 
-wb.save("conti_camerino_styled.xlsx")
