@@ -147,8 +147,29 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_gennaio_uscite.to_excel(writer, sheet_name="multiple", startrow=(len(pivot_gennaio_entrate)+5))
 
 
+from openpyxl import Workbook
+from openpyxl import load_workbook
+wb = load_workbook(filename = "conti_camerino_multiple.xlsx")
+ws_entrate = wb['gennaio_entrate']
+ws_uscite=wb['gennaio_uscite']
+ws_multiple=wb['multiple']
 
+
+
+
+print('type')
+print(wb.sheetnames)
+print(type(ws_uscite))
+print(type(ws_entrate))
+print(type(ws_multiple))
+
+print('type')
+
+print('valoreeee')
+print(ws_entrate['D18'].value)
+print(ws_uscite['D18'].value)
+print(ws_multiple['C8'].value)
 
 # Close the Pandas Excel writer and output the Excel file.
-#writer.close()
+
 
