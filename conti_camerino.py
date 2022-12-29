@@ -1,7 +1,7 @@
 # provo ad importare conti_camerino
 import pandas as pd
 #leggo e creo dataframe sensa indici colonna
-df_conti_camerino=pd.read_excel('conti_camerino_da_importare.xlsx', header=None)
+df_conti_camerino=pd.read_excel('conti_camerino_da_importare.xlsx', header=None, index_col=None)
 #verifico
 #print(df_conti_camerino.head())
 print() # riga vuota
@@ -107,7 +107,7 @@ pivot_gennaio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'Entrate gennaio',
+                               margins_name= 'TOTALE',
                                fill_value=0),2)
 
 
@@ -119,7 +119,7 @@ pivot_gennaio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite','Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'Uscite gennaio',
+                               margins_name= 'TOTALE',
                                fill_value=0),2)
 
 print(pivot_gennaio_entrate)
@@ -214,17 +214,68 @@ print(ws_multiple['D8'].value)
 
 # center align column H in the default sheet:
 #ws = wb.active
+
 for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
-    cell = row[3]             # column C
+    #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
+    cell = row[3] #il quarto valore della tuple
+    #print (cell)# <Cell 'multiple'.D7>
     cell.number_format = '#,##0.00€'
     cell.alignment = Alignment(horizontal="right")
+    cell.font=Font(bold=True)
 
 for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
-    cell = row[2]  # column C
+    cell = row[2]  #il terzo valore della tuple
     cell.alignment = Alignment(horizontal="right")
 
 for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
-    cell = row[1]  # column C
+    cell = row[1]  #il secondo valore della tuple
     cell.alignment = Alignment(horizontal="center", vertical="center")
+
+
+list=[]
+# Enumerate the cells in the second row
+for row in ws_multiple.rows:
+    for cell in row:
+        if (cell.value == ("Categoria") or
+            cell.value == ("Entrate") or
+            cell.value == ("Euro") or
+            cell.value == ("Uscite") or
+            cell.value == ('TOTALE') or
+            cell.value == ("Voce")):
+            print('trovato')
+            print(cell)
+            list.append(cell)
+print(list)
+
+for cell in list:
+    cell.font = Font(size=15, color='a81a1a', bold=True)
+
+
+
+list=[]
+# Enumerate the cells in the second row
+for row in ws_multiple.rows:
+    for cell in row:
+        if cell.value == ("Entrate_Uscite"):
+            list.append(cell)
+for cell in list:
+    cell.font = Font(size=1)
+
+# for cell in list:
+#     cell.font = Font(size=1)
+#     print(cell)
+#     print(cell.coordinate)
+#     print(cell.row)
+#     print(cell.column)
+
+list=[]
+
+for row in ws_multiple.rows:
+    for cell in row:
+        if cell.value == ("TOTALE"):
+            list.append(cell)
+for cell in list:
+    ws_multiple.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+
 
 wb.save("conti_camerino_styled.xlsx")
