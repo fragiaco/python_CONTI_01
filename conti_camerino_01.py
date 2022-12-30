@@ -378,26 +378,9 @@ pivot_dicembre_uscite = np.round(pd.pivot_table
                                fill_value=0),2)
 
 
-# with pd.ExcelWriter("conti_camerino_multiple.xlsx") as writer:
-#     pivot_gennaio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_febbraio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_marzo_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_aprile_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_maggio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_giugno_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_luglio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_agosto_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_settembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_ottobre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_novembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_dicembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#
-#
-#
-#     pivot_gennaio_entrate.to_excel(writer, sheet_name='gennaio_entrate')
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -405,7 +388,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_gennaio_entrate.to_excel(writer, sheet_name="Gennaio", startrow=5)
                     pivot_gennaio_uscite.to_excel(writer, sheet_name="Gennaio", startrow=(len(pivot_gennaio_entrate)+10))
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -413,7 +396,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_febbraio_entrate.to_excel(writer, sheet_name="Febbraio", startrow=5)
                     pivot_febbraio_uscite.to_excel(writer, sheet_name="Febbraio", startrow=(len(pivot_gennaio_entrate) + 10))
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -422,7 +405,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_marzo_uscite.to_excel(writer, sheet_name="Marzo", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -431,7 +414,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_aprile_uscite.to_excel(writer, sheet_name="Aprile", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -440,7 +423,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_maggio_uscite.to_excel(writer, sheet_name="Maggio", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -449,7 +432,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_giugno_uscite.to_excel(writer, sheet_name="Giugno", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -458,7 +441,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_luglio_uscite.to_excel(writer, sheet_name="Luglio", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -467,7 +450,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_agosto_uscite.to_excel(writer, sheet_name="Agosto", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -476,7 +459,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_settembre_uscite.to_excel(writer, sheet_name="Settembre", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -485,7 +468,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_ottobre_uscite.to_excel(writer, sheet_name="Ottobre", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -494,7 +477,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_novembre_uscite.to_excel(writer, sheet_name="Novembre", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
@@ -504,7 +487,7 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
 
 
 
-wb = load_workbook(filename = "conti_camerino_multiple.xlsx")
+wb = load_workbook(filename = "conti_camerino_styled.xlsx")
 # ws_entrate = wb['gennaio_entrate']
 # ws_uscite = wb['gennaio_uscite']
 
