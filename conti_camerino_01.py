@@ -378,23 +378,6 @@ pivot_dicembre_uscite = np.round(pd.pivot_table
                                fill_value=0),2)
 
 
-# with pd.ExcelWriter("conti_camerino_multiple.xlsx") as writer:
-#     pivot_gennaio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_febbraio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_marzo_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_aprile_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_maggio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_giugno_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_luglio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_agosto_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_settembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_ottobre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_novembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#     pivot_dicembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-#
-#
-#
-#     pivot_gennaio_entrate.to_excel(writer, sheet_name='gennaio_entrate')
 
 
 with pd.ExcelWriter("conti_camerino_multiple.xlsx",
@@ -576,67 +559,69 @@ for sheet in list_ws_mese:
 
     top_left_cell.alignment = Alignment(horizontal="center", vertical="center")
 
-for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
-    #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
-    cell = row[3] #il quarto valore della tuple
-    #print (cell)# <Cell 'multiple'.D7>
-    cell.number_format = '#,##0.00€'
-    cell.alignment = Alignment(horizontal="right")
-    cell.font=Font(bold=True)
 
-for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
-    cell = row[2]  #il terzo valore della tuple
-    cell.alignment = Alignment(horizontal="right")
+for sheet in list_ws_mese:
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
+        cell = row[3] #il quarto valore della tuple
+        #print (cell)# <Cell 'multiple'.D7>
+        cell.number_format = '#,##0.00€'
+        cell.alignment = Alignment(horizontal="right")
+        cell.font=Font(bold=True)
 
-for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
-    cell = row[1]  #il secondo valore della tuple
-    cell.alignment = Alignment(horizontal="center", vertical="center")
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        cell = row[2]  #il terzo valore della tuple
+        cell.alignment = Alignment(horizontal="right")
 
-
-list=[]
-# Enumerate the cells in the second row
-for row in ws_gennaio.rows:
-    for cell in row:
-        if (cell.value == ("Categoria") or
-            cell.value == ("Entrate") or
-            cell.value == ("Euro") or
-            cell.value == ("Uscite") or
-            cell.value == ('TOTALE') or
-            cell.value == ("Voce")):
-            print('trovato')
-            print(cell)
-            list.append(cell)
-print(list)
-
-for cell in list:
-    cell.font = Font(size=15, color='a81a1a', bold=True)
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        cell = row[1]  #il secondo valore della tuple
+        cell.alignment = Alignment(horizontal="center", vertical="center")
 
 
+    list=[]
+    # Enumerate the cells in the second row
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("Categoria") or
+                cell.value == ("Entrate") or
+                cell.value == ("Euro") or
+                cell.value == ("Uscite") or
+                cell.value == ('TOTALE') or
+                cell.value == ("Voce")):
+                print('trovato')
+                print(cell)
+                list.append(cell)
+    print(list)
 
-list=[]
-# Enumerate the cells in the second row
-for row in ws_gennaio.rows:
-    for cell in row:
-        if cell.value == ("Entrate_Uscite"):
-            list.append(cell)
-for cell in list:
-    cell.font = Font(size=1)
+    for cell in list:
+        cell.font = Font(size=15, color='a81a1a', bold=True)
 
-# for cell in list:
-#     cell.font = Font(size=1)
-#     print(cell)
-#     print(cell.coordinate)
-#     print(cell.row)
-#     print(cell.column)
 
-list=[]
 
-for row in ws_gennaio.rows:
-    for cell in row:
-        if cell.value == ("TOTALE"):
-            list.append(cell)
-for cell in list:
-    ws_gennaio.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+    list=[]
+    # Enumerate the cells in the second row
+    for row in sheet.rows:
+        for cell in row:
+            if cell.value == ("Entrate_Uscite"):
+                list.append(cell)
+    for cell in list:
+        cell.font = Font(size=1)
+
+    # for cell in list:
+    #     cell.font = Font(size=1)
+    #     print(cell)
+    #     print(cell.coordinate)
+    #     print(cell.row)
+    #     print(cell.column)
+
+    list=[]
+
+    for row in sheet.rows:
+        for cell in row:
+            if cell.value == ("TOTALE"):
+                list.append(cell)
+    for cell in list:
+        sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
 
 
 wb.save("conti_camerino_styled.xlsx")
