@@ -33,20 +33,343 @@ df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_
 
 
 
-df_conti_camerino_pivot_tabellone_anno_entrate = df_conti_camerino_modified.loc[
+df_conti_camerino_pivot_entrate_gennaio = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
-df_conti_camerino_pivot_tabellone_anno_uscite = df_conti_camerino_modified.loc[
+
+df_conti_camerino_pivot_entrate_febbraio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'febbraio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_marzo = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'marzo') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_aprile = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'aprile') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_maggio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'maggio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_giugno = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'giugno') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_luglio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'luglio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_agosto = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'agosto') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_settembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'settembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_ottobre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'ottobre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_novembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'novembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+df_conti_camerino_pivot_entrate_dicembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'dicembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
+########
+
+
+df_conti_camerino_pivot_uscite_gennaio = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
 
+df_conti_camerino_pivot_uscite_febbraio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'febbraio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_marzo = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'marzo') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_aprile = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'aprile') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_maggio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'maggio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_giugno = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'giugno') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_luglio = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'luglio') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_agosto = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'agosto') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_settembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'settembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_ottobre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'ottobre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_novembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'novembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
+df_conti_camerino_pivot_uscite_dicembre = df_conti_camerino_modified.loc[
+                                        (df_conti_camerino_modified['Anno'] == 2015) &
+                                        (df_conti_camerino_modified['Mese'] == 'dicembre') &
+                                        (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
 
 
 pivot_gennaio_entrate = np.round(pd.pivot_table
-                            (df_conti_camerino_pivot_tabellone_anno_entrate,
+                            (df_conti_camerino_pivot_entrate_gennaio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_febbraio_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_febbraio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_marzo_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_marzo,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_aprile_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_aprile,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_maggio_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_maggio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_giugno_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_giugno,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_luglio_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_luglio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_agosto_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_agosto,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_settembre_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_settembre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_ottobre_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_ottobre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_novembre_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_novembre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_dicembre_entrate = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_entrate_dicembre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+#############################
+
+
+pivot_gennaio_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_gennaio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_febbraio_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_febbraio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_marzo_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_marzo,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_aprile_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_aprile,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_maggio_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_maggio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_giugno_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_giugno,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_luglio_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_luglio,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_agosto_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_agosto,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_settembre_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_settembre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_ottobre_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_ottobre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_novembre_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_novembre,
+                               values='Euro',
+                               index=['Entrate_Uscite', 'Categoria','Voce'],
+                               aggfunc='sum',
+                               margins=True,
+                               margins_name= 'TOTALE',
+                               fill_value=0),2)
+
+pivot_dicembre_uscite = np.round(pd.pivot_table
+                            (df_conti_camerino_pivot_uscite_dicembre,
                                values='Euro',
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
@@ -55,19 +378,23 @@ pivot_gennaio_entrate = np.round(pd.pivot_table
                                fill_value=0),2)
 
 
-pivot_gennaio_uscite = np.round(pd.pivot_table
-                            (df_conti_camerino_pivot_tabellone_anno_uscite,
-                               values='Euro',
-                               index=['Entrate_Uscite','Categoria','Voce'],
-                               aggfunc='sum',
-                               margins=True,
-                               margins_name= 'TOTALE',
-                               fill_value=0),2)
-
-
-with pd.ExcelWriter("conti_camerino_multiple.xlsx") as writer:
-    pivot_gennaio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
-    pivot_gennaio_entrate.to_excel(writer, sheet_name='gennaio_entrate')
+# with pd.ExcelWriter("conti_camerino_multiple.xlsx") as writer:
+#     pivot_gennaio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_febbraio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_marzo_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_aprile_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_maggio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_giugno_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_luglio_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_agosto_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_settembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_ottobre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_novembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#     pivot_dicembre_uscite.to_excel(writer, sheet_name='gennaio_uscite')
+#
+#
+#
+#     pivot_gennaio_entrate.to_excel(writer, sheet_name='gennaio_entrate')
 
 
 with pd.ExcelWriter("conti_camerino_multiple.xlsx",
@@ -75,29 +402,136 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
                     ) as writer:
-                    pivot_gennaio_entrate.to_excel(writer, sheet_name="multiple", startrow=5)
-                    pivot_gennaio_uscite.to_excel(writer, sheet_name="multiple", startrow=(len(pivot_gennaio_entrate)+10))
+                    pivot_gennaio_entrate.to_excel(writer, sheet_name="Gennaio", startrow=5)
+                    pivot_gennaio_uscite.to_excel(writer, sheet_name="Gennaio", startrow=(len(pivot_gennaio_entrate)+10))
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_febbraio_entrate.to_excel(writer, sheet_name="Febbraio", startrow=5)
+                    pivot_febbraio_uscite.to_excel(writer, sheet_name="Febbraio", startrow=(len(pivot_gennaio_entrate) + 10))
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_marzo_entrate.to_excel(writer, sheet_name="Marzo", startrow=5)
+                    pivot_marzo_uscite.to_excel(writer, sheet_name="Marzo", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_aprile_entrate.to_excel(writer, sheet_name="Aprile", startrow=5)
+                    pivot_aprile_uscite.to_excel(writer, sheet_name="Aprile", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_maggio_entrate.to_excel(writer, sheet_name="Maggio", startrow=5)
+                    pivot_maggio_uscite.to_excel(writer, sheet_name="Maggio", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_giugno_entrate.to_excel(writer, sheet_name="Giugno", startrow=5)
+                    pivot_giugno_uscite.to_excel(writer, sheet_name="Giugno", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_luglio_entrate.to_excel(writer, sheet_name="Luglio", startrow=5)
+                    pivot_luglio_uscite.to_excel(writer, sheet_name="Luglio", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_agosto_entrate.to_excel(writer, sheet_name="Agosto", startrow=5)
+                    pivot_agosto_uscite.to_excel(writer, sheet_name="Agosto", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_settembre_entrate.to_excel(writer, sheet_name="Settembre", startrow=5)
+                    pivot_settembre_uscite.to_excel(writer, sheet_name="Settembre", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_ottobre_entrate.to_excel(writer, sheet_name="Ottobre", startrow=5)
+                    pivot_ottobre_uscite.to_excel(writer, sheet_name="Ottobre", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_novembre_entrate.to_excel(writer, sheet_name="Novembre", startrow=5)
+                    pivot_novembre_uscite.to_excel(writer, sheet_name="Novembre", startrow=(len(pivot_gennaio_entrate) + 10))
+
+
+with pd.ExcelWriter("conti_camerino_multiple.xlsx",
+                    mode="a",
+                    engine="openpyxl",
+                    if_sheet_exists="overlay",
+                    ) as writer:
+                    pivot_dicembre_entrate.to_excel(writer, sheet_name="Dicembre", startrow=5)
+                    pivot_dicembre_uscite.to_excel(writer, sheet_name="Dicembre", startrow=(len(pivot_gennaio_entrate) + 10))
+
 
 
 wb = load_workbook(filename = "conti_camerino_multiple.xlsx")
-ws_entrate = wb['gennaio_entrate']
-ws_uscite=wb['gennaio_uscite']
-ws_multiple=wb['multiple']
+# ws_entrate = wb['gennaio_entrate']
+# ws_uscite = wb['gennaio_uscite']
+
+ws_gennaio = wb['Gennaio']
+ws_febbraio = wb['Febbraio']
+ws_marzo = wb['Marzo']
+ws_aprile = wb['Aprile']
+ws_maggio = wb['Maggio']
+ws_giugno = wb['Giugno']
+ws_luglio = wb['Luglio']
+ws_agosto = wb['Agosto']
+ws_settembre = wb['Settembre']
+ws_ottobre = wb['Ottobre']
+ws_novembre = wb['Novembre']
+ws_dicembre = wb['Dicembre']
+
 
 # set the height of the row
-ws_multiple.row_dimensions[1].height = 70
-
+ws_gennaio.row_dimensions[1].height = 70
 # set the width of the column
-ws_multiple.column_dimensions['A'].width = 15
-ws_multiple.column_dimensions['B'].width = 20
-ws_multiple.column_dimensions['C'].width = 30
-ws_multiple.column_dimensions['D'].width = 15
-
-center_align = Alignment(horizontal='center', vertical='center')
-
-
-ws_multiple.merge_cells('A1:D1')
-top_left_cell = ws_multiple['A1']
+ws_gennaio.column_dimensions['A'].width = 15
+ws_gennaio.column_dimensions['B'].width = 20
+ws_gennaio.column_dimensions['C'].width = 30
+ws_gennaio.column_dimensions['D'].width = 15
+#merge cells
+ws_gennaio.merge_cells('A1:D1')
+top_left_cell = ws_gennaio['A1']
 top_left_cell.value = "Conti mese di gennaio"
 top_left_cell.font=Font(name='Calibri',
                         size=25,
@@ -108,27 +542,26 @@ top_left_cell.font=Font(name='Calibri',
                         strike=False,
                         color='a81a1a')
 
-
 top_left_cell.alignment = Alignment(horizontal="center", vertical="center")
 
-
-print('type')
-print(wb.sheetnames)
-print(type(ws_uscite))
-print(type(ws_entrate))
-print(type(ws_multiple))
-
-print('type')
-
-print('valoreeee')
-print(ws_entrate['D18'].value)
-print(ws_uscite['D18'].value)
-print(ws_multiple['D8'].value)
+#
+# print('type')
+# print(wb.sheetnames)
+# print(type(ws_uscite))
+# print(type(ws_entrate))
+# print(type(ws_multiple))
+#
+# print('type')
+#
+# print('valoreeee')
+# print(ws_entrate['D18'].value)
+# print(ws_uscite['D18'].value)
+# print(ws_multiple['D8'].value)
 
 # center align column H in the default sheet:
 #ws = wb.active
 
-for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
     #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
     cell = row[3] #il quarto valore della tuple
     #print (cell)# <Cell 'multiple'.D7>
@@ -136,18 +569,18 @@ for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
     cell.alignment = Alignment(horizontal="right")
     cell.font=Font(bold=True)
 
-for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
     cell = row[2]  #il terzo valore della tuple
     cell.alignment = Alignment(horizontal="right")
 
-for row in ws_multiple[7:ws_multiple.max_row]:  # skip the header
+for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
     cell = row[1]  #il secondo valore della tuple
     cell.alignment = Alignment(horizontal="center", vertical="center")
 
 
 list=[]
 # Enumerate the cells in the second row
-for row in ws_multiple.rows:
+for row in ws_gennaio.rows:
     for cell in row:
         if (cell.value == ("Categoria") or
             cell.value == ("Entrate") or
@@ -167,7 +600,7 @@ for cell in list:
 
 list=[]
 # Enumerate the cells in the second row
-for row in ws_multiple.rows:
+for row in ws_gennaio.rows:
     for cell in row:
         if cell.value == ("Entrate_Uscite"):
             list.append(cell)
@@ -183,12 +616,12 @@ for cell in list:
 
 list=[]
 
-for row in ws_multiple.rows:
+for row in ws_gennaio.rows:
     for cell in row:
         if cell.value == ("TOTALE"):
             list.append(cell)
 for cell in list:
-    ws_multiple.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+    ws_gennaio.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
 
 
 wb.save("conti_camerino_styled.xlsx")
