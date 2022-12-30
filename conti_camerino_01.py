@@ -522,44 +522,59 @@ ws_novembre = wb['Novembre']
 ws_dicembre = wb['Dicembre']
 
 
+list_ws_mese = [ws_gennaio,
+                ws_febbraio,
+                ws_marzo,
+                ws_aprile,
+                ws_maggio,
+                ws_giugno,
+                ws_luglio,
+                ws_agosto,
+                ws_settembre,
+                ws_ottobre,
+                ws_novembre,
+                ws_dicembre]
+
+i = 0 # contatore list_mese
+list_mese = ['Conto del mese di Gennaio',
+             'Conto del mese di Febbraio',
+             'Conto del mese di Marzo',
+             'Conto del mese di Aprile',
+             'Conto del mese di Maggio',
+             'Conto del mese di Giugno',
+             'Conto del mese di Luglio',
+             'Conto del mese di Agosto',
+             'Conto del mese di Settembre',
+             'Conto del mese di Ottobre',
+             'Conto del mese di Novembre',
+             'Conto del mese di Dicembre',
+             ]
+
 # set the height of the row
-ws_gennaio.row_dimensions[1].height = 70
+for sheet in list_ws_mese:
+    sheet.row_dimensions[1].height = 70
+#ws_gennaio.row_dimensions[1].height = 70
 # set the width of the column
-ws_gennaio.column_dimensions['A'].width = 15
-ws_gennaio.column_dimensions['B'].width = 20
-ws_gennaio.column_dimensions['C'].width = 30
-ws_gennaio.column_dimensions['D'].width = 15
+    sheet.column_dimensions['A'].width = 15
+    sheet.column_dimensions['B'].width = 20
+    sheet.column_dimensions['C'].width = 30
+    sheet.column_dimensions['D'].width = 15
 #merge cells
-ws_gennaio.merge_cells('A1:D1')
-top_left_cell = ws_gennaio['A1']
-top_left_cell.value = "Conti mese di gennaio"
-top_left_cell.font=Font(name='Calibri',
-                        size=25,
-                        bold=True,
-                        italic=True,
-                        vertAlign='none',
-                        underline='single',
-                        strike=False,
-                        color='a81a1a')
+    sheet.merge_cells('A1:D1')
+    top_left_cell = sheet['A1']
 
-top_left_cell.alignment = Alignment(horizontal="center", vertical="center")
+    top_left_cell.value = list_mese[i]
+    i += 1
+    top_left_cell.font=Font(name='Calibri',
+                            size=25,
+                            bold=True,
+                            italic=True,
+                            vertAlign='none',
+                            underline='single',
+                            strike=False,
+                            color='a81a1a')
 
-#
-# print('type')
-# print(wb.sheetnames)
-# print(type(ws_uscite))
-# print(type(ws_entrate))
-# print(type(ws_multiple))
-#
-# print('type')
-#
-# print('valoreeee')
-# print(ws_entrate['D18'].value)
-# print(ws_uscite['D18'].value)
-# print(ws_multiple['D8'].value)
-
-# center align column H in the default sheet:
-#ws = wb.active
+    top_left_cell.alignment = Alignment(horizontal="center", vertical="center")
 
 for row in ws_gennaio[7:ws_gennaio.max_row]:  # skip the header
     #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
