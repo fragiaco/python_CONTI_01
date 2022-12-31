@@ -4,10 +4,10 @@ import numpy as np
 from openpyxl.styles import Font, Alignment
 # from openpyxl import load_workbook
 
-# Leggi il file xlsx e trasformalo in dataframe
+# Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
 df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx', names=col_names)
-print(df_conti_camerino_modified)
+
 
 # Creo la colonna ['Entrate_Uscite'] e scrivo in automatico i volori
 df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply\
@@ -29,15 +29,13 @@ df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Catego
                                 x=='Eccedenza Cassa'
                             else 'Uscite')
 
-# Assogno alle colonne l'ordine desiderato
+# Assegno alle colonne l'ordine desiderato
 df_conti_camerino_modified = df_conti_camerino_modified [['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce','Euro']]
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].astype("category")
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_categories(["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"])
 
-print(df_conti_camerino_modified)
 
-'''
-
+#creo dataframe per le entrate di ogni mese di uno specifico anno
 df_conti_camerino_pivot_entrate_gennaio = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
                                         (df_conti_camerino_modified['Mese'] == 'gennaio') &
@@ -99,7 +97,8 @@ df_conti_camerino_pivot_entrate_dicembre = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Mese'] == 'dicembre') &
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
-########
+
+#creo dataframe per le uscite di ogni mese di uno specifico anno
 
 
 df_conti_camerino_pivot_uscite_gennaio = df_conti_camerino_modified.loc[
@@ -163,6 +162,7 @@ df_conti_camerino_pivot_uscite_dicembre = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
 
 
+# Creo pivot per le entrate di ogni mese di uno specifico anno
 pivot_gennaio_entrate = np.round(pd.pivot_table
                             (df_conti_camerino_pivot_entrate_gennaio,
                                values='Euro',
@@ -271,7 +271,8 @@ pivot_dicembre_entrate = np.round(pd.pivot_table
                                margins_name= 'TOTALE',
                                fill_value=0),2)
 
-#############################
+# Creo pivot per le uscite di ogni mese di uno specifico anno
+# round arrotonda alla seconda cifra decimale ',2)'
 
 
 pivot_gennaio_uscite = np.round(pd.pivot_table
@@ -385,6 +386,8 @@ pivot_dicembre_uscite = np.round(pd.pivot_table
 
 
 
+# Con ExcelWriter di pandas metto insieme il pivot delle entrate ed il pivot delle uscite
+
 with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
@@ -392,7 +395,7 @@ with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     ) as writer:
                     pivot_gennaio_entrate.to_excel(writer, sheet_name="Gennaio", startrow=5)
                     pivot_gennaio_uscite.to_excel(writer, sheet_name="Gennaio", startrow=(len(pivot_gennaio_entrate)+10))
-
+"""
 with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
@@ -630,4 +633,5 @@ for sheet in list_ws_mese:
 
 
 wb.save("conti_camerino_styled.xlsx")
-'''
+
+"""
