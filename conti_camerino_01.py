@@ -2,10 +2,12 @@
 import pandas as pd
 import numpy as np
 from openpyxl.styles import Font, Alignment
-from openpyxl import load_workbook
+# from openpyxl import load_workbook
 
-df_conti_camerino_modified = pd.read_excel('conti_camerino_modified.xlsx', index_col=0)
+# Leggi il file xlsx e trasformalo in dataframe
+df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx')
 
+# Creo la colonna ['Entrate_Uscite'] e scrivo in automatico i volori
 df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply\
     (lambda x: 'Entrate'    if  x=='Vendite varie' or
                                 x=='Salute' or
@@ -25,13 +27,13 @@ df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Catego
                                 x=='Eccedenza Cassa'
                             else 'Uscite')
 
-
+# Assogno alle colonne l'ordine desiderato
 df_conti_camerino_modified = df_conti_camerino_modified [['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce','Euro']]
-
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].astype("category")
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_categories(["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"])
 
 
+'''
 
 df_conti_camerino_pivot_entrate_gennaio = df_conti_camerino_modified.loc[
                                         (df_conti_camerino_modified['Anno'] == 2015) &
@@ -625,3 +627,4 @@ for sheet in list_ws_mese:
 
 
 wb.save("conti_camerino_styled.xlsx")
+'''
