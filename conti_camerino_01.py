@@ -1,8 +1,12 @@
 
 import pandas as pd
+
 import numpy as np
+
+from openpyxl import Workbook
+from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
-# from openpyxl import load_workbook
+
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
@@ -384,18 +388,23 @@ pivot_dicembre_uscite = np.round(pd.pivot_table
                                fill_value=0),2)
 
 
+#Creo il file 'conti_camerino_styled.xlsx'
+wb = Workbook()
+wb['Sheet'].title = 'Copertina_fronte'
+wb.save('conti_camerino_styled.xlsx')
 
 
 # Con ExcelWriter di pandas metto insieme il pivot delle entrate ed il pivot delle uscite
 
-with pd.ExcelWriter("conti_camerino_styled.xlsx",
+with pd.ExcelWriter('conti_camerino_styled.xlsx',
                     mode="a",
                     engine="openpyxl",
                     if_sheet_exists="overlay",
                     ) as writer:
                     pivot_gennaio_entrate.to_excel(writer, sheet_name="Gennaio", startrow=5)
                     pivot_gennaio_uscite.to_excel(writer, sheet_name="Gennaio", startrow=(len(pivot_gennaio_entrate)+10))
-"""
+
+
 with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
                     engine="openpyxl",
@@ -403,6 +412,7 @@ with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     ) as writer:
                     pivot_febbraio_entrate.to_excel(writer, sheet_name="Febbraio", startrow=5)
                     pivot_febbraio_uscite.to_excel(writer, sheet_name="Febbraio", startrow=(len(pivot_gennaio_entrate) + 10))
+
 
 with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     mode="a",
@@ -494,25 +504,26 @@ with pd.ExcelWriter("conti_camerino_styled.xlsx",
                     pivot_dicembre_uscite.to_excel(writer, sheet_name="Dicembre", startrow=(len(pivot_gennaio_entrate) + 10))
 
 
-
+# leggo il file "conti_camerino_styled.xlsx"
 wb = load_workbook(filename = "conti_camerino_styled.xlsx")
-# ws_entrate = wb['gennaio_entrate']
-# ws_uscite = wb['gennaio_uscite']
 
-ws_gennaio = wb['Gennaio']
+# creo 12 sheet per i 12 mesi
+ws_gennaio  = wb['Gennaio']
 ws_febbraio = wb['Febbraio']
-ws_marzo = wb['Marzo']
-ws_aprile = wb['Aprile']
-ws_maggio = wb['Maggio']
-ws_giugno = wb['Giugno']
-ws_luglio = wb['Luglio']
-ws_agosto = wb['Agosto']
+ws_marzo    = wb['Marzo']
+ws_aprile   = wb['Aprile']
+ws_maggio   = wb['Maggio']
+ws_giugno   = wb['Giugno']
+ws_luglio   = wb['Luglio']
+ws_agosto   = wb['Agosto']
 ws_settembre = wb['Settembre']
-ws_ottobre = wb['Ottobre']
+ws_ottobre  = wb['Ottobre']
 ws_novembre = wb['Novembre']
 ws_dicembre = wb['Dicembre']
 
+# creo 2 liste: i fogli di excel ed i mesi dell'anno
 
+#sheets dei 12 mesi
 list_ws_mese = [ws_gennaio,
                 ws_febbraio,
                 ws_marzo,
@@ -541,22 +552,26 @@ list_mese = ['Conto del mese di Gennaio',
              'Conto del mese di Dicembre',
              ]
 
-# set the height of the row
+# set the height of the first row in each sheet
 for sheet in list_ws_mese:
     sheet.row_dimensions[1].height = 70
-#ws_gennaio.row_dimensions[1].height = 70
+
+
 # set the width of the column
     sheet.column_dimensions['A'].width = 15
     sheet.column_dimensions['B'].width = 20
     sheet.column_dimensions['C'].width = 30
     sheet.column_dimensions['D'].width = 15
+
 #merge cells
     sheet.merge_cells('A1:D1')
-    top_left_cell = sheet['A1']
 
-    top_left_cell.value = list_mese[i]
+    #scrivo nella cella 'A1'
+    sheet['A1'].value = list_mese[i]
     i += 1
-    top_left_cell.font=Font(name='Calibri',
+
+    # Formattazione cella
+    sheet['A1'].font=Font(  name='Calibri',
                             size=25,
                             bold=True,
                             italic=True,
@@ -565,9 +580,9 @@ for sheet in list_ws_mese:
                             strike=False,
                             color='a81a1a')
 
-    top_left_cell.alignment = Alignment(horizontal="center", vertical="center")
+    sheet['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
-
+# Colonna D :Formattazione degli euro in valuta euro
 for sheet in list_ws_mese:
     for row in sheet[7:sheet.max_row]:  # skip the header
         #print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
@@ -577,17 +592,19 @@ for sheet in list_ws_mese:
         cell.alignment = Alignment(horizontal="right")
         cell.font=Font(bold=True)
 
+# Colonna C: Allineamento
     for row in sheet[7:sheet.max_row]:  # skip the header
         cell = row[2]  #il terzo valore della tuple
         cell.alignment = Alignment(horizontal="right")
 
+# Colonna D: Allineamento
     for row in sheet[7:sheet.max_row]:  # skip the header
         cell = row[1]  #il secondo valore della tuple
         cell.alignment = Alignment(horizontal="center", vertical="center")
 
-
+# Formattazione headers
     list=[]
-    # Enumerate the cells in the second row
+
     for row in sheet.rows:
         for cell in row:
             if (cell.value == ("Categoria") or
@@ -596,18 +613,14 @@ for sheet in list_ws_mese:
                 cell.value == ("Uscite") or
                 cell.value == ('TOTALE') or
                 cell.value == ("Voce")):
-                print('trovato')
-                print(cell)
                 list.append(cell)
-    print(list)
-
     for cell in list:
         cell.font = Font(size=15, color='a81a1a', bold=True)
 
 
-
+# Rendi 'invisibile il testo"Entrate_Uscite"
     list=[]
-    # Enumerate the cells in the second row
+
     for row in sheet.rows:
         for cell in row:
             if cell.value == ("Entrate_Uscite"):
@@ -622,6 +635,7 @@ for sheet in list_ws_mese:
     #     print(cell.row)
     #     print(cell.column)
 
+# Formattazione 'TOTALE'
     list=[]
 
     for row in sheet.rows:
@@ -632,6 +646,6 @@ for sheet in list_ws_mese:
         sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
 
 
+# Salva
 wb.save("conti_camerino_styled.xlsx")
 
-"""

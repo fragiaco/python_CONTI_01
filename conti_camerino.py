@@ -148,6 +148,11 @@ with pd.ExcelWriter("conti_camerino_multiple.xlsx",
                     pivot_gennaio_entrate.to_excel(writer, sheet_name="multiple", startrow=5)
                     pivot_gennaio_uscite.to_excel(writer, sheet_name="multiple", startrow=(len(pivot_gennaio_entrate)+10))
 
+
+
+
+
+
 ########################
 ########################
 from openpyxl.styles import colors
