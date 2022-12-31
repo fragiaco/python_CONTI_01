@@ -659,6 +659,39 @@ for sheet in list_ws_mese:
 
 
 #Creo tabella SAlDO
+# text
+
+
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("TOTALE_Uscite")):
+                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font\
+                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font\
+                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font\
+                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font\
+                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font\
+                    = Font(size=15, color='a81a1a', bold=True)
+
+
+# from openpyxl import load_workbook
+#
+# wb = load_workbook("copies.xlsx")
+# ws1 = wb.worksheets[0]
+# ws2 = wb.worksheets[1]
+#
+# # Get the row
+# for rows in ws1.iter_rows(min_row=2, max_row=None, min_col=1, max_col=1):
+#     # Get the cell
+#     for cell in rows:
+#         # offset the values for cells on ws2 with cell offset
+#         ws2.cell(row=cell.offset(row=5, column=0).row, column=1, value=cell.value)
+# wb.save("copies_copied.xlsx")
 
 
 # Salva
