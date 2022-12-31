@@ -173,7 +173,7 @@ pivot_gennaio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_febbraio_entrate = np.round(pd.pivot_table
@@ -182,7 +182,7 @@ pivot_febbraio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_marzo_entrate = np.round(pd.pivot_table
@@ -191,7 +191,7 @@ pivot_marzo_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_aprile_entrate = np.round(pd.pivot_table
@@ -200,7 +200,7 @@ pivot_aprile_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_maggio_entrate = np.round(pd.pivot_table
@@ -209,7 +209,7 @@ pivot_maggio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_giugno_entrate = np.round(pd.pivot_table
@@ -218,7 +218,7 @@ pivot_giugno_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_luglio_entrate = np.round(pd.pivot_table
@@ -227,7 +227,7 @@ pivot_luglio_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_agosto_entrate = np.round(pd.pivot_table
@@ -236,7 +236,7 @@ pivot_agosto_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_settembre_entrate = np.round(pd.pivot_table
@@ -245,7 +245,7 @@ pivot_settembre_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_ottobre_entrate = np.round(pd.pivot_table
@@ -254,7 +254,7 @@ pivot_ottobre_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_novembre_entrate = np.round(pd.pivot_table
@@ -263,7 +263,7 @@ pivot_novembre_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 pivot_dicembre_entrate = np.round(pd.pivot_table
@@ -272,7 +272,7 @@ pivot_dicembre_entrate = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Entrate',
                                fill_value=0),2)
 
 # Creo pivot per le uscite di ogni mese di uno specifico anno
@@ -285,7 +285,7 @@ pivot_gennaio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_febbraio_uscite = np.round(pd.pivot_table
@@ -294,7 +294,7 @@ pivot_febbraio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_marzo_uscite = np.round(pd.pivot_table
@@ -303,7 +303,7 @@ pivot_marzo_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_aprile_uscite = np.round(pd.pivot_table
@@ -312,7 +312,7 @@ pivot_aprile_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_maggio_uscite = np.round(pd.pivot_table
@@ -321,7 +321,7 @@ pivot_maggio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_giugno_uscite = np.round(pd.pivot_table
@@ -330,7 +330,7 @@ pivot_giugno_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_luglio_uscite = np.round(pd.pivot_table
@@ -339,7 +339,7 @@ pivot_luglio_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_agosto_uscite = np.round(pd.pivot_table
@@ -348,7 +348,7 @@ pivot_agosto_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_settembre_uscite = np.round(pd.pivot_table
@@ -357,7 +357,7 @@ pivot_settembre_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_ottobre_uscite = np.round(pd.pivot_table
@@ -366,7 +366,7 @@ pivot_ottobre_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_novembre_uscite = np.round(pd.pivot_table
@@ -375,7 +375,7 @@ pivot_novembre_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 pivot_dicembre_uscite = np.round(pd.pivot_table
@@ -384,7 +384,7 @@ pivot_dicembre_uscite = np.round(pd.pivot_table
                                index=['Entrate_Uscite', 'Categoria','Voce'],
                                aggfunc='sum',
                                margins=True,
-                               margins_name= 'TOTALE',
+                               margins_name= 'TOTALE_Uscite',
                                fill_value=0),2)
 
 
@@ -611,11 +611,22 @@ for sheet in list_ws_mese:
                 cell.value == ("Entrate") or
                 cell.value == ("Euro") or
                 cell.value == ("Uscite") or
-                cell.value == ('TOTALE') or
                 cell.value == ("Voce")):
                 list.append(cell)
     for cell in list:
         cell.font = Font(size=15, color='a81a1a', bold=True)
+
+# Formattazione 'TOTALE_Entrate' e 'TOTALE_Uscite'
+    list = []
+
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ('TOTALE_Entrate') or
+                cell.value == ('TOTALE_Uscite')):
+                list.append(cell)
+        for cell in list:
+            cell.font = Font(size=12, color='a81a1a', bold=True)
+
 
 
 # Rendi 'invisibile il testo"Entrate_Uscite"
@@ -635,15 +646,19 @@ for sheet in list_ws_mese:
     #     print(cell.row)
     #     print(cell.column)
 
-# Formattazione 'TOTALE'
+# Formattazione Euro somma totale
     list=[]
 
     for row in sheet.rows:
         for cell in row:
-            if cell.value == ("TOTALE"):
+            if (cell.value == ("TOTALE_Entrate") or
+                cell.value == ("TOTALE_Uscite")):
                 list.append(cell)
     for cell in list:
         sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+
+
+
 
 
 # Salva
