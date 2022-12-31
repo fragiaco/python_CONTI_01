@@ -5,7 +5,9 @@ from openpyxl.styles import Font, Alignment
 # from openpyxl import load_workbook
 
 # Leggi il file xlsx e trasformalo in dataframe
-df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx')
+col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
+df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx', names=col_names)
+print(df_conti_camerino_modified)
 
 # Creo la colonna ['Entrate_Uscite'] e scrivo in automatico i volori
 df_conti_camerino_modified['Entrate_Uscite']= df_conti_camerino_modified['Categoria'].apply\
@@ -32,6 +34,7 @@ df_conti_camerino_modified = df_conti_camerino_modified [['Anno', 'Mese', 'Entra
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].astype("category")
 df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_categories(["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"])
 
+print(df_conti_camerino_modified)
 
 '''
 
