@@ -693,6 +693,25 @@ for sheet in list_ws_mese:
 #         ws2.cell(row=cell.offset(row=5, column=0).row, column=1, value=cell.value)
 # wb.save("copies_copied.xlsx")
 
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("TOTALE_Uscite")):
+                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
+                           value=df_conti_camerino_pivot_entrate_gennaio['Euro'].sum(numeric_only=True)).font\
+                    = Font(size=15, color='a81a1a', bold=True)
+
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("TOTALE_Uscite")):
+                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
+                           value=df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True)).font\
+                    = Font(size=15, color='a81a1a', bold=True)
+
+
 
     # sheets dei 12 mesi
     list_df_conti_entrate = [df_conti_camerino_pivot_entrate_gennaio,
