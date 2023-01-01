@@ -693,25 +693,63 @@ for sheet in list_ws_mese:
 #         ws2.cell(row=cell.offset(row=5, column=0).row, column=1, value=cell.value)
 # wb.save("copies_copied.xlsx")
 
-    for row in sheet.rows:
-        for cell in row:
-            if (cell.value == ("TOTALE_Uscite")):
-                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-                sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
-                           value=df_conti_camerino_pivot_entrate_gennaio['Euro'].sum(numeric_only=True)).font\
-                    = Font(size=15, color='a81a1a', bold=True)
 
-    for row in sheet.rows:
-        for cell in row:
-            if (cell.value == ("TOTALE_Uscite")):
-                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-                sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
-                           value=df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True)).font\
-                    = Font(size=15, color='a81a1a', bold=True)
+    # sheets dei 12 mesi
+    list_df_conti_entrate = [df_conti_camerino_pivot_entrate_gennaio,
+                             df_conti_camerino_pivot_entrate_febbraio,
+                             df_conti_camerino_pivot_entrate_marzo,
+                             df_conti_camerino_pivot_entrate_aprile,
+                             df_conti_camerino_pivot_entrate_maggio,
+                             df_conti_camerino_pivot_entrate_giugno,
+                             df_conti_camerino_pivot_entrate_luglio,
+                             df_conti_camerino_pivot_entrate_agosto,
+                             df_conti_camerino_pivot_entrate_settembre,
+                             df_conti_camerino_pivot_entrate_ottobre,
+                             df_conti_camerino_pivot_entrate_novembre,
+                             df_conti_camerino_pivot_entrate_dicembre]
+
+    list_df_conti_uscite = [df_conti_camerino_pivot_uscite_gennaio,
+                             df_conti_camerino_pivot_uscite_febbraio,
+                             df_conti_camerino_pivot_uscite_marzo,
+                             df_conti_camerino_pivot_uscite_aprile,
+                             df_conti_camerino_pivot_uscite_maggio,
+                             df_conti_camerino_pivot_uscite_giugno,
+                             df_conti_camerino_pivot_uscite_luglio,
+                             df_conti_camerino_pivot_uscite_agosto,
+                             df_conti_camerino_pivot_uscite_settembre,
+                             df_conti_camerino_pivot_uscite_ottobre,
+                             df_conti_camerino_pivot_uscite_novembre,
+                             df_conti_camerino_pivot_uscite_dicembre]
 
 
+
+
+    # Riportare  entrate e uscite del mese
+    i = 0  # contatore list_mese
+    for sheet in list_ws_mese:
+        for row in sheet.rows:
+            for cell in row:
+                if (cell.value == ("TOTALE_Uscite")):
+                    #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                    #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
+                               value=list_df_conti_entrate[i]['Euro'].sum(numeric_only=True))
+                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4).number_format = '#,##0.00€'
+                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+        for row in sheet.rows:
+            for cell in row:
+                if (cell.value == ("TOTALE_Uscite")):
+                    #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                    #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
+                               value=list_df_conti_uscite[i]['Euro'].sum(numeric_only=True))
+                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '#,##0.00€'
+                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                    i += 1
 
 # Salva
 wb.save("conti_camerino_styled.xlsx")
