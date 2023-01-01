@@ -712,7 +712,6 @@ for sheet in list_ws_mese:
                     = Font(size=15, color='a81a1a', bold=True)
 
 
-
     # sheets dei 12 mesi
     list_df_conti_entrate = [df_conti_camerino_pivot_entrate_gennaio,
                              df_conti_camerino_pivot_entrate_febbraio,
