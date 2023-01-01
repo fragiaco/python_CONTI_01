@@ -668,15 +668,20 @@ for sheet in list_ws_mese:
                 #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
                 #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
                 sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
                 sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2).alignment = Alignment(horizontal="left")
                 sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2).alignment = Alignment(horizontal="left")
                 sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2).alignment = Alignment(horizontal="left")
                 sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
 
 
 # from openpyxl import load_workbook
@@ -693,23 +698,32 @@ for sheet in list_ws_mese:
 #         ws2.cell(row=cell.offset(row=5, column=0).row, column=1, value=cell.value)
 # wb.save("copies_copied.xlsx")
 
-    for row in sheet.rows:
+    for row in ws_gennaio:
         for cell in row:
             if (cell.value == ("TOTALE_Uscite")):
                 #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
                 #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-                sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
-                           value=df_conti_camerino_pivot_entrate_gennaio['Euro'].sum(numeric_only=True)).font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4, value=int(-100000))
+                ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+                ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
-    for row in sheet.rows:
-        for cell in row:
-            if (cell.value == ("TOTALE_Uscite")):
-                #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-                sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
-                           value=df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True)).font\
-                    = Font(size=15, color='a81a1a', bold=True)
+                if  ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
+                    ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
+                    ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+
+                else:
+                    ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
+                    ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+
+    #
+    # for row in sheet.rows:
+    #     for cell in row:
+    #         if (cell.value == ("TOTALE_Uscite")):
+    #             #print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+    #             #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+    #             sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
+    #                        value=df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True)).font\
+    #                 = Font(size=15, color='a81a1a', bold=True)
 
 
     # sheets dei 12 mesi
@@ -742,7 +756,7 @@ for sheet in list_ws_mese:
 
 
 
-    # Riportare  entrate e uscite del mese
+    # Riportare  entrate e uscite del mese in ogni foglio
     i = 0  # contatore list_mese
     for sheet in list_ws_mese:
         for row in sheet.rows:
@@ -752,7 +766,7 @@ for sheet in list_ws_mese:
                     #print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
                     sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
                                value=list_df_conti_entrate[i]['Euro'].sum(numeric_only=True))
-                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='000000', bold=True)
                     sheet.cell(row=cell.offset(row=7, column=0).row, column=4).number_format = '#,##0.00€'
                     sheet.cell(row=cell.offset(row=7, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
@@ -764,10 +778,57 @@ for sheet in list_ws_mese:
                     sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
                                value=list_df_conti_uscite[i]['Euro'].sum(numeric_only=True))
                     sheet.cell(row=cell.offset(row=9, column=0).row, column=4).font = Font(size=15, color='a81a1a', bold=True)
-                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '#,##0.00€'
+                    sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '-#,##0.00€'
                     sheet.cell(row=cell.offset(row=9, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
-                    i += 1
+        for row in sheet.rows:
+                        for cell in row:
+                            if (cell.value == ("TOTALE_Uscite")):
+                                # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                                # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+                                sheet.cell(row=cell.offset(row=11, column=0).row, column=4,
+                                           value=((list_df_conti_entrate[i]['Euro']).sum(numeric_only=True) -
+                                                  (list_df_conti_uscite[i]['Euro']).sum(numeric_only=True)
+                                                  )
+                                           )
+                                #sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(size=15,
+                                #                                                                       bold=True)
+                                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).number_format = '#,##0.00€'
+                                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                                if  (sheet.cell(row=cell.offset(row=11, column=0).row, column=4).value) > 0:
+                                     sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='000000',size=15,bold=True)
+                                else:
+                                     sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='a81a1a',size=15,bold=True)
+
+
+
+
+
+
+        # for row in sheet.rows:
+        #                 for cell in row:
+        #                     if (cell.value == ("TOTALE_Uscite")):
+        #                         # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+        #                         # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
+        #                         sheet.cell(row=cell.offset(row=13, column=0).row, column=4,
+        #                                    value=((list_df_conti_entrate[i]['Euro']).sum(numeric_only=True) -
+        #                                           (list_df_conti_uscite[i]['Euro']).sum(numeric_only=True)
+        #                                           )
+        #                                    )
+        #                         #sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(size=15,
+        #                         #                                                                       bold=True)
+        #                         sheet.cell(row=cell.offset(row=11, column=0).row, column=4).number_format = '#,##0.00€'
+        #                         sheet.cell(row=cell.offset(row=11, column=0).row, column=4).alignment = Alignment(horizontal="right")
+        #
+        #                         if  (sheet.cell(row=cell.offset(row=11, column=0).row, column=4).value) > 0:
+        #                              sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='000000',size=15,bold=True)
+        #                         else:
+        #                              sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='a81a1a',size=15,bold=True)
+
+        i += 1
+
+
 
 # Salva
 wb.save("conti_camerino_styled.xlsx")
