@@ -37,24 +37,70 @@ df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_
     ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre",
      "novembre", "dicembre"])
 
+# sheets dei 12 mesi
+list_df_conti_entrate = ['df_conti_camerino_pivot_entrate_gennaio',
+                         'df_conti_camerino_pivot_entrate_febbraio',
+                         'df_conti_camerino_pivot_entrate_marzo',
+                         'df_conti_camerino_pivot_entrate_aprile',
+                         'df_conti_camerino_pivot_entrate_maggio',
+                         'df_conti_camerino_pivot_entrate_giugno',
+                         'df_conti_camerino_pivot_entrate_luglio',
+                         'df_conti_camerino_pivot_entrate_agosto',
+                         'df_conti_camerino_pivot_entrate_settembre',
+                         'df_conti_camerino_pivot_entrate_ottobre',
+                         'df_conti_camerino_pivot_entrate_novembre',
+                         'df_conti_camerino_pivot_entrate_dicembre']
+
+list_df_conti_uscite = ['df_conti_camerino_pivot_uscite_gennaio',
+                        'df_conti_camerino_pivot_uscite_febbraio',
+                        'df_conti_camerino_pivot_uscite_marzo',
+                        'df_conti_camerino_pivot_uscite_aprile',
+                        'df_conti_camerino_pivot_uscite_maggio',
+                        'df_conti_camerino_pivot_uscite_giugno',
+                        'df_conti_camerino_pivot_uscite_luglio',
+                        'df_conti_camerino_pivot_uscite_agosto',
+                        'df_conti_camerino_pivot_uscite_settembre',
+                        'df_conti_camerino_pivot_uscite_ottobre',
+                        'df_conti_camerino_pivot_uscite_novembre',
+                        'df_conti_camerino_pivot_uscite_dicembre']
+
+list_mese = ['gennaio',
+             'febbraio',
+             'marzo',
+             'aprile',
+             'maggio',
+             'giugno',
+             'luglio',
+             'agosto',
+             'settembre',
+             'ottobre',
+             'novembre',
+             'dicembre'
+             ]
+
+
+#imposto anno
+anno = 2015
+
+
 # creo dataframe per le entrate di ogni mese di uno specifico anno
 df_conti_camerino_pivot_entrate_gennaio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
+    (df_conti_camerino_modified['Anno'] == anno) &
     (df_conti_camerino_modified['Mese'] == 'gennaio') &
     (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
 df_conti_camerino_pivot_entrate_febbraio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
+    (df_conti_camerino_modified['Anno'] == anno) &
     (df_conti_camerino_modified['Mese'] == 'febbraio') &
     (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
 df_conti_camerino_pivot_entrate_marzo = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
+    (df_conti_camerino_modified['Anno'] == anno) &
     (df_conti_camerino_modified['Mese'] == 'marzo') &
     (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
 df_conti_camerino_pivot_entrate_aprile = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
+    (df_conti_camerino_modified['Anno'] == anno) &
     (df_conti_camerino_modified['Mese'] == 'aprile') &
     (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 
@@ -97,6 +143,7 @@ df_conti_camerino_pivot_entrate_dicembre = df_conti_camerino_modified.loc[
     (df_conti_camerino_modified['Anno'] == 2015) &
     (df_conti_camerino_modified['Mese'] == 'dicembre') &
     (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+
 
 # creo dataframe per le uscite di ogni mese di uno specifico anno
 
