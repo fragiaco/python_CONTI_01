@@ -429,7 +429,7 @@ for sheet in list_ws_mese:
     # sheets dei 12 mesi
 
 
-    list_df_conti_entrate = [list_df_conti_camerino_pivot_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
+list_df_conti_entrate = [list_df_conti_camerino_pivot_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
                           list_df_conti_camerino_pivot_entrate[1],
                           list_df_conti_camerino_pivot_entrate[2],
                           list_df_conti_camerino_pivot_entrate[3],
@@ -443,7 +443,7 @@ for sheet in list_ws_mese:
                           list_df_conti_camerino_pivot_entrate[11]
                           ]
 
-    list_df_conti_uscite = [list_df_conti_camerino_pivot_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
+list_df_conti_uscite = [list_df_conti_camerino_pivot_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
                          list_df_conti_camerino_pivot_uscite[1],
                          list_df_conti_camerino_pivot_uscite[2],
                          list_df_conti_camerino_pivot_uscite[3],
