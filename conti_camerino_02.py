@@ -200,31 +200,33 @@ list_mese = ['gennaio',
              'dicembre'
              ]
 
-list_pivot_entrate=[pivot_gennaio_entrate,
-                    pivot_febbraio_entrate,
-                    pivot_marzo_entrate,
-                    pivot_aprile_entrate,
-                    pivot_maggio_entrate,
-                    pivot_giugno_entrate,
-                    pivot_luglio_entrate,
-                    pivot_agosto_entrate,
-                    pivot_settembre_entrate,
-                    pivot_novembre_entrate,
-                    pivot_novembre_entrate,
-                    pivot_dicembre_entrate]
+list_pivot_entrate=[pivot_mese_entrate[0], #pivot gennaio entrate
+                    pivot_mese_entrate[1],
+                    pivot_mese_entrate[2],
+                    pivot_mese_entrate[3],
+                    pivot_mese_entrate[4],
+                    pivot_mese_entrate[5],
+                    pivot_mese_entrate[6],
+                    pivot_mese_entrate[7],
+                    pivot_mese_entrate[8],
+                    pivot_mese_entrate[9],
+                    pivot_mese_entrate[10],
+                    pivot_mese_entrate[11]
+                    ]
 
-list_pivot_uscite= [pivot_gennaio_uscite,
-                    pivot_febbraio_uscite,
-                    pivot_marzo_uscite,
-                    pivot_aprile_uscite,
-                    pivot_maggio_uscite,
-                    pivot_giugno_uscite,
-                    pivot_luglio_uscite,
-                    pivot_agosto_uscite,
-                    pivot_settembre_uscite,
-                    pivot_novembre_uscite,
-                    pivot_novembre_uscite,
-                    pivot_dicembre_uscite]
+list_pivot_uscite= [pivot_mese_entrate[0],
+                    pivot_mese_entrate[1],
+                    pivot_mese_entrate[2],
+                    pivot_mese_entrate[3],
+                    pivot_mese_entrate[4],
+                    pivot_mese_entrate[5],
+                    pivot_mese_entrate[6],
+                    pivot_mese_entrate[7],
+                    pivot_mese_entrate[8],
+                    pivot_mese_entrate[9],
+                    pivot_mese_entrate[10],
+                    pivot_mese_entrate[11]
+                    ]
 
 # sheets dei 12 mesi
 list_ws_mese = ['ws_gennaio',
@@ -425,31 +427,37 @@ for sheet in list_ws_mese:
 
 
     # sheets dei 12 mesi
-    list_df_conti_entrate = [df_conti_camerino_pivot_entrate_gennaio,
-                             df_conti_camerino_pivot_entrate_febbraio,
-                             df_conti_camerino_pivot_entrate_marzo,
-                             df_conti_camerino_pivot_entrate_aprile,
-                             df_conti_camerino_pivot_entrate_maggio,
-                             df_conti_camerino_pivot_entrate_giugno,
-                             df_conti_camerino_pivot_entrate_luglio,
-                             df_conti_camerino_pivot_entrate_agosto,
-                             df_conti_camerino_pivot_entrate_settembre,
-                             df_conti_camerino_pivot_entrate_ottobre,
-                             df_conti_camerino_pivot_entrate_novembre,
-                             df_conti_camerino_pivot_entrate_dicembre]
 
-    list_df_conti_uscite = [df_conti_camerino_pivot_uscite_gennaio,
-                            df_conti_camerino_pivot_uscite_febbraio,
-                            df_conti_camerino_pivot_uscite_marzo,
-                            df_conti_camerino_pivot_uscite_aprile,
-                            df_conti_camerino_pivot_uscite_maggio,
-                            df_conti_camerino_pivot_uscite_giugno,
-                            df_conti_camerino_pivot_uscite_luglio,
-                            df_conti_camerino_pivot_uscite_agosto,
-                            df_conti_camerino_pivot_uscite_settembre,
-                            df_conti_camerino_pivot_uscite_ottobre,
-                            df_conti_camerino_pivot_uscite_novembre,
-                            df_conti_camerino_pivot_uscite_dicembre]
+
+    list_df_conti_entrate = [list_df_conti_camerino_pivot_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
+                          list_df_conti_camerino_pivot_entrate[1],
+                          list_df_conti_camerino_pivot_entrate[2],
+                          list_df_conti_camerino_pivot_entrate[3],
+                          list_df_conti_camerino_pivot_entrate[4],
+                          list_df_conti_camerino_pivot_entrate[5],
+                          list_df_conti_camerino_pivot_entrate[6],
+                          list_df_conti_camerino_pivot_entrate[7],
+                          list_df_conti_camerino_pivot_entrate[8],
+                          list_df_conti_camerino_pivot_entrate[9],
+                          list_df_conti_camerino_pivot_entrate[10],
+                          list_df_conti_camerino_pivot_entrate[11]
+                          ]
+
+    list_df_conti_uscite = [list_df_conti_camerino_pivot_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
+                         list_df_conti_camerino_pivot_uscite[1],
+                         list_df_conti_camerino_pivot_uscite[2],
+                         list_df_conti_camerino_pivot_uscite[3],
+                         list_df_conti_camerino_pivot_uscite[4],
+                         list_df_conti_camerino_pivot_uscite[5],
+                         list_df_conti_camerino_pivot_uscite[6],
+                         list_df_conti_camerino_pivot_uscite[7],
+                         list_df_conti_camerino_pivot_uscite[8],
+                         list_df_conti_camerino_pivot_uscite[9],
+                         list_df_conti_camerino_pivot_uscite[10],
+                         list_df_conti_camerino_pivot_uscite[11]
+                         ]
+
+
 
     # Riportare  entrate del mese in ogni foglio
 i = 0  # contatore list_mese
