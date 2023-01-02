@@ -659,19 +659,7 @@ for sheet in list_ws_mese:
                     = Font(size=15, color='000000', bold=True)
                 sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
 
-    # from openpyxl import load_workbook
-    #
-    # wb = load_workbook("copies.xlsx")
-    # ws1 = wb.worksheets[0]
-    # ws2 = wb.worksheets[1]
-    #
-    # # Get the row
-    # for rows in ws1.iter_rows(min_row=2, max_row=None, min_col=1, max_col=1):
-    #     # Get the cell
-    #     for cell in rows:
-    #         # offset the values for cells on ws2 with cell offset
-    #         ws2.cell(row=cell.offset(row=5, column=0).row, column=1, value=cell.value)
-    # wb.save("copies_copied.xlsx")
+
 
     # sheets dei 12 mesi
     list_df_conti_entrate = [df_conti_camerino_pivot_entrate_gennaio,
@@ -753,110 +741,7 @@ for sheet in list_ws_mese:
 
                 i+= 1
 ##########
-# Assegno a gennaio un residuo del mese precedento di 100000 euro
-# residuo_mese_precedente = 100_000
-#
-# for row in ws_gennaio:
-#     for cell in row:
-#         if (cell.value == ("TOTALE_Uscite")):
-#             # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-#             # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-#             ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4, value=residuo_mese_precedente)
-#             ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
-#             ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
-#             saldo = (ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).value)
-#             ###
-#             if ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
-#                 ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
-#                                                                                             bold=True)
-#                 ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
-#
-#             else:
-#                 ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
-#                                                                                             bold=True)
-#                 ws_gennaio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
-#
-# # Calcolo il saldo del mese di gennaio
-# for row in ws_gennaio:
-#     for cell in row:
-#         if (cell.value == ("TOTALE_Uscite")):
-#
-#             ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4,
-#                             value=(
-#                                     saldo +
-#                                     (df_conti_camerino_pivot_entrate_gennaio['Euro'].sum(numeric_only=True) -
-#                                      df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True))
-#                             )
-#                             )
-#             saldo = ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).value
-#             print(saldo)
-#
-#             if ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
-#                 ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15,
-#                                                                                              bold=True)
-#                 ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
-#
-#             else:
-#                 ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15,
-#                                                                                              bold=True)
-#                 ws_gennaio.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
-#
-# # vorrei farlo per gli altri mesi
-# # i = 0
-# # m = 1
-#
-# # for sheet in list_ws_mese[1:12]: #<Worksheet "Febbraio"> fino a dicembre
-# for row in ws_febbraio:
-#     for cell in row:
-#         if (cell.value == ("TOTALE_Uscite")):
-#             # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-#             # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-#             ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4,
-#                        value=(
-#                                saldo
-#                              )
-#                        )
-#             #saldo = (ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).value)
-#             print(saldo)
-#
-#             ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15,
-#                                                                                   bold=True)
-#             ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
-#             ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
-#
-#             if (ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).value) > 0:
-#                 ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
-#                                                                                         bold=True)
-#             else:
-#                 ws_febbraio.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
-#                                                                                         bold=True)
-#
-#             # i += 1
-#             # m += 1
-# # Calcolo il saldo del mese di febbraio
-# for row in ws_febbraio:
-#     for cell in row:
-#         if (cell.value == ("TOTALE_Uscite")):
-#
-#             ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4,
-#                             value=(
-#                                     saldo +
-#                                     (df_conti_camerino_pivot_entrate_gennaio['Euro'].sum(numeric_only=True) -
-#                                      df_conti_camerino_pivot_uscite_gennaio['Euro'].sum(numeric_only=True))
-#                             )
-#                             )
-#             saldo = ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).value
-#             print(saldo)
-#
-#             if ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
-#                 ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15,
-#                                                                                              bold=True)
-#                 ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
-#
-#             else:
-#                 ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15,
-#                                                                                              bold=True)
-#                 ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
+
 ##################################################################################################################################
 
 # saldo per tutti i mesi
