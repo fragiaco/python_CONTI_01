@@ -859,33 +859,37 @@ for sheet in list_ws_mese:
 #                 ws_febbraio.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
 ##################################################################################################################################
 
-# # vorrei farlo per gli altri mesi
-saldo = 100_000
+# saldo per tutti i mesi
+
+#imposto saldo iniziale
+saldo = 200_000
+#imposto un contatore
 e = 0
-m = 0
+
+#saldo iniziale
 for sheet in list_ws_mese:
-# for sheet in list_ws_mese[1:12]: #<Worksheet "Febbraio"> fino a dicembre
     for row in sheet:
         for cell in row:
             if (cell.value == ("TOTALE_Uscite")):
-                # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
-                sheet.cell  (row=cell.offset(row=5, column=0).row, column=4,
-                        value=  (
-                                        saldo
-                                )
+
+                sheet.cell  (   row=cell.offset(row=5, column=0).row, column=4,
+                                value=  (
+                                                saldo
+                                        )
                             )
+
+                # mi calcolo il saldo finale e la assegno alla variabile saldo
                 saldo = (saldo +
                          list_df_conti_entrate[e]['Euro'].sum(numeric_only=True) -
-                         list_df_conti_uscite[e]['Euro'].sum(numeric_only=True))
+                         list_df_conti_uscite[e]['Euro'].sum(numeric_only=True)
+                         )
 
 
-                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15,
-                                                                                  bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15, bold=True)
                 sheet.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
                 sheet.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
-                if saldo > 0:
+                if sheet.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
                         sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
                                                                                         bold=True)
                 else:
@@ -893,8 +897,8 @@ for sheet in list_ws_mese:
                                                                                         bold=True)
 
                 e += 1
-            # m += 1
-# # Calcolo il saldo del mese di febbraio
+
+# Saldo finale
     for row in sheet:
         for cell in row:
             if (cell.value == ("TOTALE_Uscite")):
@@ -905,14 +909,14 @@ for sheet in list_ws_mese:
                                     )
                             )
 
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
-                if saldo > 0:
+                if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
-                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
-
                 else:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
-                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
 
 
 # Salva
