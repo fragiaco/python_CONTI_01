@@ -38,167 +38,130 @@ df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_
      "novembre", "dicembre"])
 
 # sheets dei 12 mesi
-list_df_conti_entrate = ['df_conti_camerino_pivot_entrate_gennaio',
-                         'df_conti_camerino_pivot_entrate_febbraio',
-                         'df_conti_camerino_pivot_entrate_marzo',
-                         'df_conti_camerino_pivot_entrate_aprile',
-                         'df_conti_camerino_pivot_entrate_maggio',
-                         'df_conti_camerino_pivot_entrate_giugno',
-                         'df_conti_camerino_pivot_entrate_luglio',
-                         'df_conti_camerino_pivot_entrate_agosto',
-                         'df_conti_camerino_pivot_entrate_settembre',
-                         'df_conti_camerino_pivot_entrate_ottobre',
-                         'df_conti_camerino_pivot_entrate_novembre',
-                         'df_conti_camerino_pivot_entrate_dicembre']
+list_df_conti_camerino_pivot_entrate = [ 'df_conti_camerino_pivot_entrate_gennaio',
+                                         'df_conti_camerino_pivot_entrate_febbraio',
+                                         'df_conti_camerino_pivot_entrate_marzo',
+                                         'df_conti_camerino_pivot_entrate_aprile',
+                                         'df_conti_camerino_pivot_entrate_maggio',
+                                         'df_conti_camerino_pivot_entrate_giugno',
+                                         'df_conti_camerino_pivot_entrate_luglio',
+                                         'df_conti_camerino_pivot_entrate_agosto',
+                                         'df_conti_camerino_pivot_entrate_settembre',
+                                         'df_conti_camerino_pivot_entrate_ottobre',
+                                         'df_conti_camerino_pivot_entrate_novembre',
+                                         'df_conti_camerino_pivot_entrate_dicembre'
+                                         ]
 
-list_df_conti_uscite = ['df_conti_camerino_pivot_uscite_gennaio',
-                        'df_conti_camerino_pivot_uscite_febbraio',
-                        'df_conti_camerino_pivot_uscite_marzo',
-                        'df_conti_camerino_pivot_uscite_aprile',
-                        'df_conti_camerino_pivot_uscite_maggio',
-                        'df_conti_camerino_pivot_uscite_giugno',
-                        'df_conti_camerino_pivot_uscite_luglio',
-                        'df_conti_camerino_pivot_uscite_agosto',
-                        'df_conti_camerino_pivot_uscite_settembre',
-                        'df_conti_camerino_pivot_uscite_ottobre',
-                        'df_conti_camerino_pivot_uscite_novembre',
-                        'df_conti_camerino_pivot_uscite_dicembre']
+list_df_conti_camerino_pivot_uscite = [ 'df_conti_camerino_pivot_uscite_gennaio',
+                                        'df_conti_camerino_pivot_uscite_febbraio',
+                                        'df_conti_camerino_pivot_uscite_marzo',
+                                        'df_conti_camerino_pivot_uscite_aprile',
+                                        'df_conti_camerino_pivot_uscite_maggio',
+                                        'df_conti_camerino_pivot_uscite_giugno',
+                                        'df_conti_camerino_pivot_uscite_luglio',
+                                        'df_conti_camerino_pivot_uscite_agosto',
+                                        'df_conti_camerino_pivot_uscite_settembre',
+                                        'df_conti_camerino_pivot_uscite_ottobre',
+                                        'df_conti_camerino_pivot_uscite_novembre',
+                                        'df_conti_camerino_pivot_uscite_dicembre'
+                                        ]
 
-
+list_mese = ['gennaio',
+             'febbraio',
+             'marzo',
+             'aprile',
+             'maggio',
+             'giugno',
+             'luglio',
+             'agosto',
+             'settembre',
+             'ottobre',
+             'novembre',
+             'dicembre'
+             ]
 
 
 #imposto anno
 anno = 2015
+i = 0
+for x in range (12):
+        list_df_conti_camerino_pivot_entrate[i]= df_conti_camerino_modified.loc[
+            (df_conti_camerino_modified['Anno'] == anno) &
+            (df_conti_camerino_modified['Mese'] == list_mese[i]) &
+            (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+        #print(list_df_conti_camerino_pivot_entrate[i].head())
 
 
-# creo dataframe per le entrate di ogni mese di uno specifico anno
-df_conti_camerino_pivot_entrate_gennaio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == anno) &
-    (df_conti_camerino_modified['Mese'] == 'gennaio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+        list_df_conti_camerino_pivot_uscite[i] = df_conti_camerino_modified.loc[
+            (df_conti_camerino_modified['Anno'] == anno) &
+            (df_conti_camerino_modified['Mese'] == list_mese[i]) &
+            (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+        print(list_df_conti_camerino_pivot_uscite[i].head())
 
-df_conti_camerino_pivot_entrate_febbraio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == anno) &
-    (df_conti_camerino_modified['Mese'] == 'febbraio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_marzo = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == anno) &
-    (df_conti_camerino_modified['Mese'] == 'marzo') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_aprile = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == anno) &
-    (df_conti_camerino_modified['Mese'] == 'aprile') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_maggio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'maggio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_giugno = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'giugno') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_luglio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'luglio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_agosto = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'agosto') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_settembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'settembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_ottobre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'ottobre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_novembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'novembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
-
-df_conti_camerino_pivot_entrate_dicembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'dicembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+        i += 1
 
 
-# creo dataframe per le uscite di ogni mese di uno specifico anno
+list_pivot_entrate = [  list_df_conti_camerino_pivot_entrate[0], #df_conti_camerino_pivot_entrate_gennaio
+                        list_df_conti_camerino_pivot_entrate[1],
+                        list_df_conti_camerino_pivot_entrate[2],
+                        list_df_conti_camerino_pivot_entrate[3],
+                        list_df_conti_camerino_pivot_entrate[4],
+                        list_df_conti_camerino_pivot_entrate[5],
+                        list_df_conti_camerino_pivot_entrate[6],
+                        list_df_conti_camerino_pivot_entrate[7],
+                        list_df_conti_camerino_pivot_entrate[8],
+                        list_df_conti_camerino_pivot_entrate[9],
+                        list_df_conti_camerino_pivot_entrate[10],
+                        list_df_conti_camerino_pivot_entrate[11]
+                      ]
+
+list_pivot_uscite = [   list_df_conti_camerino_pivot_uscite[0], #df_conti_camerino_pivot_uscite_gennaio
+                        list_df_conti_camerino_pivot_uscite[1],
+                        list_df_conti_camerino_pivot_uscite[2],
+                        list_df_conti_camerino_pivot_uscite[3],
+                        list_df_conti_camerino_pivot_uscite[4],
+                        list_df_conti_camerino_pivot_uscite[5],
+                        list_df_conti_camerino_pivot_uscite[6],
+                        list_df_conti_camerino_pivot_uscite[7],
+                        list_df_conti_camerino_pivot_uscite[8],
+                        list_df_conti_camerino_pivot_uscite[9],
+                        list_df_conti_camerino_pivot_uscite[10],
+                        list_df_conti_camerino_pivot_uscite[11]
+                    ]
 
 
-df_conti_camerino_pivot_uscite_gennaio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'gennaio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+pivot_mese_entrate = ['pivot_gennaio_entrate',
+                      'pivot_febbraio_entrate',
+                      'pivot_marzo_entrate',
+                      'pivot_aprile_entrate',
+                      'pivot_maggio_entrate',
+                      'pivot_giugno_entrate',
+                      'pivot_luglio_entrate',
+                      'pivot_agosto_entrate',
+                      'pivot_settembre_entrate',
+                      'pivot_ottobre_entrate',
+                      'pivot_novembre_entrate',
+                      'pivot_dicembre_entrate'
+                      ]
 
-df_conti_camerino_pivot_uscite_febbraio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'febbraio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+pivot_mese_uscite = ['pivot_gennaio_uscite',
+                      'pivot_febbraio_uscite',
+                      'pivot_marzo_uscite',
+                      'pivot_aprile_uscite',
+                      'pivot_maggio_uscite',
+                      'pivot_giugno_uscite',
+                      'pivot_luglio_uscite',
+                      'pivot_agosto_uscite',
+                      'pivot_settembre_uscite',
+                      'pivot_ottobre_uscite',
+                      'pivot_novembre_uscite',
+                      'pivot_dicembre_uscite'
+                      ]
 
-df_conti_camerino_pivot_uscite_marzo = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'marzo') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_aprile = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'aprile') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_maggio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'maggio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_giugno = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'giugno') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_luglio = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'luglio') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_agosto = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'agosto') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_settembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'settembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_ottobre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'ottobre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_novembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'novembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-df_conti_camerino_pivot_uscite_dicembre = df_conti_camerino_modified.loc[
-    (df_conti_camerino_modified['Anno'] == 2015) &
-    (df_conti_camerino_modified['Mese'] == 'dicembre') &
-    (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-
-# Creo pivot per le entrate di ogni mese di uno specifico anno
-pivot_gennaio_entrate = np.round(pd.pivot_table
-                                 (df_conti_camerino_pivot_entrate_gennaio,
+i=0
+for x in range(12):
+    pivot_mese_entrate[i] = np.round(pd.pivot_table
+                                 (list_pivot_entrate[i],
                                   values='Euro',
                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
                                   aggfunc='sum',
@@ -206,216 +169,16 @@ pivot_gennaio_entrate = np.round(pd.pivot_table
                                   margins_name='TOTALE_Entrate',
                                   fill_value=0), 2)
 
-pivot_febbraio_entrate = np.round(pd.pivot_table
-                                  (df_conti_camerino_pivot_entrate_febbraio,
-                                   values='Euro',
-                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                   aggfunc='sum',
-                                   margins=True,
-                                   margins_name='TOTALE_Entrate',
-                                   fill_value=0), 2)
-
-pivot_marzo_entrate = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_entrate_marzo,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Entrate',
-                                fill_value=0), 2)
-
-pivot_aprile_entrate = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_entrate_aprile,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Entrate',
-                                 fill_value=0), 2)
-
-pivot_maggio_entrate = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_entrate_maggio,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Entrate',
-                                 fill_value=0), 2)
-
-pivot_giugno_entrate = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_entrate_giugno,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Entrate',
-                                 fill_value=0), 2)
-
-pivot_luglio_entrate = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_entrate_luglio,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Entrate',
-                                 fill_value=0), 2)
-
-pivot_agosto_entrate = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_entrate_agosto,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Entrate',
-                                 fill_value=0), 2)
-
-pivot_settembre_entrate = np.round(pd.pivot_table
-                                   (df_conti_camerino_pivot_entrate_settembre,
-                                    values='Euro',
-                                    index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                    aggfunc='sum',
-                                    margins=True,
-                                    margins_name='TOTALE_Entrate',
-                                    fill_value=0), 2)
-
-pivot_ottobre_entrate = np.round(pd.pivot_table
-                                 (df_conti_camerino_pivot_entrate_ottobre,
+    pivot_mese_uscite[i] = np.round(pd.pivot_table
+                                 (list_pivot_uscite[i],
                                   values='Euro',
                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
                                   aggfunc='sum',
                                   margins=True,
                                   margins_name='TOTALE_Entrate',
                                   fill_value=0), 2)
+    i +=1
 
-pivot_novembre_entrate = np.round(pd.pivot_table
-                                  (df_conti_camerino_pivot_entrate_novembre,
-                                   values='Euro',
-                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                   aggfunc='sum',
-                                   margins=True,
-                                   margins_name='TOTALE_Entrate',
-                                   fill_value=0), 2)
-
-pivot_dicembre_entrate = np.round(pd.pivot_table
-                                  (df_conti_camerino_pivot_entrate_dicembre,
-                                   values='Euro',
-                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                   aggfunc='sum',
-                                   margins=True,
-                                   margins_name='TOTALE_Entrate',
-                                   fill_value=0), 2)
-
-# Creo pivot per le uscite di ogni mese di uno specifico anno
-# round arrotonda alla seconda cifra decimale ',2)'
-
-
-pivot_gennaio_uscite = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_uscite_gennaio,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Uscite',
-                                 fill_value=0), 2)
-
-pivot_febbraio_uscite = np.round(pd.pivot_table
-                                 (df_conti_camerino_pivot_uscite_febbraio,
-                                  values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                  aggfunc='sum',
-                                  margins=True,
-                                  margins_name='TOTALE_Uscite',
-                                  fill_value=0), 2)
-
-pivot_marzo_uscite = np.round(pd.pivot_table
-                              (df_conti_camerino_pivot_uscite_marzo,
-                               values='Euro',
-                               index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                               aggfunc='sum',
-                               margins=True,
-                               margins_name='TOTALE_Uscite',
-                               fill_value=0), 2)
-
-pivot_aprile_uscite = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_uscite_aprile,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Uscite',
-                                fill_value=0), 2)
-
-pivot_maggio_uscite = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_uscite_maggio,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Uscite',
-                                fill_value=0), 2)
-
-pivot_giugno_uscite = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_uscite_giugno,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Uscite',
-                                fill_value=0), 2)
-
-pivot_luglio_uscite = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_uscite_luglio,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Uscite',
-                                fill_value=0), 2)
-
-pivot_agosto_uscite = np.round(pd.pivot_table
-                               (df_conti_camerino_pivot_uscite_agosto,
-                                values='Euro',
-                                index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                aggfunc='sum',
-                                margins=True,
-                                margins_name='TOTALE_Uscite',
-                                fill_value=0), 2)
-
-pivot_settembre_uscite = np.round(pd.pivot_table
-                                  (df_conti_camerino_pivot_uscite_settembre,
-                                   values='Euro',
-                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                   aggfunc='sum',
-                                   margins=True,
-                                   margins_name='TOTALE_Uscite',
-                                   fill_value=0), 2)
-
-pivot_ottobre_uscite = np.round(pd.pivot_table
-                                (df_conti_camerino_pivot_uscite_ottobre,
-                                 values='Euro',
-                                 index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                 aggfunc='sum',
-                                 margins=True,
-                                 margins_name='TOTALE_Uscite',
-                                 fill_value=0), 2)
-
-pivot_novembre_uscite = np.round(pd.pivot_table
-                                 (df_conti_camerino_pivot_uscite_novembre,
-                                  values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                  aggfunc='sum',
-                                  margins=True,
-                                  margins_name='TOTALE_Uscite',
-                                  fill_value=0), 2)
-
-pivot_dicembre_uscite = np.round(pd.pivot_table
-                                 (df_conti_camerino_pivot_uscite_dicembre,
-                                  values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                  aggfunc='sum',
-                                  margins=True,
-                                  margins_name='TOTALE_Uscite',
-                                  fill_value=0), 2)
 
 # Creo il file 'conti_camerino_styled.xlsx'
 wb = Workbook()
@@ -436,6 +199,7 @@ list_mese = ['gennaio',
              'novembre',
              'dicembre'
              ]
+
 list_pivot_entrate=[pivot_gennaio_entrate,
                     pivot_febbraio_entrate,
                     pivot_marzo_entrate,
@@ -494,11 +258,6 @@ for x in range (12):
     wb = load_workbook(filename="conti_camerino_styled.xlsx")
     #creo i 12 sheet
     list_ws_mese[w]= wb[list_mese[m]]
-
-
-
-    print(list_ws_mese[w])
-    print(wb[list_mese[m]])
 
     m += 1
     e += 1
