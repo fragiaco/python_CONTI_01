@@ -133,12 +133,7 @@ list_df_conti_camerino_mese_uscite = [   list_df_conti_camerino_mese_uscite[0], 
 
 print(list_df_conti_camerino_mese_entrate[0].columns)
 
-indices = ['Entrate_Uscite', 'Categoria', 'Voce']
-df = list_df_conti_camerino_mese_entrate[0] #adesso un solo dataframe
-values='Euro'
-columns=[]
-aggfunc='sum'
-fill_value=0
+
 
 def pivot_table_w_subtotals(df, values, indices, columns, aggfunc, fill_value):
     listOfTable = []
@@ -159,8 +154,9 @@ def pivot_table_w_subtotals(df, values, indices, columns, aggfunc, fill_value):
 
     concatTable = pd.concat(listOfTable).sort_index()
     concatTable = concatTable.set_index(keys=indices)
-    print(concatTable.sort_index(axis=0,ascending=True))
+    return concatTable.sort_index(axis=0,ascending=True)
 
+print((pivot_table_w_subtotals(df=list_df_conti_camerino_mese_entrate[0],values='Euro',indices=['Entrate_Uscite', 'Categoria', 'Voce'],columns=[],aggfunc='sum',fill_value='')).head())
 
 ''' 
 fin qui vengono creati 3 dataframes             print(table.sample())
