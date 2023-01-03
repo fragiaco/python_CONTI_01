@@ -131,54 +131,6 @@ list_df_conti_camerino_mese_uscite = [   list_df_conti_camerino_mese_uscite[0], 
                                             list_df_conti_camerino_mese_uscite[11]
                                         ]
 
-print(list_df_conti_camerino_mese_entrate[0].columns)
-
-
-
-def pivot_table_w_subtotals(df, values, indices, columns, aggfunc, fill_value):
-    listOfTable = []
-    for indexNumber in range(len(indices)):
-        n = indexNumber+1
-        if n == 1:
-            table = pd.pivot_table(df,values=values,index=indices[:n],columns=columns,aggfunc=aggfunc,fill_value=fill_value,margins=True)
-
-        else:
-            table = pd.pivot_table(df,values=values,index=indices[:n],columns=columns,aggfunc=aggfunc,fill_value=fill_value)
-        table = table.reset_index()
-
-
-        for column in indices[n:]:
-            table[column] = ''
-
-        listOfTable.append(table)
-
-    concatTable = pd.concat(listOfTable).sort_index()
-    concatTable = concatTable.set_index(keys=indices)
-    return concatTable.sort_index(axis=0,ascending=True)
-
-#print((pivot_table_w_subtotals(df=list_df_conti_camerino_mese_entrate[0],values='Euro',indices=['Entrate_Uscite', 'Categoria', 'Voce'],columns=[],aggfunc='sum',fill_value='').head(60)))
-
-''' 
-fin qui vengono creati 3 dataframes             print(table.sample())
-
-
-Index(['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'], dtype='object')
-                      Euro
-Entrate_Uscite            
-Entrate         102266.604
-All             102266.604
-                              Euro
-Entrate_Uscite Categoria          
-Entrate        Predicazione  150.0
-                                   Euro
-Entrate_Uscite Categoria Voce          
-Entrate        Offerte   Museo  1325.26
-
-'''
-
-
-
-
 
 list_pivot_mese_entrate = ['pivot_gennaio_entrate',
                               'pivot_febbraio_entrate',
@@ -208,33 +160,16 @@ list_pivot_mese_uscite = ['pivot_gennaio_uscite',
                               'pivot_dicembre_uscite'
                               ]
 
-# pivot_table_w_subtotals
-#       (df=list_df_conti_camerino_mese_entrate[0],values='Euro',indices=['Entrate_Uscite', 'Categoria', 'Voce'],columns=[],aggfunc='sum',fill_value='')
-
-
 i=0
 for x in range(12):
-    list_pivot_mese_entrate[i] = np.round(pivot_table_w_subtotals
-                                 (df=list_df_conti_camerino_mese_entrate[i],
+    list_pivot_mese_entrate[i] = np.round(pd.pivot_table
+                                 (list_df_conti_camerino_mese_entrate[i],
                                   values='Euro',
-                                  indices=['Entrate_Uscite', 'Categoria', 'Voce'],
-                                  columns=[],
+                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
                                   aggfunc='sum',
-                                  fill_value=''), 2)
-
-
-
-
-# i=0
-# for x in range(12):
-#     list_pivot_mese_entrate[i] = np.round(pd.pivot_table
-#                                  (list_df_conti_camerino_mese_entrate[i],
-#                                   values='Euro',
-#                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-#                                   aggfunc='sum',
-#                                   margins=True,
-#                                   margins_name='TOTALE_Entrate',
-#                                   fill_value=0), 2)
+                                  margins=True,
+                                  margins_name='TOTALE_Entrate',
+                                  fill_value=0), 2)
 
     list_pivot_mese_uscite[i] = np.round(pd.pivot_table
                                  (list_df_conti_camerino_mese_uscite[i],
