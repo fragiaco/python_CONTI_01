@@ -37,33 +37,35 @@ df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_
     ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre",
      "novembre", "dicembre"])
 
+
+
 # sheets dei 12 mesi
-list_df_conti_camerino_pivot_entrate = [ 'df_conti_camerino_pivot_entrate_gennaio',
-                                         'df_conti_camerino_pivot_entrate_febbraio',
-                                         'df_conti_camerino_pivot_entrate_marzo',
-                                         'df_conti_camerino_pivot_entrate_aprile',
-                                         'df_conti_camerino_pivot_entrate_maggio',
-                                         'df_conti_camerino_pivot_entrate_giugno',
-                                         'df_conti_camerino_pivot_entrate_luglio',
-                                         'df_conti_camerino_pivot_entrate_agosto',
-                                         'df_conti_camerino_pivot_entrate_settembre',
-                                         'df_conti_camerino_pivot_entrate_ottobre',
-                                         'df_conti_camerino_pivot_entrate_novembre',
-                                         'df_conti_camerino_pivot_entrate_dicembre'
+list_df_conti_camerino_mese_entrate = [ 'df_conti_camerino_mese_entrate_gennaio',
+                                         'df_conti_camerino_mese_entrate_febbraio',
+                                         'df_conti_camerino_mese_entrate_marzo',
+                                         'df_conti_camerino_mese_entrate_aprile',
+                                         'df_conti_camerino_mese_entrate_maggio',
+                                         'df_conti_camerino_mese_entrate_giugno',
+                                         'df_conti_camerino_mese_entrate_luglio',
+                                         'df_conti_camerino_mese_entrate_agosto',
+                                         'df_conti_camerino_mese_entrate_settembre',
+                                         'df_conti_camerino_mese_entrate_ottobre',
+                                         'df_conti_camerino_mese_entrate_novembre',
+                                         'df_conti_camerino_mese_entrate_dicembre'
                                          ]
 
-list_df_conti_camerino_pivot_uscite = [ 'df_conti_camerino_pivot_uscite_gennaio',
-                                        'df_conti_camerino_pivot_uscite_febbraio',
-                                        'df_conti_camerino_pivot_uscite_marzo',
-                                        'df_conti_camerino_pivot_uscite_aprile',
-                                        'df_conti_camerino_pivot_uscite_maggio',
-                                        'df_conti_camerino_pivot_uscite_giugno',
-                                        'df_conti_camerino_pivot_uscite_luglio',
-                                        'df_conti_camerino_pivot_uscite_agosto',
-                                        'df_conti_camerino_pivot_uscite_settembre',
-                                        'df_conti_camerino_pivot_uscite_ottobre',
-                                        'df_conti_camerino_pivot_uscite_novembre',
-                                        'df_conti_camerino_pivot_uscite_dicembre'
+list_df_conti_camerino_mese_uscite = [ 'df_conti_camerino_mese_uscite_gennaio',
+                                        'df_conti_camerino_mese_uscite_febbraio',
+                                        'df_conti_camerino_mese_uscite_marzo',
+                                        'df_conti_camerino_mese_uscite_aprile',
+                                        'df_conti_camerino_mese_uscite_maggio',
+                                        'df_conti_camerino_mese_uscite_giugno',
+                                        'df_conti_camerino_mese_uscite_luglio',
+                                        'df_conti_camerino_mese_uscite_agosto',
+                                        'df_conti_camerino_mese_uscite_settembre',
+                                        'df_conti_camerino_mese_uscite_ottobre',
+                                        'df_conti_camerino_mese_uscite_novembre',
+                                        'df_conti_camerino_mese_uscite_dicembre'
                                         ]
 
 list_mese = ['gennaio',
@@ -85,83 +87,83 @@ list_mese = ['gennaio',
 anno = 2015
 i = 0
 for x in range (12):
-        list_df_conti_camerino_pivot_entrate[i]= df_conti_camerino_modified.loc[
+        list_df_conti_camerino_mese_entrate[i]= df_conti_camerino_modified.loc[
             (df_conti_camerino_modified['Anno'] == anno) &
             (df_conti_camerino_modified['Mese'] == list_mese[i]) &
             (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
         #print(list_df_conti_camerino_pivot_entrate[i].head())
 
 
-        list_df_conti_camerino_pivot_uscite[i] = df_conti_camerino_modified.loc[
+        list_df_conti_camerino_mese_uscite[i] = df_conti_camerino_modified.loc[
             (df_conti_camerino_modified['Anno'] == anno) &
             (df_conti_camerino_modified['Mese'] == list_mese[i]) &
             (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
-        print(list_df_conti_camerino_pivot_uscite[i].head())
+        #print(list_df_conti_camerino_mese_uscite[i].head())
 
         i += 1
 
 
-list_pivot_entrate = [  list_df_conti_camerino_pivot_entrate[0], #df_conti_camerino_pivot_entrate_gennaio
-                        list_df_conti_camerino_pivot_entrate[1],
-                        list_df_conti_camerino_pivot_entrate[2],
-                        list_df_conti_camerino_pivot_entrate[3],
-                        list_df_conti_camerino_pivot_entrate[4],
-                        list_df_conti_camerino_pivot_entrate[5],
-                        list_df_conti_camerino_pivot_entrate[6],
-                        list_df_conti_camerino_pivot_entrate[7],
-                        list_df_conti_camerino_pivot_entrate[8],
-                        list_df_conti_camerino_pivot_entrate[9],
-                        list_df_conti_camerino_pivot_entrate[10],
-                        list_df_conti_camerino_pivot_entrate[11]
-                      ]
+list_df_conti_camerino_mese_entrate = [  list_df_conti_camerino_mese_entrate[0], #df_conti_camerino_pivot_entrate_gennaio
+                                            list_df_conti_camerino_mese_entrate[1],
+                                            list_df_conti_camerino_mese_entrate[2],
+                                            list_df_conti_camerino_mese_entrate[3],
+                                            list_df_conti_camerino_mese_entrate[4],
+                                            list_df_conti_camerino_mese_entrate[5],
+                                            list_df_conti_camerino_mese_entrate[6],
+                                            list_df_conti_camerino_mese_entrate[7],
+                                            list_df_conti_camerino_mese_entrate[8],
+                                            list_df_conti_camerino_mese_entrate[9],
+                                            list_df_conti_camerino_mese_entrate[10],
+                                            list_df_conti_camerino_mese_entrate[11]
+                                        ]
 
-list_pivot_uscite = [   list_df_conti_camerino_pivot_uscite[0], #df_conti_camerino_pivot_uscite_gennaio
-                        list_df_conti_camerino_pivot_uscite[1],
-                        list_df_conti_camerino_pivot_uscite[2],
-                        list_df_conti_camerino_pivot_uscite[3],
-                        list_df_conti_camerino_pivot_uscite[4],
-                        list_df_conti_camerino_pivot_uscite[5],
-                        list_df_conti_camerino_pivot_uscite[6],
-                        list_df_conti_camerino_pivot_uscite[7],
-                        list_df_conti_camerino_pivot_uscite[8],
-                        list_df_conti_camerino_pivot_uscite[9],
-                        list_df_conti_camerino_pivot_uscite[10],
-                        list_df_conti_camerino_pivot_uscite[11]
-                    ]
+list_df_conti_camerino_mese_uscite = [   list_df_conti_camerino_mese_uscite[0], #df_conti_camerino_pivot_uscite_gennaio
+                                            list_df_conti_camerino_mese_uscite[1],
+                                            list_df_conti_camerino_mese_uscite[2],
+                                            list_df_conti_camerino_mese_uscite[3],
+                                            list_df_conti_camerino_mese_uscite[4],
+                                            list_df_conti_camerino_mese_uscite[5],
+                                            list_df_conti_camerino_mese_uscite[6],
+                                            list_df_conti_camerino_mese_uscite[7],
+                                            list_df_conti_camerino_mese_uscite[8],
+                                            list_df_conti_camerino_mese_uscite[9],
+                                            list_df_conti_camerino_mese_uscite[10],
+                                            list_df_conti_camerino_mese_uscite[11]
+                                        ]
 
 
-pivot_mese_entrate = ['pivot_gennaio_entrate',
-                      'pivot_febbraio_entrate',
-                      'pivot_marzo_entrate',
-                      'pivot_aprile_entrate',
-                      'pivot_maggio_entrate',
-                      'pivot_giugno_entrate',
-                      'pivot_luglio_entrate',
-                      'pivot_agosto_entrate',
-                      'pivot_settembre_entrate',
-                      'pivot_ottobre_entrate',
-                      'pivot_novembre_entrate',
-                      'pivot_dicembre_entrate'
-                      ]
+list_pivot_mese_entrate = ['pivot_gennaio_entrate',
+                              'pivot_febbraio_entrate',
+                              'pivot_marzo_entrate',
+                              'pivot_aprile_entrate',
+                              'pivot_maggio_entrate',
+                              'pivot_giugno_entrate',
+                              'pivot_luglio_entrate',
+                              'pivot_agosto_entrate',
+                              'pivot_settembre_entrate',
+                              'pivot_ottobre_entrate',
+                              'pivot_novembre_entrate',
+                              'pivot_dicembre_entrate'
+                              ]
 
-pivot_mese_uscite = ['pivot_gennaio_uscite',
-                      'pivot_febbraio_uscite',
-                      'pivot_marzo_uscite',
-                      'pivot_aprile_uscite',
-                      'pivot_maggio_uscite',
-                      'pivot_giugno_uscite',
-                      'pivot_luglio_uscite',
-                      'pivot_agosto_uscite',
-                      'pivot_settembre_uscite',
-                      'pivot_ottobre_uscite',
-                      'pivot_novembre_uscite',
-                      'pivot_dicembre_uscite'
-                      ]
+list_pivot_mese_uscite = ['pivot_gennaio_uscite',
+                              'pivot_febbraio_uscite',
+                              'pivot_marzo_uscite',
+                              'pivot_aprile_uscite',
+                              'pivot_maggio_uscite',
+                              'pivot_giugno_uscite',
+                              'pivot_luglio_uscite',
+                              'pivot_agosto_uscite',
+                              'pivot_settembre_uscite',
+                              'pivot_ottobre_uscite',
+                              'pivot_novembre_uscite',
+                              'pivot_dicembre_uscite'
+                              ]
 
 i=0
 for x in range(12):
-    pivot_mese_entrate[i] = np.round(pd.pivot_table
-                                 (list_pivot_entrate[i],
+    list_pivot_mese_entrate[i] = np.round(pd.pivot_table
+                                 (list_df_conti_camerino_mese_entrate[i],
                                   values='Euro',
                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
                                   aggfunc='sum',
@@ -169,15 +171,43 @@ for x in range(12):
                                   margins_name='TOTALE_Entrate',
                                   fill_value=0), 2)
 
-    pivot_mese_uscite[i] = np.round(pd.pivot_table
-                                 (list_pivot_uscite[i],
+    list_pivot_mese_uscite[i] = np.round(pd.pivot_table
+                                 (list_df_conti_camerino_mese_uscite[i],
                                   values='Euro',
                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
                                   aggfunc='sum',
                                   margins=True,
-                                  margins_name='TOTALE_Entrate',
+                                  margins_name='TOTALE_Uscite',
                                   fill_value=0), 2)
     i +=1
+
+list_pivot_mese_entrate=[list_pivot_mese_entrate[0], #pivot gennaio entrate
+                    list_pivot_mese_entrate[1],
+                    list_pivot_mese_entrate[2],
+                    list_pivot_mese_entrate[3],
+                    list_pivot_mese_entrate[4],
+                    list_pivot_mese_entrate[5],
+                    list_pivot_mese_entrate[6],
+                    list_pivot_mese_entrate[7],
+                    list_pivot_mese_entrate[8],
+                    list_pivot_mese_entrate[9],
+                    list_pivot_mese_entrate[10],
+                    list_pivot_mese_entrate[11]
+                    ]
+
+list_pivot_mese_uscite= [list_pivot_mese_uscite[0],
+                    list_pivot_mese_uscite[1],
+                    list_pivot_mese_uscite[2],
+                    list_pivot_mese_uscite[3],
+                    list_pivot_mese_uscite[4],
+                    list_pivot_mese_uscite[5],
+                    list_pivot_mese_uscite[6],
+                    list_pivot_mese_uscite[7],
+                    list_pivot_mese_uscite[8],
+                    list_pivot_mese_uscite[9],
+                    list_pivot_mese_uscite[10],
+                    list_pivot_mese_uscite[11]
+                    ]
 
 
 # Creo il file 'conti_camerino_styled.xlsx'
@@ -200,33 +230,6 @@ list_mese = ['gennaio',
              'dicembre'
              ]
 
-list_pivot_entrate=[pivot_mese_entrate[0], #pivot gennaio entrate
-                    pivot_mese_entrate[1],
-                    pivot_mese_entrate[2],
-                    pivot_mese_entrate[3],
-                    pivot_mese_entrate[4],
-                    pivot_mese_entrate[5],
-                    pivot_mese_entrate[6],
-                    pivot_mese_entrate[7],
-                    pivot_mese_entrate[8],
-                    pivot_mese_entrate[9],
-                    pivot_mese_entrate[10],
-                    pivot_mese_entrate[11]
-                    ]
-
-list_pivot_uscite= [pivot_mese_entrate[0],
-                    pivot_mese_entrate[1],
-                    pivot_mese_entrate[2],
-                    pivot_mese_entrate[3],
-                    pivot_mese_entrate[4],
-                    pivot_mese_entrate[5],
-                    pivot_mese_entrate[6],
-                    pivot_mese_entrate[7],
-                    pivot_mese_entrate[8],
-                    pivot_mese_entrate[9],
-                    pivot_mese_entrate[10],
-                    pivot_mese_entrate[11]
-                    ]
 
 # sheets dei 12 mesi
 list_ws_mese = ['ws_gennaio',
@@ -240,12 +243,10 @@ list_ws_mese = ['ws_gennaio',
                 'ws_settembre',
                 'ws_ottobre',
                 'ws_novembre',
-                'ws_dicembre']
+                'ws_dicembre'
+                ]
 
-m = 0 # list_mese
-e = 0 # list_pivot_entrate
-u = 0 # list_pivot_uscite
-w = 0 # list_ws_mese
+c = 0 # contatore
 
 for x in range (12):
     with pd.ExcelWriter('conti_camerino_styled.xlsx',
@@ -253,18 +254,15 @@ for x in range (12):
                         engine="openpyxl",
                         if_sheet_exists="overlay",
                         ) as writer:
-        list_pivot_entrate[e].to_excel(writer, sheet_name=list_mese[m], startrow=5)
-        list_pivot_uscite[u].to_excel(writer, sheet_name=list_mese[m], startrow=(len(list_pivot_entrate[e] ) + 10))
+        list_pivot_mese_entrate[c].to_excel(writer, sheet_name=list_mese[c], startrow=5)
+        list_pivot_mese_uscite[c].to_excel(writer, sheet_name=list_mese[c], startrow=(len(list_pivot_mese_entrate[c] ) + 10))
 
     # leggo il file "conti_camerino_styled.xlsx"
     wb = load_workbook(filename="conti_camerino_styled.xlsx")
     #creo i 12 sheet
-    list_ws_mese[w]= wb[list_mese[m]]
+    list_ws_mese[c]= wb[list_mese[c]]
 
-    m += 1
-    e += 1
-    u += 1
-    w += 1
+    c += 1
 
 
 
@@ -283,21 +281,22 @@ list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
                 wb[list_mese[11]],  #ws_dicembre
                 ]
 
-i = 0  # contatore list_mese
-list_mese = ['Conto del mese di Gennaio',
-             'Conto del mese di Febbraio',
-             'Conto del mese di Marzo',
-             'Conto del mese di Aprile',
-             'Conto del mese di Maggio',
-             'Conto del mese di Giugno',
-             'Conto del mese di Luglio',
-             'Conto del mese di Agosto',
-             'Conto del mese di Settembre',
-             'Conto del mese di Ottobre',
-             'Conto del mese di Novembre',
-             'Conto del mese di Dicembre',
-             ]
 
+# list_mese = ['Conto del mese di Gennaio',
+#              'Conto del mese di Febbraio',
+#              'Conto del mese di Marzo',
+#              'Conto del mese di Aprile',
+#              'Conto del mese di Maggio',
+#              'Conto del mese di Giugno',
+#              'Conto del mese di Luglio',
+#              'Conto del mese di Agosto',
+#              'Conto del mese di Settembre',
+#              'Conto del mese di Ottobre',
+#              'Conto del mese di Novembre',
+#              'Conto del mese di Dicembre',
+#              ]
+
+i = 0  # contatore
 # set the height of the first row in each sheet
 for sheet in list_ws_mese:
     sheet.row_dimensions[1].height = 70
@@ -328,7 +327,7 @@ for sheet in list_ws_mese:
     sheet['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
 # Colonna D :Formattazione degli euro in valuta euro
-for sheet in list_ws_mese:
+#for sheet in list_ws_mese:
     for row in sheet[7:sheet.max_row]:  # skip the header
         # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
         cell = row[3]  # il quarto valore della tuple
@@ -353,10 +352,10 @@ for sheet in list_ws_mese:
     for row in sheet.rows:
         for cell in row:
             if (cell.value == ("Categoria") or
-                    cell.value == ("Entrate") or
-                    cell.value == ("Euro") or
-                    cell.value == ("Uscite") or
-                    cell.value == ("Voce")):
+                cell.value == ("Entrate") or
+                cell.value == ("Euro") or
+                cell.value == ("Uscite") or
+                cell.value == ("Voce")):
                 list.append(cell)
     for cell in list:
         cell.font = Font(size=15, color='a81a1a', bold=True)
@@ -374,6 +373,8 @@ for sheet in list_ws_mese:
 
     # Rendi 'invisibile il testo"Entrate_Uscite"
     list = []
+
+    # Formattazione "Entrate_Uscite"
 
     for row in sheet.rows:
         for cell in row:
@@ -395,13 +396,13 @@ for sheet in list_ws_mese:
     for row in sheet.rows:
         for cell in row:
             if (cell.value == ("TOTALE_Entrate") or
-                    cell.value == ("TOTALE_Uscite")):
+                cell.value == ("TOTALE_Uscite")):
                 list.append(cell)
     for cell in list:
         sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
 
     # Creo tabella SAlDO
-    # text
+
 
     for row in sheet.rows:
         for cell in row:
@@ -429,33 +430,33 @@ for sheet in list_ws_mese:
     # sheets dei 12 mesi
 
 
-list_df_conti_entrate = [list_df_conti_camerino_pivot_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
-                          list_df_conti_camerino_pivot_entrate[1],
-                          list_df_conti_camerino_pivot_entrate[2],
-                          list_df_conti_camerino_pivot_entrate[3],
-                          list_df_conti_camerino_pivot_entrate[4],
-                          list_df_conti_camerino_pivot_entrate[5],
-                          list_df_conti_camerino_pivot_entrate[6],
-                          list_df_conti_camerino_pivot_entrate[7],
-                          list_df_conti_camerino_pivot_entrate[8],
-                          list_df_conti_camerino_pivot_entrate[9],
-                          list_df_conti_camerino_pivot_entrate[10],
-                          list_df_conti_camerino_pivot_entrate[11]
-                          ]
-
-list_df_conti_uscite = [list_df_conti_camerino_pivot_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
-                         list_df_conti_camerino_pivot_uscite[1],
-                         list_df_conti_camerino_pivot_uscite[2],
-                         list_df_conti_camerino_pivot_uscite[3],
-                         list_df_conti_camerino_pivot_uscite[4],
-                         list_df_conti_camerino_pivot_uscite[5],
-                         list_df_conti_camerino_pivot_uscite[6],
-                         list_df_conti_camerino_pivot_uscite[7],
-                         list_df_conti_camerino_pivot_uscite[8],
-                         list_df_conti_camerino_pivot_uscite[9],
-                         list_df_conti_camerino_pivot_uscite[10],
-                         list_df_conti_camerino_pivot_uscite[11]
-                         ]
+# list_df_conti_entrate = [list_df_conti_camerino_pivot_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
+#                           list_df_conti_camerino_pivot_entrate[1],
+#                           list_df_conti_camerino_pivot_entrate[2],
+#                           list_df_conti_camerino_pivot_entrate[3],
+#                           list_df_conti_camerino_pivot_entrate[4],
+#                           list_df_conti_camerino_pivot_entrate[5],
+#                           list_df_conti_camerino_pivot_entrate[6],
+#                           list_df_conti_camerino_pivot_entrate[7],
+#                           list_df_conti_camerino_pivot_entrate[8],
+#                           list_df_conti_camerino_pivot_entrate[9],
+#                           list_df_conti_camerino_pivot_entrate[10],
+#                           list_df_conti_camerino_pivot_entrate[11]
+#                           ]
+#
+# list_df_conti_uscite = [list_df_conti_camerino_pivot_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
+#                          list_df_conti_camerino_pivot_uscite[1],
+#                          list_df_conti_camerino_pivot_uscite[2],
+#                          list_df_conti_camerino_pivot_uscite[3],
+#                          list_df_conti_camerino_pivot_uscite[4],
+#                          list_df_conti_camerino_pivot_uscite[5],
+#                          list_df_conti_camerino_pivot_uscite[6],
+#                          list_df_conti_camerino_pivot_uscite[7],
+#                          list_df_conti_camerino_pivot_uscite[8],
+#                          list_df_conti_camerino_pivot_uscite[9],
+#                          list_df_conti_camerino_pivot_uscite[10],
+#                          list_df_conti_camerino_pivot_uscite[11]
+#                          ]
 
 
 
@@ -468,7 +469,7 @@ for sheet in list_ws_mese:
                 # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
                 # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
                 sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
-                           value=list_df_conti_entrate[i]['Euro'].sum(numeric_only=True))
+                           value=list_df_conti_camerino_mese_entrate[i]['Euro'].sum(numeric_only=True))
                 sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='000000',
                                                                                        bold=True)
                 sheet.cell(row=cell.offset(row=7, column=0).row, column=4).number_format = '#,##0.00€'
@@ -482,7 +483,7 @@ for sheet in list_ws_mese:
                 # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
                 # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
                 sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
-                           value=list_df_conti_uscite[i]['Euro'].sum(numeric_only=True))
+                           value=list_df_conti_camerino_mese_uscite[i]['Euro'].sum(numeric_only=True))
                 sheet.cell(row=cell.offset(row=9, column=0).row, column=4).font = Font(size=15, color='a81a1a',
                                                                                        bold=True)
                 sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '-#,##0.00€'
@@ -494,8 +495,8 @@ for sheet in list_ws_mese:
                 # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
                 # print(sheet.cell(row=cell.row, column=cell.column).value) # stampa 'TOTALE_Uscite
                 sheet.cell(row=cell.offset(row=11, column=0).row, column=4,
-                           value=((list_df_conti_entrate[i]['Euro']).sum(numeric_only=True) -
-                                  (list_df_conti_uscite[i]['Euro']).sum(numeric_only=True)
+                           value=((list_df_conti_camerino_mese_entrate[i]['Euro']).sum(numeric_only=True) -
+                                  (list_df_conti_camerino_mese_uscite[i]['Euro']).sum(numeric_only=True)
                                   )
                            )
                 # sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(size=15,
@@ -536,8 +537,8 @@ for sheet in list_ws_mese:
 
                 # mi calcolo il saldo finale e la assegno alla variabile saldo
                 saldo = (saldo +
-                         list_df_conti_entrate[e]['Euro'].sum(numeric_only=True) -
-                         list_df_conti_uscite[e]['Euro'].sum(numeric_only=True)
+                         list_df_conti_camerino_mese_entrate[e]['Euro'].sum(numeric_only=True) -
+                         list_df_conti_camerino_mese_uscite[e]['Euro'].sum(numeric_only=True)
                          )
 
 
