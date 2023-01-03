@@ -220,9 +220,7 @@ wb = Workbook()
 # sheet copertina_fronte
 wb['Sheet'].title = 'Copertina_fronte'
 
-
 img = openpyxl.drawing.image.Image('bilancia.png')
-
 img.anchor = 'B13'
 
 wb['Copertina_fronte'].add_image(img)
