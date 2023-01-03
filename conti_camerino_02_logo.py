@@ -6,6 +6,10 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 
+from openpyxl.drawing.image import Image
+
+
+
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
 df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx', names=col_names)
@@ -212,8 +216,20 @@ list_pivot_mese_uscite= [list_pivot_mese_uscite[0],
 
 # Creo il file 'conti_camerino_styled.xlsx'
 wb = Workbook()
+
+# sheet copertina_fronte
 wb['Sheet'].title = 'Copertina_fronte'
-wb.save('conti_camerino_styled.xlsx')
+
+
+
+
+
+
+
+
+
+
+
 
 # Con ExcelWriter di pandas metto insieme il pivot delle entrate ed il pivot delle uscite
 list_mese = ['gennaio',
@@ -326,7 +342,7 @@ for sheet in list_ws_mese:
 
     sheet['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
-# Colonna D :Formattazione degli euro in valuta euro
+# Colonna D: Formattazione degli euro in valuta euro
 #for sheet in list_ws_mese:
     for row in sheet[7:sheet.max_row]:  # skip the header
         # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
