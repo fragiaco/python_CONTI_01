@@ -224,7 +224,7 @@ img = openpyxl.drawing.image.Image('bilancia.png')
 img.anchor = 'B13'
 
 wb['Copertina_fronte'].add_image(img)
-wb.save('conti_camerino_styled.xlsx')
+#wb.save('conti_camerino_styled.xlsx')
 
 # img = openpyxl.drawing.image.Image('C:/Users/myplot.png')
 # img.anchor = 'E6'
