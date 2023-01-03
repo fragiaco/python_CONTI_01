@@ -1,13 +1,13 @@
+import openpyxl
 import pandas as pd
 
 import numpy as np
 
-from openpyxl import Workbook
+from openpyxl import Workbook, drawing
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 
 from openpyxl.drawing.image import Image
-
 
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
@@ -221,10 +221,18 @@ wb = Workbook()
 wb['Sheet'].title = 'Copertina_fronte'
 
 
+img = openpyxl.drawing.image.Image('bilancia.png')
 
+img.anchor = 'B13'
 
+wb['Copertina_fronte'].add_image(img)
+wb.save('conti_camerino_styled.xlsx')
 
-
+# img = openpyxl.drawing.image.Image('C:/Users/myplot.png')
+# img.anchor = 'E6'
+#
+# workbook['Your sheet'].add_image(img)
+# workbook.save(outputExcelFile)
 
 
 
