@@ -5,6 +5,11 @@ import numpy as np
 from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
+from openpyxl.utils import get_column_letter
+
+from openpyxl import styles, formatting
+from openpyxl.styles.differential import DifferentialStyle
+from openpyxl.formatting.rule import Rule
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
@@ -155,6 +160,19 @@ def pivot_table_w_subtotals(df, values, indices, columns, aggfunc, fill_value):
     concatTable = pd.concat(listOfTable).sort_index()
     concatTable = concatTable.set_index(keys=indices)
     return concatTable.sort_index(axis=0,ascending=True)
+
+
+
+    #myFile = 'C:/Path/test.xlsx'
+
+    #myDF.to_excel(myFile, index=False, sheet_name='Tab 1')
+
+    # workbook = openpyxl.load_workbook(myFile)
+    # worksheet = workbook['Sheet1']
+
+
+
+    #workbook.save(myFile)
 
 #print((pivot_table_w_subtotals(df=list_df_conti_camerino_mese_entrate[0],values='Euro',indices=['Entrate_Uscite', 'Categoria', 'Voce'],columns=[],aggfunc='sum',fill_value='').head(60)))
 
@@ -360,6 +378,26 @@ list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
 #              'Conto del mese di Novembre',
 #              'Conto del mese di Dicembre',
 #              ]
+i = 0  # contatore
+# set the height of the first row in each sheet
+for sheet in list_ws_mese:
+    for cell in sheet['B']: #per ogni casella della colonna B
+        if cell.value is not None:
+            print(cell.value)
+            print(cell.coordinate)    # B148
+            print(cell.column_letter) # B
+            print(cell.column)        # 2
+            print(cell.row)           # 148
+
+
+
+    #         data = sheet.cell(row=i, column='B').value
+    #         print(data)
+            #data è = ad ogni singola cella di tutti i fogli
+            #if data=='ABC': column_letter = get_column_letter(j)
+            # print('ABC employee name is present in column ', column_letter, 'and in row index ', i )
+
+
 
 i = 0  # contatore
 # set the height of the first row in each sheet
