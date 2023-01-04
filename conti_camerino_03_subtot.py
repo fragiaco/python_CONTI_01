@@ -378,26 +378,38 @@ list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
 #              'Conto del mese di Novembre',
 #              'Conto del mese di Dicembre',
 #              ]
-i = 0  # contatore
+# Colonna D :Formattazione degli euro in valuta euro
+for sheet in list_ws_mese:
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
+        cell = row[3]  # il quarto valore della tuple
+        # print (cell)# <Cell 'multiple'.D7>
+        cell.number_format = '#,##0.00€'
+        cell.alignment = Alignment(horizontal="right")
+        cell.font = Font(bold=True)
 # set the height of the first row in each sheet
 for sheet in list_ws_mese:
-    for cell in sheet['B']: #per ogni casella della colonna B
-        if cell.value is not None:
-            print(cell.value)
-            print(cell.coordinate)    # B148
-            print(cell.column_letter) # B
-            print(cell.column)        # 2
-            print(cell.row)           # 148
-            cell.font = Font(name='Calibri',
-                            size=25,
-                            bold=True,
-                            italic=True,
-                            vertAlign='none',
-                            underline='single',
-                            strike=False,
-                            color='a81a1a')
-            sheet.cell(row=cell.offset(row=0, column=0).row, column=3).font \
-                = Font(size=25, color='000000', bold=True)
+    for row in sheet[7:sheet.max_row]:
+        for cell in sheet['B']: #per ogni casella della colonna B
+            if cell.value is not None:
+                #print(cell.value)
+                #print(cell.coordinate)    # B148
+                # print(cell.column_letter) # B
+                # print(cell.column)        # 2
+                # print(cell.row)           # 148
+                cell.font = Font(name='Calibri',
+                                size=15,
+                                bold=True,
+                                italic=True,
+                                vertAlign='none',
+                                underline='single',
+                                strike=False,
+                                color='a81a1a')
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).font\
+                                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).alignment = Alignment(horizontal="left")
+
 
     #         data = sheet.cell(row=i, column='B').value
     #         print(data)
@@ -439,13 +451,13 @@ for sheet in list_ws_mese:
 
 # Colonna D :Formattazione degli euro in valuta euro
 #for sheet in list_ws_mese:
-    for row in sheet[7:sheet.max_row]:  # skip the header
-        # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
-        cell = row[3]  # il quarto valore della tuple
-        # print (cell)# <Cell 'multiple'.D7>
-        cell.number_format = '#,##0.00€'
-        cell.alignment = Alignment(horizontal="right")
-        cell.font = Font(bold=True)
+    # for row in sheet[7:sheet.max_row]:  # skip the header
+    #     # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
+    #     cell = row[3]  # il quarto valore della tuple
+    #     # print (cell)# <Cell 'multiple'.D7>
+    #     cell.number_format = '#,##0.00€'
+    #     cell.alignment = Alignment(horizontal="right")
+    #     cell.font = Font(bold=True)
 
     # Colonna C: Allineamento
     for row in sheet[7:sheet.max_row]:  # skip the header
