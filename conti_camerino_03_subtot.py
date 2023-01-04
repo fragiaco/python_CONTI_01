@@ -388,8 +388,16 @@ for sheet in list_ws_mese:
             print(cell.column_letter) # B
             print(cell.column)        # 2
             print(cell.row)           # 148
-
-
+            cell.font = Font(name='Calibri',
+                            size=25,
+                            bold=True,
+                            italic=True,
+                            vertAlign='none',
+                            underline='single',
+                            strike=False,
+                            color='a81a1a')
+            sheet.cell(row=cell.offset(row=0, column=0).row, column=3).font \
+                = Font(size=25, color='000000', bold=True)
 
     #         data = sheet.cell(row=i, column='B').value
     #         print(data)
