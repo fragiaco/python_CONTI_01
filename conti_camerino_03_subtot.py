@@ -6,6 +6,7 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 from openpyxl.utils import get_column_letter
+from openpyxl.styles import Side, Border
 
 from openpyxl import styles, formatting
 from openpyxl.styles.differential import DifferentialStyle
@@ -405,11 +406,14 @@ for sheet in list_ws_mese:
                                 underline='single',
                                 strike=False,
                                 color='a81a1a')
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=3, value=f"Totale {cell.value} =").font\
+                                    = Font(size=10, color='a81a1a', bold=True)
                 sheet.cell(row=cell.offset(row=0, column=0).row, column=4).font\
                                     = Font(size=15, color='a81a1a', bold=True)
-                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format = '#,##0.00 €'
                 sheet.cell(row=cell.offset(row=0, column=0).row, column=4).alignment = Alignment(horizontal="left")
-
+                white = Side(border_style='thin', color='FFFFFF')
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).border = Border(top=white, bottom=white, left=white, right=white)
 
     #         data = sheet.cell(row=i, column='B').value
     #         print(data)
