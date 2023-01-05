@@ -534,25 +534,26 @@ for sheet in list_ws_mese:
     #         FullRange = 'A1:' + get_column_letter(worksheet.max_column) + str(worksheet.max_row)
 
 for sheet in list_ws_mese:
-                cell = 'A' + str(sheet.max_row)
-                #cell.value = sheet[last_cell]
+                last_cell = 'A' + str(sheet.max_row)
+                cell = sheet[last_cell]
 
- # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                print(cell) # stampa ultima cella colonna A
-
-                # sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
-                # sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font \
-                #     = Font(size=15, color='000000', bold=True)
-                # sheet.cell(row=cell.offset(row=7, column=0).row, column=2).alignment = Alignment(horizontal="left")
-                # sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font \
-                #     = Font(size=15, color='000000', bold=True)
-                # sheet.cell(row=cell.offset(row=9, column=0).row, column=2).alignment = Alignment(horizontal="left")
-                # sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font \
-                #     = Font(size=15, color='000000', bold=True)
-                # sheet.cell(row=cell.offset(row=11, column=0).row, column=2).alignment = Alignment(horizontal="left")
-                # sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font \
-                #     = Font(size=15, color='000000', bold=True)
-                # sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #print(cell) # stampa ultima cella colonna A
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
 
 
 
