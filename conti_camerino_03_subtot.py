@@ -241,9 +241,6 @@ for x in range(12):
                                   aggfunc='sum',
                                   fill_value=''), 2)
 
-
-
-
 # i=0
 # for x in range(12):
 #     list_pivot_mese_entrate[i] = np.round(pd.pivot_table
@@ -254,15 +251,13 @@ for x in range(12):
 #                                   margins=True,
 #                                   margins_name='TOTALE_Entrate',
 #                                   fill_value=0), 2)
-
-    list_pivot_mese_uscite[i] = np.round(pd.pivot_table
+    list_pivot_mese_uscite[i] = np.round(pivot_table_w_subtotals
                                  (list_df_conti_camerino_mese_uscite[i],
                                   values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  indices=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  columns=[],
                                   aggfunc='sum',
-                                  margins=True,
-                                  margins_name='TOTALE_Uscite',
-                                  fill_value=0), 2)
+                                  fill_value=''), 2)
     i +=1
 
 list_pivot_mese_entrate=[list_pivot_mese_entrate[0], #pivot gennaio entrate
@@ -534,13 +529,22 @@ for sheet in list_ws_mese:
     #         FullRange = 'A1:' + get_column_letter(worksheet.max_column) + str(worksheet.max_row)
 
 for sheet in list_ws_mese:
-                last_cell = 'A' + str(sheet.max_row)
-                cell = sheet[last_cell]
+                #coordinate dell'ultima cella della colonna A di ogni foglio
 
-                print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
-                #print(cell) # stampa ultima cella colonna A
+                last_cell_coordiate = 'C' + str(sheet.max_row)
+                print(last_cell_coordiate)
+                #attraverso le coordinate risalgo alla cella di excel
+                cell=sheet[last_cell_coordiate]
+                print(cell.value)
+
+                #cell = sheet.cell(row=1, column=1)
+                # last_cell = sheet[last_cell]
+                #
+                # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #
+                # #print(cell) # stampa ultima cella colonna A
                 sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font \
-                    = Font(size=15, color='000000', bold=True)
+                      = Font(size=15, color='000000', bold=True)
                 sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
                 sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font \
                     = Font(size=15, color='000000', bold=True)
@@ -645,7 +649,15 @@ for sheet in list_ws_mese:
 ##########
 
 ##################################################################################################################################
-
+#for sheet in list_ws_mese:
+#                last_cell_coordiate = 'C' + str(sheet.max_row)
+#                 print(last_cell_coordiate)
+#                 #attraverso le coordinate risalgo alla cella di excel
+#                 cell=sheet[last_cell_coordiate]
+#                 print(cell.value)
+#
+#                 sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font \
+#                       = Font(size=15, color='000000', bold=True)
 # saldo per tutti i mesi
 
 #imposto saldo iniziale
@@ -655,55 +667,53 @@ e = 0
 
 #saldo iniziale
 for sheet in list_ws_mese:
-    for row in sheet:
-        for cell in row:
-            if (cell.value == ("TOTALE_Uscite")):
+    print(cell.value)
 
-                sheet.cell  (   row=cell.offset(row=5, column=0).row, column=4,
-                                value=  (
-                                                saldo
-                                        )
-                            )
-
-                # mi calcolo il saldo finale e la assegno alla variabile saldo
-                saldo = (saldo +
-                         list_df_conti_camerino_mese_entrate[e]['Euro'].sum(numeric_only=True) -
-                         list_df_conti_camerino_mese_uscite[e]['Euro'].sum(numeric_only=True)
-                         )
-
-
-                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15, bold=True)
-                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
-                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
-
-                if sheet.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
-                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
-                                                                                        bold=True)
-                else:
-                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
-                                                                                        bold=True)
-
-                e += 1
-
-# Saldo finale
-    for row in sheet:
-        for cell in row:
-            if (cell.value == ("TOTALE_Uscite")):
-
-                sheet.cell(row=cell.offset(row=13, column=0).row, column=4,
-                            value=  (
-                                        saldo
-                                    )
-                            )
-
-                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
-                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
-                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
-
-                if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
-                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
-                else:
-                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
+#                 sheet.cell  (   row=cell.offset(row=5, column=0).row, column=4,
+#                                 value=  (
+#                                                 saldo
+#                                         )
+#                             )
+#
+#                 # mi calcolo il saldo finale e la assegno alla variabile saldo
+#                 saldo = (saldo +
+#                          list_df_conti_camerino_mese_entrate[e]['Euro'].sum(numeric_only=True) -
+#                          list_df_conti_camerino_mese_uscite[e]['Euro'].sum(numeric_only=True)
+#                          )
+#
+#
+#                 sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15, bold=True)
+#                 sheet.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+#                 sheet.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
+#
+#                 if sheet.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
+#                         sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
+#                                                                                         bold=True)
+#                 else:
+#                         sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
+#                                                                                         bold=True)
+#
+#                 e += 1
+#
+# # Saldo finale
+#     for row in sheet:
+#         for cell in row:
+#             if (cell.value == ("TOTALE_Uscite")):
+#
+#                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4,
+#                             value=  (
+#                                         saldo
+#                                     )
+#                             )
+#
+#                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
+#                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
+#                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
+#
+#                 if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
+#                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
+#                 else:
+#                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
 
 # Salva
