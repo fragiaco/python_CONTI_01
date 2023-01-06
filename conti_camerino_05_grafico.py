@@ -740,5 +740,8 @@ for sheet in list_ws_mese:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
 
+
+
+
 # Salva
 wb.save("conti_camerino_styled.xlsx")
