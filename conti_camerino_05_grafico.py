@@ -135,7 +135,7 @@ list_df_conti_camerino_mese_uscite = [   list_df_conti_camerino_mese_uscite[0], 
                                             list_df_conti_camerino_mese_uscite[11]
                                         ]
 
-print(list_df_conti_camerino_mese_entrate[0].columns)
+#print(list_df_conti_camerino_mese_entrate[0].columns)
 
 
 
@@ -227,16 +227,7 @@ for x in range(12):
                                   aggfunc='sum',
                                   fill_value=''), 2)
 
-# i=0
-# for x in range(12):
-#     list_pivot_mese_entrate[i] = np.round(pd.pivot_table
-#                                  (list_df_conti_camerino_mese_entrate[i],
-#                                   values='Euro',
-#                                   index=['Entrate_Uscite', 'Categoria', 'Voce'],
-#                                   aggfunc='sum',
-#                                   margins=True,
-#                                   margins_name='TOTALE_Entrate',
-#                                   fill_value=0), 2)
+
     list_pivot_mese_uscite[i] = np.round(pivot_table_w_subtotals
                                  (list_df_conti_camerino_mese_uscite[i],
                                   values='Euro',
@@ -274,11 +265,59 @@ list_pivot_mese_uscite= [list_pivot_mese_uscite[0],
                     list_pivot_mese_uscite[11]
                     ]
 
+##############PRIMA PAGINA
+import openpyxl
+from openpyxl.drawing.image import Image
+from openpyxl.styles import Alignment
+
 
 # Creo il file 'conti_camerino_styled.xlsx'
 wb = Workbook()
-wb['Sheet'].title = 'Copertina_fronte'
+# La prima pagina 'Sheet' la chiamo 'Copertina_fronte'
+wb['Sheet'].title = ('Copertina_fronte')
+
+wb['Copertina_fronte'].merge_cells('A4:I4')
+wb['Copertina_fronte']['A4'] = 'Resoconto Amministrativo'
+wb['Copertina_fronte']['A4'].font = Font(name='Calibri',
+                                size=35,
+                                bold=True,
+                                italic=True,
+                                vertAlign='none',
+                                underline='single',
+                                strike=False,
+                                color='204ac8') #blu royal
+wb['Copertina_fronte']['A4'].alignment = Alignment(horizontal='center')
+
+wb['Copertina_fronte']['A7'] = 'Fraternità di .....'
+wb['Copertina_fronte']['A7'].font = Font(name='Calibri',
+                                size=25,
+                                bold=True,
+                                italic=True,
+                                vertAlign='none',
+                                underline='single',
+                                strike=False,
+                                color='204ac8')
+
+wb['Copertina_fronte']['A10'] = 'Anno.....'
+wb['Copertina_fronte']['A10'].font = Font(name='Calibri',
+                                size=25,
+                                bold=True,
+                                italic=True,
+                                vertAlign='none',
+                                underline='single',
+                                strike=False,
+                                color='204ac8')
+
+
+
+# Inserisco immagin bilancia
+img = openpyxl.drawing.image.Image('bilancia.png')
+img.anchor = 'B13'
+wb['Copertina_fronte'].add_image(img)
 wb.save('conti_camerino_styled.xlsx')
+
+
+##################################
 
 # Con ExcelWriter di pandas metto insieme il pivot delle entrate ed il pivot delle uscite
 list_mese = ['gennaio',
@@ -347,26 +386,27 @@ list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
                 ]
 
 
+################# APPLICO STILE
+
+
 
 # Colonna D :Formattazione degli euro in valuta euro
 for sheet in list_ws_mese:
     for row in sheet[7:sheet.max_row]:  # skip the header
-        # print(row) #(<Cell 'multiple'.A7>, <Cell 'multiple'.B7>, <Cell 'multiple'.C7>, <Cell 'multiple'.D7>)
+        #print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
         cell = row[3]  # il quarto valore della tuple
         # print (cell)# <Cell 'multiple'.D7>
-        cell.number_format = '#,##0.00€'
+        cell.number_format = '#,##0.00 €'
         cell.alignment = Alignment(horizontal="right")
         cell.font = Font(bold=True)
-# set the height of the first row in each sheet
+
+# Aggiungo la scritta 'Totale =' alla tabella pivot davanti ai subtotali
 for sheet in list_ws_mese:
     for row in sheet[7:sheet.max_row]:
         for cell in sheet['B']: #per ogni casella della colonna B
             if cell.value is not None:
-                #print(cell.value)
-                #print(cell.coordinate)    # B148
-                # print(cell.column_letter) # B
-                # print(cell.column)        # 2
-                # print(cell.row)           # 148
+                # ossia se la casella nella colonna B non è vuota
+                # Assegnale uno stile
                 cell.font = Font(name='Calibri',
                                 size=15,
                                 bold=True,
@@ -375,18 +415,19 @@ for sheet in list_ws_mese:
                                 underline='single',
                                 strike=False,
                                 color='a81a1a')
-                sheet.cell(row=cell.offset(row=0, column=0).row, column=3, value=f"Totale {cell.value} =").font\
-                                    = Font(size=10, color='a81a1a', bold=True)
+                # Assegna uno stile anche alla cell accanto corrispondente
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=3,
+                                    value=f"Totale {cell.value} =")
                 sheet.cell(row=cell.offset(row=0, column=0).row, column=4).font\
                                     = Font(size=15, color='a81a1a', bold=True)
-                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format = '#,##0.00 €'
-                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).alignment = Alignment(horizontal="left")
-                # white = Side(border_style='thin', color='FFFFFF')
-                # sheet.cell(row=cell.offset(row=0, column=0).row, column=4).border = Border(top=white, bottom=white, left=white, right=white)
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format\
+                                    = '#,##0.00 €'
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).alignment\
+                                    = Alignment(horizontal="left")
 
 
 
-
+# Larghezza fissa colonne
 i = 0  # contatore
 # set the height of the first row in each sheet
 for sheet in list_ws_mese:
@@ -430,12 +471,14 @@ for sheet in list_ws_mese:
     # Colonna C: Allineamento
     for row in sheet[7:sheet.max_row]:  # skip the header
         cell = row[2]  # il terzo valore della tuple
-        cell.alignment = Alignment(horizontal="right")
+        cell.alignment = Alignment(horizontal="right", vertical="center")
 
     # Colonna D: Allineamento
     for row in sheet[7:sheet.max_row]:  # skip the header
         cell = row[1]  # il secondo valore della tuple
         cell.alignment = Alignment(horizontal="center", vertical="center")
+
+
 
     # Formattazione headers
     list = []
@@ -449,23 +492,35 @@ for sheet in list_ws_mese:
                 cell.value == ("Voce")):
                 list.append(cell)
     for cell in list:
-        cell.font = Font(size=15, color='0000FF', bold=True)
-
-    # Formattazione 'TOTALE_Entrate' e 'TOTALE_Uscite'
-    list = []
+        cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+        cell.alignment = Alignment(horizontal="center", vertical="center")
 
     for row in sheet.rows:
         for cell in row:
-            if (cell.value == ('Categoria') or
-                    cell.value == ('TOTALE_Uscite')):
-                list.append(cell)
-        for cell in list:
-            cell.font = Font(size=12, color='a81a1a', bold=True)
+            if (cell.value == ("Totale Categoria =")):
 
+                    cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+                    cell.alignment = Alignment(horizontal="right", vertical="center")
+
+
+    # Formattazione ' Euro accanto a 'Totale categoria='
+    i = 0
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ('Totale Categoria =')):
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4,
+                            value=(list_df_conti_camerino_mese_entrate[i]['Euro']).sum(numeric_only=True))
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).font \
+                            = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).number_format \
+                            = '#,##0.00 €'
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).alignment \
+                            = Alignment(horizontal="left")
+                    i += 1
     # Rendi 'invisibile il testo"Entrate_Uscite"
     list = []
 
-    # Formattazione "Entrate_Uscite"
+    # Formattazione "Entrate_Uscite", piccolo per non essere visto
 
     for row in sheet.rows:
         for cell in row:
@@ -482,15 +537,15 @@ for sheet in list_ws_mese:
     #     print(cell.column)
 
     # Formattazione Euro somma totale
-    list = []
-
-    for row in sheet.rows:
-        for cell in row:
-            if (cell.value == ("TOTALE_Entrate") or
-                cell.value == ("TOTALE_Uscite")):
-                list.append(cell)
-    for cell in list:
-        sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
+    # list = []
+    #
+    # for row in sheet.rows:
+    #     for cell in row:
+    #         if (cell.value == ("TOTALE_Entrate") or
+    #             cell.value == ("TOTALE_Uscite")):
+    #             list.append(cell)
+    # for cell in list:
+    #     sheet.cell(cell.row, column=4).font = Font(size=15, color='a81a1a', bold=True)
 
     # Creo tabella SAlDO  ws['A4'] = 4
 #            for sheet in sheetsLits:
