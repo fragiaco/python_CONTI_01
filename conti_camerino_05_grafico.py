@@ -505,6 +505,7 @@ for sheet in list_ws_mese:
 
     # Formattazione ' Euro accanto a 'Totale categoria='
     from openpyxl.styles import PatternFill, GradientFill
+    double = Side(border_style="double", color="4617F1")
     i = 0
     for row in sheet.rows:
         for cell in row:
@@ -519,6 +520,9 @@ for sheet in list_ws_mese:
                             = Alignment(horizontal="left")
                     sheet.cell(row=cell.offset(row=0, column=1).row, column=4).fill\
                         = PatternFill('solid', fgColor='d1d22e')
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).border\
+                        = Border(bottom=double, top=double, left=double, right=double)
+
                     i += 1
     # Rendi 'invisibile il testo"Entrate_Uscite"
     list = []
