@@ -760,7 +760,7 @@ for sheet in list_ws_mese:
                             )
 
                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
-                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,## 0.00€'
                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
                 if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
@@ -776,16 +776,22 @@ from openpyxl.chart import Reference, LineChart
 
 #Creo un nuovo foglio
 ws_saldo_riepilogo = wb.create_sheet('Saldo_riepilogo')
+ws_saldo_riepilogo['A1']='Tabella Entrate - Uscite - Saldo di ogni mese '
 
 #Formattazione
-ws_saldo_riepilogo.row_dimensions[1].height = 20
+ws_saldo_riepilogo.row_dimensions[1].height = 100
+ws_saldo_riepilogo.merge_cells('A1:E1')
+
+
+
+
 
  # set the width of the column
 ws_saldo_riepilogo.column_dimensions['A'].width = 15
-ws_saldo_riepilogo.column_dimensions['B'].width = 15
-ws_saldo_riepilogo.column_dimensions['C'].width = 15
-ws_saldo_riepilogo.column_dimensions['D'].width = 15
-ws_saldo_riepilogo.column_dimensions['E'].width = 15
+ws_saldo_riepilogo.column_dimensions['B'].width = 17
+ws_saldo_riepilogo.column_dimensions['C'].width = 17
+ws_saldo_riepilogo.column_dimensions['D'].width = 17
+ws_saldo_riepilogo.column_dimensions['E'].width = 17
 
 
 #queste liste mi servono per il grafico
@@ -804,6 +810,42 @@ for mese in range(1,12):
 
     ws_saldo_riepilogo.append(mese_saldo_grafico)
     i +=1
+
+
+list = []
+for row in ws_saldo_riepilogo.rows:
+        for cell in row:
+            cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+            cell.alignment = Alignment(horizontal="right", vertical="center")
+            cell.number_format = '#,## 0.00€'
+
+            if (cell.value == ("saldo_iniziale") or
+                cell.value == ("entrate_mese") or
+                cell.value == ("uscite_mese") or
+                cell.value == ("saldo_finale") or
+                cell.value == ("gennaio") or
+                cell.value == ("febbraio") or
+                cell.value == ("marzo") or
+                cell.value == ("aprile") or
+                cell.value == ("maggio") or
+                cell.value == ("giugno") or
+                cell.value == ("luglio") or
+                cell.value == ("agosto") or
+                cell.value == ("settembre") or
+                cell.value == ("ottobre") or
+                cell.value == ("novembre") or
+                cell.value == ("dicembre")
+                ):
+                cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+
+        for cell in row:
+            if  cell.value == ("mese"):
+                cell.font = Font(size=1)
+
+ws_saldo_riepilogo['A1'].font = Font(name='Calibri', size=20, color='a81a1a', bold=True)
+ws_saldo_riepilogo['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
 
 data = Reference(ws_saldo_riepilogo, min_col=3, min_row=1, max_col=5, max_row=13)
 titles = Reference(ws_saldo_riepilogo, min_row=1, max_row=12, min_col=1)
