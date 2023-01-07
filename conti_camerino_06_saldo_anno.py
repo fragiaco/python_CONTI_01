@@ -859,9 +859,12 @@ ws_saldo_riepilogo['A1'].font = Font(name='Calibri', size=20, color='a81a1a', bo
 ws_saldo_riepilogo['A1'].alignment = Alignment(horizontal="center", vertical="center")
 ws_saldo_riepilogo['B3'].border\
                         = Border(bottom=double, top=double, left=double, right=double)
+ws_saldo_riepilogo['B3'].fill\
+                        = PatternFill('solid', fgColor='d1d22e')
 ws_saldo_riepilogo['E14'].border\
                         = Border(bottom=double, top=double, left=double, right=double)
-
+ws_saldo_riepilogo['E14'].fill\
+                        = PatternFill('solid', fgColor='d1d22e')
 
 data = Reference(ws_saldo_riepilogo, min_col=3, min_row=2, max_col=5, max_row=14)
 titles = Reference(ws_saldo_riepilogo, min_row=3, max_row=14, min_col=1)
