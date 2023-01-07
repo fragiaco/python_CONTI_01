@@ -771,120 +771,27 @@ for sheet in list_ws_mese:
 
 
 ######################  grafico
-# from datetime import date
-# import openpyxl
-# from openpyxl import Workbook
-# from openpyxl.chart import Reference, LineChart
-# from openpyxl.chart.axis import DateAxis
-#
-# wb = Workbook()
-# ws = wb.active
-#
-#
-# rows = [
-#     ['Mesi', 'Entrate', 'Uscite', 'Saldo'],
-#     ['gennaio', list_df_conti_camerino_mese_entrate[0]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[0]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[0]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[0]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['febbraio',list_df_conti_camerino_mese_entrate[1]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[1]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[1]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[1]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['marzo',   list_df_conti_camerino_mese_entrate[2]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[2]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[2]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[2]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['aprile',  list_df_conti_camerino_mese_entrate[3]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[3]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[3]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[3]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['maggio',  list_df_conti_camerino_mese_entrate[4]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[4]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[4]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[4]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['giugno',  list_df_conti_camerino_mese_entrate[5]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[5]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[5]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[5]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['luglio',  list_df_conti_camerino_mese_entrate[6]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[6]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[6]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[6]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['agosto',  list_df_conti_camerino_mese_entrate[7]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[7]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[7]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[7]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['settembre',list_df_conti_camerino_mese_entrate[8]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[8]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[8]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[8]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['ottobre', list_df_conti_camerino_mese_entrate[9]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[9]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[9]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[9]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['novembre',list_df_conti_camerino_mese_entrate[10]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[10]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[10]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[10]['Euro']).sum(numeric_only=True))
-#      ],
-#     ['dicembre',list_df_conti_camerino_mese_entrate[11]['Euro'].sum(numeric_only=True),
-#                 -list_df_conti_camerino_mese_uscite[11]['Euro'].sum(numeric_only=True),
-#                 ((list_df_conti_camerino_mese_entrate[11]['Euro']).sum(numeric_only=True) -
-#                 (list_df_conti_camerino_mese_uscite[11]['Euro']).sum(numeric_only=True))
-#      ],
-#         ]
-#
-# for row in rows:
-#     ws.append(row)
-#
-# data = Reference(ws, min_col=2, min_row=1, max_col=4, max_row=13)
-# titles = Reference(ws, min_row=1, max_row=12, min_col=1)
-#
-# # Chart with date axis
-# chart = LineChart()
-# chart.title = "Bilancio"
-# chart.style = 12
-#
-# chart.add_data(data, titles_from_data=True)
-# chart.set_categories(titles)
-# chart.x_axis.title = 'Mesi'
-# chart.y_axis.title = 'Euro'
-#
-# line_entrate = chart.series[0]
-# line_entrate.marker.symbol = 'triangle'
-# line_entrate.marker.graphicalProperties.solidFill = "0000FF" # blue fill
-# line_entrate.marker.graphicalProperties.line.solidFill = "FF0000" # red outline
-# line_entrate.graphicalProperties.line.noFill = True
-#
-#
-# ws.add_chart(chart, "A21")
-#
-# wb.save("line.xlsx")
-##################  da qui
 
+from openpyxl.chart import Reference, LineChart
 
 #Creo un nuovo foglio
 ws_saldo_riepilogo = wb.create_sheet('Saldo_riepilogo')
 
+#Formattazione
+ws_saldo_riepilogo.row_dimensions[1].height = 20
 
+ # set the width of the column
+ws_saldo_riepilogo.column_dimensions['A'].width = 15
+ws_saldo_riepilogo.column_dimensions['B'].width = 15
+ws_saldo_riepilogo.column_dimensions['C'].width = 15
+ws_saldo_riepilogo.column_dimensions['D'].width = 15
+ws_saldo_riepilogo.column_dimensions['E'].width = 15
 
 
 #queste liste mi servono per il grafico
 
 list_headers= ['mese', 'saldo_iniziale','entrate_mese', 'uscite_mese', 'saldo_finale']
 list_saldo_iniziale_anno = list_saldo_iniale_finale_anno[:-1]
-#print(list_saldo_iniziale_anno)
 # list_entrate_mesi
 # list_uscite_mesi
 list_saldo_finale_anno = list_saldo_iniale_finale_anno[1:]
@@ -898,8 +805,19 @@ for mese in range(1,12):
     ws_saldo_riepilogo.append(mese_saldo_grafico)
     i +=1
 
-#for row in rows:
-#     ws.append(row)
+data = Reference(ws_saldo_riepilogo, min_col=3, min_row=1, max_col=5, max_row=13)
+titles = Reference(ws_saldo_riepilogo, min_row=1, max_row=12, min_col=1)
+chart = LineChart()
+chart.title = "Bilancio"
+chart.style = 12
+
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(titles)
+chart.x_axis.title = 'Mesi'
+chart.y_axis.title = 'Euro'
+
+ws_saldo_riepilogo.add_chart(chart, "A21")
+
 
 
 # Salva
