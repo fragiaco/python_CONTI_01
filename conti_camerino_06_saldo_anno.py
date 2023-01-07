@@ -879,6 +879,7 @@ ws_saldo_riepilogo = wb.create_sheet('Saldo_riepilogo')
 
 
 
+
 #queste liste mi servono per il grafico
 
 list_headers= ['mese', 'saldo_iniziale','entrate_mese', 'uscite_mese', 'saldo_finale']
