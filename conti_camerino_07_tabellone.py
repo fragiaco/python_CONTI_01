@@ -778,13 +778,45 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 #Creo un nuovo foglio
 ws_tab_entrate = wb.create_sheet('Tab_Entrate')
 ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
+
 ws_tab_entrate['A1']='Tabellone Entrate'
+ws_tab_entrate.row_dimensions[1].height = 70
+ws_tab_entrate['A1'].font = Font(name='Calibri', size=80, color='a81a1a', bold=True)
+ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
+ws_tab_entrate.merge_cells('A1:N1')
+
+
+
+
+
+ # set the width of the column
+ws_tab_entrate.column_dimensions['A'].width = 18
+ws_tab_entrate.column_dimensions['B'].width = 10
+ws_tab_entrate.column_dimensions['C'].width = 10
+ws_tab_entrate.column_dimensions['D'].width = 10
+ws_tab_entrate.column_dimensions['E'].width = 10
+ws_tab_entrate.column_dimensions['F'].width = 10
+ws_tab_entrate.column_dimensions['G'].width = 10
+ws_tab_entrate.column_dimensions['H'].width = 10
+ws_tab_entrate.column_dimensions['I'].width = 10
+ws_tab_entrate.column_dimensions['L'].width = 10
+ws_tab_entrate.column_dimensions['M'].width = 10
+ws_tab_entrate.column_dimensions['N'].width = 18
+
+i=2
+for x in range(2, 20):
+    ws_tab_entrate.row_dimensions[i].height = 20
+    i +=1
+
+
 
 anno = 2015
 df_conti_camerino_TOT_entrate= df_conti_camerino_modified.loc[
             (df_conti_camerino_modified['Anno'] == anno) &
             (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
 #print(df_conti_camerino_TOT_entrate.head(40))
+
+
 
 pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
                                  (df_conti_camerino_TOT_entrate,
@@ -803,6 +835,22 @@ for r in dataframe_to_rows(pivot_conti_camerino_TOT_entrate, index=True, header=
 
 for cell in ws_tab_entrate['A'] + ws_tab_entrate[2]:
     cell.style = 'Pandas'
+
+ws_tab_entrate['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
+ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+print(df_conti_camerino_TOT_entrate['Euro'].sum())
+print(pivot_conti_camerino_TOT_entrate.shape)
+
+# for row in ws_tab_entrate.rows:
+#         for cell in row:
+#             if (cell[pivot_conti_camerino_TOT_entrate.shape] == round(df_conti_camerino_TOT_entrate.groupby('Entrate_Uscite').sum()),2):
+#                 print('trovato')
+#                 cell.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
+#                 cell.alignment = Alignment(horizontal="right", vertical="center")
+
+
+
 
         # list_df_conti_camerino_mese_uscite[i] = df_conti_camerino_modified.loc[
         #     (df_conti_camerino_modified['Anno'] == anno) &
