@@ -847,8 +847,9 @@ ws_saldo_riepilogo['A1'].font = Font(name='Calibri', size=20, color='a81a1a', bo
 ws_saldo_riepilogo['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
 
-data = Reference(ws_saldo_riepilogo, min_col=3, min_row=1, max_col=5, max_row=13)
-titles = Reference(ws_saldo_riepilogo, min_row=1, max_row=12, min_col=1)
+data = Reference(ws_saldo_riepilogo, min_col=3, min_row=2, max_col=5, max_row=13)
+titles = Reference(ws_saldo_riepilogo, min_row=3, max_row=13, min_col=1)
+
 chart = LineChart()
 chart.title = "Bilancio"
 chart.style = 12
