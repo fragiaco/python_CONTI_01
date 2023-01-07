@@ -265,107 +265,6 @@ list_pivot_mese_uscite= [list_pivot_mese_uscite[0],
                     list_pivot_mese_uscite[11]
                     ]
 
-######################  grafico
-from datetime import date
-import openpyxl
-from openpyxl import Workbook
-from openpyxl.chart import Reference, LineChart
-from openpyxl.chart.axis import DateAxis
-
-wb = Workbook()
-ws = wb.active
-
-
-rows = [
-    ['Mesi', 'Entrate', 'Uscite', 'Saldo'],
-    ['gennaio', list_df_conti_camerino_mese_entrate[0]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[0]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[0]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[0]['Euro']).sum(numeric_only=True))
-     ],
-    ['febbraio',list_df_conti_camerino_mese_entrate[1]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[1]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[1]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[1]['Euro']).sum(numeric_only=True))
-     ],
-    ['marzo',   list_df_conti_camerino_mese_entrate[2]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[2]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[2]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[2]['Euro']).sum(numeric_only=True))
-     ],
-    ['aprile',  list_df_conti_camerino_mese_entrate[3]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[3]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[3]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[3]['Euro']).sum(numeric_only=True))
-     ],
-    ['maggio',  list_df_conti_camerino_mese_entrate[4]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[4]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[4]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[4]['Euro']).sum(numeric_only=True))
-     ],
-    ['giugno',  list_df_conti_camerino_mese_entrate[5]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[5]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[5]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[5]['Euro']).sum(numeric_only=True))
-     ],
-    ['luglio',  list_df_conti_camerino_mese_entrate[6]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[6]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[6]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[6]['Euro']).sum(numeric_only=True))
-     ],
-    ['agosto',  list_df_conti_camerino_mese_entrate[7]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[7]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[7]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[7]['Euro']).sum(numeric_only=True))
-     ],
-    ['settembre',list_df_conti_camerino_mese_entrate[8]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[8]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[8]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[8]['Euro']).sum(numeric_only=True))
-     ],
-    ['ottobre', list_df_conti_camerino_mese_entrate[9]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[9]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[9]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[9]['Euro']).sum(numeric_only=True))
-     ],
-    ['novembre',list_df_conti_camerino_mese_entrate[10]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[10]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[10]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[10]['Euro']).sum(numeric_only=True))
-     ],
-    ['dicembre',list_df_conti_camerino_mese_entrate[11]['Euro'].sum(numeric_only=True),
-                -list_df_conti_camerino_mese_uscite[11]['Euro'].sum(numeric_only=True),
-                ((list_df_conti_camerino_mese_entrate[11]['Euro']).sum(numeric_only=True) -
-                (list_df_conti_camerino_mese_uscite[11]['Euro']).sum(numeric_only=True))
-     ],
-        ]
-
-for row in rows:
-    ws.append(row)
-
-data = Reference(ws, min_col=2, min_row=1, max_col=4, max_row=13)
-titles = Reference(ws, min_row=1, max_row=12, min_col=1)
-
-# Chart with date axis
-chart = LineChart()
-chart.title = "Bilancio"
-chart.style = 12
-
-chart.add_data(data, titles_from_data=True)
-chart.set_categories(titles)
-chart.x_axis.title = 'Mesi'
-chart.y_axis.title = 'Euro'
-
-line_entrate = chart.series[0]
-line_entrate.marker.symbol = 'triangle'
-line_entrate.marker.graphicalProperties.solidFill = "0000FF" # blue fill
-line_entrate.marker.graphicalProperties.line.solidFill = "FF0000" # red outline
-line_entrate.graphicalProperties.line.noFill = True
-
-
-ws.add_chart(chart, "A21")
-
-wb.save("line.xlsx")
 
 
 ##############PRIMA PAGINA
@@ -849,6 +748,220 @@ for sheet in list_ws_mese:
                 else:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
+
+
+######################  grafico
+# from datetime import date
+# import openpyxl
+# from openpyxl import Workbook
+# from openpyxl.chart import Reference, LineChart
+# from openpyxl.chart.axis import DateAxis
+#
+# wb = Workbook()
+# ws = wb.active
+#
+#
+# rows = [
+#     ['Mesi', 'Entrate', 'Uscite', 'Saldo'],
+#     ['gennaio', list_df_conti_camerino_mese_entrate[0]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[0]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[0]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[0]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['febbraio',list_df_conti_camerino_mese_entrate[1]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[1]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[1]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[1]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['marzo',   list_df_conti_camerino_mese_entrate[2]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[2]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[2]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[2]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['aprile',  list_df_conti_camerino_mese_entrate[3]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[3]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[3]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[3]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['maggio',  list_df_conti_camerino_mese_entrate[4]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[4]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[4]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[4]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['giugno',  list_df_conti_camerino_mese_entrate[5]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[5]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[5]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[5]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['luglio',  list_df_conti_camerino_mese_entrate[6]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[6]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[6]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[6]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['agosto',  list_df_conti_camerino_mese_entrate[7]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[7]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[7]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[7]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['settembre',list_df_conti_camerino_mese_entrate[8]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[8]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[8]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[8]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['ottobre', list_df_conti_camerino_mese_entrate[9]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[9]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[9]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[9]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['novembre',list_df_conti_camerino_mese_entrate[10]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[10]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[10]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[10]['Euro']).sum(numeric_only=True))
+#      ],
+#     ['dicembre',list_df_conti_camerino_mese_entrate[11]['Euro'].sum(numeric_only=True),
+#                 -list_df_conti_camerino_mese_uscite[11]['Euro'].sum(numeric_only=True),
+#                 ((list_df_conti_camerino_mese_entrate[11]['Euro']).sum(numeric_only=True) -
+#                 (list_df_conti_camerino_mese_uscite[11]['Euro']).sum(numeric_only=True))
+#      ],
+#         ]
+#
+# for row in rows:
+#     ws.append(row)
+#
+# data = Reference(ws, min_col=2, min_row=1, max_col=4, max_row=13)
+# titles = Reference(ws, min_row=1, max_row=12, min_col=1)
+#
+# # Chart with date axis
+# chart = LineChart()
+# chart.title = "Bilancio"
+# chart.style = 12
+#
+# chart.add_data(data, titles_from_data=True)
+# chart.set_categories(titles)
+# chart.x_axis.title = 'Mesi'
+# chart.y_axis.title = 'Euro'
+#
+# line_entrate = chart.series[0]
+# line_entrate.marker.symbol = 'triangle'
+# line_entrate.marker.graphicalProperties.solidFill = "0000FF" # blue fill
+# line_entrate.marker.graphicalProperties.line.solidFill = "FF0000" # red outline
+# line_entrate.graphicalProperties.line.noFill = True
+#
+#
+# ws.add_chart(chart, "A21")
+#
+# wb.save("line.xlsx")
+##################  da qui
+
+#imposto saldo iniziale
+saldo = 200_000
+#imposto un contatore
+e = 0
+i=0
+#saldo iniziale
+for sheet in list_ws_mese:
+                #coordinate dell'ultima cella della colonna A di ogni foglio
+
+                last_cell_coordiate = 'C' + str(sheet.max_row)
+                print(last_cell_coordiate)
+                #attraverso le coordinate risalgo alla cella di excel
+                cell=sheet[last_cell_coordiate]
+                print(cell.value)
+
+                #cell = sheet.cell(row=1, column=1)
+                # last_cell = sheet[last_cell]
+                #
+                # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #
+                # #print(cell) # stampa ultima cella colonna A
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font \
+                      = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
+
+                sheet.cell  (   row=cell.offset(row=5, column=0).row, column=4,
+                                value=  (
+                                                saldo
+                                        )
+                            )
+
+                # mi calcolo il saldo finale e la assegno alla variabile saldo
+                saldo = (saldo +
+                         list_df_conti_camerino_mese_entrate[e]['Euro'].sum(numeric_only=True) -
+                         list_df_conti_camerino_mese_uscite[e]['Euro'].sum(numeric_only=True)
+                         )
+
+
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15, bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if sheet.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
+                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
+                                                                                        bold=True)
+                else:
+                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
+                                                                                        bold=True)
+
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
+                           value=list_df_conti_camerino_mese_entrate[i]['Euro'].sum(numeric_only=True))
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='000000',
+                                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).alignment = Alignment(horizontal="right")
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
+                           value=list_df_conti_camerino_mese_uscite[i]['Euro'].sum(numeric_only=True))
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).font = Font(size=15, color='a81a1a',
+                                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '-#,##0.00€'
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).alignment = Alignment(horizontal="right")
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4,
+                           value=((list_df_conti_camerino_mese_entrate[i]['Euro']).sum(numeric_only=True) -
+                                  (list_df_conti_camerino_mese_uscite[i]['Euro']).sum(numeric_only=True)
+                                  )
+                           )
+                # sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(size=15,
+                #                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if (sheet.cell(row=cell.offset(row=11, column=0).row, column=4).value) > 0:
+                    sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='000000', size=15,
+                                                                                            bold=True)
+                else:
+                    sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='a81a1a', size=15,
+                                                                                            bold=True)
+                i += 1
+# Saldo finale
+# for row in sheet:
+#         for cell in row:
+#             if (cell.value == ("TOTALE_Uscite")):
+
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4,
+                            value=  (
+                                        saldo
+                                    )
+                            )
+
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
+                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
+                else:
+                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
 
 
