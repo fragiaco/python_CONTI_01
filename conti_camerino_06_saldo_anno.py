@@ -312,7 +312,7 @@ wb['Copertina_fronte']['A10'].font = Font(name='Calibri',
 
 
 
-# Inserisco immagin bilancia
+# Inserisco immagine bilancia
 img = openpyxl.drawing.image.Image('bilancia.png')
 img.anchor = 'B13'
 wb['Copertina_fronte'].add_image(img)
@@ -805,7 +805,7 @@ list_saldo_finale_anno = list_saldo_iniale_finale_anno[1:]
 
 i = 0
 ws_saldo_riepilogo.append(list_headers)
-for mese in range(1,12):
+for mese in range(1,13):
     mese_saldo_grafico = [list_mese[i], list_saldo_iniziale_anno[i], list_entrate_mesi[i], list_uscite_mesi[i], list_saldo_finale_anno[i]]
 
     ws_saldo_riepilogo.append(mese_saldo_grafico)
@@ -815,9 +815,7 @@ for mese in range(1,12):
 list = []
 for row in ws_saldo_riepilogo.rows:
         for cell in row:
-            cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
-            cell.alignment = Alignment(horizontal="right", vertical="center")
-            cell.number_format = '#,## 0.00€'
+
 
             if (cell.value == ("saldo_iniziale") or
                 cell.value == ("entrate_mese") or
@@ -836,19 +834,37 @@ for row in ws_saldo_riepilogo.rows:
                 cell.value == ("novembre") or
                 cell.value == ("dicembre")
                 ):
-                cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
                 cell.alignment = Alignment(horizontal="right", vertical="center")
 
         for cell in row:
             if  cell.value == ("mese"):
                 cell.font = Font(size=1)
 
+for row in ws_saldo_riepilogo.iter_rows(min_row=3, min_col=2, max_row=14, max_col=5):
+        for cell in row:
+            cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+            cell.alignment = Alignment(horizontal="right", vertical="center")
+            cell.number_format = '#,## 0.00€'
+            if (int(cell.value) > 0):
+                cell.font = Font(color='000000')
+            else:
+                cell.font = Font(color='a81a1a')
+
+
+
+
+
 ws_saldo_riepilogo['A1'].font = Font(name='Calibri', size=20, color='a81a1a', bold=True)
 ws_saldo_riepilogo['A1'].alignment = Alignment(horizontal="center", vertical="center")
+ws_saldo_riepilogo['B3'].border\
+                        = Border(bottom=double, top=double, left=double, right=double)
+ws_saldo_riepilogo['E14'].border\
+                        = Border(bottom=double, top=double, left=double, right=double)
 
 
-data = Reference(ws_saldo_riepilogo, min_col=3, min_row=2, max_col=5, max_row=13)
-titles = Reference(ws_saldo_riepilogo, min_row=3, max_row=13, min_col=1)
+data = Reference(ws_saldo_riepilogo, min_col=3, min_row=2, max_col=5, max_row=14)
+titles = Reference(ws_saldo_riepilogo, min_row=3, max_row=14, min_col=1)
 
 chart = LineChart()
 chart.title = "Bilancio"
