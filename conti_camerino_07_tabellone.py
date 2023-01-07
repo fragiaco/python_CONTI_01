@@ -11,6 +11,8 @@ from openpyxl import styles, formatting
 
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
+from openpyxl.worksheet.worksheet import Worksheet
+
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
 df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx', names=col_names)
 
@@ -768,17 +770,22 @@ for sheet in list_ws_mese:
                 else:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
-
+import openpyxl
+from openpyxl.worksheet import page
 ###################### tabellone entrate
 #Creo un nuovo foglio
-ws_saldo_riepilogo = wb.create_sheet('Tab_Entrate')
-ws_saldo_riepilogo['A1']='Tabellone Entrate'
+ws_tab_entrate = wb.create_sheet('Tab_Entrate')
+ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
+ws_tab_entrate['A1']='Tabellone Entrate'
 
 
 ###################### tabellone uscite
 #Creo un nuovo foglio
-ws_saldo_riepilogo = wb.create_sheet('Tab_Uscite')
-ws_saldo_riepilogo['A1']='Tabellone Uscite'
+ws_tab_uscite = wb.create_sheet('Tab_Uscite')
+ws_tab_uscite.ORIENTATION = 'landscape'
+ws_tab_uscite.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
+
+ws_tab_uscite['A1']='Tabellone Uscite'
 
 ######################  grafico
 
