@@ -859,6 +859,7 @@ chart.set_categories(titles)
 chart.x_axis.title = 'Mesi'
 chart.y_axis.title = 'Euro'
 
+
 ws_saldo_riepilogo.add_chart(chart, "A21")
 
 
