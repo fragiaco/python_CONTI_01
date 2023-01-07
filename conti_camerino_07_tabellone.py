@@ -839,15 +839,18 @@ for cell in ws_tab_entrate['A'] + ws_tab_entrate[2]:
 ws_tab_entrate['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
 ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
-print(df_conti_camerino_TOT_entrate['Euro'].sum())
-print(pivot_conti_camerino_TOT_entrate.shape)
+TOTALE = round(df_conti_camerino_TOT_entrate['Euro'].sum(),2)
+print(TOTALE)
 
-# for row in ws_tab_entrate.rows:
-#         for cell in row:
-#             if (cell[pivot_conti_camerino_TOT_entrate.shape] == round(df_conti_camerino_TOT_entrate.groupby('Entrate_Uscite').sum()),2):
-#                 print('trovato')
-#                 cell.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
-#                 cell.alignment = Alignment(horizontal="right", vertical="center")
+
+for row in ws_tab_entrate.rows:
+        for cell in row:
+            if  cell.value == TOTALE:
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+                cell.border = Border(bottom=double, top=double, left=double, right=double)
+                cell.fill = PatternFill('solid', fgColor='d1d22e')
+
 
 
 
