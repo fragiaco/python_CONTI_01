@@ -770,9 +770,11 @@ for sheet in list_ws_mese:
                 else:
                     sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
 
+###################### tabellone entrate
 import openpyxl
 from openpyxl.worksheet import page
-###################### tabellone entrate
+from openpyxl.utils.dataframe import dataframe_to_rows
+
 #Creo un nuovo foglio
 ws_tab_entrate = wb.create_sheet('Tab_Entrate')
 ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
@@ -787,7 +789,8 @@ df_conti_camerino_TOT_entrate= df_conti_camerino_modified.loc[
 pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
                                  (df_conti_camerino_TOT_entrate,
                                   values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  index=['Categoria'],
+                                  columns='Mese',
                                   aggfunc='sum',
                                   margins=True,
                                   margins_name='TOTALE_Entrate',
@@ -795,7 +798,11 @@ pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
 
 print(pivot_conti_camerino_TOT_entrate.head())
 
+for r in dataframe_to_rows(pivot_conti_camerino_TOT_entrate, index=True, header=True):
+    ws_tab_entrate.append(r)
 
+for cell in ws_tab_entrate['A'] + ws_tab_entrate[2]:
+    cell.style = 'Pandas'
 
         # list_df_conti_camerino_mese_uscite[i] = df_conti_camerino_modified.loc[
         #     (df_conti_camerino_modified['Anno'] == anno) &
@@ -821,14 +828,20 @@ df_conti_camerino_TOT_uscite= df_conti_camerino_modified.loc[
 pivot_conti_camerino_TOT_uscite= np.round(pd.pivot_table
                                  (df_conti_camerino_TOT_uscite,
                                   values='Euro',
-                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  #index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  index=['Categoria'],
+                                  columns='Mese',
                                   aggfunc='sum',
                                   margins=True,
                                   margins_name='TOTALE_Uscite',
                                   fill_value=0), 2)
 
 print(pivot_conti_camerino_TOT_uscite.head())
+for r in dataframe_to_rows(pivot_conti_camerino_TOT_uscite, index=True, header=True):
+    ws_tab_uscite.append(r)
 
+for cell in ws_tab_uscite['A'] + ws_tab_uscite[2]:
+    cell.style = 'Pandas'
 
 ######################  grafico
 
