@@ -847,9 +847,10 @@ for row in ws_tab_entrate.rows:
         for cell in row:
             if  cell.value == TOTALE:
                 cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
-                cell.alignment = Alignment(horizontal="center", vertical="center")
+                cell.alignment = Alignment(horizontal="right", vertical="center")
                 cell.border = Border(bottom=double, top=double, left=double, right=double)
                 cell.fill = PatternFill('solid', fgColor='d1d22e')
+                cell.number_format = '#,## 0.00€'
 
 
 
