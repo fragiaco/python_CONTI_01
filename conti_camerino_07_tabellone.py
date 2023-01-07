@@ -778,6 +778,33 @@ ws_tab_entrate = wb.create_sheet('Tab_Entrate')
 ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
 ws_tab_entrate['A1']='Tabellone Entrate'
 
+anno = 2015
+df_conti_camerino_TOT_entrate= df_conti_camerino_modified.loc[
+            (df_conti_camerino_modified['Anno'] == anno) &
+            (df_conti_camerino_modified['Entrate_Uscite'] == 'Entrate')]
+#print(df_conti_camerino_TOT_entrate.head(40))
+
+pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
+                                 (df_conti_camerino_TOT_entrate,
+                                  values='Euro',
+                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  aggfunc='sum',
+                                  margins=True,
+                                  margins_name='TOTALE_Entrate',
+                                  fill_value=0), 2)
+
+print(pivot_conti_camerino_TOT_entrate.head())
+
+
+
+        # list_df_conti_camerino_mese_uscite[i] = df_conti_camerino_modified.loc[
+        #     (df_conti_camerino_modified['Anno'] == anno) &
+        #     (df_conti_camerino_modified['Mese'] == list_mese[i]) &
+        #     (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+        # #print(list_df_conti_camerino_mese_uscite[i].head())
+        #
+        # i += 1
+
 
 ###################### tabellone uscite
 #Creo un nuovo foglio
@@ -786,6 +813,22 @@ ws_tab_uscite.ORIENTATION = 'landscape'
 ws_tab_uscite.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
 
 ws_tab_uscite['A1']='Tabellone Uscite'
+
+df_conti_camerino_TOT_uscite= df_conti_camerino_modified.loc[
+            (df_conti_camerino_modified['Anno'] == anno) &
+            (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+#print(df_conti_camerino_TOT_uscite.head(40))
+pivot_conti_camerino_TOT_uscite= np.round(pd.pivot_table
+                                 (df_conti_camerino_TOT_uscite,
+                                  values='Euro',
+                                  index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  aggfunc='sum',
+                                  margins=True,
+                                  margins_name='TOTALE_Uscite',
+                                  fill_value=0), 2)
+
+print(pivot_conti_camerino_TOT_uscite.head())
+
 
 ######################  grafico
 
