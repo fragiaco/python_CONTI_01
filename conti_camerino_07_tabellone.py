@@ -777,7 +777,8 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 
 #Creo un nuovo foglio
 ws_tab_entrate = wb.create_sheet('Tab_Entrate')
-ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
+ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
+#ws_tab_entrate.print_area = 'A1:Z1'
 
 ws_tab_entrate['A1']='Tabellone Entrate'
 ws_tab_entrate.row_dimensions[1].height = 70
@@ -790,18 +791,18 @@ ws_tab_entrate.merge_cells('A1:N1')
 
 
  # set the width of the column
-ws_tab_entrate.column_dimensions['A'].width = 18
-ws_tab_entrate.column_dimensions['B'].width = 10
-ws_tab_entrate.column_dimensions['C'].width = 10
-ws_tab_entrate.column_dimensions['D'].width = 10
-ws_tab_entrate.column_dimensions['E'].width = 10
-ws_tab_entrate.column_dimensions['F'].width = 10
-ws_tab_entrate.column_dimensions['G'].width = 10
-ws_tab_entrate.column_dimensions['H'].width = 10
-ws_tab_entrate.column_dimensions['I'].width = 10
-ws_tab_entrate.column_dimensions['L'].width = 10
-ws_tab_entrate.column_dimensions['M'].width = 10
-ws_tab_entrate.column_dimensions['N'].width = 18
+ws_tab_entrate.column_dimensions['A'].width = 14
+ws_tab_entrate.column_dimensions['B'].width = 8
+ws_tab_entrate.column_dimensions['C'].width = 8
+ws_tab_entrate.column_dimensions['D'].width = 8
+ws_tab_entrate.column_dimensions['E'].width = 8
+ws_tab_entrate.column_dimensions['F'].width = 8
+ws_tab_entrate.column_dimensions['G'].width = 8
+ws_tab_entrate.column_dimensions['H'].width = 8
+ws_tab_entrate.column_dimensions['I'].width = 8
+ws_tab_entrate.column_dimensions['L'].width = 9
+ws_tab_entrate.column_dimensions['M'].width = 8
+ws_tab_entrate.column_dimensions['N'].width = 14
 
 i=2
 for x in range(2, 20):
