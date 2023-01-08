@@ -1050,7 +1050,7 @@ ws_saldo_riepilogo.add_chart(chart, "A21")
 #######################PAGINA CONCLUSIVA
 #format
 from openpyxl.styles import NamedStyle, Font, Border, Side
-
+#HIGHLIGHT
 highlight = NamedStyle(name="highlight")
 highlight.font = Font(name='Calibri', size=15, color='000000', bold=True)
 double = Side(border_style="double", color="4617F1")
@@ -1058,12 +1058,14 @@ double = Side(border_style="double", color="4617F1")
 highlight.fill = PatternFill('solid', fgColor='d1d22e')
 highlight.alignment = Alignment(horizontal="right", vertical="center")
 highlight.number_format = '#,## 0.00 €'
-#cell.number_format = '#,## 0.00 €'
-
-#Once a named style has been created, it can be registered with the workbook:
 wb.add_named_style(highlight)
-# Once registered, assign the style using just the name:
-# ws['D5'].style = 'highlight'
+
+############BLACK
+black = NamedStyle(name="black")
+black.font = Font(name='Calibri', size=15, color='000000', bold=True)
+black.alignment = Alignment(horizontal="right", vertical="center")
+wb.add_named_style(black)
+
 
 
 import openpyxl
@@ -1121,6 +1123,22 @@ ws_fine['A19'].alignment = Alignment(horizontal="right", vertical="center")
 ws_fine['A22'].font = Font(name='Calibri', size=15, bold=True)
 ws_fine['A22'].alignment = Alignment(horizontal="right", vertical="center")
 
+
+ws_fine['A32']='Data'
+ws_fine['A32'].style = 'black'
+ws_fine.merge_cells('A32:B32')
+ws_fine['D29']='Guardiano'
+ws_fine['D29'].style = 'black'
+ws_fine.merge_cells('D29:I29')
+ws_fine['d35']='Vicario'
+ws_fine['D35'].style = 'black'
+ws_fine.merge_cells('D35:I35')
+ws_fine['D41']='Economo'
+ws_fine['D41'].style = 'black'
+ws_fine.merge_cells('D41:I41')
+ws_fine['A38']='Timbro'
+ws_fine['A38'].style = 'black'
+ws_fine.merge_cells('A38:B38')
 
 
 
