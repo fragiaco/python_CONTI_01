@@ -829,7 +829,7 @@ pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
                                   margins_name='TOTALE_Entrate',
                                   fill_value=0), 2)
 
-print(pivot_conti_camerino_TOT_entrate.head())
+#print(pivot_conti_camerino_TOT_entrate.head())
 
 for r in dataframe_to_rows(pivot_conti_camerino_TOT_entrate, index=True, header=True):
     ws_tab_entrate.append(r)
@@ -840,13 +840,13 @@ for cell in ws_tab_entrate['A'] + ws_tab_entrate[2]:
 ws_tab_entrate['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
 ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
 
-TOTALE = round(df_conti_camerino_TOT_entrate['Euro'].sum(),2)
-print(TOTALE)
+TOTALE_ENTRATE = round(df_conti_camerino_TOT_entrate['Euro'].sum(),2)
+
 
 
 for row in ws_tab_entrate.rows:
         for cell in row:
-            if  cell.value == TOTALE:
+            if  cell.value == TOTALE_ENTRATE:
                 cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
                 cell.alignment = Alignment(horizontal="right", vertical="center")
                 cell.border = Border(bottom=double, top=double, left=double, right=double)
@@ -869,14 +869,18 @@ for row in ws_tab_entrate.rows:
 ###################### tabellone uscite
 #Creo un nuovo foglio
 ws_tab_uscite = wb.create_sheet('Tab_Uscite')
-ws_tab_uscite.ORIENTATION = 'landscape'
-ws_tab_uscite.set_printer_settings(Worksheet.PAPERSIZE_LEGAL, Worksheet.ORIENTATION_LANDSCAPE)
+
+ws_tab_uscite.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
 
 ws_tab_uscite['A1']='Tabellone Uscite'
+ws_tab_uscite.merge_cells('A1:N1')
+ws_tab_uscite.row_dimensions[1].height = 45
+
 
 df_conti_camerino_TOT_uscite= df_conti_camerino_modified.loc[
             (df_conti_camerino_modified['Anno'] == anno) &
             (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+
 #print(df_conti_camerino_TOT_uscite.head(40))
 pivot_conti_camerino_TOT_uscite= np.round(pd.pivot_table
                                  (df_conti_camerino_TOT_uscite,
@@ -895,6 +899,43 @@ for r in dataframe_to_rows(pivot_conti_camerino_TOT_uscite, index=True, header=T
 
 for cell in ws_tab_uscite['A'] + ws_tab_uscite[2]:
     cell.style = 'Pandas'
+
+# set the width of the column
+ws_tab_uscite.column_dimensions['A'].width = 16
+ws_tab_uscite.column_dimensions['B'].width = 7
+ws_tab_uscite.column_dimensions['C'].width = 7
+ws_tab_uscite.column_dimensions['D'].width = 7
+ws_tab_uscite.column_dimensions['E'].width = 7
+ws_tab_uscite.column_dimensions['F'].width = 7
+ws_tab_uscite.column_dimensions['G'].width = 7
+ws_tab_uscite.column_dimensions['H'].width = 7
+ws_tab_uscite.column_dimensions['I'].width = 7
+ws_tab_uscite.column_dimensions['L'].width = 9
+ws_tab_uscite.column_dimensions['M'].width = 7
+ws_tab_uscite.column_dimensions['N'].width = 16
+
+i=2
+for x in range(2, 20):
+    ws_tab_uscite.row_dimensions[i].height = 17
+    i +=1
+
+
+ws_tab_uscite['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
+ws_tab_uscite['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+TOTALE_USCITE = round(df_conti_camerino_TOT_uscite['Euro'].sum(),2)
+
+
+
+
+for row in ws_tab_uscite.rows:
+        for cell in row:
+            if  cell.value == TOTALE_USCITE:
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+                cell.border = Border(bottom=double, top=double, left=double, right=double)
+                cell.fill = PatternFill('solid', fgColor='d1d22e')
+                cell.number_format = '#,## 0.00€'
 
 ######################  grafico
 
