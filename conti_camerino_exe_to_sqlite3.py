@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-conn = sqlite3.connect('database_conti_esperimento')
+conn = sqlite3.connect('database_conti')
 
 cur = conn.cursor()
 print(conn)
@@ -13,7 +13,7 @@ df_conti_camerino_modified = pd.read_excel('Camerino_2012_modified.xlsx')
 
 
 
-df_conti_camerino_modified.to_sql('TABLE_Conti',conn,if_exists='replace',index=False)
+df_conti_camerino_modified.to_sql('TABLE_Conti',conn,if_exists='replace',index=True)
 
 
 r_df = pd.read_sql("select * from TABLE_Conti",conn)
