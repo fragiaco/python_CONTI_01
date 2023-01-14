@@ -2,7 +2,7 @@ from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
 import numpy as np
-import xlsxwriter
+
 
 from Origine         import *
 import sqlite3
@@ -22,6 +22,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.styles import Font
 from xlsxwriter.utility import xl_rowcol_to_cell
 
+# CONNESSIONE AL DATABASE
 conn = sqlite3.connect('database_conti')
 
 cur = conn.cursor()
@@ -39,12 +40,11 @@ except:
 
 print(conn)
 print('Sei connesso al database_conti')
-
-
 conn.commit()
 
-root = Tk()
 
+#TKINTER
+root = Tk()
 
 # root.title("Programma gestione conti Convento Offida")
 # root.geometry('1680x950+0+0')
@@ -637,48 +637,18 @@ def sqlite3_to_excel():
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn) # create dataframe
-    #print(df.head())
+
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
-
-# XlsxWriter can only create new files.
-# It cannot read or modify existing files
-# The next step is to create a new workbook object
-# using the Workbook() constructor.
-# Workbook() takes one, non-optional, argument
-# which is the filename that we want to create:
-
-    # workbook = xlsxwriter.Workbook('database_conti_form01.xlsx')
-    # worksheet = workbook.add_worksheet('Data')
-
-    # Create a Pandas dataframe from the data
-    #df = pd.read_sql(query, conn)
-
-    # Convert the dataframe to an XlsxWriter Excel object.
-    # writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
-    #df.to_excel('database_conti_form01.xlsx')  # Change the path
-
-    # #
-    # workbook = writer.book
-    # worksheet = writer.sheets['report']
-    # writer.close()
-
-    # print(df.columns)
-
-    # for c in df.columns:
-    #     print(c)
-
-    # # put them in a list
-    # c = list(df.columns)
-    # print(c)
-
-    # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
-    # cells_haeder=ws
 
     wb = Workbook()
     wb = load_workbook(filename="database_conti.xlsx")
     ws = wb.active
-    ws.row_dimensions[1].height = 40
 
+    ws.row_dimensions[1].height = 40
+    # openpyxl freeze first row
+    ws.freeze_panes = 'A2'
+    # openpyxl filter columns
+    ws.auto_filter.ref = ws.dimensions
 
 
     from openpyxl.styles import NamedStyle, Font, Border, Side, PatternFill
@@ -705,10 +675,7 @@ def sqlite3_to_excel():
     ws.column_dimensions['F'].width = 21
     ws.column_dimensions['G'].width = 10
 
-    # openpyxl freeze first row
-    ws.freeze_panes = 'A2'
-    # openpyxl filter columns
-    ws.auto_filter.ref = ws.dimensions
+
 
     # Colonna G: Formattazione
     for row in ws[2:ws.max_row]:  # skip the header
@@ -1065,6 +1032,7 @@ B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_d
 B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
+B_report = Button(Frame1in, text='report', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
 
 #####
 
