@@ -13,36 +13,18 @@ from openpyxl import styles, formatting
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 from openpyxl.worksheet.worksheet import Worksheet
 
-col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
-df_conti_camerino_modified = pd.read_excel('conti_camerino_da_importare.xlsx', names=col_names)
+col_names = ['Id', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
+df_conti_camerino_modified = pd.read_excel('database_conti.xlsx', names=col_names)
 
-# Creo la colonna ['Entrate_Uscite'] e scrivo in automatico i volori
-df_conti_camerino_modified['Entrate_Uscite'] = df_conti_camerino_modified['Categoria'].apply \
-    (lambda x: 'Entrate' if x == 'Vendite varie' or
-                            x == 'Salute' or
-                            x == 'Curia' or
-                            x == 'Collette-Chiesa' or
-                            x == 'Congrua' or
-                            x == 'Interessi' or
-                            x == 'Messe celebrate' or
-                            x == 'Offerte' or
-                            x == 'Pensioni' or
-                            x == 'Predicazione' or
-                            x == 'Servizi religiosi' or
-                            x == 'Stipendi' or
-                            x == 'Sussidi' or
-                            x == 'Rimbosi' or
-                            x == 'Vendite varie' or
-                            x == 'Eccedenza Cassa'
-    else 'Uscite')
 
-# Assegno alle colonne l'ordine desiderato
-df_conti_camerino_modified = df_conti_camerino_modified[['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']]
-df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].astype("category")
-df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_categories(
-    ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre",
-     "novembre", "dicembre"])
 
+# # Assegno alle colonne l'ordine desiderato
+# df_conti_camerino_modified = df_conti_camerino_modified[['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']]
+# df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].astype("category")
+# df_conti_camerino_modified["Mese"] = df_conti_camerino_modified["Mese"].cat.set_categories(
+#     ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre",
+#      "novembre", "dicembre"])
+#
 
 
 # sheets dei 12 mesi
