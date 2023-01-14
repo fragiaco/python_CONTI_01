@@ -4,6 +4,7 @@ import sqlite3
 # Leggo Camerino_2012.xlsx
 # Lo trasformo in un dataframe
 
+
 col_names = ['Anno', 'Mese', 'Categoria', 'Voce', 'Euro']
 df_Camerino_2012 = pd.read_excel('Camerino_2012.xlsx', names=col_names)
 
