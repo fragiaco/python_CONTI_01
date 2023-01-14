@@ -9,6 +9,16 @@ import sqlite3
 import pandas as pd
 import os, sys, subprocess
 from openpyxl import *
+from openpyxl import Workbook
+from openpyxl import load_workbook
+from openpyxl.styles import Font, Alignment
+from openpyxl.styles import Side, Border
+
+from openpyxl import styles, formatting
+
+
+# Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
+from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.styles import Font
 from xlsxwriter.utility import xl_rowcol_to_cell
 
@@ -615,6 +625,7 @@ def query_database():
     conn.close()
 
 #######################################
+
 def sqlite3_to_excel():
 
     # Create a database or connect to one that exists
@@ -626,7 +637,7 @@ def sqlite3_to_excel():
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn) # create dataframe
-    print(df.head())
+    #print(df.head())
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
 # XlsxWriter can only create new files.
@@ -663,15 +674,57 @@ def sqlite3_to_excel():
     # data_cols=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro']
     # cells_haeder=ws
 
+    wb = Workbook()
+    wb = load_workbook(filename="database_conti.xlsx")
+    ws = wb.active
+    ws.row_dimensions[1].height = 40
 
 
+
+    from openpyxl.styles import NamedStyle, Font, Border, Side, PatternFill
+    ############RED
+    red = NamedStyle(name="red")
+    red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
+    red.alignment = Alignment(horizontal="center", vertical="center")
+    red.fill = PatternFill('solid', fgColor='d1d22e')
+    wb.add_named_style(red)
+
+    ws['A1'].style = 'red'
+    ws['B1'].style = 'red'
+    ws['C1'].style = 'red'
+    ws['D1'].style = 'red'
+    ws['E1'].style = 'red'
+    ws['F1'].style = 'red'
+    ws['G1'].style = 'red'
+
+    ws.column_dimensions['A'].width = 6
+    ws.column_dimensions['B'].width = 8
+    ws.column_dimensions['C'].width = 10
+    ws.column_dimensions['D'].width = 11
+    ws.column_dimensions['E'].width = 18
+    ws.column_dimensions['F'].width = 21
+    ws.column_dimensions['G'].width = 10
+
+    # openpyxl freeze first row
+    ws.freeze_panes = 'A2'
+    # openpyxl filter columns
+    ws.auto_filter.ref = ws.dimensions
+
+    # Colonna G: Formattazione
+    for row in ws[2:ws.max_row]:  # skip the header
+        cell = row[6]  # il settimo valore della tuple
+        cell.alignment = Alignment(horizontal="right", vertical="center")
+        cell.number_format = '#,##0.00 €'
+
+    #ws = wb.create_sheet('Dati')
+    wb.save("database_conti_styled.xlsx")
 
 
     if sys.platform == "win32":
-        os.startfile('database_conti.xlsx')
+        os.startfile('database_conti_styled.xlsx')
     else:
         opener = "open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'database_conti.xlsx'])
+        subprocess.call([opener, 'database_conti_styled.xlsx'])
 
     # Commit changes
     conn.commit()
