@@ -4,6 +4,8 @@ from tkinter         import messagebox
 import numpy as np
 import xlsxwriter
 
+import conti_camerino_09_class
+from conti_camerino_09_class import *
 from Origine         import *
 import sqlite3
 import pandas as pd
@@ -1012,6 +1014,8 @@ B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_d
 B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
+
+B_excel_report = Button(Frame1in, text='Report', width=10, command=lambda:[conti_camerino_09_class, os.startfile('conti_camerino_styled.xlsx')]).grid(row=0, column=3, padx=20, pady=15)
 
 #####
 
