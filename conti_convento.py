@@ -627,7 +627,7 @@ def sqlite3_to_excel():
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn) # create dataframe
     print(df.head())
-    #df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
+    df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
 # XlsxWriter can only create new files.
 # It cannot read or modify existing files
@@ -640,7 +640,7 @@ def sqlite3_to_excel():
     # worksheet = workbook.add_worksheet('Data')
 
     # Create a Pandas dataframe from the data
-    df = pd.read_sql(query, conn)
+    #df = pd.read_sql(query, conn)
 
     # Convert the dataframe to an XlsxWriter Excel object.
     # writer = pd.ExcelWriter('database_conti_formattato.xlsx', engine='xlsxwriter')
@@ -667,11 +667,11 @@ def sqlite3_to_excel():
 
 
 
-    # if sys.platform == "win32":
-    #     os.startfile('database_conti.xlsx')
-    # else:
-    #     opener = "open" if sys.platform == "darwin" else "xdg-open"
-    #     subprocess.call([opener, 'database_conti.xlsx'])
+    if sys.platform == "win32":
+        os.startfile('database_conti.xlsx')
+    else:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, 'database_conti.xlsx'])
 
     # Commit changes
     conn.commit()
