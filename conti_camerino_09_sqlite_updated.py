@@ -274,5 +274,68 @@ wb['Copertina_fronte']['A10'].font = Font(name='Calibri',
 img = openpyxl.drawing.image.Image('bilancia.png')
 img.anchor = 'B13'
 wb['Copertina_fronte'].add_image(img)
-wb.save('conti_styled.xlsx')
 
+wb.save('conti_styled.xlsx')
+##################################
+
+# Con ExcelWriter di pandas METTO INSIEME il pivot delle entrate e il pivot delle uscite
+
+
+# sheets dei 12 mesi
+list_ws_mese = ['ws_gennaio',
+                'ws_febbraio',
+                'ws_marzo',
+                'ws_aprile',
+                'ws_maggio',
+                'ws_giugno',
+                'ws_luglio',
+                'ws_agosto',
+                'ws_settembre',
+                'ws_ottobre',
+                'ws_novembre',
+                'ws_dicembre'
+                ]
+
+c = 0 # contatore
+
+for x in range (12):
+    with pd.ExcelWriter('conti_styled.xlsx',
+                        mode="a",
+                        engine="openpyxl",
+                        if_sheet_exists="overlay",
+                        ) as writer:
+        list_pivot_mese_entrate[c].to_excel(writer, sheet_name=list_mese[c], startrow=5)
+        list_pivot_mese_uscite[c].to_excel(writer, sheet_name=list_mese[c], startrow=(len(list_pivot_mese_entrate[c] ) + 10))
+
+    # leggo il file "conti_camerino_styled.xlsx"
+    wb = load_workbook(filename="conti_styled.xlsx")
+    #creo i 12 sheet
+    list_ws_mese[c]= wb[list_mese[c]]
+
+    c += 1
+
+
+
+#sheets dei 12 mesi
+list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
+                wb[list_mese[1]],  #ws_febbraio,
+                wb[list_mese[2]],  #ws_marzo,
+                wb[list_mese[3]],  #ws_aprile,
+                wb[list_mese[4]],  #ws_maggio,
+                wb[list_mese[5]],  #ws_giugno,
+                wb[list_mese[6]],  #ws_luglio,
+                wb[list_mese[7]],  #ws_agosto,
+                wb[list_mese[8]],  #ws_settembre,
+                wb[list_mese[9]],  #ws_ottobre,
+                wb[list_mese[10]],  #ws_novembre,
+                wb[list_mese[11]],  #ws_dicembre
+                ]
+
+
+
+
+
+
+
+
+wb.save('conti_styled.xlsx')
