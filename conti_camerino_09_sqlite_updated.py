@@ -8,6 +8,7 @@ from openpyxl import load_workbook
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
+from openpyxl.styles import PatternFill
 
 
 
@@ -331,7 +332,156 @@ list_ws_mese = [wb[list_mese[0]],  #ws_gennaio,
                 wb[list_mese[11]],  #ws_dicembre
                 ]
 
+################# APPLICO STILE ########################
 
+
+
+# Colonna D :Formattazione degli euro in valuta euro
+for sheet in list_ws_mese:
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        #print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
+        cell = row[3]  # il quarto valore della tuple
+        print (cell)# <Cell 'multiple'.D7>
+        cell.number_format = '#,##0.00 €'
+        cell.alignment = Alignment(horizontal="right")
+        cell.font = Font(bold=True)
+
+# Aggiungo la scritta 'Totale =' alla tabella pivot davanti ai subtotali
+for sheet in list_ws_mese:
+    for row in sheet[7:sheet.max_row]:
+        for cell in sheet['B']: #per ogni casella della colonna B
+            if cell.value is not None:
+                # ossia se la casella nella colonna B non è vuota
+                # Assegnale uno stile
+                cell.font = Font(name='Calibri',
+                                size=15,
+                                bold=True,
+                                italic=True,
+                                vertAlign='none',
+                                underline='single',
+                                strike=False,
+                                color='a81a1a')
+                # Assegna uno stile anche alla cell accanto corrispondente
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=3,
+                                    value=f"Totale {cell.value} =")
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).font\
+                                    = Font(size=15, color='a81a1a', bold=True)
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).number_format\
+                                    = '#,##0.00 €'
+                sheet.cell(row=cell.offset(row=0, column=0).row, column=4).alignment\
+                                    = Alignment(horizontal="left")
+
+
+
+# Larghezza fissa colonne
+i = 0  # contatore
+# set the height of the first row in each sheet
+for sheet in list_ws_mese:
+    sheet.row_dimensions[1].height = 70
+
+    # set the width of the column
+    sheet.column_dimensions['A'].width = 15
+    sheet.column_dimensions['B'].width = 20
+    sheet.column_dimensions['C'].width = 30
+    sheet.column_dimensions['D'].width = 15
+
+    # merge cells
+    sheet.merge_cells('A1:D1')
+
+    # scrivo nella cella 'A1'
+    sheet['A1'].value = list_mese[i]
+    i += 1
+
+    # Formattazione cella
+    sheet['A1'].font = Font(name='Calibri',
+                            size=25,
+                            bold=True,
+                            italic=True,
+                            vertAlign='none',
+                            underline='single',
+                            strike=False,
+                            color='a81a1a')
+
+    sheet['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+
+
+    # Colonna C: Allineamento
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        cell = row[2]  # il terzo valore della tuple
+        cell.alignment = Alignment(horizontal="right", vertical="center")
+
+    # Colonna D: Allineamento
+    for row in sheet[7:sheet.max_row]:  # skip the header
+        cell = row[1]  # il secondo valore della tuple
+        cell.alignment = Alignment(horizontal="center", vertical="center")
+
+
+
+    # Formattazione headers
+    list = []
+
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("Categoria") or
+                cell.value == ("Entrate") or
+                cell.value == ("Euro") or
+                cell.value == ("Uscite") or
+                cell.value == ("Voce")):
+                list.append(cell)
+    for cell in list:
+        cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+        cell.alignment = Alignment(horizontal="center", vertical="center")
+
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ("Totale Categoria =")):
+
+                    cell.font = Font(name='Calibri', size=15, color='a81a1a', bold=True)
+                    cell.alignment = Alignment(horizontal="right", vertical="center")
+
+
+    # Formattazione ' Euro accanto a 'Totale categoria='
+
+    double = Side(border_style="double", color="4617F1")
+    cont = 0
+    for row in sheet.rows:
+        for cell in row:
+            if (cell.value == ('Totale Categoria =')):
+                    #
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).font \
+                            = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).number_format \
+                            = '#,##0.00 €'
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).alignment \
+                            = Alignment(horizontal="left")
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).fill\
+                        = PatternFill('solid', fgColor='d1d22e')
+                    sheet.cell(row=cell.offset(row=0, column=1).row, column=4).border\
+                        = Border(bottom=double, top=double, left=double, right=double)
+
+                    sheet.cell(row=cell.offset(row=1, column=1).row, column=4).font \
+                        = Font(size=15, color='a81a1a', bold=True)
+                    sheet.cell(row=cell.offset(row=1, column=1).row, column=4).number_format \
+                        = '#,##0.00 €'
+                    sheet.cell(row=cell.offset(row=1, column=1).row, column=4).alignment \
+                        = Alignment(horizontal="left")
+                    sheet.cell(row=cell.offset(row=1, column=1).row, column=4).fill \
+                        = PatternFill('solid', fgColor='d1d22e')
+                    sheet.cell(row=cell.offset(row=1, column=1).row, column=4).border \
+                        = Border(bottom=double, top=double, left=double, right=double)
+
+    # Rendi 'invisibile il testo"Entrate_Uscite"
+    list = []
+
+    # Formattazione "Entrate_Uscite", piccolo per non essere visto
+
+    for row in sheet.rows:
+        for cell in row:
+            if cell.value == ("Entrate_Uscite"):
+                list.append(cell)
+    for cell in list:
+        cell.font = Font(size=1)
 
 
 
