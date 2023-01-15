@@ -14,6 +14,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
 import conti_camerino_09_sqlite_updated
+from conti_camerino_09_sqlite_updated import *
 from openpyxl import styles, formatting
 
 
