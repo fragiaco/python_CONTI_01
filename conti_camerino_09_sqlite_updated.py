@@ -9,8 +9,8 @@ from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
 from openpyxl.styles import PatternFill
-
-
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.worksheet.worksheet import Worksheet
 
 
 
@@ -483,8 +483,505 @@ for sheet in list_ws_mese:
     for cell in list:
         cell.font = Font(size=1)
 
+#imposto saldo iniziale
+saldo = 200_000
+#imposto un contatore
+e = 0
+i=0
+#memorizzo in una lista tutti i saldi dall'inizio alla fine dell'anno
+#le entrete
+#le uscite
+list_saldo_iniale_finale_anno=[saldo]
+list_entrate_mesi = []
+list_uscite_mesi = []
+#saldo iniziale
+for sheet in list_ws_mese:
+                #coordinate dell'ultima cella della colonna A di ogni foglio
+
+                last_cell_coordiate = 'C' + str(sheet.max_row)
+                print(last_cell_coordiate)
+                #attraverso le coordinate risalgo alla cella di excel
+                cell=sheet[last_cell_coordiate]
+                print(cell.value)
+
+                #cell = sheet.cell(row=1, column=1)
+                # last_cell = sheet[last_cell]
+                #
+                # print(cell.coordinate, cell.row, cell.column) # A184 184 1 per tutti e 12 i fogli
+                #
+                # #print(cell) # stampa ultima cella colonna A
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2, value='SALDO del mese precedente').font \
+                      = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2, value='ENTRATE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2, value='USCITE del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2, value='DIS/AVANZO del mese').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=2).alignment = Alignment(horizontal="left")
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2, value='SALDO del mese corrente').font \
+                    = Font(size=15, color='000000', bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
+
+                sheet.cell  (   row=cell.offset(row=5, column=0).row, column=4,
+                                value=  (
+                                                saldo
+                                        )
+                            )
+
+                # mi calcolo il saldo finale e la assegno alla variabile saldo
+                saldo = (saldo +
+                         list_df_conti_mese_entrate[e]['Euro'].sum(numeric_only=True) -
+                         list_df_conti_mese_uscite[e]['Euro'].sum(numeric_only=True)
+                         )
 
 
+
+                #print(list_saldo_iniale_finale_anno)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(size=15, bold=True)
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=5, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if sheet.cell(row=cell.offset(row=5, column=0).row, column=4).value > 0:
+                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='000000', size=15,
+                                                                                        bold=True)
+                else:
+                        sheet.cell(row=cell.offset(row=5, column=0).row, column=4).font = Font(color='a81a1a', size=15,
+                                                                                        bold=True)
+
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4,
+                           value=list_df_conti_mese_entrate[i]['Euro'].sum(numeric_only=True))
+
+
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).font = Font(size=15, color='000000',
+                                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=7, column=0).row, column=4).alignment = Alignment(horizontal="right")
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4,
+                           value=list_df_conti_mese_uscite[i]['Euro'].sum(numeric_only=True))
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).font = Font(size=15, color='a81a1a',
+                                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).number_format = '-#,##0.00€'
+                sheet.cell(row=cell.offset(row=9, column=0).row, column=4).alignment = Alignment(horizontal="right")
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4,
+                           value=((list_df_conti_mese_entrate[i]['Euro']).sum(numeric_only=True) -
+                                  (list_df_conti_mese_uscite[i]['Euro']).sum(numeric_only=True)
+                                  )
+                           )
+                # sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(size=15,
+                #                                                                       bold=True)
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).number_format = '#,##0.00€'
+                sheet.cell(row=cell.offset(row=11, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if (sheet.cell(row=cell.offset(row=11, column=0).row, column=4).value) > 0:
+                    sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='000000', size=15,
+                                                                                            bold=True)
+                else:
+                    sheet.cell(row=cell.offset(row=11, column=0).row, column=4).font = Font(color='a81a1a', size=15,
+
+                                                                                            bold=True)
+                #queste liste mi servono per il grafico
+                list_saldo_iniale_finale_anno.append(saldo)
+                list_entrate_mesi.append(list_df_conti_mese_entrate[i]['Euro'].sum(numeric_only=True))
+                list_uscite_mesi.append(list_df_conti_mese_uscite[i]['Euro'].sum(numeric_only=True))
+
+                # print(list_saldo_iniale_finale_anno)
+                # print(list_entrate_mesi)
+                # print(list_uscite_mesi)
+
+                i += 1
+# Saldo finale
+# for row in sheet:
+#         for cell in row:
+#             if (cell.value == ("TOTALE_Uscite")):
+
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4,
+                            value=  (
+                                        saldo
+                                    )
+                            )
+
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,## 0.00€'
+                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
+
+                if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
+                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='000000', size=15, bold=True)
+                else:
+                    sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(color='a81a1a', size=15, bold=True)
+
+###################### tabellone entrate
+import openpyxl
+from openpyxl.worksheet import page
+
+
+#Creo un nuovo foglio
+ws_tab_entrate = wb.create_sheet('Tab_Entrate')
+ws_tab_entrate.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
+#ws_tab_entrate.print_area = 'A1:Z1'
+
+ws_tab_entrate['A1']='Tabellone Entrate'
+ws_tab_entrate.row_dimensions[1].height = 70
+ws_tab_entrate['A1'].font = Font(name='Calibri', size=80, color='a81a1a', bold=True)
+ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
+ws_tab_entrate.merge_cells('A1:N1')
+
+
+
+
+
+ # set the width of the column
+ws_tab_entrate.column_dimensions['A'].width = 14
+ws_tab_entrate.column_dimensions['B'].width = 8
+ws_tab_entrate.column_dimensions['C'].width = 8
+ws_tab_entrate.column_dimensions['D'].width = 8
+ws_tab_entrate.column_dimensions['E'].width = 8
+ws_tab_entrate.column_dimensions['F'].width = 8
+ws_tab_entrate.column_dimensions['G'].width = 8
+ws_tab_entrate.column_dimensions['H'].width = 8
+ws_tab_entrate.column_dimensions['I'].width = 8
+ws_tab_entrate.column_dimensions['L'].width = 9
+ws_tab_entrate.column_dimensions['M'].width = 8
+ws_tab_entrate.column_dimensions['N'].width = 14
+
+i=2
+for x in range(2, 20):
+    ws_tab_entrate.row_dimensions[i].height = 20
+    i +=1
+
+
+
+anno = 2012
+df_conti_camerino_TOT_entrate= df_database_conti.loc[
+            (df_database_conti['Anno'] == anno) &
+            (df_database_conti['Entrate_Uscite'] == 'Entrate')]
+#print(df_conti_camerino_TOT_entrate.head(40))
+
+
+
+pivot_conti_camerino_TOT_entrate = np.round(pd.pivot_table
+                                 (df_conti_camerino_TOT_entrate,
+                                  values='Euro',
+                                  index=['Categoria'],
+                                  columns='Mese',
+                                  aggfunc='sum',
+                                  margins=True,
+                                  margins_name='TOTALE_Entrate',
+                                  fill_value=0), 2)
+
+#print(pivot_conti_camerino_TOT_entrate.head())
+
+for r in dataframe_to_rows(pivot_conti_camerino_TOT_entrate, index=True, header=True):
+    ws_tab_entrate.append(r)
+
+for cell in ws_tab_entrate['A'] + ws_tab_entrate[2]:
+    cell.style = 'Pandas'
+
+ws_tab_entrate['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
+ws_tab_entrate['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+TOTALE_ENTRATE = round(df_conti_camerino_TOT_entrate['Euro'].sum(),2)
+
+
+
+for row in ws_tab_entrate.rows:
+        for cell in row:
+            if  cell.value == TOTALE_ENTRATE:
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+                cell.border = Border(bottom=double, top=double, left=double, right=double)
+                cell.fill = PatternFill('solid', fgColor='d1d22e')
+                cell.number_format = '#,## 0.00€'
+
+
+
+
+
+        # list_df_conti_camerino_mese_uscite[i] = df_conti_camerino_modified.loc[
+        #     (df_conti_camerino_modified['Anno'] == anno) &
+        #     (df_conti_camerino_modified['Mese'] == list_mese[i]) &
+        #     (df_conti_camerino_modified['Entrate_Uscite'] == 'Uscite')]
+        # #print(list_df_conti_camerino_mese_uscite[i].head())
+        #
+        # i += 1
+
+
+###################### tabellone uscite
+#Creo un nuovo foglio
+ws_tab_uscite = wb.create_sheet('Tab_Uscite')
+
+ws_tab_uscite.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
+
+ws_tab_uscite['A1']='Tabellone Uscite'
+ws_tab_uscite.merge_cells('A1:N1')
+ws_tab_uscite.row_dimensions[1].height = 45
+
+
+df_conti_camerino_TOT_uscite= df_database_conti.loc[
+            (df_database_conti['Anno'] == anno) &
+            (df_database_conti['Entrate_Uscite'] == 'Uscite')]
+
+#print(df_conti_camerino_TOT_uscite.head(40))
+pivot_conti_camerino_TOT_uscite= np.round(pd.pivot_table
+                                 (df_conti_camerino_TOT_uscite,
+                                  values='Euro',
+                                  #index=['Entrate_Uscite', 'Categoria', 'Voce'],
+                                  index=['Categoria'],
+                                  columns='Mese',
+                                  aggfunc='sum',
+                                  margins=True,
+                                  margins_name='TOTALE_Uscite',
+                                  fill_value=0), 2)
+
+print(pivot_conti_camerino_TOT_uscite.head())
+for r in dataframe_to_rows(pivot_conti_camerino_TOT_uscite, index=True, header=True):
+    ws_tab_uscite.append(r)
+
+for cell in ws_tab_uscite['A'] + ws_tab_uscite[2]:
+    cell.style = 'Pandas'
+
+# set the width of the column
+ws_tab_uscite.column_dimensions['A'].width = 16
+ws_tab_uscite.column_dimensions['B'].width = 7
+ws_tab_uscite.column_dimensions['C'].width = 7
+ws_tab_uscite.column_dimensions['D'].width = 7
+ws_tab_uscite.column_dimensions['E'].width = 7
+ws_tab_uscite.column_dimensions['F'].width = 7
+ws_tab_uscite.column_dimensions['G'].width = 7
+ws_tab_uscite.column_dimensions['H'].width = 7
+ws_tab_uscite.column_dimensions['I'].width = 7
+ws_tab_uscite.column_dimensions['L'].width = 9
+ws_tab_uscite.column_dimensions['M'].width = 7
+ws_tab_uscite.column_dimensions['N'].width = 16
+
+i=2
+for x in range(2, 20):
+    ws_tab_uscite.row_dimensions[i].height = 17
+    i +=1
+
+
+ws_tab_uscite['A1'].font = Font(name='Calibri', size=40, color='a81a1a', bold=True)
+ws_tab_uscite['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+TOTALE_USCITE = round(df_conti_camerino_TOT_uscite['Euro'].sum(),2)
+
+
+
+
+for row in ws_tab_uscite.rows:
+        for cell in row:
+            if  cell.value == TOTALE_USCITE:
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+                cell.border = Border(bottom=double, top=double, left=double, right=double)
+                cell.fill = PatternFill('solid', fgColor='d1d22e')
+                cell.number_format = '#,## 0.00€'
+
+######################  grafico
+
+from openpyxl.chart import Reference, LineChart
+
+#Creo un nuovo foglio
+ws_saldo_riepilogo = wb.create_sheet('Saldo_riepilogo')
+ws_saldo_riepilogo['A1']='Tabella Entrate - Uscite - Saldo di ogni mese '
+
+#Formattazione
+ws_saldo_riepilogo.row_dimensions[1].height = 100
+ws_saldo_riepilogo.merge_cells('A1:E1')
+
+
+
+
+
+ # set the width of the column
+ws_saldo_riepilogo.column_dimensions['A'].width = 15
+ws_saldo_riepilogo.column_dimensions['B'].width = 17
+ws_saldo_riepilogo.column_dimensions['C'].width = 17
+ws_saldo_riepilogo.column_dimensions['D'].width = 17
+ws_saldo_riepilogo.column_dimensions['E'].width = 17
+
+
+#queste liste mi servono per il grafico
+
+list_headers= ['mese', 'saldo_iniziale','entrate_mese', 'uscite_mese', 'saldo_finale']
+list_saldo_iniziale_anno = list_saldo_iniale_finale_anno[:-1]
+# list_entrate_mesi
+# list_uscite_mesi
+list_saldo_finale_anno = list_saldo_iniale_finale_anno[1:]
+
+
+i = 0
+ws_saldo_riepilogo.append(list_headers)
+for mese in range(1,13):
+    mese_saldo_grafico = [list_mese[i], list_saldo_iniziale_anno[i], list_entrate_mesi[i], list_uscite_mesi[i], list_saldo_finale_anno[i]]
+
+    ws_saldo_riepilogo.append(mese_saldo_grafico)
+    i +=1
+
+
+list = []
+for row in ws_saldo_riepilogo.rows:
+        for cell in row:
+
+
+            if (cell.value == ("saldo_iniziale") or
+                cell.value == ("entrate_mese") or
+                cell.value == ("uscite_mese") or
+                cell.value == ("saldo_finale") or
+                cell.value == ("gennaio") or
+                cell.value == ("febbraio") or
+                cell.value == ("marzo") or
+                cell.value == ("aprile") or
+                cell.value == ("maggio") or
+                cell.value == ("giugno") or
+                cell.value == ("luglio") or
+                cell.value == ("agosto") or
+                cell.value == ("settembre") or
+                cell.value == ("ottobre") or
+                cell.value == ("novembre") or
+                cell.value == ("dicembre")
+                ):
+                cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+
+        for cell in row:
+            if  cell.value == ("mese"):
+                cell.font = Font(size=1)
+
+for row in ws_saldo_riepilogo.iter_rows(min_row=3, min_col=2, max_row=14, max_col=5):
+        for cell in row:
+            cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
+            cell.alignment = Alignment(horizontal="right", vertical="center")
+            cell.number_format = '#,## 0.00 €'
+            if (int(cell.value) > 0):
+                cell.font = Font(color='000000')
+            else:
+                cell.font = Font(color='a81a1a')
+
+
+
+
+
+ws_saldo_riepilogo['A1'].font = Font(name='Calibri', size=20, color='a81a1a', bold=True)
+ws_saldo_riepilogo['A1'].alignment = Alignment(horizontal="center", vertical="center")
+ws_saldo_riepilogo['B3'].border\
+                        = Border(bottom=double, top=double, left=double, right=double)
+ws_saldo_riepilogo['B3'].fill\
+                        = PatternFill('solid', fgColor='d1d22e')
+ws_saldo_riepilogo['E14'].border\
+                        = Border(bottom=double, top=double, left=double, right=double)
+ws_saldo_riepilogo['E14'].fill\
+                        = PatternFill('solid', fgColor='d1d22e')
+
+data = Reference(ws_saldo_riepilogo, min_col=3, min_row=2, max_col=5, max_row=14)
+titles = Reference(ws_saldo_riepilogo, min_row=3, max_row=14, min_col=1)
+
+chart = LineChart()
+chart.title = "Bilancio"
+chart.style = 12
+
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(titles)
+chart.x_axis.title = 'Mesi'
+chart.y_axis.title = 'Euro'
+
+
+ws_saldo_riepilogo.add_chart(chart, "A21")
+#######################PAGINA CONCLUSIVA
+#format
+from openpyxl.styles import NamedStyle, Font, Border, Side
+#HIGHLIGHT
+highlight = NamedStyle(name="highlight")
+highlight.font = Font(name='Calibri', size=15, color='000000', bold=True)
+double = Side(border_style="double", color="4617F1")
+#highlight.border = Border(bottom=double, top=double, left=double, right=double)
+highlight.fill = PatternFill('solid', fgColor='d1d22e')
+highlight.alignment = Alignment(horizontal="right", vertical="center")
+highlight.number_format = '#,## 0.00 €'
+wb.add_named_style(highlight)
+
+############BLACK
+black = NamedStyle(name="black")
+black.font = Font(name='Calibri', size=15, color='000000', bold=True)
+black.alignment = Alignment(horizontal="right", vertical="center")
+wb.add_named_style(black)
+
+
+
+import openpyxl
+from openpyxl import load_workbook
+ws_fine = wb.create_sheet('Fine')
+ws_fine['A1']='Bilancio Anno ...'
+ws_fine.merge_cells('A1:I1')
+ws_fine.row_dimensions[1].height = 45
+ws_fine['A1'].font = Font(name='Calibri', size=35, color='a81a1a', bold=True)
+ws_fine['A1'].alignment = Alignment(horizontal="center", vertical="center")
+
+ws_fine['A7']='RIEPILOGO'
+ws_fine.merge_cells('A7:C7')
+
+ws_fine['A10']='SALDO iniziale'
+ws_fine.merge_cells('A10:C10')
+ws_fine['E10']=int(200_000)
+ws_fine.merge_cells('E10:G10')
+ws_fine['E10'].style = 'highlight'
+
+ws_fine['A13']='TOTALE Entrate'
+ws_fine.merge_cells('A13:C13')
+ws_fine['E13']=TOTALE_ENTRATE
+ws_fine.merge_cells('E13:G13')
+ws_fine['E13'].style = 'highlight'
+
+ws_fine['A16']='TOTALE Uscite'
+ws_fine.merge_cells('A16:C16')
+ws_fine['E16']=TOTALE_USCITE
+ws_fine.merge_cells('E16:G16')
+ws_fine['E16'].style = 'highlight'
+
+ws_fine['A19']='DIS/AVANZO'
+ws_fine.merge_cells('A19:C19')
+ws_fine['E19']=(TOTALE_ENTRATE - TOTALE_USCITE)
+ws_fine.merge_cells('E19:G19')
+ws_fine['E19'].style = 'highlight'
+
+ws_fine['A22']='SALDO Finale'
+ws_fine.merge_cells('A22:C22')
+ws_fine['E22']=saldo
+ws_fine.merge_cells('E22:G22')
+ws_fine['E22'].style = 'highlight'
+
+ws_fine['A7'].font = Font(name='Calibri', size=20, color='a81a1a', bold=True)
+ws_fine['A7'].alignment = Alignment(horizontal="center", vertical="center")
+ws_fine['A10'].font = Font(name='Calibri', size=15, bold=True)
+ws_fine['A10'].alignment = Alignment(horizontal="right", vertical="center")
+ws_fine['A13'].font = Font(name='Calibri', size=15, bold=True)
+ws_fine['A13'].alignment = Alignment(horizontal="right", vertical="center")
+ws_fine['A16'].font = Font(name='Calibri', size=15, bold=True)
+ws_fine['A16'].alignment = Alignment(horizontal="right", vertical="center")
+ws_fine['A19'].font = Font(name='Calibri', size=15, bold=True)
+ws_fine['A19'].alignment = Alignment(horizontal="right", vertical="center")
+ws_fine['A22'].font = Font(name='Calibri', size=15, bold=True)
+ws_fine['A22'].alignment = Alignment(horizontal="right", vertical="center")
+
+
+ws_fine['A32']='Data'
+ws_fine['A32'].style = 'black'
+ws_fine.merge_cells('A32:B32')
+ws_fine['D29']='Guardiano'
+ws_fine['D29'].style = 'black'
+ws_fine.merge_cells('D29:I29')
+ws_fine['d35']='Vicario'
+ws_fine['D35'].style = 'black'
+ws_fine.merge_cells('D35:I35')
+ws_fine['D41']='Economo'
+ws_fine['D41'].style = 'black'
+ws_fine.merge_cells('D41:I41')
+ws_fine['A38']='Timbro'
+ws_fine['A38'].style = 'black'
+ws_fine.merge_cells('A38:B38')
 
 
 
