@@ -13,7 +13,7 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
-
+import conti_camerino_09_sqlite_updated
 from openpyxl import styles, formatting
 
 
@@ -1032,7 +1032,7 @@ B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_d
 B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
 B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame1in, text='report', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
+B_report = Button(Frame1in, text='report', width=10, command=lambda:[conti_camerino_09_sqlite_updated.Report()]).grid(row=0, column=3, padx=20, pady=15)
 
 #####
 
