@@ -15,6 +15,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 import os, sys, subprocess
 
 class Report():
+
     if __name__ == '__main__':
 
         #CONNESSIONE A SQLITE3
