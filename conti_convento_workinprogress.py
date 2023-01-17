@@ -744,6 +744,10 @@ def query_database():
 
     #COLORI RIGHE pari e dispari
     count = 0
+    # Create striped row tags
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="lightblue")
+
     for record in records:
         if count % 2 == 0:
             my_tree.insert(parent='', index=0, iid=record[0], text='',
@@ -817,8 +821,6 @@ def sqlite3_to_excel():
     ws.column_dimensions['F'].width = 21
     ws.column_dimensions['G'].width = 10
 
-
-
     # Colonna G: Formattazione
     for row in ws[2:ws.max_row]:  # skip the header
         cell = row[6]  # il settimo valore della tuple
@@ -827,7 +829,6 @@ def sqlite3_to_excel():
 
     #ws = wb.create_sheet('Dati')
     wb.save("database_conti_styled.xlsx")
-
 
     if sys.platform == "win32":
         os.startfile('database_conti_styled.xlsx')
@@ -840,24 +841,17 @@ def sqlite3_to_excel():
 
     # Close our connection
     conn.close()
-################treeviw
 
 
-
-# Create striped row tags
-my_tree.tag_configure('oddrow', background="white")
-my_tree.tag_configure('evenrow', background="lightblue")
-
-
-##############################
-anno_stringvar = StringVar()
-mese_stringvar = StringVar()
-entrate_uscite_stringvar = StringVar()
-categoria_stringvar = StringVar()
-voce_stringvar = StringVar()
-euro_stringvar = StringVar()
-
-
+###########################################################
+################# COMBOBOX UPDATE #########################
+###########################################################
+anno_stringvar          = StringVar()
+mese_stringvar          = StringVar()
+entrate_uscite_stringvar= StringVar()
+categoria_stringvar     = StringVar()
+voce_stringvar          = StringVar()
+euro_stringvar          = StringVar()
 
 Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere', font=('verdana', 20, 'bold'), bg='blue', fg='white')
 Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
