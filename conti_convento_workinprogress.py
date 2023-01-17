@@ -846,6 +846,7 @@ def sqlite3_to_excel():
 ###########################################################
 ################# COMBOBOX UPDATE #########################
 ###########################################################
+
 anno_stringvar          = StringVar()
 mese_stringvar          = StringVar()
 entrate_uscite_stringvar= StringVar()
@@ -853,7 +854,8 @@ categoria_stringvar     = StringVar()
 voce_stringvar          = StringVar()
 euro_stringvar          = StringVar()
 
-Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere', font=('verdana', 20, 'bold'), bg='blue', fg='white')
+Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere o cancellare',
+                            font=('verdana', 14, 'bold'), bg='blue', fg='white')
 Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
