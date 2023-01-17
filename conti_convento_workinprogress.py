@@ -1775,7 +1775,7 @@ class Report():
                                             )
 
                                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
-                                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,## 0.00€'
+                                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
                                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
                                 if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
@@ -1864,7 +1864,7 @@ class Report():
                                 cell.alignment = Alignment(horizontal="right", vertical="center")
                                 cell.border = Border(bottom=double, top=double, left=double, right=double)
                                 cell.fill = PatternFill('solid', fgColor='d1d22e')
-                                cell.number_format = '#,## 0.00€'
+                                cell.number_format = '#,##0.00€'
 
 
 
@@ -1948,7 +1948,7 @@ class Report():
                                 cell.alignment = Alignment(horizontal="right", vertical="center")
                                 cell.border = Border(bottom=double, top=double, left=double, right=double)
                                 cell.fill = PatternFill('solid', fgColor='d1d22e')
-                                cell.number_format = '#,## 0.00€'
+                                cell.number_format = '#,##0.00€'
 
                 ######################  grafico
 
@@ -2025,7 +2025,7 @@ class Report():
                         for cell in row:
                             cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
                             cell.alignment = Alignment(horizontal="right", vertical="center")
-                            cell.number_format = '#,## 0.00 €'
+                            cell.number_format = '#,##0.00 €'
                             if (int(cell.value) > 0):
                                 cell.font = Font(color='000000')
                             else:
@@ -2070,7 +2070,7 @@ class Report():
                 #highlight.border = Border(bottom=double, top=double, left=double, right=double)
                 highlight.fill = PatternFill('solid', fgColor='d1d22e')
                 highlight.alignment = Alignment(horizontal="right", vertical="center")
-                highlight.number_format = '#,## 0.00 €'
+                highlight.number_format = '#,##0.00 €'
                 wb.add_named_style(highlight)
 
                 ############BLACK
