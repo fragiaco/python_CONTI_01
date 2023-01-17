@@ -1,39 +1,30 @@
 
-
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
 
-#from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
-from openpyxl import *
-from openpyxl import Workbook
-from openpyxl import load_workbook
+
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
-#from conti_camerino_09_sqlite_updated import *
-#from conti_camerino_09_sqlite_updated import Report
 
 from openpyxl import styles, formatting
 import pandas as pd
 import numpy as np
 
-
-import openpyxl
 from openpyxl import Workbook
 from openpyxl import load_workbook
+from openpyxl.styles import NamedStyle, Font, Alignment, Border, Side, PatternFill
 from openpyxl.drawing.image import Image
-from openpyxl.styles import Font, Alignment
-from openpyxl.styles import Side, Border
-from openpyxl.styles import PatternFill
+
 from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.worksheet.worksheet import Worksheet
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 from openpyxl.worksheet.worksheet import Worksheet
-from openpyxl.styles import Font
+
 from xlsxwriter.utility import xl_rowcol_to_cell
 
 ######################################################################
@@ -82,8 +73,9 @@ root.title('Conti Convento Camerino')
 title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='white')
 title.pack(side=TOP, fill=X)
 
-######################################
-#DEFINISCO i FRAMES
+###################################
+######## TKINTER frames ###########
+###################################
 #LATO SINISTRO
 # Frame 1 - left side Frame
 Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
@@ -114,24 +106,9 @@ Frame_update_botton.place(x=15, y=405, width=970, height=60)
 #######################################################
 
 
-
-
-# FUNZIONI TREEVIEW
-# Insert into TABLE_Conti
-def submit():
-
-    conn = sqlite3.connect('database_conti')
-    cur = conn.cursor()
-
-    dati = [(anno_combo.get(), mesi_combo.get(), my_combo.get(), categoria_combo.get(), voce_combo.get(), euro.get())]
-
-    cur.executemany('INSERT INTO TABLE_Conti (Anno, Mese, Entrate_Uscite, Categoria, Voce, Euro) VALUES(?, ?, ?, ? ,? ,?)', dati)
-    conn.commit()
-
-
-
 # define mylabel
 mylabel=Label(Frame2)
+
 ##########################
 #Frame1 Labels
 Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
@@ -734,6 +711,18 @@ my_tree.heading("Euro", text="Euro", anchor=W)
 ######## SQLITE3 ###########
 ############################
 
+# Insert into TABLE_Conti
+def submit():
+
+    conn = sqlite3.connect('database_conti')
+    cur = conn.cursor()
+
+    dati = [(anno_combo.get(), mesi_combo.get(), my_combo.get(), categoria_combo.get(), voce_combo.get(), euro.get())]
+
+    cur.executemany('INSERT INTO TABLE_Conti (Anno, Mese, Entrate_Uscite, Categoria, Voce, Euro) VALUES(?, ?, ?, ? ,? ,?)', dati)
+    conn.commit()
+
+# query_database ed insert rows into TREEVIEW
 def query_database():
 
     # Clear the Treeview
@@ -746,18 +735,15 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-
     c.execute("SELECT * FROM TABLE_Conti")
     records = c.fetchall()
 
-
-    count=0
-
-    for record in records:
-        print(record)
-
+    # for record in records:
+    #     print(record)
     #record[0] = id key
 
+    #COLORI RIGHE pari e dispari
+    count = 0
     for record in records:
         if count % 2 == 0:
             my_tree.insert(parent='', index=0, iid=record[0], text='',
@@ -769,27 +755,18 @@ def query_database():
                            tags=('oddrow'))
 
         count +=1
-    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
-    my_tree.focus(child_id) #evidenziata
-    #print(my_tree.focus(child_id)) #stampa l'anno
-    my_tree.selection_set(child_id)#oppure questo
-#   ID Anno Mese  Entrate_Uscite  Categoria  Voce  Euro
-    sql = '''
-    SELECT * FROM TABLE_Conti;
-    '''
 
-    # df = pd.read_sql_query(sql,conn)
-    # print(df)
-    # print(df.groupby(['Voce']).count())
+    # Al termine del processo la prima riga risulta evidenziata
+    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+    my_tree.focus(child_id)               # evidenziata
+    my_tree.selection_set(child_id)
 
     # Commit changes
     conn.commit()
 
-
     # Close our connection
     conn.close()
 
-#######################################
 
 def sqlite3_to_excel():
 
@@ -799,15 +776,17 @@ def sqlite3_to_excel():
     # Create a cursor instance
     c = conn.cursor()
 
-
     query="SELECT * FROM TABLE_Conti" # query to collect recors
     df = pd.read_sql(query, conn) # create dataframe
 
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
+    ###########################################################
+    ################# Creo il Workbook con OPENPYXL############
+    ###########################################################
     wb = Workbook()
     wb = load_workbook(filename="database_conti.xlsx")
-    ws = wb.active
+    ws = wb.active  # Worksheet
 
     ws.row_dimensions[1].height = 40
     # openpyxl freeze first row
@@ -815,9 +794,7 @@ def sqlite3_to_excel():
     # openpyxl filter columns
     ws.auto_filter.ref = ws.dimensions
 
-
-    from openpyxl.styles import NamedStyle, Font, Border, Side, PatternFill
-    ############RED
+    ############RED################
     red = NamedStyle(name="red")
     red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
     red.alignment = Alignment(horizontal="center", vertical="center")
