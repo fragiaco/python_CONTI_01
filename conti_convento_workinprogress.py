@@ -1,12 +1,10 @@
-import sqlite3
+
 
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
 
-
-
-from Origine         import *
+#from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
@@ -38,8 +36,9 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.styles import Font
 from xlsxwriter.utility import xl_rowcol_to_cell
 
-# FUNZIONE CONNESSIONE AL DATABASE 'database_conti'
-
+######################################################################
+######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
+######################################################################
 def connessione():
     conn = sqlite3.connect('database_conti')
 
@@ -63,8 +62,9 @@ def connessione():
 
 connessione()
 
-
-##########  TKINTER ##########
+############################
+######## TKINTER ###########
+############################
 
 root = Tk()
 
@@ -84,6 +84,7 @@ title.pack(side=TOP, fill=X)
 
 ######################################
 #DEFINISCO i FRAMES
+#LATO SINISTRO
 # Frame 1 - left side Frame
 Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
@@ -94,6 +95,7 @@ Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
 
+#LATO DESTRO
 # Frame 2 - right side Frame
 Frame2 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame2.place(x=590, y=85, width=1070, height=850)
@@ -112,10 +114,10 @@ Frame_update_botton.place(x=15, y=405, width=970, height=60)
 #######################################################
 
 
-# define mylabel
-mylabel=Label(Frame2)
 
 
+# FUNZIONI TREEVIEW
+# Insert into TABLE_Conti
 def submit():
 
     conn = sqlite3.connect('database_conti')
@@ -128,8 +130,8 @@ def submit():
 
 
 
-
-
+# define mylabel
+mylabel=Label(Frame2)
 ##########################
 #Frame1 Labels
 Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
@@ -152,17 +154,14 @@ Frame1_VoceSpesa.grid(row=10, padx=25, pady=20, sticky='w')
 
 Frame1_Euro = Label(Frame1, text='Euro', font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Frame1_Euro.grid(row=12, padx=25, pady=20, sticky='w')
-#######################
+
+######## CALCOLATRICE #########
 
 # Python program to create a simple GUI
 # calculator using Tkinter
 
-# import everything from tkinter module
-#from tkinter import *
-
 # globally declare the expression variable
 expression = ""
-
 
 # Function to update expression
 # in the text entry box
@@ -175,7 +174,6 @@ def press(num):
 
 	# update the expression by using set method
 	equation.set(expression)
-
 
 # Function to evaluate the final expression
 def equalpress():
@@ -207,28 +205,12 @@ def equalpress():
 		equation.set(" error ")
 		expression = ""
 
-
 # Function to clear the contents
 # of text entry box
 def clear():
 	global expression
 	expression = ""
 	equation.set("")
-
-
-# Driver code
-# if __name__ == "__main__":
-	# create a GUI window
-	# gui = Tk()
-    #
-	# # set the background colour of GUI window
-	# gui.configure(background="light green")
-    #
-	# # set the title of GUI window
-	# gui.title("Simple Calculator")
-    #
-	# # set the configuration of GUI window
-	# gui.geometry("270x150")
 
 	# StringVar() is the variable class
 	# we create an instance of this class
@@ -317,7 +299,163 @@ Decimal.grid(row=6, column=0)
 	# start the GUI
 	#gui.mainloop()
 
-#########################
+############################
+####### COMBOBOX ###########
+############################
+
+# List Anno
+Anni = ["2022",
+        "2023",
+        "2024",
+        "2025",
+        ]
+
+# List Mesi
+Mesi = ["gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre",
+        ]
+
+# List Entrate_Uscite
+Entrate_Uscite = ["Entrate",
+                  "Uscite",
+                  ]
+
+# List Categorie_Entrate
+Categorie_Entrate = ["Collette_Chiesa",
+                     "Congrua",
+                     "Interessi",
+                     "Messe_celebrate",
+                     "Offerte",
+                     "Pensioni",
+                     "Servizi_religiosi",
+                     ]
+
+# List Voci Entrate
+Collette_Chiesa = ["Cestino",
+                   "Cassette"
+                   ]
+Congrua = ['fra Giacomo'
+           ]
+Interessi = ['Interessi bancari'
+             ]
+Messe_celebrate = ['Messe_celebrate'
+                   ]
+Offerte = ['Eccedenza_Messe',
+           'Offerte libere'
+           ]
+Pensioni = ['fra Gabriele'
+            ]
+Servizi_religiosi = ['Servizi_religiosi',
+                     'Predicazione'
+                     ]
+
+# List Categorie Uscite
+Categorie_Uscite = ["Acquisti_Chiesa",
+                    "Acquisti_Convento",
+                    "Acquisti_Orto_Animali",
+                    "Cultura",
+                    "Curia_provinciale",
+                    "Domestici",
+                    "Elargizioni",
+                    "Utenze",
+                    "Ferie_Viaggi",
+                    "Igiene",
+                    "Imposte",
+                    "Lavori_Impianti",
+                    "Posta_Cancelleria",
+                    "Salute",
+                    "Veicoli_motore",
+                    "Vestiario",
+                    'Vitto',
+                    'Eccedenza_Cassa',
+                    ]
+# List Voci Entrate
+Acquisti_Chiesa = ['Fiori',
+                   'Ostie',
+                   'Ceri e Candele',
+                   'Paramenti liturigici'
+                   ]
+Acquisti_Convento = ['Ferramenta',
+                     'Materiale elettrico',
+                     'Casalinghi',
+                     'Materiale edile',
+                     'Computer',
+                     'Stampante'
+                     ]
+Acquisti_Orto_Animali = ['Attrezzi agricoli manutenzione',
+                         'Semi, Ortaggi',
+                         'Fitofarmaci'
+                         ]
+Cultura = ['Abbonamenti',
+           'Convegni',
+           'Ritiro spirituale',
+           'Libri_Riviste',
+           'Pellegrinaggio'
+           ]
+Curia_provinciale = ['Curia_provinciale',
+                     'Tassa_Curia_generale'
+                     ]
+Domestici = ['Rosaria'
+             ]
+Elargizioni = ['Regalie',
+               'Beneficenza_5%'
+               ]
+Utenze = ['Energia_elettrica',
+          'Gas',
+          'Acqua',
+          'Riscaldamento',
+          'Rifiuti',
+          'pay_TV',
+          'Telefono_Internet'
+          ]
+Ferie_Viaggi = ['Carburante',
+                'Treno',
+                'Aereo',
+                'Autostrada-Parcheggio'
+                ]
+Igiene = ['Detersivi',
+          'Igiene personale',
+          ]
+Imposte = ['Imposte_bancarie',
+           'Controllo_estintori'
+           'Imposte_varie'
+           ]
+Lavori_Impianti = ['Elettricista',
+                   'Fabbro',
+                   'Idraulico',
+                   'Muratore',
+                   'Imbianchino',
+                   'Restauratore'
+                   ]
+Posta_Cancelleria = ['Cancelleria',
+                     'Posta'
+                     ]
+Salute = ['Ticket_Esami',
+          'Farmacia'
+          ]
+Veicoli_motore = ['Assicurazione',
+                  'Bollo Auto',
+                  'Meccanico',
+                  'Gommista',
+                  'Elettrauto',
+                  'Carrozziere'
+                  ]
+Vestiario = ['Indumenti'
+             ]
+Vitto = ['Alimentari'
+         ]
+Eccedenza_Cassa = ['Eccedenza_Cassa'
+                   ]
 
 def pick_Categoria(e):
     if my_combo.get() == "Entrate":
@@ -527,32 +665,33 @@ voce_combo['state'] = 'readonly'
 euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=equation)
 euro.grid(row=12, column=1)
 
-
+############################
+####### TREEVIEW ###########
+############################
 
 # Add some style
 style = ttk.Style()
 #Pick a theme
 style.theme_use("default")
-# Configure our treeview colors
 
+# Configure our treeview colors
 style.configure("Treeview",
 	background="#D3D3D3",
 	foreground="black",
 	rowheight=30,
 	fieldbackground="#D3D3D3",
     font=('Calibri', 12)
-	)
+	            )
 
 #Headings
-style.configure("Treeview.Heading", font=('Calibri', 12,'bold'))
+style.configure("Treeview.Heading",
+                font=('Calibri', 12,'bold')
+                )
 
 # Change selected color
 style.map('Treeview',
-	background=[('selected', 'blue')])
-
-# Create Treeview Frame
-# tree_frame = Frame(Frame2)
-#Frame2in_tree.pack(pady=10)
+	        background=[('selected', 'blue')]
+          )
 
 # Treeview Scrollbar
 tree_scroll = Scrollbar(Frame2in_tree)
@@ -590,6 +729,10 @@ my_tree.heading("Categoria", text="Categoria", anchor=W)
 my_tree.heading("Voce", text="Voce", anchor=W)
 my_tree.heading("Euro", text="Euro", anchor=W)
 
+
+############################
+######## SQLITE3 ###########
+############################
 
 def query_database():
 
