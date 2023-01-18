@@ -1,130 +1,123 @@
+
 from tkinter         import *
 from tkinter         import ttk
 from tkinter         import messagebox
-import numpy as np
 
-
-from Origine         import *
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
-from openpyxl import *
-from openpyxl import Workbook
-from openpyxl import load_workbook
+
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
-#from conti_camerino_09_sqlite_updated import *
-#from conti_camerino_09_sqlite_updated import Report
 
 from openpyxl import styles, formatting
 import pandas as pd
 import numpy as np
-import sqlite3
 
-import openpyxl
 from openpyxl import Workbook
 from openpyxl import load_workbook
+from openpyxl.styles import NamedStyle, Font, Alignment, Border, Side, PatternFill
 from openpyxl.drawing.image import Image
-from openpyxl.styles import Font, Alignment
-from openpyxl.styles import Side, Border
-from openpyxl.styles import PatternFill
+
 from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.worksheet.worksheet import Worksheet
 
 # Leggi il file xlsx e trasformalo in dataframe impostando i nomi colonna
 from openpyxl.worksheet.worksheet import Worksheet
-from openpyxl.styles import Font
+
 from xlsxwriter.utility import xl_rowcol_to_cell
 
-# CONNESSIONE AL DATABASE
-conn = sqlite3.connect('database_conti')
+######################################################################
+######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
+######################################################################
+def connessione():
+    conn = sqlite3.connect('database_conti')
 
-cur = conn.cursor()
-try:
-    cur.execute('''CREATE TABLE TABLE_Conti(ID integer not null PRIMARY KEY ,
-                                            Anno TEXT not null ,
-                                            Mese TEXT not null ,
-                                            Entrate_Uscite TEXT not null ,
-                                            Categoria TEXT not null ,
-                                            Voce TEXT not null ,
-                                            Euro real not null )''')
-except:
-    pass
-
-
-print(conn)
-print('Sei connesso al database_conti')
-conn.commit()
+    cur = conn.cursor()
+    try:
+        cur.execute('''CREATE TABLE TABLE_Conti(ID integer not null PRIMARY KEY ,
+                                                Anno TEXT not null ,
+                                                Mese TEXT not null ,
+                                                Entrate_Uscite TEXT not null ,
+                                                Categoria TEXT not null ,
+                                                Voce TEXT not null ,
+                                                Euro real not null )''')
+    except:
+        pass
 
 
-#TKINTER
+    print(conn)
+    print('Sei connesso al database_conti')
+    conn.commit()
+    conn.close()
+
+connessione()
+
+############################
+######## TKINTER ###########
+############################
+
 root = Tk()
 
-# root.title("Programma gestione conti Convento Offida")
-# root.geometry('1680x950+0+0')
-
-height = 950 # altezza
-width = 1680 # larghezza
-# top = (root.winfo_screenheight() - height) / 2
-top = 0
-left = (root.winfo_screenwidth() - width) / 2
+# DEFINISCO le dimensioni della GUI e il TITOLO nella barra superiore
+height = 950  # altezza
+width  = 1680 # larghezza
+top    = 0
+left   = (root.winfo_screenwidth() - width) / 2
 geometry = ("{}x{}+{}+{}".format(width, height, int(left), int(top)))
 root.geometry(geometry)
 root.resizable(0, 0)
-root.title('')
+root.title('Conti Convento Camerino')
 
-#Label title
-title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='white')
+# Label title
+title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='#ffeddb')
 title.pack(side=TOP, fill=X)
-###########################
+
+###################################
+######## TKINTER frames ###########
+###################################
+#LATO SINISTRO
 # Frame 1 - left side Frame
 Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame1.place(x=20, y=85, width=550, height=850)
-#FRame calcolatrice
+#Frame 1in - calcolatrice
 Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
 Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
-
-
-# Frame 1 - bottom side Frame
+# Frame 1in - bottom side Frame - Button 'add'
 Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
 Frame1in.place(x=15, y=768, width=500, height=60)
+
+#LATO DESTRO
 # Frame 2 - right side Frame
 Frame2 = Frame(root, bd='4', bg='blue', relief=RIDGE)
 Frame2.place(x=590, y=85, width=1070, height=850)
 # Frame 2in - treeview right Frame
 Frame2in_tree = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_tree.place(x=15, y=15, width=1015, height=335)
-# Frame 2in - bottom side right Frame
+# Frame 2in - Place holder COMBOBOX e EXCELL FRAMES e BUTTONS
 Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
-
-#Frame update botton
+# Frame 2in - combobox
+Frame_combobox_ok = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
+Frame_combobox_ok.place(x=15, y=2, width=485, height=400)
+# Frame 2in - excell
+Frame_excell = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
+Frame_excell.place(x=500, y=2, width=485, height=400)
+# Frame 2in -  update botton
 Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_update_botton.place(x=15, y=405, width=970, height=60)
-
+Frame_update_botton.place(x=15, y=405, width=485, height=60)
+# Frame 2in -  excell botton
+Frame_excell_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
+Frame_excell_botton.place(x=500, y=405, width=485, height=60)
+#######################################################
 
 
 # define mylabel
 mylabel=Label(Frame2)
 
-
-def submit():
-
-    conn = sqlite3.connect('database_conti')
-    cur = conn.cursor()
-
-    dati = [(anno_combo.get(), mesi_combo.get(), my_combo.get(), categoria_combo.get(), voce_combo.get(), euro.get())]
-
-    cur.executemany('INSERT INTO TABLE_Conti (Anno, Mese, Entrate_Uscite, Categoria, Voce, Euro) VALUES(?, ?, ?, ? ,? ,?)', dati)
-    conn.commit()
-
-
-
-
-
 ##########################
 #Frame1 Labels
-Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
+Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
 Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
 Frame1_anno = Label(Frame1, text='Anno', font=('verdana', 15, 'bold'), bg='blue', fg='white')
@@ -144,17 +137,14 @@ Frame1_VoceSpesa.grid(row=10, padx=25, pady=20, sticky='w')
 
 Frame1_Euro = Label(Frame1, text='Euro', font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Frame1_Euro.grid(row=12, padx=25, pady=20, sticky='w')
-#######################
+
+######## CALCOLATRICE #########
 
 # Python program to create a simple GUI
 # calculator using Tkinter
 
-# import everything from tkinter module
-#from tkinter import *
-
 # globally declare the expression variable
 expression = ""
-
 
 # Function to update expression
 # in the text entry box
@@ -167,7 +157,6 @@ def press(num):
 
 	# update the expression by using set method
 	equation.set(expression)
-
 
 # Function to evaluate the final expression
 def equalpress():
@@ -199,28 +188,12 @@ def equalpress():
 		equation.set(" error ")
 		expression = ""
 
-
 # Function to clear the contents
 # of text entry box
 def clear():
 	global expression
 	expression = ""
 	equation.set("")
-
-
-# Driver code
-# if __name__ == "__main__":
-	# create a GUI window
-	# gui = Tk()
-    #
-	# # set the background colour of GUI window
-	# gui.configure(background="light green")
-    #
-	# # set the title of GUI window
-	# gui.title("Simple Calculator")
-    #
-	# # set the configuration of GUI window
-	# gui.geometry("270x150")
 
 	# StringVar() is the variable class
 	# we create an instance of this class
@@ -309,7 +282,163 @@ Decimal.grid(row=6, column=0)
 	# start the GUI
 	#gui.mainloop()
 
-#########################
+############################
+####### COMBOBOX ###########
+############################
+
+# List Anno
+Anni = ["2022",
+        "2023",
+        "2024",
+        "2025",
+        ]
+
+# List Mesi
+Mesi = ["gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre",
+        ]
+
+# List Entrate_Uscite
+Entrate_Uscite = ["Entrate",
+                  "Uscite",
+                  ]
+
+# List Categorie_Entrate
+Categorie_Entrate = ["Collette_Chiesa",
+                     "Congrua",
+                     "Interessi",
+                     "Messe_celebrate",
+                     "Offerte",
+                     "Pensioni",
+                     "Servizi_religiosi",
+                     ]
+
+# List Voci Entrate
+Collette_Chiesa = ["Cestino",
+                   "Cassette"
+                   ]
+Congrua = ['fra Giacomo'
+           ]
+Interessi = ['Interessi bancari'
+             ]
+Messe_celebrate = ['Messe_celebrate'
+                   ]
+Offerte = ['Eccedenza_Messe',
+           'Offerte libere'
+           ]
+Pensioni = ['fra Gabriele'
+            ]
+Servizi_religiosi = ['Servizi_religiosi',
+                     'Predicazione'
+                     ]
+
+# List Categorie Uscite
+Categorie_Uscite = ["Acquisti_Chiesa",
+                    "Acquisti_Convento",
+                    "Acquisti_Orto_Animali",
+                    "Cultura",
+                    "Curia_provinciale",
+                    "Domestici",
+                    "Elargizioni",
+                    "Utenze",
+                    "Ferie_Viaggi",
+                    "Igiene",
+                    "Imposte",
+                    "Lavori_Impianti",
+                    "Posta_Cancelleria",
+                    "Salute",
+                    "Veicoli_motore",
+                    "Vestiario",
+                    'Vitto',
+                    'Eccedenza_Cassa',
+                    ]
+# List Voci Entrate
+Acquisti_Chiesa = ['Fiori',
+                   'Ostie',
+                   'Ceri e Candele',
+                   'Paramenti liturigici'
+                   ]
+Acquisti_Convento = ['Ferramenta',
+                     'Materiale elettrico',
+                     'Casalinghi',
+                     'Materiale edile',
+                     'Computer',
+                     'Stampante'
+                     ]
+Acquisti_Orto_Animali = ['Attrezzi agricoli manutenzione',
+                         'Semi, Ortaggi',
+                         'Fitofarmaci'
+                         ]
+Cultura = ['Abbonamenti',
+           'Convegni',
+           'Ritiro spirituale',
+           'Libri_Riviste',
+           'Pellegrinaggio'
+           ]
+Curia_provinciale = ['Curia_provinciale',
+                     'Tassa_Curia_generale'
+                     ]
+Domestici = ['Rosaria'
+             ]
+Elargizioni = ['Regalie',
+               'Beneficenza_5%'
+               ]
+Utenze = ['Energia_elettrica',
+          'Gas',
+          'Acqua',
+          'Riscaldamento',
+          'Rifiuti',
+          'pay_TV',
+          'Telefono_Internet'
+          ]
+Ferie_Viaggi = ['Carburante',
+                'Treno',
+                'Aereo',
+                'Autostrada-Parcheggio'
+                ]
+Igiene = ['Detersivi',
+          'Igiene personale',
+          ]
+Imposte = ['Imposte_bancarie',
+           'Controllo_estintori'
+           'Imposte_varie'
+           ]
+Lavori_Impianti = ['Elettricista',
+                   'Fabbro',
+                   'Idraulico',
+                   'Muratore',
+                   'Imbianchino',
+                   'Restauratore'
+                   ]
+Posta_Cancelleria = ['Cancelleria',
+                     'Posta'
+                     ]
+Salute = ['Ticket_Esami',
+          'Farmacia'
+          ]
+Veicoli_motore = ['Assicurazione',
+                  'Bollo Auto',
+                  'Meccanico',
+                  'Gommista',
+                  'Elettrauto',
+                  'Carrozziere'
+                  ]
+Vestiario = ['Indumenti'
+             ]
+Vitto = ['Alimentari'
+         ]
+Eccedenza_Cassa = ['Eccedenza_Cassa'
+                   ]
 
 def pick_Categoria(e):
     if my_combo.get() == "Entrate":
@@ -519,32 +648,33 @@ voce_combo['state'] = 'readonly'
 euro = Entry(Frame1, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=equation)
 euro.grid(row=12, column=1)
 
-
+############################
+####### TREEVIEW ###########
+############################
 
 # Add some style
 style = ttk.Style()
 #Pick a theme
 style.theme_use("default")
-# Configure our treeview colors
 
+# Configure our treeview colors
 style.configure("Treeview",
 	background="#D3D3D3",
 	foreground="black",
 	rowheight=30,
 	fieldbackground="#D3D3D3",
     font=('Calibri', 12)
-	)
+	            )
 
 #Headings
-style.configure("Treeview.Heading", font=('Calibri', 12,'bold'))
+style.configure("Treeview.Heading",
+                font=('Calibri', 12,'bold')
+                )
 
 # Change selected color
 style.map('Treeview',
-	background=[('selected', 'blue')])
-
-# Create Treeview Frame
-# tree_frame = Frame(Frame2)
-#Frame2in_tree.pack(pady=10)
+	        background=[('selected', 'blue')]
+          )
 
 # Treeview Scrollbar
 tree_scroll = Scrollbar(Frame2in_tree)
@@ -583,6 +713,22 @@ my_tree.heading("Voce", text="Voce", anchor=W)
 my_tree.heading("Euro", text="Euro", anchor=W)
 
 
+############################
+######## SQLITE3 ###########
+############################
+
+# Insert into TABLE_Conti
+def submit():
+
+    conn = sqlite3.connect('database_conti')
+    cur = conn.cursor()
+
+    dati = [(anno_combo.get(), mesi_combo.get(), my_combo.get(), categoria_combo.get(), voce_combo.get(), euro.get())]
+
+    cur.executemany('INSERT INTO TABLE_Conti (Anno, Mese, Entrate_Uscite, Categoria, Voce, Euro) VALUES(?, ?, ?, ? ,? ,?)', dati)
+    conn.commit()
+
+# query_database ed insert rows into TREEVIEW
 def query_database():
 
     # Clear the Treeview
@@ -595,17 +741,18 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-
     c.execute("SELECT * FROM TABLE_Conti")
     records = c.fetchall()
 
-
-    count=0
-
-    for record in records:
-        print(record)
-
+    # for record in records:
+    #     print(record)
     #record[0] = id key
+
+    #COLORI RIGHE pari e dispari
+    count = 0
+    # Create striped row tags
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="lightblue")
 
     for record in records:
         if count % 2 == 0:
@@ -618,27 +765,18 @@ def query_database():
                            tags=('oddrow'))
 
         count +=1
-    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
-    my_tree.focus(child_id) #evidenziata
-    #print(my_tree.focus(child_id)) #stampa l'anno
-    my_tree.selection_set(child_id)#oppure questo
-#   ID Anno Mese  Entrate_Uscite  Categoria  Voce  Euro
-    sql = '''
-    SELECT * FROM TABLE_Conti;
-    '''
 
-    # df = pd.read_sql_query(sql,conn)
-    # print(df)
-    # print(df.groupby(['Voce']).count())
+    # Al termine del processo la prima riga risulta evidenziata
+    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+    my_tree.focus(child_id)               # evidenziata
+    my_tree.selection_set(child_id)
 
     # Commit changes
     conn.commit()
 
-
     # Close our connection
     conn.close()
 
-#######################################
 
 def sqlite3_to_excel():
 
@@ -648,15 +786,18 @@ def sqlite3_to_excel():
     # Create a cursor instance
     c = conn.cursor()
 
-
     query="SELECT * FROM TABLE_Conti" # query to collect recors
+
     df = pd.read_sql(query, conn) # create dataframe
 
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
+    ###########################################################
+    ################# Creo il Workbook con OPENPYXL############
+    ###########################################################
     wb = Workbook()
     wb = load_workbook(filename="database_conti.xlsx")
-    ws = wb.active
+    ws = wb.active  # Worksheet
 
     ws.row_dimensions[1].height = 40
     # openpyxl freeze first row
@@ -664,9 +805,7 @@ def sqlite3_to_excel():
     # openpyxl filter columns
     ws.auto_filter.ref = ws.dimensions
 
-
-    from openpyxl.styles import NamedStyle, Font, Border, Side, PatternFill
-    ############RED
+    ############RED################
     red = NamedStyle(name="red")
     red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
     red.alignment = Alignment(horizontal="center", vertical="center")
@@ -689,8 +828,6 @@ def sqlite3_to_excel():
     ws.column_dimensions['F'].width = 21
     ws.column_dimensions['G'].width = 10
 
-
-
     # Colonna G: Formattazione
     for row in ws[2:ws.max_row]:  # skip the header
         cell = row[6]  # il settimo valore della tuple
@@ -699,7 +836,6 @@ def sqlite3_to_excel():
 
     #ws = wb.create_sheet('Dati')
     wb.save("database_conti_styled.xlsx")
-
 
     if sys.platform == "win32":
         os.startfile('database_conti_styled.xlsx')
@@ -712,61 +848,86 @@ def sqlite3_to_excel():
 
     # Close our connection
     conn.close()
-################treeviw
 
 
+###########################################################
+#################  EXCEL REPORT  ##########################
+###########################################################
+Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
+                            font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
+Frame_excell_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
 
-# Create striped row tags
-my_tree.tag_configure('oddrow', background="white")
-my_tree.tag_configure('evenrow', background="lightblue")
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere l'anno di interesse",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno.grid(row=1, columnspan=2, padx=10, pady=10, sticky='w')
+
+Anno_label_excell = Label(Frame_excell, text="Anno", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Anno_label_excell.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Anno_entry_excell.grid(row=2, column=1)
+
+Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Scrivere il saldo iniziale",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno_saldo.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
+
+Saldo_label_excell = Label(Frame_excell, text="Saldo iniziale", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Saldo_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Saldo_entry_excell.grid(row=4, column=1)
 
 
-##############################
-anno_stringvar = StringVar()
-mese_stringvar = StringVar()
-entrate_uscite_stringvar = StringVar()
-categoria_stringvar = StringVar()
-voce_stringvar = StringVar()
-euro_stringvar = StringVar()
+###########################################################
+################# COMBOBOX UPDATE #########################
+###########################################################
 
+anno_stringvar          = StringVar()
+mese_stringvar          = StringVar()
+entrate_uscite_stringvar= StringVar()
+categoria_stringvar     = StringVar()
+voce_stringvar          = StringVar()
+euro_stringvar          = StringVar()
 
+Frame2_bottom_title = Label(Frame_combobox_ok, text='Correggi o Cancella:',
+                            font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
+Frame2_bottom_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
 
-Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere', font=('verdana', 20, 'bold'), bg='blue', fg='white')
-Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
+Frame2_bottom_subtitle = Label(Frame_combobox_ok, text='Selezionare prima una riga nella tabella sopra',
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame2_bottom_subtitle.grid(row=1, columnspan=2, padx=10, pady=10, sticky='w')
 
-Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Id_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', width=17)
+Id_label = Label(Frame_combobox_ok, text="Id", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Id_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Id_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', width=17)
 Id_entry.grid(row=2, column=1)
 
-Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Anno_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
+Anno_label = Label(Frame_combobox_ok, text="Anno", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Anno_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+Anno_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
 # Anno_entry.grid(row=2, column=1, padx=10, pady=10)
 
-Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Mese_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
-Mese_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=mese_stringvar)
+Mese_label = Label(Frame_combobox_ok, text="Mese", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Mese_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Mese_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=mese_stringvar)
 #Mese_entry.grid(row=3, column=1, padx=10, pady=10)
 
-Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Entrate_Uscite_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
-Entrate_Uscite_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=entrate_uscite_stringvar)
+Entrate_Uscite_label = Label(Frame_combobox_ok, text="Entrate_Uscite", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Entrate_Uscite_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+Entrate_Uscite_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=entrate_uscite_stringvar)
 #Entrate_Uscite_entry.grid(row=4, column=1, padx=10, pady=10)
 #
-Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Categoria_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
-Categorie_Entrate_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=categoria_stringvar)
+Categoria_label = Label(Frame_combobox_ok, text="Categoria", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Categoria_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+Categorie_Entrate_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=categoria_stringvar)
 #Categorie_Entrate_entry.grid(row=5, column=1, padx=10, pady=10)
 #
-Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Voce_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-Voce_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=voce_stringvar)
+Voce_label = Label(Frame_combobox_ok, text="Voce", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Voce_label.grid(row=7, column=0, padx=10, pady=10, sticky='w')
+Voce_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=voce_stringvar)
 #Voce_entry.grid(row=6, column=1, padx=10, pady=10)
 #
-Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Euro_label.grid(row=7, column=0, padx=10, pady=10, sticky='w')
-Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=euro_stringvar)
+Euro_label = Label(Frame_combobox_ok, text="Euro", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Euro_label.grid(row=8, column=0, padx=10, pady=10, sticky='w')
+Euro_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable=euro_stringvar)
 #Euro_entry.grid(row=7, column=1, padx=10, pady=10)
 
 
@@ -827,7 +988,7 @@ def remove_one():
 
 
 # Add a little message box for fun
-    messagebox.showinfo("Deleted!", "Your Record Has Been Deleted!")
+    messagebox.showinfo("Deleted", "Riga Cancellata!")
 #######################
 ######
     # Update record
@@ -873,7 +1034,7 @@ def update_record():
 #         # Close our connection
     conn.close()
 # Add a little message box for fun
-    messagebox.showinfo("Deleted!", "Your Record Has Been Updated!")
+    messagebox.showinfo("Updated!", "Riga aggiornata!")
 
 
 
@@ -1003,39 +1164,39 @@ def pick_Voce_update(e):
         voce_combo_update.current(0)
 
 # Dropbox Anno
-anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=anno_stringvar)
+anno_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 10), values=Anni, textvariable=anno_stringvar)
 anno_combo_update.set(anno_stringvar.get())
 # anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=new_Anno_entry)
 # anno_combo_update.set(new_Anno_entry)
-anno_combo_update.grid(row=2, column=1)
+anno_combo_update.grid(row=3, column=1)
 # Dropbox Mesi
-mesi_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Mesi, textvariable=mese_stringvar)
+mesi_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 10), values=Mesi, textvariable=mese_stringvar)
 mesi_combo_update.set(mese_stringvar.get())
-mesi_combo_update.grid(row=3, column=1)
+mesi_combo_update.grid(row=4, column=1)
 # Dropbox Entrate_Uscite
-my_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Entrate_Uscite, textvariable=entrate_uscite_stringvar)
+my_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 10), values=Entrate_Uscite, textvariable=entrate_uscite_stringvar)
 #my_combo.current(0)
-my_combo_update.grid(row=4, column=1)
+my_combo_update.grid(row=5, column=1)
 
 # Bind the ComboBox
 my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
 
 # Categoria ComboBox
-categoria_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=categoria_stringvar)
+categoria_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 10), values=[""], textvariable=categoria_stringvar)
 categoria_combo_update.current(0)
-categoria_combo_update.grid(row=5, column=1)
+categoria_combo_update.grid(row=6, column=1)
 
 # Bind the ComboBox
 categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
 
 # Voce Entrata_Spesa ComboBox Combo Box
-voce_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=voce_stringvar)
+voce_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 10), values=[""], textvariable=voce_stringvar)
 voce_combo_update.current(0)
-voce_combo_update.grid(row=6, column=1)
+voce_combo_update.grid(row=7, column=1)
 
 # euro ENTRY
-euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
-euro_update.grid(row=7, column=1)
+euro_update = Entry(Frame_combobox_ok, font=("Helvetica", 10, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
+euro_update.grid(row=8, column=1)
 
 ####
 class Report():
@@ -1651,7 +1812,7 @@ class Report():
                                             )
 
                                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).font = Font(size=15, bold=True)
-                                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,## 0.00€'
+                                sheet.cell(row=cell.offset(row=13, column=0).row, column=4).number_format = '#,##0.00€'
                                 sheet.cell(row=cell.offset(row=13, column=0).row, column=4).alignment = Alignment(horizontal="right")
 
                                 if sheet.cell(row=cell.offset(row=13, column=0).row, column=4).value > 0:
@@ -1740,7 +1901,7 @@ class Report():
                                 cell.alignment = Alignment(horizontal="right", vertical="center")
                                 cell.border = Border(bottom=double, top=double, left=double, right=double)
                                 cell.fill = PatternFill('solid', fgColor='d1d22e')
-                                cell.number_format = '#,## 0.00€'
+                                cell.number_format = '#,##0.00€'
 
 
 
@@ -1824,7 +1985,7 @@ class Report():
                                 cell.alignment = Alignment(horizontal="right", vertical="center")
                                 cell.border = Border(bottom=double, top=double, left=double, right=double)
                                 cell.fill = PatternFill('solid', fgColor='d1d22e')
-                                cell.number_format = '#,## 0.00€'
+                                cell.number_format = '#,##0.00€'
 
                 ######################  grafico
 
@@ -1901,7 +2062,7 @@ class Report():
                         for cell in row:
                             cell.font = Font(name='Calibri', size=13, color='000000', bold=True)
                             cell.alignment = Alignment(horizontal="right", vertical="center")
-                            cell.number_format = '#,## 0.00 €'
+                            cell.number_format = '#,##0.00 €'
                             if (int(cell.value) > 0):
                                 cell.font = Font(color='000000')
                             else:
@@ -1946,7 +2107,7 @@ class Report():
                 #highlight.border = Border(bottom=double, top=double, left=double, right=double)
                 highlight.fill = PatternFill('solid', fgColor='d1d22e')
                 highlight.alignment = Alignment(horizontal="right", vertical="center")
-                highlight.number_format = '#,## 0.00 €'
+                highlight.number_format = '#,##0.00 €'
                 wb.add_named_style(highlight)
 
                 ############BLACK
@@ -2041,18 +2202,19 @@ class Report():
 
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
-B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
-B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
-B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
-B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame_update_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=3, padx=20, pady=15)
-
+B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=390, pady=15)
+B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
+B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
+B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
+B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=2, padx=20, pady=15)
+B_esporta = Button(Frame_excell_botton, text='esporta', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
+B_importa = Button(Frame_excell_botton, text='importa', width=10, command='').grid(row=0, column=4, padx=20, pady=15)
 #####
 
 
 query_database()
 
-conn.close()
+#conn.close()
 
 root.mainloop()
 
