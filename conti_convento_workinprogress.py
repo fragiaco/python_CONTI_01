@@ -98,8 +98,11 @@ Frame2in_tree.place(x=15, y=15, width=1015, height=335)
 Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
 # Frame 2in - excell
+Frame_combobox_ok = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
+Frame_combobox_ok.place(x=15, y=2, width=485, height=400)
+# Frame 2in - excell
 Frame_excell = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
-Frame_excell.place(x=600, y=70, width=385, height=330)
+Frame_excell.place(x=500, y=2, width=485, height=400)
 # Frame 2in -  update botton
 Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
 Frame_update_botton.place(x=15, y=405, width=970, height=60)
@@ -854,43 +857,43 @@ categoria_stringvar     = StringVar()
 voce_stringvar          = StringVar()
 euro_stringvar          = StringVar()
 
-Frame2_bottom_title = Label(Frame2in_bottom, text='Selezionare sopra la riga da correggere o cancellare',
-                            font=('verdana', 14, 'bold'), bg='blue', fg='white')
+Frame2_bottom_title = Label(Frame_combobox_ok, text='Selezionare sopra la riga da correggere o cancellare',
+                            font=('verdana', 11, 'bold'), bg='blue', fg='white')
 Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
-Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Id_label = Label(Frame_combobox_ok, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
-Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', width=17)
+Id_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', width=17)
 Id_entry.grid(row=1, column=1)
 
-Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Anno_label = Label(Frame_combobox_ok, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-Anno_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
+Anno_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=anno_stringvar)
 # Anno_entry.grid(row=2, column=1, padx=10, pady=10)
 
-Mese_label = Label(Frame2in_bottom, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Mese_label = Label(Frame_combobox_ok, text="Mese", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Mese_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
-Mese_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=mese_stringvar)
+Mese_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=mese_stringvar)
 #Mese_entry.grid(row=3, column=1, padx=10, pady=10)
 
-Entrate_Uscite_label = Label(Frame2in_bottom, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Entrate_Uscite_label = Label(Frame_combobox_ok, text="Entrate_Uscite", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Entrate_Uscite_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
-Entrate_Uscite_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=entrate_uscite_stringvar)
+Entrate_Uscite_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=entrate_uscite_stringvar)
 #Entrate_Uscite_entry.grid(row=4, column=1, padx=10, pady=10)
 #
-Categoria_label = Label(Frame2in_bottom, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Categoria_label = Label(Frame_combobox_ok, text="Categoria", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Categoria_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
-Categorie_Entrate_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=categoria_stringvar)
+Categorie_Entrate_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=categoria_stringvar)
 #Categorie_Entrate_entry.grid(row=5, column=1, padx=10, pady=10)
 #
-Voce_label = Label(Frame2in_bottom, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Voce_label = Label(Frame_combobox_ok, text="Voce", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Voce_label.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-Voce_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=voce_stringvar)
+Voce_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=voce_stringvar)
 #Voce_entry.grid(row=6, column=1, padx=10, pady=10)
 #
-Euro_label = Label(Frame2in_bottom, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Euro_label = Label(Frame_combobox_ok, text="Euro", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Euro_label.grid(row=7, column=0, padx=10, pady=10, sticky='w')
-Euro_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=euro_stringvar)
+Euro_entry = Entry(Frame_combobox_ok, font=('verdana', 15, 'bold'), bg='blue', fg='white', textvariable=euro_stringvar)
 #Euro_entry.grid(row=7, column=1, padx=10, pady=10)
 
 
@@ -1127,17 +1130,17 @@ def pick_Voce_update(e):
         voce_combo_update.current(0)
 
 # Dropbox Anno
-anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=anno_stringvar)
+anno_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 15), values=Anni, textvariable=anno_stringvar)
 anno_combo_update.set(anno_stringvar.get())
 # anno_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Anni, textvariable=new_Anno_entry)
 # anno_combo_update.set(new_Anno_entry)
 anno_combo_update.grid(row=2, column=1)
 # Dropbox Mesi
-mesi_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Mesi, textvariable=mese_stringvar)
+mesi_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 15), values=Mesi, textvariable=mese_stringvar)
 mesi_combo_update.set(mese_stringvar.get())
 mesi_combo_update.grid(row=3, column=1)
 # Dropbox Entrate_Uscite
-my_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=Entrate_Uscite, textvariable=entrate_uscite_stringvar)
+my_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 15), values=Entrate_Uscite, textvariable=entrate_uscite_stringvar)
 #my_combo.current(0)
 my_combo_update.grid(row=4, column=1)
 
@@ -1145,7 +1148,7 @@ my_combo_update.grid(row=4, column=1)
 my_combo_update.bind("<<ComboboxSelected>>", pick_Categoria_update)
 
 # Categoria ComboBox
-categoria_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=categoria_stringvar)
+categoria_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 15), values=[""], textvariable=categoria_stringvar)
 categoria_combo_update.current(0)
 categoria_combo_update.grid(row=5, column=1)
 
@@ -1153,12 +1156,12 @@ categoria_combo_update.grid(row=5, column=1)
 categoria_combo_update.bind("<<ComboboxSelected>>", pick_Voce_update)
 
 # Voce Entrata_Spesa ComboBox Combo Box
-voce_combo_update = ttk.Combobox(Frame2in_bottom, font=("Helvetica", 15), values=[""], textvariable=voce_stringvar)
+voce_combo_update = ttk.Combobox(Frame_combobox_ok, font=("Helvetica", 15), values=[""], textvariable=voce_stringvar)
 voce_combo_update.current(0)
 voce_combo_update.grid(row=6, column=1)
 
 # euro ENTRY
-euro_update = Entry(Frame2in_bottom, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
+euro_update = Entry(Frame_combobox_ok, font=("Helvetica", 15, 'bold'), bd=5, relief=GROOVE, textvariable=euro_stringvar)
 euro_update.grid(row=7, column=1)
 
 ####
