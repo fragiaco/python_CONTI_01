@@ -2171,8 +2171,8 @@ class Report():
 
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
-B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=400, pady=15)
-B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
+B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=390, pady=15)
+B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
 B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=3, padx=20, pady=15)
