@@ -94,10 +94,10 @@ Frame2.place(x=590, y=85, width=1070, height=850)
 # Frame 2in - treeview right Frame
 Frame2in_tree = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_tree.place(x=15, y=15, width=1015, height=335)
-# Frame 2in - Combo box Select rox
+# Frame 2in - Place holder COMBOBOX e EXCELL FRAMES e BUTTONS
 Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
 Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
-# Frame 2in - excell
+# Frame 2in - combobox
 Frame_combobox_ok = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
 Frame_combobox_ok.place(x=15, y=2, width=485, height=400)
 # Frame 2in - excell
@@ -105,7 +105,10 @@ Frame_excell = Frame(Frame2in_bottom,bd='4', bg='blue', relief=RIDGE)
 Frame_excell.place(x=500, y=2, width=485, height=400)
 # Frame 2in -  update botton
 Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_update_botton.place(x=15, y=405, width=970, height=60)
+Frame_update_botton.place(x=15, y=405, width=485, height=60)
+# Frame 2in -  excell botton
+Frame_excell_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
+Frame_excell_botton.place(x=500, y=405, width=485, height=60)
 #######################################################
 
 
@@ -2168,11 +2171,11 @@ class Report():
 
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
-B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=20, pady=15)
-B_update = Button(Frame_update_botton, text='update', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
-B_delete = Button(Frame1in, text='delete', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
-B_excel = Button(Frame1in, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame1in, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=3, padx=20, pady=15)
+B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), query_database()]).grid(row=0, column=0, padx=400, pady=15)
+B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=10, pady=15)
+B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
+B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
+B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=3, padx=20, pady=15)
 
 #####
 
