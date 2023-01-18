@@ -737,7 +737,7 @@ Frame2_bottom_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 Id_label = Label(Frame2in_bottom, text="Id", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Id_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 Id_entry = Entry(Frame2in_bottom, font=('verdana', 15, 'bold'), bg='blue', fg='white', width=17)
-Id_entry.grid(row=1, column=1)
+Id_entry.grid(row=2, column=1)
 
 Anno_label = Label(Frame2in_bottom, text="Anno", font=('verdana', 15, 'bold'), bg='blue', fg='white')
 Anno_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
