@@ -70,7 +70,7 @@ root.resizable(0, 0)
 root.title('Conti Convento Camerino')
 
 # Label title
-title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='white')
+title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='#ffeddb')
 title.pack(side=TOP, fill=X)
 
 ###################################
@@ -117,7 +117,7 @@ mylabel=Label(Frame2)
 
 ##########################
 #Frame1 Labels
-Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='white')
+Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
 Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
 Frame1_anno = Label(Frame1, text='Anno', font=('verdana', 15, 'bold'), bg='blue', fg='white')
@@ -787,6 +787,7 @@ def sqlite3_to_excel():
     c = conn.cursor()
 
     query="SELECT * FROM TABLE_Conti" # query to collect recors
+
     df = pd.read_sql(query, conn) # create dataframe
 
     df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
@@ -850,6 +851,32 @@ def sqlite3_to_excel():
 
 
 ###########################################################
+#################  EXCEL REPORT  ##########################
+###########################################################
+Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
+                            font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
+Frame_excell_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
+
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere l'anno di interesse",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno.grid(row=1, columnspan=2, padx=10, pady=10, sticky='w')
+
+Anno_label_excell = Label(Frame_excell, text="Anno", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Anno_label_excell.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Anno_entry_excell.grid(row=2, column=1)
+
+Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Scrivere il saldo iniziale",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno_saldo.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
+
+Saldo_label_excell = Label(Frame_excell, text="Saldo iniziale", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Saldo_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Saldo_entry_excell.grid(row=4, column=1)
+
+
+###########################################################
 ################# COMBOBOX UPDATE #########################
 ###########################################################
 
@@ -861,7 +888,7 @@ voce_stringvar          = StringVar()
 euro_stringvar          = StringVar()
 
 Frame2_bottom_title = Label(Frame_combobox_ok, text='Correggi o Cancella:',
-                            font=('verdana', 19, 'bold'), bg='blue', fg='white')
+                            font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
 Frame2_bottom_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
 
 Frame2_bottom_subtitle = Label(Frame_combobox_ok, text='Selezionare prima una riga nella tabella sopra',
@@ -1007,7 +1034,7 @@ def update_record():
 #         # Close our connection
     conn.close()
 # Add a little message box for fun
-    messagebox.showinfo("Deleted!", "Your Record Has Been Updated!")
+    messagebox.showinfo("Updated!", "Riga aggiornata!")
 
 
 
@@ -2179,8 +2206,9 @@ B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), qu
 B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=3, padx=20, pady=15)
-
+B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=2, padx=20, pady=15)
+B_esporta = Button(Frame_excell_botton, text='esporta', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
+B_importa = Button(Frame_excell_botton, text='importa', width=10, command='').grid(row=0, column=4, padx=20, pady=15)
 #####
 
 
