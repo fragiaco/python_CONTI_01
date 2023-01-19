@@ -854,8 +854,7 @@ def sqlite3_to_excel():
 #################  EXCEL REPORT  ##########################
 ###########################################################
 
-anno_report_Stringvar   = StringVar()
-saldo_report_Stringvar  = StringVar()
+
 
 ### Titolo 'Visualizza dati:'
 Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
@@ -1226,10 +1225,42 @@ euro_update = Entry(Frame_combobox_ok, font=("Helvetica", 10, 'bold'), bd=5, rel
 euro_update.grid(row=8, column=1)
 
 ####
+
+# class Complex:
+#     def __init__(self, realpart, imagpart):
+#         self.r = realpart
+#         self.i = imagpart
+# x = Complex(3.0, -4.5)
+# x.r, x.i
+
+anno_report_Stringvar = StringVar()
+
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white',
+                                        textvariable=anno_report_Stringvar)
+Anno_entry_excell.grid(row=4, column=1)
+global anno_report
+
+
+
 class Report():
     # if __name__ == '__main__':
+
         def __int__(self, anno):
-            self.anno = anno
+            self.anno_report = anno
+
+
+            #saldo_report_Stringvar = StringVar()
+
+            ### Entry Anno
+
+
+
+            #print(anno_report_Stringvar)
+
+
+        def anno_report_func(self):
+                anno_report = anno_report_Stringvar.get()
+                return anno_report
 
         def report(self):
 
@@ -1253,12 +1284,12 @@ class Report():
                 cur = conn.cursor()
 
                 #MI ASSIOCURO DI ESSERE CONNESSO
-                print(conn)
-                print('Sei connesso al database_conti')
+                # print(conn)
+                # print('Sei connesso al database_conti')
 
                 #CREO DATAFRAME df_database_conti
                 df_database_conti = pd.read_sql("select * from TABLE_Conti", conn)
-                print(df_database_conti.info(verbose=True))
+                #print(df_database_conti.info(verbose=True))
 
 
                 #COMMIT e CLOSE
@@ -1575,7 +1606,7 @@ class Report():
                     for row in sheet[7:sheet.max_row]:  # skip the header
                         #print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
                         cell = row[3]  # il quarto valore della tuple
-                        print (cell)# <Cell 'multiple'.D7>
+                        #print (cell)# <Cell 'multiple'.D7>
                         cell.number_format = '#,##0.00 €'
                         cell.alignment = Alignment(horizontal="right")
                         cell.font = Font(bold=True)
@@ -1733,10 +1764,10 @@ class Report():
                                 #coordinate dell'ultima cella della colonna A di ogni foglio
 
                                 last_cell_coordiate = 'C' + str(sheet.max_row)
-                                print(last_cell_coordiate)
+                                #print(last_cell_coordiate)
                                 #attraverso le coordinate risalgo alla cella di excel
                                 cell=sheet[last_cell_coordiate]
-                                print(cell.value)
+                                #print(cell.value)
 
                                 #cell = sheet.cell(row=1, column=1)
                                 # last_cell = sheet[last_cell]
@@ -2233,7 +2264,9 @@ B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), qu
 B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=2, padx=20, pady=15)
+#B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: Report.anno_report_func(anno_report_Stringvar)).grid(row=0, column=2, padx=20, pady=15)
+
+B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2012)).grid(row=0, column=2, padx=20, pady=15)
 B_esporta = Button(Frame_excell_botton, text='esporta', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
 B_importa = Button(Frame_excell_botton, text='importa', width=10, command='').grid(row=0, column=4, padx=20, pady=15)
 #####
