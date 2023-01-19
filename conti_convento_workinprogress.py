@@ -853,29 +853,48 @@ def sqlite3_to_excel():
 ###########################################################
 #################  EXCEL REPORT  ##########################
 ###########################################################
+### Titolo 'Visualizza dati:'
 Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
                             font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
 Frame_excell_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
-
-Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere l'anno di interesse",
+### Sottotitolo Scrivere prima
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere prima:",
                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
 Frame_excell_subtitle_anno.grid(row=1, columnspan=2, padx=10, pady=10, sticky='w')
-
-Anno_label_excell = Label(Frame_excell, text="Anno", font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Anno_label_excell.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Anno_entry_excell.grid(row=2, column=1)
-
-Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Scrivere il saldo iniziale",
+### Riga vuota
+Frame_excell_subtitle_anno = Label(Frame_excell, text="",
+                            font=('verdana', 1, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno.grid(row=2, columnspan=2, padx=10, pady=10, sticky='w')
+### Sottotitolo Anno
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Anno di interesse:",
                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Frame_excell_subtitle_anno_saldo.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
-
-Saldo_label_excell = Label(Frame_excell, text="Saldo iniziale", font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Saldo_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Frame_excell_subtitle_anno.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
+### Label Anno
+Anno_label_excell = Label(Frame_excell, text="(esempio: 2022)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Anno_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+### Entry Anno
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Anno_entry_excell.grid(row=4, column=1)
+### Sottotitolo Saldo
+Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Saldo ad inizio anno:",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno_saldo.grid(row=5, columnspan=2, padx=10, pady=10, sticky='w')
+### Label Saldo
+Saldo_label_excell = Label(Frame_excell, text="(esempio: 99.99 oppure -99.99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Saldo_label_excell.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+### Entry Anno
 Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Saldo_entry_excell.grid(row=4, column=1)
-
-
+Saldo_entry_excell.grid(row=6, column=1)
+### Sottotitolo Residuo Messe
+Frame_excell_subtitle_residuo_messe = Label(Frame_excell, text="Dis/Avanzo Messe ad inizio anno",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_residuo_messe.grid(row=7, columnspan=2, padx=10, pady=10, sticky='w')
+### Label Residuo Messe
+Messe_residuo_label_excell = Label(Frame_excell, text="(esempio: 99 oppure -99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Messe_residuo_label_excell.grid(row=8, column=0, padx=10, pady=10, sticky='w')
+### Entry Residuo Messe
+Messe_residuo_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Messe_residuo_excell.grid(row=8, column=1)
 ###########################################################
 ################# COMBOBOX UPDATE #########################
 ###########################################################
