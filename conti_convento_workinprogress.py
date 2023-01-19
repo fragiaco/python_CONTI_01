@@ -853,6 +853,10 @@ def sqlite3_to_excel():
 ###########################################################
 #################  EXCEL REPORT  ##########################
 ###########################################################
+
+anno_report_Stringvar   = StringVar()
+saldo_report_Stringvar  = StringVar()
+
 ### Titolo 'Visualizza dati:'
 Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
                             font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
@@ -907,6 +911,8 @@ entrate_uscite_stringvar= StringVar()
 categoria_stringvar     = StringVar()
 voce_stringvar          = StringVar()
 euro_stringvar          = StringVar()
+
+
 
 Frame2_bottom_title = Label(Frame_combobox_ok, text='Correggi o Cancella:',
                             font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
