@@ -885,16 +885,18 @@ Saldo_label_excell.grid(row=6, column=0, padx=10, pady=10, sticky='w')
 ### Entry Anno
 Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
 Saldo_entry_excell.grid(row=6, column=1)
+
 ### Sottotitolo Residuo Messe
-Frame_excell_subtitle_residuo_messe = Label(Frame_excell, text="Dis/Avanzo Messe ad inizio anno",
-                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Frame_excell_subtitle_residuo_messe.grid(row=7, columnspan=2, padx=10, pady=10, sticky='w')
-### Label Residuo Messe
-Messe_residuo_label_excell = Label(Frame_excell, text="(esempio: 99 oppure -99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Messe_residuo_label_excell.grid(row=8, column=0, padx=10, pady=10, sticky='w')
-### Entry Residuo Messe
-Messe_residuo_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Messe_residuo_excell.grid(row=8, column=1)
+# Frame_excell_subtitle_residuo_messe = Label(Frame_excell, text="Dis/Avanzo Messe ad inizio anno",
+#                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
+# Frame_excell_subtitle_residuo_messe.grid(row=7, columnspan=2, padx=10, pady=10, sticky='w')
+# ### Label Residuo Messe
+# Messe_residuo_label_excell = Label(Frame_excell, text="(esempio: 99 oppure -99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+# Messe_residuo_label_excell.grid(row=8, column=0, padx=10, pady=10, sticky='w')
+# ### Entry Residuo Messe
+# Messe_residuo_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+# Messe_residuo_excell.grid(row=8, column=1)
+
 ###########################################################
 ################# COMBOBOX UPDATE #########################
 ###########################################################
