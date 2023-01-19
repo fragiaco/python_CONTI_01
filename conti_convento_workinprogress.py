@@ -790,7 +790,7 @@ def sqlite3_to_excel():
 
     df = pd.read_sql(query, conn) # create dataframe
 
-    df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
+    df.sort_values(by='index', ascending = False).to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
     ###########################################################
     ################# Creo il Workbook con OPENPYXL############
