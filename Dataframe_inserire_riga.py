@@ -155,6 +155,10 @@ print('##########################################')
 print(list_df_conti_mese_entrate[0].to_markdown())
 print('')
 print(list_df_conti_mese_uscite[0].to_markdown())
-
+print(df_database_conti)
+new_df_database_conti = df_database_conti[df_database_conti.Anno.notnull() &
+                                            (df_database_conti.Mese.notnull())]
+#df[df.origin.notnull()]
+# newdf = df[(df.origin == "JFK") & (df.carrier == "B6")]
 
 #df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
