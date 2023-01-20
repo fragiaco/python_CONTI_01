@@ -65,7 +65,7 @@ list_mese = ['gennaio',
 # anno = Report.anno_report_func(anno_report_Stringvar)
 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 
-anno= 2014
+anno= 2020
 
 i = 0
 for x in range (12):
@@ -74,7 +74,7 @@ for x in range (12):
                             (df_database_conti['Anno'] == anno) &
                             (df_database_conti['Mese'] == list_mese[i]) &
                             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
-                        print(list_df_conti_mese_entrate[i].empty)
+                        #print(list_df_conti_mese_entrate[i].empty)
 
 
                         list_df_conti_mese_uscite[i] = df_database_conti.loc[
@@ -102,19 +102,22 @@ for x in range (12):
                                      'novembre',
                                      'dicembre'
                                      ]
-                        dataframe_empty_list = [(anno, list_mese[i], 'vuoto', 'vuoto', 'vuoto', 0)]
+                        dataframe_empty_list = [(i, anno, list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
                         if  list_df_conti_mese_entrate[i].empty:
                                 list_df_conti_mese_entrate[i] = pd.DataFrame\
-                                    (dataframe_empty_list, columns = ['Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
-                                list_df_conti_mese_uscite[i] = df_database_conti.loc[
-                                    (df_database_conti['Anno'] == anno) &
-                                    (df_database_conti['Mese'] == list_mese[i]) &
-                                    (df_database_conti['Entrate_Uscite'] == 'Entrate')]
+                                    (dataframe_empty_list, columns = ['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
 
 
+                        dataframe_empty_list = [(i, anno, list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
+                        if  list_df_conti_mese_uscite[i].empty:
+                                list_df_conti_mese_uscite[i] = pd.DataFrame\
+                                    (dataframe_empty_list, columns = ['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
 
                         print(list_df_conti_mese_entrate[i].to_markdown())
                         print('')
+                        print(list_df_conti_mese_uscite[i].to_markdown())
+                        print('')
+
                         #print(list_df_conti_mese_uscite[i].info())
                         i +=1
 
@@ -148,7 +151,10 @@ list_df_conti_mese_uscite = [   list_df_conti_mese_uscite[0], #df_conti_camerino
                                                         ]
 
 # print(list_df_conti_mese_entrate[0].columns)
-# print(list_df_conti_mese_entrate[0].to_markdown())
+print('##########################################')
+print(list_df_conti_mese_entrate[0].to_markdown())
+print('')
+print(list_df_conti_mese_uscite[0].to_markdown())
 
 
 #df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})

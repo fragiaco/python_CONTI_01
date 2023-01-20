@@ -1341,33 +1341,57 @@ class Report():
 
             i += 1
 
-        dataframe_empty_list = [(0, 'vuoto', 'vuoto', 'vuoto', 'vuoto', 0)]
-
         i = 0
+
         for x in range(12):
+
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Stringvar), list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_entrate[i].empty:
-                list_df_conti_mese_entrate[i] = pd.DataFrame(dataframe_empty_list,
-                                                             columns=['Anno', 'Mese', 'Entrate_Uscite', 'Categoria',
-                                                                      'Voce', 'Euro'])
-                list_df_conti_mese_entrate[i] = df_database_conti.loc[
-                    (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
-                    (df_database_conti['Mese'] == list_mese[i]) &
-                    (df_database_conti['Entrate_Uscite'] == 'Entrate')]
-                # print(list_df_conti_mese_entrate[i].head())
-                i += 0
+                list_df_conti_mese_entrate[i] = pd.DataFrame \
+                    (dataframe_empty_list,
+                     columns=['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
 
-        i = 0
-        for x in range(12):
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Stringvar), list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_uscite[i].empty:
-                list_df_conti_mese_uscite[i] = pd.DataFrame(dataframe_empty_list,
-                                                            columns=['Anno', 'Mese', 'Entrate_Uscite',
-                                                                     'Categoria', 'Voce', 'Euro'])
-                list_df_conti_mese_uscite[i] = df_database_conti.loc[
-                    (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
-                    (df_database_conti['Mese'] == list_mese[i]) &
-                    (df_database_conti['Entrate_Uscite'] == 'Uscite')]
-                # print(list_df_conti_mese_entrate[i].head())
-                i += 0
+                list_df_conti_mese_uscite[i] = pd.DataFrame \
+                    (dataframe_empty_list,
+                     columns=['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
+
+            print(list_df_conti_mese_entrate[i].to_markdown())
+            print('')
+            print(list_df_conti_mese_uscite[i].to_markdown())
+            print('')
+
+            # print(list_df_conti_mese_uscite[i].info())
+            i += 1
+
+        list_df_conti_mese_entrate = [list_df_conti_mese_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
+                                      list_df_conti_mese_entrate[1],
+                                      list_df_conti_mese_entrate[2],
+                                      list_df_conti_mese_entrate[3],
+                                      list_df_conti_mese_entrate[4],
+                                      list_df_conti_mese_entrate[5],
+                                      list_df_conti_mese_entrate[6],
+                                      list_df_conti_mese_entrate[7],
+                                      list_df_conti_mese_entrate[8],
+                                      list_df_conti_mese_entrate[9],
+                                      list_df_conti_mese_entrate[10],
+                                      list_df_conti_mese_entrate[11]
+                                      ]
+
+        list_df_conti_mese_uscite = [list_df_conti_mese_uscite[0],  # df_conti_camerino_pivot_uscite_gennaio
+                                     list_df_conti_mese_uscite[1],
+                                     list_df_conti_mese_uscite[2],
+                                     list_df_conti_mese_uscite[3],
+                                     list_df_conti_mese_uscite[4],
+                                     list_df_conti_mese_uscite[5],
+                                     list_df_conti_mese_uscite[6],
+                                     list_df_conti_mese_uscite[7],
+                                     list_df_conti_mese_uscite[8],
+                                     list_df_conti_mese_uscite[9],
+                                     list_df_conti_mese_uscite[10],
+                                     list_df_conti_mese_uscite[11]
+                                     ]
 
         list_df_conti_mese_entrate = [list_df_conti_mese_entrate[0],  # df_conti_camerino_pivot_entrate_gennaio
                                       list_df_conti_mese_entrate[1],
