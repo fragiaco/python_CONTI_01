@@ -1243,6 +1243,7 @@ class Report():
     # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 
     def report(self):
+      try:
 
         import pandas as pd
 
@@ -1477,8 +1478,9 @@ class Report():
         #       (df=list_df_conti_camerino_mese_entrate[0],values='Euro',indices=['Entrate_Uscite', 'Categoria', 'Voce'],columns=[],aggfunc='sum',fill_value='')
 
         i = 0
-        for x in range(12):
-            list_pivot_mese_entrate[i] = np.round(pivot_table_w_subtotals
+        try:
+            for x in range(12):
+                list_pivot_mese_entrate[i] = np.round(pivot_table_w_subtotals
                                                   (df=list_df_conti_mese_entrate[i],
                                                    values='Euro',
                                                    indices=['Entrate_Uscite', 'Categoria', 'Voce'],
@@ -1486,14 +1488,18 @@ class Report():
                                                    aggfunc='sum',
                                                    fill_value=''), 2)
 
-            list_pivot_mese_uscite[i] = np.round(pivot_table_w_subtotals
+                list_pivot_mese_uscite[i] = np.round(pivot_table_w_subtotals
                                                  (list_df_conti_mese_uscite[i],
                                                   values='Euro',
                                                   indices=['Entrate_Uscite', 'Categoria', 'Voce'],
                                                   columns=[],
                                                   aggfunc='sum',
                                                   fill_value=''), 2)
-            i += 1
+                i += 1
+        except:
+            pass
+
+
 
         list_pivot_mese_entrate = [list_pivot_mese_entrate[0],  # pivot gennaio entrate
                                    list_pivot_mese_entrate[1],
@@ -1590,23 +1596,25 @@ class Report():
                         ]
 
         c = 0  # contatore
+        try:
+            for x in range(12):
+                with pd.ExcelWriter('conti_styled.xlsx',
+                                    mode="a",
+                                    engine="openpyxl",
+                                    if_sheet_exists="overlay",
+                                    ) as writer:
+                    list_pivot_mese_entrate[c].to_excel(writer, sheet_name=list_mese[c], startrow=5)
+                    list_pivot_mese_uscite[c].to_excel(writer, sheet_name=list_mese[c],
+                                                    startrow=(len(list_pivot_mese_entrate[c]) + 10))
 
-        for x in range(12):
-            with pd.ExcelWriter('conti_styled.xlsx',
-                                mode="a",
-                                engine="openpyxl",
-                                if_sheet_exists="overlay",
-                                ) as writer:
-                list_pivot_mese_entrate[c].to_excel(writer, sheet_name=list_mese[c], startrow=5)
-                list_pivot_mese_uscite[c].to_excel(writer, sheet_name=list_mese[c],
-                                                   startrow=(len(list_pivot_mese_entrate[c]) + 10))
+                # leggo il file "conti_camerino_styled.xlsx"
+                wb = load_workbook(filename="conti_styled.xlsx")
+                # creo i 12 sheet
+                list_ws_mese[c] = wb[list_mese[c]]
+                c += 1
+        except:
+            pass
 
-            # leggo il file "conti_camerino_styled.xlsx"
-            wb = load_workbook(filename="conti_styled.xlsx")
-            # creo i 12 sheet
-            list_ws_mese[c] = wb[list_mese[c]]
-
-            c += 1
 
         # sheets dei 12 mesi
         list_ws_mese = [wb[list_mese[0]],  # ws_gennaio,
@@ -2227,6 +2235,8 @@ class Report():
         ws_fine['A38'].style = 'black'
         ws_fine.merge_cells('A38:B38')
 
+
+
         wb.save('conti_styled.xlsx')
 
         if sys.platform == "win32":
@@ -2234,6 +2244,13 @@ class Report():
         else:
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, 'conti_styled.xlsx'])
+      except:
+          messagebox.showinfo(title=None, message=None)
+
+
+
+
+
 
 
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
