@@ -1252,12 +1252,18 @@ class Report():
 
         def anno_report_func(self):
                 self.anno_report = anno_report_Stringvar.get()
-                return self.anno_report
+                return int(self.anno_report) #  return: altrimenti restituisce None - int: altrimenti Type STRING
+
+
+#B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
+
 
         def report(self):
 
                 import pandas as pd
+
                 import numpy as np
+
                 import sqlite3
 
                 import openpyxl
@@ -1271,6 +1277,8 @@ class Report():
                 from openpyxl.worksheet.worksheet import Worksheet
 
                 import os, sys, subprocess
+
+
                 #CONNESSIONE A SQLITE3
                 conn = sqlite3.connect('database_conti')
                 cur = conn.cursor()
@@ -1333,18 +1341,22 @@ class Report():
                              ]
 
                 ########### imposto anno ##############
-                anno = Report.anno_report_func(anno_report_Stringvar)
+                # anno = Report.anno_report_func(anno_report_Stringvar)
+                # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
+                #
+                # print(f'anno= {anno}')
+
                 i = 0
                 for x in range (12):
                         list_df_conti_mese_entrate[i]= df_database_conti.loc[
-                            (df_database_conti['Anno'] == anno) &
+                            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
                             (df_database_conti['Mese'] == list_mese[i]) &
                             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
                         #print(list_df_conti_camerino_pivot_entrate[i].head())
 
 
                         list_df_conti_mese_uscite[i] = df_database_conti.loc[
-                            (df_database_conti['Anno'] == anno) &
+                            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
                             (df_database_conti['Mese'] == list_mese[i]) &
                             (df_database_conti['Entrate_Uscite'] == 'Uscite')]
                         #print(list_df_conti_camerino_mese_uscite[i].head())
@@ -1911,9 +1923,9 @@ class Report():
 
 
 
-                anno = Report.anno_report_func(anno_report_Stringvar)
+                #anno =
                 df_conti_camerino_TOT_entrate= df_database_conti.loc[
-                            (df_database_conti['Anno'] == anno) &
+                            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
                             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
                 #print(df_conti_camerino_TOT_entrate.head(40))
 
@@ -1978,7 +1990,7 @@ class Report():
 
 
                 df_conti_camerino_TOT_uscite= df_database_conti.loc[
-                            (df_database_conti['Anno'] == anno) &
+                            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
                             (df_database_conti['Entrate_Uscite'] == 'Uscite')]
 
                 #print(df_conti_camerino_TOT_uscite.head(40))
@@ -2256,7 +2268,7 @@ B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), qu
 B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-#B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: Report.anno_report_func(anno_report_Stringvar)).grid(row=0, column=2, padx=20, pady=15)
+#B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: Report.report(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 
 #B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2012)).grid(row=0, column=2, padx=20, pady=15)
