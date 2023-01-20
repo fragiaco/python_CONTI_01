@@ -1343,8 +1343,7 @@ class Report():
                 ########### imposto anno ##############
                 # anno = Report.anno_report_func(anno_report_Stringvar)
                 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
-                #
-                # print(f'anno= {anno}')
+
 
                 i = 0
                 for x in range (12):
