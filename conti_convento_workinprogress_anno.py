@@ -1237,9 +1237,14 @@ class Report():
         self.anno_report = anno
 
     def anno_report_func(self):
-        self.anno_report = anno_report_Stringvar.get()
-        return int(self.anno_report)  # return: altrimenti restituisce None - int: altrimenti Type STRING
 
+        # try:
+            self.anno_report = anno_report_Stringvar.get()
+            return int(self.anno_report)  # return: altrimenti restituisce None - int: altrimenti Type STRING
+        # except:
+        #     messagebox.showwarning(title='Dati Mancanti o Errati', message="Scrivere l'anno di interesse")
+        # finally:
+        #     quit()
     # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 
     def report(self):
@@ -2245,7 +2250,7 @@ class Report():
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, 'conti_styled.xlsx'])
       except:
-          messagebox.showinfo(title=None, message=None)
+            messagebox.showwarning(title='Dati Mancanti', message="L'anno indicato deve avere almeno una voce in entrata e una voce in uscita")
 
 
 
