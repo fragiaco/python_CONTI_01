@@ -69,8 +69,10 @@ root.geometry(geometry)
 root.resizable(0, 0)
 root.title('Registro Messe')
 
+foreground_Bianco = '#ffeddb'
+background_Blu = 'blue'
 # Label title
-title = Label(root, text='Registro Messe', font=('verdana', 40, 'bold'), bg='#ABCDEF', fg='#08457E')
+title = Label(root, text='Registro Messe', font=('verdana', 40, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 title.pack(side=TOP, fill=X)
 
 ###################################
@@ -78,225 +80,56 @@ title.pack(side=TOP, fill=X)
 ###################################
 # LATO SINISTRO
 # Frame Combo - left side Frame
-Frame_combo = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE) #azzurro fiordaliso
+Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE) #azzurro fiordaliso
 Frame_combo.place(x=20, y=75, width=625, height=350)
 
 # Frame Treeview - treeview right Frame
-Frame_tree = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE)
+Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_tree.place(x=650, y=75, width=1010, height=350)
 
 # Frame Tabella - Tabella bottom Frame
-Frame_tree = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE)
+Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_tree.place(x=20, y=430, width=1640, height=510)
 
-# Frame 1in - calcolatrice
-# Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-# Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
-# Frame 1in - bottom side Frame - Button 'add'
-# Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
-# Frame1in.place(x=15, y=768, width=500, height=60)
 
 
-root.mainloop()
-'''
-# LATO DESTRO
-# Frame 2 - right side Frame
-Frame2 = Frame(root, bd='4', bg='blue', relief=RIDGE)
-Frame2.place(x=590, y=85, width=1070, height=850)
-# Frame 2in - treeview right Frame
-Frame2in_tree = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
-Frame2in_tree.place(x=15, y=15, width=1015, height=335)
-# Frame 2in - Place holder COMBOBOX e EXCELL FRAMES e BUTTONS
-Frame2in_bottom = Frame(Frame2, bd='4', bg='blue', relief=RIDGE)
-Frame2in_bottom.place(x=15, y=360, width=1015, height=480)
-# Frame 2in - combobox
-Frame_combobox_ok = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_combobox_ok.place(x=15, y=2, width=485, height=400)
-# Frame 2in - excell
-Frame_excell = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_excell.place(x=500, y=2, width=485, height=400)
-# Frame 2in -  update botton
-Frame_update_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_update_botton.place(x=15, y=405, width=485, height=60)
-# Frame 2in -  excell botton
-Frame_excell_botton = Frame(Frame2in_bottom, bd='4', bg='blue', relief=RIDGE)
-Frame_excell_botton.place(x=500, y=405, width=485, height=60)
+
+
+
 #######################################################
 
 
-# define mylabel
-mylabel = Label(Frame2)
+#Frame Combo
+Frame_Combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_Combo_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
-##########################
-# Frame1 Labels
-Frame1_title = Label(Frame1, text='Inserisci Dati:', font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
-Frame1_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
-Frame1_anno = Label(Frame1, text='Anno', font=('verdana', 15, 'bold'), bg='blue', fg='white')
+
+
+
+
+
+
+Frame1_anno = Label(Frame_combo, text='Anno', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_anno.grid(row=2, padx=20, pady=10, sticky='w')
 
-Frame1_mese = Label(Frame1, text='Mese', font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Frame1_mese = Label(Frame_combo, text='Mese', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_mese.grid(row=4, padx=20, pady=25, sticky='w')
 
-Frame1_EntrateUscite = Label(Frame1, text='Entrate/Uscite', font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Frame1_EntrateUscite = Label(Frame_combo, text='Nome Celebrante', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_EntrateUscite.grid(row=6, padx=25, pady=20, sticky='w')
 
-Frame1_Categoria = Label(Frame1, text='Categoria', font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Frame1_Categoria = Label(Frame_combo, text='Categoria', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_Categoria.grid(row=8, padx=25, pady=20, sticky='w')
 
-Frame1_VoceSpesa = Label(Frame1, text='Voce di spesa', font=('verdana', 15, 'bold'), bg='blue', fg='white')
-Frame1_VoceSpesa.grid(row=10, padx=25, pady=20, sticky='w')
+# Frame1_VoceSpesa = Label(Frame_combo, text='Voce di spesa', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Frame1_VoceSpesa.grid(row=10, padx=25, pady=20, sticky='w')
 
-Frame1_Euro = Label(Frame1, text='Euro', font=('verdana', 15, 'bold'), bg='blue', fg='white')
+Frame1_Euro = Label(Frame_combo, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_Euro.grid(row=12, padx=25, pady=20, sticky='w')
 
-######## CALCOLATRICE #########
-
-# Python program to create a simple GUI
-# calculator using Tkinter
-
-# globally declare the expression variable
-expression = ""
 
 
-# Function to update expression
-# in the text entry box
-def press(num):
-    # point out the global expression variable
-    global expression
-
-    # concatenation of string
-    expression = expression + str(num)
-
-    # update the expression by using set method
-    equation.set(expression)
-
-
-# Function to evaluate the final expression
-def equalpress():
-    # Try and except statement is used
-    # for handling the errors like zero
-    # division error etc.
-
-    # Put that code inside the try block
-    # which may generate the error
-    try:
-
-        global expression
-
-        # eval function evaluate the expression
-        # and str function convert the result
-        # into string
-        total = str(eval(expression))
-
-        equation.set(total)
-
-        # initialize the expression variable
-        # by empty string
-        expression = ""
-
-    # if error is generate then handle
-    # by the except block
-    except:
-
-        equation.set(" error ")
-        expression = ""
-
-
-# Function to clear the contents
-# of text entry box
-def clear():
-    global expression
-    expression = ""
-    equation.set("")
-
-
-# StringVar() is the variable class
-# we create an instance of this class
-equation = StringVar()
-
-# create the text entry box for
-# showing the expression .
-expression_field = Entry(Frame_calc, textvariable=equation)
-
-# grid method is used for placing
-# the widgets at respective positions
-# in table like structure .
-# expression_field.grid(columnspan=4, ipadx=70)
-
-# create a Buttons and place at a particular
-# location inside the root window .
-# when user press the button, the command or
-# function affiliated to that button is executed .
-button1 = Button(Frame_calc, text=' 1 ', fg='black', bg='light grey',
-                 command=lambda: press(1), height=1, width=7)
-button1.grid(row=2, column=0, pady=2)
-
-button2 = Button(Frame_calc, text=' 2 ', fg='black', bg='light grey',
-                 command=lambda: press(2), height=1, width=7)
-button2.grid(row=2, column=1)
-
-button3 = Button(Frame_calc, text=' 3 ', fg='black', bg='light grey',
-                 command=lambda: press(3), height=1, width=7)
-button3.grid(row=2, column=2)
-
-button4 = Button(Frame_calc, text=' 4 ', fg='black', bg='light grey',
-                 command=lambda: press(4), height=1, width=7)
-button4.grid(row=3, column=0, pady=2)
-
-button5 = Button(Frame_calc, text=' 5 ', fg='black', bg='light grey',
-                 command=lambda: press(5), height=1, width=7)
-button5.grid(row=3, column=1)
-
-button6 = Button(Frame_calc, text=' 6 ', fg='black', bg='light grey',
-                 command=lambda: press(6), height=1, width=7)
-button6.grid(row=3, column=2)
-
-button7 = Button(Frame_calc, text=' 7 ', fg='black', bg='light grey',
-                 command=lambda: press(7), height=1, width=7)
-button7.grid(row=4, column=0, pady=2)
-
-button8 = Button(Frame_calc, text=' 8 ', fg='black', bg='light grey',
-                 command=lambda: press(8), height=1, width=7)
-button8.grid(row=4, column=1)
-
-button9 = Button(Frame_calc, text=' 9 ', fg='black', bg='light grey',
-                 command=lambda: press(9), height=1, width=7)
-button9.grid(row=4, column=2)
-
-button0 = Button(Frame_calc, text=' 0 ', fg='black', bg='light grey',
-                 command=lambda: press(0), height=1, width=7)
-button0.grid(row=5, column=0, pady=2)
-
-plus = Button(Frame_calc, text=' + ', fg='black', bg='light grey',
-              command=lambda: press("+"), height=1, width=7)
-plus.grid(row=2, column=3)
-
-minus = Button(Frame_calc, text=' - ', fg='black', bg='light grey',
-               command=lambda: press("-"), height=1, width=7)
-minus.grid(row=3, column=3)
-
-multiply = Button(Frame_calc, text=' * ', fg='black', bg='light grey',
-                  command=lambda: press("*"), height=1, width=7)
-multiply.grid(row=4, column=3)
-
-divide = Button(Frame_calc, text=' / ', fg='black', bg='light grey',
-                command=lambda: press("/"), height=1, width=7)
-divide.grid(row=5, column=3)
-
-equal = Button(Frame_calc, text=' = ', fg='black', bg='light grey',
-               command=equalpress, height=1, width=7)
-equal.grid(row=5, column=2)
-
-clear = Button(Frame_calc, text='Clear', fg='black', bg='light grey',
-               command=clear, height=1, width=7)
-clear.grid(row=5, column=1)
-
-Decimal = Button(Frame_calc, text='.', fg='black', bg='light grey',
-                 command=lambda: press('.'), height=1, width=7)
-Decimal.grid(row=6, column=0)
-# start the GUI
-# gui.mainloop()
 
 ############################
 ####### COMBOBOX ###########
@@ -325,12 +158,12 @@ Mesi = ["gennaio",
         ]
 
 # List Entrate_Uscite
-Entrate_Uscite = ["Entrate",
-                  "Uscite",
+Nomi = ["Entrate",
+        "Uscite",
                   ]
 
 # List Categorie_Entrate
-Categorie_Entrate = ["Collette_Chiesa",
+Categorie   = ["Collette_Chiesa",
                      "Congrua",
                      "Interessi",
                      "Messe_celebrate",
@@ -339,124 +172,126 @@ Categorie_Entrate = ["Collette_Chiesa",
                      "Servizi_religiosi",
                      ]
 
-# List Voci Entrate
-Collette_Chiesa = ["Cestino",
-                   "Cassette"
-                   ]
-Congrua = ['fra Giacomo'
-           ]
-Interessi = ['Interessi bancari'
-             ]
-Messe_celebrate = ['Messe_celebrate'
-                   ]
-Offerte = ['Eccedenza_Messe',
-           'Offerte libere'
-           ]
-Pensioni = ['fra Gabriele'
-            ]
-Servizi_religiosi = ['Servizi_religiosi',
-                     'Predicazione'
-                     ]
+# # List Voci Entrate
+# Collette_Chiesa = ["Cestino",
+#                    "Cassette"
+#                    ]
+# Congrua = ['fra Giacomo'
+#            ]
+# Interessi = ['Interessi bancari'
+#              ]
+# Messe_celebrate = ['Messe_celebrate'
+#                    ]
+# Offerte = ['Eccedenza_Messe',
+#            'Offerte libere'
+#            ]
+# Pensioni = ['fra Gabriele'
+#             ]
+# Servizi_religiosi = ['Servizi_religiosi',
+#                      'Predicazione'
+#                      ]
+#
+# # List Categorie Uscite
+# Categorie_Uscite = ["Acquisti_Chiesa",
+#                     "Acquisti_Convento",
+#                     "Acquisti_Orto_Animali",
+#                     "Cultura",
+#                     "Curia_provinciale",
+#                     "Domestici",
+#                     "Elargizioni",
+#                     "Utenze",
+#                     "Ferie_Viaggi",
+#                     "Igiene",
+#                     "Imposte",
+#                     "Lavori_Impianti",
+#                     "Posta_Cancelleria",
+#                     "Salute",
+#                     "Veicoli_motore",
+#                     "Vestiario",
+#                     'Vitto',
+#                     'Eccedenza_Cassa',
+#                     ]
+# # List Voci Entrate
+# Acquisti_Chiesa = ['Fiori',
+#                    'Ostie',
+#                    'Ceri e Candele',
+#                    'Paramenti liturigici'
+#                    ]
+# Acquisti_Convento = ['Ferramenta',
+#                      'Materiale elettrico',
+#                      'Casalinghi',
+#                      'Materiale edile',
+#                      'Computer',
+#                      'Stampante'
+#                      ]
+# Acquisti_Orto_Animali = ['Attrezzi agricoli manutenzione',
+#                          'Semi, Ortaggi',
+#                          'Fitofarmaci'
+#                          ]
+# Cultura = ['Abbonamenti',
+#            'Convegni',
+#            'Ritiro spirituale',
+#            'Libri_Riviste',
+#            'Pellegrinaggio'
+#            ]
+# Curia_provinciale = ['Curia_provinciale',
+#                      'Tassa_Curia_generale'
+#                      ]
+# Domestici = ['Rosaria'
+#              ]
+# Elargizioni = ['Regalie',
+#                'Beneficenza_5%'
+#                ]
+# Utenze = ['Energia_elettrica',
+#           'Gas',
+#           'Acqua',
+#           'Riscaldamento',
+#           'Rifiuti',
+#           'pay_TV',
+#           'Telefono_Internet'
+#           ]
+# Ferie_Viaggi = ['Carburante',
+#                 'Treno',
+#                 'Aereo',
+#                 'Autostrada-Parcheggio'
+#                 ]
+# Igiene = ['Detersivi',
+#           'Igiene personale',
+#           ]
+# Imposte = ['Imposte_bancarie',
+#            'Controllo_estintori'
+#            'Imposte_varie'
+#            ]
+# Lavori_Impianti = ['Elettricista',
+#                    'Fabbro',
+#                    'Idraulico',
+#                    'Muratore',
+#                    'Imbianchino',
+#                    'Restauratore'
+#                    ]
+# Posta_Cancelleria = ['Cancelleria',
+#                      'Posta'
+#                      ]
+# Salute = ['Ticket_Esami',
+#           'Farmacia'
+#           ]
+# Veicoli_motore = ['Assicurazione',
+#                   'Bollo Auto',
+#                   'Meccanico',
+#                   'Gommista',
+#                   'Elettrauto',
+#                   'Carrozziere'
+#                   ]
+# Vestiario = ['Indumenti'
+#              ]
+# Vitto = ['Alimentari'
+#          ]
+# Eccedenza_Cassa = ['Eccedenza_Cassa'
+#                    ]
 
-# List Categorie Uscite
-Categorie_Uscite = ["Acquisti_Chiesa",
-                    "Acquisti_Convento",
-                    "Acquisti_Orto_Animali",
-                    "Cultura",
-                    "Curia_provinciale",
-                    "Domestici",
-                    "Elargizioni",
-                    "Utenze",
-                    "Ferie_Viaggi",
-                    "Igiene",
-                    "Imposte",
-                    "Lavori_Impianti",
-                    "Posta_Cancelleria",
-                    "Salute",
-                    "Veicoli_motore",
-                    "Vestiario",
-                    'Vitto',
-                    'Eccedenza_Cassa',
-                    ]
-# List Voci Entrate
-Acquisti_Chiesa = ['Fiori',
-                   'Ostie',
-                   'Ceri e Candele',
-                   'Paramenti liturigici'
-                   ]
-Acquisti_Convento = ['Ferramenta',
-                     'Materiale elettrico',
-                     'Casalinghi',
-                     'Materiale edile',
-                     'Computer',
-                     'Stampante'
-                     ]
-Acquisti_Orto_Animali = ['Attrezzi agricoli manutenzione',
-                         'Semi, Ortaggi',
-                         'Fitofarmaci'
-                         ]
-Cultura = ['Abbonamenti',
-           'Convegni',
-           'Ritiro spirituale',
-           'Libri_Riviste',
-           'Pellegrinaggio'
-           ]
-Curia_provinciale = ['Curia_provinciale',
-                     'Tassa_Curia_generale'
-                     ]
-Domestici = ['Rosaria'
-             ]
-Elargizioni = ['Regalie',
-               'Beneficenza_5%'
-               ]
-Utenze = ['Energia_elettrica',
-          'Gas',
-          'Acqua',
-          'Riscaldamento',
-          'Rifiuti',
-          'pay_TV',
-          'Telefono_Internet'
-          ]
-Ferie_Viaggi = ['Carburante',
-                'Treno',
-                'Aereo',
-                'Autostrada-Parcheggio'
-                ]
-Igiene = ['Detersivi',
-          'Igiene personale',
-          ]
-Imposte = ['Imposte_bancarie',
-           'Controllo_estintori'
-           'Imposte_varie'
-           ]
-Lavori_Impianti = ['Elettricista',
-                   'Fabbro',
-                   'Idraulico',
-                   'Muratore',
-                   'Imbianchino',
-                   'Restauratore'
-                   ]
-Posta_Cancelleria = ['Cancelleria',
-                     'Posta'
-                     ]
-Salute = ['Ticket_Esami',
-          'Farmacia'
-          ]
-Veicoli_motore = ['Assicurazione',
-                  'Bollo Auto',
-                  'Meccanico',
-                  'Gommista',
-                  'Elettrauto',
-                  'Carrozziere'
-                  ]
-Vestiario = ['Indumenti'
-             ]
-Vitto = ['Alimentari'
-         ]
-Eccedenza_Cassa = ['Eccedenza_Cassa'
-                   ]
 
-
+root.mainloop()
+'''
 def pick_Categoria(e):
     if my_combo.get() == "Entrate":
         categoria_combo.config(values=Categorie_Entrate)
