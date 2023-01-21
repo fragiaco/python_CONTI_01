@@ -67,7 +67,7 @@ left = (root.winfo_screenwidth() - width) / 2
 geometry = ("{}x{}+{}+{}".format(width, height, int(left), int(top)))
 root.geometry(geometry)
 root.resizable(0, 0)
-root.title('Conti Convento Camerino')
+root.title('Conti Convento')
 
 # Label title
 title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='#ffeddb')
