@@ -31,17 +31,17 @@ from xlsxwriter.utility import xl_rowcol_to_cell
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
 ######################################################################
 def connessione():
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_messe')
 
     cur = conn.cursor()
     try:
-        cur.execute('''CREATE TABLE TABLE_Conti(ID integer not null PRIMARY KEY ,
+        cur.execute('''CREATE TABLE TABLE_Messe(ID integer not null PRIMARY KEY ,
                                                 Anno TEXT not null ,
                                                 Mese TEXT not null ,
-                                                Entrate_Uscite TEXT not null ,
+                                                Nome TEXT not null ,
                                                 Categoria TEXT not null ,
-                                                Voce TEXT not null ,
-                                                Euro real not null )''')
+                                                
+                                                Numero real not null )''')
     except:
         pass
 
@@ -67,26 +67,38 @@ left = (root.winfo_screenwidth() - width) / 2
 geometry = ("{}x{}+{}+{}".format(width, height, int(left), int(top)))
 root.geometry(geometry)
 root.resizable(0, 0)
-root.title('Conti Convento')
+root.title('Registro Messe')
 
 # Label title
-title = Label(root, text='Database Entrate Uscite', font=('verdana', 40, 'bold'), bg='blue', fg='#ffeddb')
+title = Label(root, text='Registro Messe', font=('verdana', 40, 'bold'), bg='#ABCDEF', fg='#08457E')
 title.pack(side=TOP, fill=X)
 
 ###################################
 ######## TKINTER frames ###########
 ###################################
 # LATO SINISTRO
-# Frame 1 - left side Frame
-Frame1 = Frame(root, bd='4', bg='blue', relief=RIDGE)
-Frame1.place(x=20, y=85, width=550, height=850)
-# Frame 1in - calcolatrice
-Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
-Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
-# Frame 1in - bottom side Frame - Button 'add'
-Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
-Frame1in.place(x=15, y=768, width=500, height=60)
+# Frame Combo - left side Frame
+Frame_combo = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE) #azzurro fiordaliso
+Frame_combo.place(x=20, y=75, width=625, height=350)
 
+# Frame Treeview - treeview right Frame
+Frame_tree = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE)
+Frame_tree.place(x=650, y=75, width=1010, height=350)
+
+# Frame Tabella - Tabella bottom Frame
+Frame_tree = Frame(root, bd='4', bg='#ABCDEF', relief=RIDGE)
+Frame_tree.place(x=20, y=430, width=1640, height=510)
+
+# Frame 1in - calcolatrice
+# Frame_calc = Frame(Frame1, bd='4', bg='light blue', relief=RIDGE)
+# Frame_calc.grid(column=0, row=15, columnspan=2, padx=65, pady=70)
+# Frame 1in - bottom side Frame - Button 'add'
+# Frame1in = Frame(Frame1, bd='4', bg='blue', relief=RIDGE)
+# Frame1in.place(x=15, y=768, width=500, height=60)
+
+
+root.mainloop()
+'''
 # LATO DESTRO
 # Frame 2 - right side Frame
 Frame2 = Frame(root, bd='4', bg='blue', relief=RIDGE)
@@ -2300,3 +2312,4 @@ query_database()
 # conn.close()
 
 root.mainloop()
+'''
