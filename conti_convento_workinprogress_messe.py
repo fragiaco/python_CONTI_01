@@ -103,26 +103,43 @@ Frame_tabella.place(x=20, y=480, width=1640, height=455)
 #######################################################
 
 
-#Frame Combo
-Frame_Combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame_Combo_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
+#Frame Combo_insert
+Frame_combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
-Frame1_anno = Label(Frame_combo, text='Anno', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame1_anno.grid(row=2, padx=20, pady=10, sticky='w')
+Frame_combo_anno = Label(Frame_combo, text='Anno', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_anno.grid(row=2, padx=20, pady=10, sticky='w')
 
-Frame1_mese = Label(Frame_combo, text='Mese', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_mese = Label(Frame_combo, text='Mese', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_mese.grid(row=4, padx=20, pady=25, sticky='w')
+
+Frame_combo_Nome_celebrante = Label(Frame_combo, text='Nome Celebrante', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_Nome_celebrante.grid(row=6, padx=25, pady=20, sticky='w')
+
+Frame_combo_categoria = Label(Frame_combo, text='Categoria', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_categoria.grid(row=8, padx=25, pady=20, sticky='w')
+
+Frame_numero_messe = Label(Frame_combo, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_numero_messe.grid(row=10, padx=25, pady=20, sticky='w')
+
+#Frame Combo_update
+Frame_Combo_title_update = Label(Frame_update, text='Correggi - Cancella Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_Combo_title_update.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
+
+Frame_combo_anno_update = Label(Frame_update, text='Anno', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_anno_update.grid(row=2, padx=20, pady=10, sticky='w')
+
+Frame1_mese = Label(Frame_update, text='Mese', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_mese.grid(row=4, padx=20, pady=25, sticky='w')
 
-Frame1_EntrateUscite = Label(Frame_combo, text='Nome Celebrante', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame1_EntrateUscite.grid(row=6, padx=25, pady=20, sticky='w')
+Frame_combo_Nome_celebrante_update = Label(Frame_update, text='Nome Celebrante', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_Nome_celebrante_update.grid(row=6, padx=25, pady=20, sticky='w')
 
-Frame1_Categoria = Label(Frame_combo, text='Categoria', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame1_Categoria.grid(row=8, padx=25, pady=20, sticky='w')
+Frame_combo_categoria_update = Label(Frame_update, text='Categoria', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_combo_categoria_update.grid(row=8, padx=25, pady=20, sticky='w')
 
-Frame1_Euro = Label(Frame_combo, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame1_Euro.grid(row=10, padx=25, pady=20, sticky='w')
-
-
+Frame_numero_messe_update = Label(Frame_update, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Frame_numero_messe_update.grid(row=10, padx=25, pady=20, sticky='w')
 
 
 ############################
@@ -171,7 +188,8 @@ Categorie   = ["Ad Mentem",
 
 
 
-
+#############################
+#####Combo insert############
 
 # Dropbox Anno
 anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni)
@@ -198,8 +216,39 @@ categorie_combo.grid(row=8, column=1)
 categorie_combo['state'] = 'readonly'
 
 # Entry Numero
-euro = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
-euro.grid(row=10, column=1)
+numero = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
+numero.grid(row=10, column=1)
+
+#############################
+#####Combo update############
+
+# Dropbox Anno
+anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Anni)
+anno_combo_update.current(0)
+anno_combo_update.grid(row=2, column=1)
+anno_combo_update['state'] = 'readonly'
+
+# Dropbox Mesi
+mesi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Mesi)
+mesi_combo_update.current(0)
+mesi_combo_update.grid(row=4, column=1)
+mesi_combo_update['state'] = 'readonly'
+
+# Dropbox Nomi
+nomi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Nomi)
+nomi_combo_update.current(0)
+nomi_combo_update.grid(row=6, column=1)
+nomi_combo_update['state'] = 'readonly'
+
+# Dropbox Categoria
+categorie_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Categorie)
+categorie_combo_update.current(0)
+categorie_combo_update.grid(row=8, column=1)
+categorie_combo_update['state'] = 'readonly'
+
+# Entry Numero
+numero_update = Entry(Frame_update, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
+numero_update.grid(row=10, column=1)
 
 
 root.mainloop()
