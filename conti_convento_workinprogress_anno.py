@@ -1792,7 +1792,7 @@ class Report():
                 cell.font = Font(size=1)
 
         # imposto saldo iniziale
-        saldo = saldo_report_DoubleVar.get()
+        saldo = Report.saldo_report_func(saldo_report_DoubleVar)
         # imposto un contatore
         e = 0
         i = 0
