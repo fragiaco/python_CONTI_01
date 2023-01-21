@@ -1217,10 +1217,10 @@ euro_update.grid(row=8, column=1)
 # x = Complex(3.0, -4.5)
 # x.r, x.i
 
-anno_report_Stringvar = StringVar()
+anno_report_Intvar = IntVar()
 
 Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white',
-                          textvariable=anno_report_Stringvar)
+                          textvariable=anno_report_Intvar)
 Anno_entry_excell.grid(row=4, column=1)
 
 
@@ -1236,13 +1236,15 @@ class Report():
     def __int__(self, anno):
         self.anno_report = anno
 
+
     def anno_report_func(self):
 
-        # try:
-            self.anno_report = anno_report_Stringvar.get()
+         try:
+            self.anno_report = anno_report_Intvar.get()
             return int(self.anno_report)  # return: altrimenti restituisce None - int: altrimenti Type STRING
-        # except:
-        #     messagebox.showwarning(title='Dati Mancanti o Errati', message="Scrivere l'anno di interesse")
+         except:
+             anno_report_Intvar.set(0)
+             messagebox.showwarning(title='Dati Mancanti o Errati', message="Scrivere l'anno di interesse")
         # finally:
         #     quit()
     # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
@@ -1334,13 +1336,13 @@ class Report():
         i = 0
         for x in range(12):
             list_df_conti_mese_entrate[i] = df_database_conti.loc[
-                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
+                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
                 (df_database_conti['Mese'] == list_mese[i]) &
                 (df_database_conti['Entrate_Uscite'] == 'Entrate')]
             # print(list_df_conti_camerino_pivot_entrate[i].head())
 
             list_df_conti_mese_uscite[i] = df_database_conti.loc[
-                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
+                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
                 (df_database_conti['Mese'] == list_mese[i]) &
                 (df_database_conti['Entrate_Uscite'] == 'Uscite')]
             # print(list_df_conti_camerino_mese_uscite[i].head())
@@ -1351,13 +1353,13 @@ class Report():
 
         for x in range(12):
 
-            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Stringvar), list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Intvar), list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_entrate[i].empty:
                 list_df_conti_mese_entrate[i] = pd.DataFrame \
                     (dataframe_empty_list,
                      columns=['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
 
-            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Stringvar), list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Intvar), list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_uscite[i].empty:
                 list_df_conti_mese_uscite[i] = pd.DataFrame \
                     (dataframe_empty_list,
@@ -1942,7 +1944,7 @@ class Report():
 
         # anno =
         df_conti_camerino_TOT_entrate = df_database_conti.loc[
-            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
+            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
         # print(df_conti_camerino_TOT_entrate.head(40))
 
@@ -1997,7 +1999,7 @@ class Report():
         ws_tab_uscite.row_dimensions[1].height = 45
 
         df_conti_camerino_TOT_uscite = df_database_conti.loc[
-            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Stringvar)) &
+            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
             (df_database_conti['Entrate_Uscite'] == 'Uscite')]
 
         # print(df_conti_camerino_TOT_uscite.head(40))
@@ -2271,7 +2273,7 @@ B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to
                                                                                              pady=15)
 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 B_report = Button(Frame_excell_botton, text='report', width=10,
-                  command=lambda: Report.report(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2,
+                  command=lambda: Report.report(Report.anno_report_func(anno_report_Intvar))).grid(row=0, column=2,
                                                                                                       padx=20, pady=15)
 
 # B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2012)).grid(row=0, column=2, padx=20, pady=15)
