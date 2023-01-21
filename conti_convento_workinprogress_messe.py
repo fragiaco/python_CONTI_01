@@ -81,15 +81,19 @@ title.pack(side=TOP, fill=X)
 # LATO SINISTRO
 # Frame Combo - left side Frame
 Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE) #azzurro fiordaliso
-Frame_combo.place(x=20, y=75, width=625, height=350)
+Frame_combo.place(x=20, y=75, width=450, height=400)
 
 # Frame Treeview - treeview right Frame
 Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_tree.place(x=650, y=75, width=1010, height=350)
+Frame_tree.place(x=475, y=75, width=730, height=400)
+
+# Frame Update - update right Frame
+Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_update.place(x=1210, y=75, width=450, height=400)
 
 # Frame Tabella - Tabella bottom Frame
-Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_tree.place(x=20, y=430, width=1640, height=510)
+Frame_tabella = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_tabella.place(x=20, y=480, width=1640, height=455)
 
 
 
@@ -103,13 +107,6 @@ Frame_tree.place(x=20, y=430, width=1640, height=510)
 Frame_Combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame_Combo_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
-
-
-
-
-
-
-
 Frame1_anno = Label(Frame_combo, text='Anno', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_anno.grid(row=2, padx=20, pady=10, sticky='w')
 
@@ -122,11 +119,8 @@ Frame1_EntrateUscite.grid(row=6, padx=25, pady=20, sticky='w')
 Frame1_Categoria = Label(Frame_combo, text='Categoria', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Frame1_Categoria.grid(row=8, padx=25, pady=20, sticky='w')
 
-# Frame1_VoceSpesa = Label(Frame_combo, text='Voce di spesa', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Frame1_VoceSpesa.grid(row=10, padx=25, pady=20, sticky='w')
-
 Frame1_Euro = Label(Frame_combo, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Frame1_Euro.grid(row=12, padx=25, pady=20, sticky='w')
+Frame1_Euro.grid(row=10, padx=25, pady=20, sticky='w')
 
 
 
@@ -158,294 +152,58 @@ Mesi = ["gennaio",
         ]
 
 # List Entrate_Uscite
-Nomi = ["Entrate",
-        "Uscite",
+Nomi = ["fra Giacomo",
+        "fra Gabriele",
                   ]
 
-# List Categorie_Entrate
-Categorie   = ["Collette_Chiesa",
-                     "Congrua",
-                     "Interessi",
-                     "Messe_celebrate",
-                     "Offerte",
-                     "Pensioni",
-                     "Servizi_religiosi",
+# List Categorie
+Categorie   = ["Ad Mentem",
+                     "Binate",
+                    "Binate concelebrate"
+                     "Trinate",
+                     "Suffragi personali",
+                     "Suffragi obbligatori",
+                     "Devozione",
+                     "Benefattori",
+                    "pro Populo",
                      ]
 
-# # List Voci Entrate
-# Collette_Chiesa = ["Cestino",
-#                    "Cassette"
-#                    ]
-# Congrua = ['fra Giacomo'
-#            ]
-# Interessi = ['Interessi bancari'
-#              ]
-# Messe_celebrate = ['Messe_celebrate'
-#                    ]
-# Offerte = ['Eccedenza_Messe',
-#            'Offerte libere'
-#            ]
-# Pensioni = ['fra Gabriele'
-#             ]
-# Servizi_religiosi = ['Servizi_religiosi',
-#                      'Predicazione'
-#                      ]
-#
-# # List Categorie Uscite
-# Categorie_Uscite = ["Acquisti_Chiesa",
-#                     "Acquisti_Convento",
-#                     "Acquisti_Orto_Animali",
-#                     "Cultura",
-#                     "Curia_provinciale",
-#                     "Domestici",
-#                     "Elargizioni",
-#                     "Utenze",
-#                     "Ferie_Viaggi",
-#                     "Igiene",
-#                     "Imposte",
-#                     "Lavori_Impianti",
-#                     "Posta_Cancelleria",
-#                     "Salute",
-#                     "Veicoli_motore",
-#                     "Vestiario",
-#                     'Vitto',
-#                     'Eccedenza_Cassa',
-#                     ]
-# # List Voci Entrate
-# Acquisti_Chiesa = ['Fiori',
-#                    'Ostie',
-#                    'Ceri e Candele',
-#                    'Paramenti liturigici'
-#                    ]
-# Acquisti_Convento = ['Ferramenta',
-#                      'Materiale elettrico',
-#                      'Casalinghi',
-#                      'Materiale edile',
-#                      'Computer',
-#                      'Stampante'
-#                      ]
-# Acquisti_Orto_Animali = ['Attrezzi agricoli manutenzione',
-#                          'Semi, Ortaggi',
-#                          'Fitofarmaci'
-#                          ]
-# Cultura = ['Abbonamenti',
-#            'Convegni',
-#            'Ritiro spirituale',
-#            'Libri_Riviste',
-#            'Pellegrinaggio'
-#            ]
-# Curia_provinciale = ['Curia_provinciale',
-#                      'Tassa_Curia_generale'
-#                      ]
-# Domestici = ['Rosaria'
-#              ]
-# Elargizioni = ['Regalie',
-#                'Beneficenza_5%'
-#                ]
-# Utenze = ['Energia_elettrica',
-#           'Gas',
-#           'Acqua',
-#           'Riscaldamento',
-#           'Rifiuti',
-#           'pay_TV',
-#           'Telefono_Internet'
-#           ]
-# Ferie_Viaggi = ['Carburante',
-#                 'Treno',
-#                 'Aereo',
-#                 'Autostrada-Parcheggio'
-#                 ]
-# Igiene = ['Detersivi',
-#           'Igiene personale',
-#           ]
-# Imposte = ['Imposte_bancarie',
-#            'Controllo_estintori'
-#            'Imposte_varie'
-#            ]
-# Lavori_Impianti = ['Elettricista',
-#                    'Fabbro',
-#                    'Idraulico',
-#                    'Muratore',
-#                    'Imbianchino',
-#                    'Restauratore'
-#                    ]
-# Posta_Cancelleria = ['Cancelleria',
-#                      'Posta'
-#                      ]
-# Salute = ['Ticket_Esami',
-#           'Farmacia'
-#           ]
-# Veicoli_motore = ['Assicurazione',
-#                   'Bollo Auto',
-#                   'Meccanico',
-#                   'Gommista',
-#                   'Elettrauto',
-#                   'Carrozziere'
-#                   ]
-# Vestiario = ['Indumenti'
-#              ]
-# Vitto = ['Alimentari'
-#          ]
-# Eccedenza_Cassa = ['Eccedenza_Cassa'
-#                    ]
 
 
-root.mainloop()
-'''
-def pick_Categoria(e):
-    if my_combo.get() == "Entrate":
-        categoria_combo.config(values=Categorie_Entrate)
-        categoria_combo.set('click!')
-        categoria_combo['state'] = 'readonly'
 
-    if my_combo.get() == "Uscite":
-        categoria_combo.config(values=Categorie_Uscite)
-        categoria_combo.set('click!')
-        categoria_combo['state'] = 'readonly'
-
-
-def pick_Voce(e):
-    # VOCI ENTRATA
-    if categoria_combo.get() == "Collette_Chiesa":
-        voce_combo.config(values=Collette_Chiesa)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Congrua":
-        voce_combo.config(values=Congrua)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Interessi":
-        voce_combo.config(values=Interessi)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Messe celebrate":
-        voce_combo.config(values=Messe_celebrate)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Offerte":
-        voce_combo.config(values=Offerte)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Pensioni":
-        voce_combo.config(values=Pensioni)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Servizi_religiosi":
-        voce_combo.config(values=Servizi_religiosi)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    # VOCI USCITA
-
-    if categoria_combo.get() == "Acquisti_Chiesa":
-        voce_combo.config(values=Acquisti_Chiesa)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Acquisti_Convento":
-        voce_combo.config(values=Acquisti_Convento)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Acquisti_Orto_Animali":
-        voce_combo.config(values=Acquisti_Orto_Animali)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Cultura":
-        voce_combo.config(values=Cultura)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Curia_provinciale":
-        voce_combo.config(values=Curia_provinciale)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Domestici":
-        voce_combo.config(values=Domestici)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Elargizioni":
-        voce_combo.config(values=Elargizioni)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Utenze":
-        voce_combo.config(values=Utenze)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Ferie_Viaggi":
-        voce_combo.config(values=Ferie_Viaggi)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Igiene":
-        voce_combo.config(values=Igiene)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Imposte":
-        voce_combo.config(values=Imposte)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Lavori_Impianti":
-        voce_combo.config(values=Lavori_Impianti)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Posta_Cancelleria":
-        voce_combo.config(values=Posta_Cancelleria)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Salute":
-        voce_combo.config(values=Salute)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Veicoli_motore":
-        voce_combo.config(values=Veicoli_motore)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Vestiario":
-        voce_combo.config(values=Vestiario)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Vitto":
-        voce_combo.config(values=Vitto)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
-
-    if categoria_combo.get() == "Eccedenza_Cassa":
-        voce_combo.config(values=Eccedenza_Cassa)
-        voce_combo.set('click!')
-        voce_combo['state'] = 'readonly'
 
 
 # Dropbox Anno
-anno_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Anni)
+anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni)
 anno_combo.current(0)
 anno_combo.grid(row=2, column=1)
 anno_combo['state'] = 'readonly'
 
 # Dropbox Mesi
-mesi_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Mesi)
+mesi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi)
 mesi_combo.current(0)
 mesi_combo.grid(row=4, column=1)
 mesi_combo['state'] = 'readonly'
 
+# Dropbox Nomi
+nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi)
+nomi_combo.current(0)
+nomi_combo.grid(row=6, column=1)
+nomi_combo['state'] = 'readonly'
+
+# Dropbox Categoria
+categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie)
+categorie_combo.current(0)
+categorie_combo.grid(row=8, column=1)
+categorie_combo['state'] = 'readonly'
+
+# Entry Numero
+euro = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
+euro.grid(row=10, column=1)
+
+
+root.mainloop()
+'''
 # Dropbox Entrate_Uscite
 my_combo = ttk.Combobox(Frame1, font=("Helvetica", 15), values=Entrate_Uscite)
 my_combo.set('click!')
