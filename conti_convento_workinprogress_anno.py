@@ -1792,7 +1792,8 @@ class Report():
                 cell.font = Font(size=1)
 
         # imposto saldo iniziale
-        saldo = Report.saldo_report_func(saldo_report_DoubleVar)
+        # Passo da DoubleVar a float
+        saldo = float(Report.saldo_report_func(saldo_report_DoubleVar))
         # imposto un contatore
         e = 0
         i = 0
@@ -1835,13 +1836,13 @@ class Report():
             sheet.cell(row=cell.offset(row=13, column=0).row, column=2).alignment = Alignment(horizontal="left")
 
             sheet.cell(row=cell.offset(row=5, column=0).row, column=4,
-                       value=(
-                           saldo
-                       )
+                       value=   (
+                           list_saldo_iniale_finale_anno[e]
+                                )
                        )
 
             # mi calcolo il saldo finale e la assegno alla variabile saldo
-            saldo = (saldo +
+            saldo = (list_saldo_iniale_finale_anno[e] +
                      list_df_conti_mese_entrate[e]['Euro'].sum(numeric_only=True) -
                      list_df_conti_mese_uscite[e]['Euro'].sum(numeric_only=True)
                      )
@@ -1896,7 +1897,7 @@ class Report():
             # print(list_saldo_iniale_finale_anno)
             # print(list_entrate_mesi)
             # print(list_uscite_mesi)
-
+            e += 1
             i += 1
             # Saldo finale
             # for row in sheet:
@@ -2197,7 +2198,7 @@ class Report():
 
         ws_fine['A10'] = 'SALDO iniziale'
         ws_fine.merge_cells('A10:C10')
-        ws_fine['E10'] = int(200_000)
+        ws_fine['E10'] = saldo_report_DoubleVar.get()
         ws_fine.merge_cells('E10:G10')
         ws_fine['E10'].style = 'highlight'
 
