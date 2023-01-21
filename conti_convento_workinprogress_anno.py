@@ -853,8 +853,8 @@ Frame_excell_subtitle_anno.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w
 Anno_label_excell = Label(Frame_excell, text="(esempio: 2022)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
 Anno_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 ### Entry Anno
-Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Anno_entry_excell.grid(row=4, column=1)
+# Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+# Anno_entry_excell.grid(row=4, column=1)
 ### Sottotitolo Saldo
 Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Saldo ad inizio anno:",
                                          font=('verdana', 10, 'bold'), bg='blue', fg='white')
@@ -863,9 +863,9 @@ Frame_excell_subtitle_anno_saldo.grid(row=5, columnspan=2, padx=10, pady=10, sti
 Saldo_label_excell = Label(Frame_excell, text="(esempio: 99.99 oppure -99.99)", font=('verdana', 10, 'bold'), bg='blue',
                            fg='white')
 Saldo_label_excell.grid(row=6, column=0, padx=10, pady=10, sticky='w')
-### Entry Anno
-Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Saldo_entry_excell.grid(row=6, column=1)
+### Entry Saldo
+# Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+# Saldo_entry_excell.grid(row=6, column=1)
 
 ### Sottotitolo Residuo Messe
 # Frame_excell_subtitle_residuo_messe = Label(Frame_excell, text="Dis/Avanzo Messe ad inizio anno",
@@ -881,7 +881,7 @@ Saldo_entry_excell.grid(row=6, column=1)
 ###########################################################
 ################# COMBOBOX UPDATE #########################
 ###########################################################
-
+#CORREGGERE INTVAR DOUBLEVAR
 anno_stringvar = StringVar()
 mese_stringvar = StringVar()
 entrate_uscite_stringvar = StringVar()
@@ -1217,11 +1217,16 @@ euro_update.grid(row=8, column=1)
 # x = Complex(3.0, -4.5)
 # x.r, x.i
 
-anno_report_Intvar = IntVar()
+anno_report_IntVar = IntVar()
+saldo_report_DoubleVar = DoubleVar()
 
 Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white',
-                          textvariable=anno_report_Intvar)
+                          textvariable=anno_report_IntVar)
 Anno_entry_excell.grid(row=4, column=1)
+
+Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white',
+                           textvariable=saldo_report_DoubleVar)
+Saldo_entry_excell.grid(row=6, column=1)
 
 
 # global anno_report
@@ -1233,21 +1238,28 @@ Anno_entry_excell.grid(row=4, column=1)
 class Report():
     # if __name__ == '__main__':
 
-    def __int__(self, anno):
+    def __int__(self, anno, saldo):
         self.anno_report = anno
+        self.saldo_report= saldo
 
 
     def anno_report_func(self):
 
          try:
-            self.anno_report = anno_report_Intvar.get()
+            self.anno_report = anno_report_IntVar.get()
             return int(self.anno_report)  # return: altrimenti restituisce None - int: altrimenti Type STRING
          except:
-             anno_report_Intvar.set(0)
+             anno_report_IntVar.set(0)
              messagebox.showwarning(title='Dati Mancanti o Errati', message="Scrivere l'anno di interesse")
-        # finally:
-        #     quit()
-    # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
+
+    def saldo_report_func(self):
+
+         try:
+            self.saldo_report = saldo_report_DoubleVar.get()
+            return self.saldo_report  # return: altrimenti restituisce None - int: altrimenti Type STRING
+         except:
+             saldo_report_DoubleVar.set(0.0)
+             messagebox.showwarning(title='Dati Mancanti o Errati', message="Scrivere il Saldo iniziale")
 
     def report(self):
       try:
@@ -1336,13 +1348,13 @@ class Report():
         i = 0
         for x in range(12):
             list_df_conti_mese_entrate[i] = df_database_conti.loc[
-                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
+                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_IntVar)) &
                 (df_database_conti['Mese'] == list_mese[i]) &
                 (df_database_conti['Entrate_Uscite'] == 'Entrate')]
             # print(list_df_conti_camerino_pivot_entrate[i].head())
 
             list_df_conti_mese_uscite[i] = df_database_conti.loc[
-                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
+                (df_database_conti['Anno'] == Report.anno_report_func(anno_report_IntVar)) &
                 (df_database_conti['Mese'] == list_mese[i]) &
                 (df_database_conti['Entrate_Uscite'] == 'Uscite')]
             # print(list_df_conti_camerino_mese_uscite[i].head())
@@ -1353,13 +1365,13 @@ class Report():
 
         for x in range(12):
 
-            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Intvar), list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_IntVar), list_mese[i], 'Entrate', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_entrate[i].empty:
                 list_df_conti_mese_entrate[i] = pd.DataFrame \
                     (dataframe_empty_list,
                      columns=['index', 'Anno', 'Mese', 'Entrate_Uscite', 'Categoria', 'Voce', 'Euro'])
 
-            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_Intvar), list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
+            dataframe_empty_list = [(i, Report.anno_report_func(anno_report_IntVar), list_mese[i], 'Uscite', 'vuoto', 'vuoto', 0)]
             if list_df_conti_mese_uscite[i].empty:
                 list_df_conti_mese_uscite[i] = pd.DataFrame \
                     (dataframe_empty_list,
@@ -1640,7 +1652,7 @@ class Report():
 
         ################# APPLICO STILE ########################
 
-        # Colonna D :Formattazione degli euro in valuta euro
+        # Colonna D: Formattazione degli euro in valuta euro
         for sheet in list_ws_mese:
             for row in sheet[7:sheet.max_row]:  # skip the header
                 # print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
@@ -1780,7 +1792,7 @@ class Report():
                 cell.font = Font(size=1)
 
         # imposto saldo iniziale
-        saldo = 200_000
+        saldo = saldo_report_DoubleVar.get()
         # imposto un contatore
         e = 0
         i = 0
@@ -1944,7 +1956,7 @@ class Report():
 
         # anno =
         df_conti_camerino_TOT_entrate = df_database_conti.loc[
-            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
+            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_IntVar)) &
             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
         # print(df_conti_camerino_TOT_entrate.head(40))
 
@@ -1999,7 +2011,7 @@ class Report():
         ws_tab_uscite.row_dimensions[1].height = 45
 
         df_conti_camerino_TOT_uscite = df_database_conti.loc[
-            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_Intvar)) &
+            (df_database_conti['Anno'] == Report.anno_report_func(anno_report_IntVar)) &
             (df_database_conti['Entrate_Uscite'] == 'Uscite')]
 
         # print(df_conti_camerino_TOT_uscite.head(40))
@@ -2273,7 +2285,7 @@ B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to
                                                                                              pady=15)
 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 B_report = Button(Frame_excell_botton, text='report', width=10,
-                  command=lambda: Report.report(Report.anno_report_func(anno_report_Intvar))).grid(row=0, column=2,
+                  command=lambda: Report.report(Report.anno_report_func(anno_report_IntVar))).grid(row=0, column=2,
                                                                                                       padx=20, pady=15)
 
 # B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2012)).grid(row=0, column=2, padx=20, pady=15)
