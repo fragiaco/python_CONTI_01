@@ -190,7 +190,7 @@ Nomi = ["fra Giacomo",
                   ]
 
 # List Categorie
-Categorie   = ["Ad Mentem",
+Categorie   = [     "Ad Mentem",
                      "Binate",
                     "Binate concelebrate"
                      "Trinate",
@@ -224,7 +224,7 @@ mesi_combo['state'] = 'readonly'
 nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi)
 nomi_combo.current(0)
 nomi_combo.grid(row=6, column=1)
-nomi_combo['state'] = 'readonly'
+#nomi_combo['state'] = 'readonly'
 
 # Dropbox Categoria
 categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie)
@@ -239,42 +239,42 @@ numero.grid(row=10, column=1)
 ###############################
 ##### Combo update ############
 
-anno_stringvar  = StringVar()
-mese_stringvar  = StringVar()
-nome_stringvar  = StringVar()
-categoria_stringvar = StringVar()
-numero_stringvar = StringVar()
+# anno_stringvar  = StringVar()
+# mese_stringvar  = StringVar()
+# nome_stringvar  = StringVar()
+# categoria_stringvar = StringVar()
+# numero_stringvar = StringVar()
 
 Id_entry_toUpdate = Entry(Frame_update, font=('verdana', 12, 'bold'), bg='blue', fg='white', width=17)
 Id_entry_toUpdate.grid(row=2, column=1)
 
 
 # Dropbox Anno
-anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Anni, textvariable=anno_stringvar)
+anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Anni)
 #anno_combo_update.current(0)
 anno_combo_update.grid(row=3, column=1)
-anno_combo_update['state'] = 'readonly'
+#anno_combo_update['state'] = 'readonly'
 
 # Dropbox Mesi
-mesi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Mesi, textvariable=mese_stringvar)
+mesi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Mesi)
 #mesi_combo_update.current(0)
 mesi_combo_update.grid(row=4, column=1)
-mesi_combo_update['state'] = 'readonly'
+#mesi_combo_update['state'] = 'readonly'
 
 # Dropbox Nomi
-nomi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Nomi, textvariable=mese_stringvar)
+nomi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Nomi)
 #nomi_combo_update.current(0)
 nomi_combo_update.grid(row=5, column=1)
-nomi_combo_update['state'] = 'readonly'
+#nomi_combo_update['state'] = 'readonly'
 
 # Dropbox Categoria
-categorie_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Categorie, textvariable=categoria_stringvar)
+categorie_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Categorie)
 #categorie_combo_update.current(0)
 categorie_combo_update.grid(row=6, column=1)
-categorie_combo_update['state'] = 'readonly'
+#categorie_combo_update['state'] = 'readonly'
 
 # Entry Numero
-numero_entry_toUpdate = Entry(Frame_update, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=numero_stringvar)
+numero_entry_toUpdate = Entry(Frame_update, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE)
 numero_entry_toUpdate.grid(row=7, column=1)
 
 
@@ -361,6 +361,7 @@ def submit():
     conn = sqlite3.connect('database_messe')
     cur = conn.cursor()
 
+    #dati presi dalla combo di inserimento (non update)
     dati = [(anno_combo.get(), mesi_combo.get(), nomi_combo.get(), categorie_combo.get(), numero.get())]
 
     cur.executemany(
@@ -615,7 +616,7 @@ def select_record(e):
     # print(selected) #esempio 38
     # Grab record values
     values = my_tree.item(selected, 'values')
-    # print(values) #esempio ('38', '2022', 'gennaio', 'Entrate', 'Messe_celebrate', '', '39.0')
+    print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
 
     # outpus to entry boxes
     Id_entry_toUpdate.insert(0, values[0])  # 0 penso significa all'inizio
@@ -629,7 +630,7 @@ def select_record(e):
     # print(Anno_entry.get())
 
 
-# Bind the treeview
+# Bind the treeview ogni volta che seleziono una riga parte la funzione select_record
 my_tree.bind("<ButtonRelease-1>", select_record)
 
 
@@ -1962,4 +1963,5 @@ query_database()
 '''
 
 query_database()
+
 root.mainloop()
