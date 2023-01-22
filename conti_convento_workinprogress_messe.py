@@ -214,31 +214,31 @@ categoria_stringvar = StringVar()
 numero_stringvar = StringVar()
 
 # Dropbox Anno
-anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni)
+anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni, textvariable=anno_stringvar)
 anno_combo.current(0)
 anno_combo.grid(row=2, column=1)
 anno_combo['state'] = 'readonly'
 
 # Dropbox Mesi
-mesi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi)
+mesi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi, textvariable=mese_stringvar)
 mesi_combo.current(0)
 mesi_combo.grid(row=4, column=1)
 mesi_combo['state'] = 'readonly'
 
 # Dropbox Nomi
-nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi)
+nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi, textvariable=nome_stringvar)
 nomi_combo.current(0)
 nomi_combo.grid(row=6, column=1)
 nomi_combo['state'] = 'readonly'
 
 # Dropbox Categoria
-categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie)
+categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie, textvariable=categoria_stringvar)
 categorie_combo.current(0)
 categorie_combo.grid(row=8, column=1)
 categorie_combo['state'] = 'readonly'
 
 # Entry Numero
-numero = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
+numero = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=numero_stringvar)
 numero.grid(row=10, column=1)
 
 ###############################
