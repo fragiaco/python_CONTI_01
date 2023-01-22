@@ -664,9 +664,9 @@ def remove_one():
 # Update record
 def update_record():
     # Grab the record number
-    print('update')
+    #print('update')
     selected = my_tree.focus()
-    print(selected)
+    #print(selected)
     # Update record
     my_tree.item(selected, text="", values=(
     Id_entry_toUpdate.get(), anno_combo_update.get(), mesi_combo_update.get(), nomi_combo_update.get(), categorie_combo_update.get(),
@@ -674,18 +674,18 @@ def update_record():
 
     # Update the database
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_messe')
     #
     # Create a cursor instance
     c = conn.cursor()
 
     #
-    c.execute("""UPDATE TABLE_Conti SET
+    c.execute("""UPDATE TABLE_Messe SET
     		Anno = :Anno,
     		Mese = :Mese,
     		Nome = :Nome,
     		Categoria = :Categoria,
-    		Numero = :Numero,
+    		Numero = :Numero
 
      		WHERE oid = :oid""",
               {
