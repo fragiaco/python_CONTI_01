@@ -109,7 +109,7 @@ Frame_bottom_right.place(x=1210, y=528, width=450, height=415)
 #######################################################
 
 
-#Frame Combo_insert
+#Labels in Frame Combo_insert
 Label_combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_combo_title.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
@@ -131,7 +131,7 @@ Label_combo_categoria.grid(row=8, padx=25, pady=20, sticky='w')
 Label_numero_messe = Label(Frame_combo, text='Numero Messe', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_numero_messe.grid(row=10, padx=25, pady=20, sticky='w')
 
-#Frame Combo_update
+#Labels in Frame Combo_update
 Label_Combo_title_update = Label(Frame_update, text='Correggi - Cancella Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_Combo_title_update.grid(row=0, columnspan=2, padx=20, pady=10, sticky='w')
 
@@ -207,75 +207,75 @@ Categorie   = ["Ad Mentem",
 #############################
 #####Combo insert############
 
+
+# Dropbox Anno
+anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni)
+anno_combo.current(0)
+anno_combo.grid(row=2, column=1)
+anno_combo['state'] = 'readonly'
+
+# Dropbox Mesi
+mesi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi)
+mesi_combo.current(0)
+mesi_combo.grid(row=4, column=1)
+mesi_combo['state'] = 'readonly'
+
+# Dropbox Nomi
+nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi)
+nomi_combo.current(0)
+nomi_combo.grid(row=6, column=1)
+nomi_combo['state'] = 'readonly'
+
+# Dropbox Categoria
+categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie)
+categorie_combo.current(0)
+categorie_combo.grid(row=8, column=1)
+categorie_combo['state'] = 'readonly'
+
+# Entry Numero
+numero = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE)
+numero.grid(row=10, column=1)
+
+###############################
+##### Combo update ############
+
 anno_stringvar  = StringVar()
 mese_stringvar  = StringVar()
 nome_stringvar  = StringVar()
 categoria_stringvar = StringVar()
 numero_stringvar = StringVar()
 
-# Dropbox Anno
-anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Anni, textvariable=anno_stringvar)
-anno_combo.current(0)
-anno_combo.grid(row=2, column=1)
-anno_combo['state'] = 'readonly'
-
-# Dropbox Mesi
-mesi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi, textvariable=mese_stringvar)
-mesi_combo.current(0)
-mesi_combo.grid(row=4, column=1)
-mesi_combo['state'] = 'readonly'
-
-# Dropbox Nomi
-nomi_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Nomi, textvariable=nome_stringvar)
-nomi_combo.current(0)
-nomi_combo.grid(row=6, column=1)
-nomi_combo['state'] = 'readonly'
-
-# Dropbox Categoria
-categorie_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Categorie, textvariable=categoria_stringvar)
-categorie_combo.current(0)
-categorie_combo.grid(row=8, column=1)
-categorie_combo['state'] = 'readonly'
-
-# Entry Numero
-numero = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=numero_stringvar)
-numero.grid(row=10, column=1)
-
-###############################
-##### Combo update ############
-
-
 Id_entry_toUpdate = Entry(Frame_update, font=('verdana', 12, 'bold'), bg='blue', fg='white', width=17)
 Id_entry_toUpdate.grid(row=2, column=1)
 
 
 # Dropbox Anno
-anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Anni)
+anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Anni, textvariable=anno_stringvar)
 #anno_combo_update.current(0)
 anno_combo_update.grid(row=3, column=1)
 anno_combo_update['state'] = 'readonly'
 
 # Dropbox Mesi
-mesi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Mesi)
+mesi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Mesi, textvariable=mese_stringvar)
 #mesi_combo_update.current(0)
 mesi_combo_update.grid(row=4, column=1)
 mesi_combo_update['state'] = 'readonly'
 
 # Dropbox Nomi
-nomi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Nomi)
+nomi_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Nomi, textvariable=mese_stringvar)
 #nomi_combo_update.current(0)
 nomi_combo_update.grid(row=5, column=1)
 nomi_combo_update['state'] = 'readonly'
 
 # Dropbox Categoria
-categorie_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Categorie)
+categorie_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 12), values=Categorie, textvariable=categoria_stringvar)
 #categorie_combo_update.current(0)
 categorie_combo_update.grid(row=6, column=1)
 categorie_combo_update['state'] = 'readonly'
 
 # Entry Numero
-numero_update = Entry(Frame_update, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable='')
-numero_update.grid(row=7, column=1)
+numero_entry_toUpdate = Entry(Frame_update, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=numero_stringvar)
+numero_entry_toUpdate.grid(row=7, column=1)
 
 
 
@@ -599,17 +599,16 @@ Euro_entry = Entry(Frame_combobox_ok, font=('verdana', 10, 'bold'), bg='blue', f
 
 
 # Euro_entry.grid(row=7, column=1, padx=10, pady=10)
-
+'''
 
 def select_record(e):
     # Clear entry boxes
-    Id_entry.delete(0, END)
-    Anno_entry.delete(0, END)
-    Mese_entry.delete(0, END)
-    Entrate_Uscite_entry.delete(0, END)
-    Categorie_Entrate_entry.delete(0, END)
-    Voce_entry.delete(0, END)
-    Euro_entry.delete(0, END)
+    Id_entry_toUpdate.delete(0, END)
+    anno_combo_update.delete(0, END)
+    mesi_combo_update.delete(0, END)
+    nomi_combo_update.delete(0, END)
+    categorie_combo_update.delete(0, END)
+    numero_entry_toUpdate.delete(0, END)
 
     # Grab record Number
     selected = my_tree.focus()  # focus restituisce l'ID key
@@ -619,13 +618,13 @@ def select_record(e):
     # print(values) #esempio ('38', '2022', 'gennaio', 'Entrate', 'Messe_celebrate', '', '39.0')
 
     # outpus to entry boxes
-    Id_entry.insert(0, values[0])  # 0 penso significa all'inizio
-    Anno_entry.insert(0, values[1])
-    Mese_entry.insert(0, values[2])
-    Entrate_Uscite_entry.insert(0, values[3])
-    Categorie_Entrate_entry.insert(0, values[4])
-    Voce_entry.insert(0, values[5])
-    Euro_entry.insert(0, values[6])
+    Id_entry_toUpdate.insert(0, values[0])  # 0 penso significa all'inizio
+    anno_combo_update.insert(0, values[1])
+    mesi_combo_update.insert(0, values[2])
+    nomi_combo_update.insert(0, values[3])
+    categorie_combo_update.insert(0, values[4])
+    numero_entry_toUpdate.insert(0, values[5])
+
 
     # print(Anno_entry.get())
 
@@ -641,13 +640,13 @@ def remove_one():
     my_tree.delete(x)
 
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_messe')
 
     # Create a cursor instance
     c = conn.cursor()
 
     # Delete From Database
-    c.execute("DELETE from TABLE_Messe WHERE oid=" + Id_entry.get())
+    c.execute("DELETE from TABLE_Messe WHERE oid=" + Id_entry_toUpdate.get())
 
     # Commit changes
     conn.commit()
@@ -669,8 +668,8 @@ def update_record():
     print(selected)
     # Update record
     my_tree.item(selected, text="", values=(
-    Id_entry.get(), Anno_entry.get(), Mese_entry.get(), Entrate_Uscite_entry.get(), Categorie_Entrate_entry.get(),
-    Voce_entry.get(), Euro_entry.get()))
+    Id_entry_toUpdate.get(), anno_combo_update.get(), mesi_combo_update.get(), nomi_combo_update.get(), categorie_combo_update.get(),
+    numero_entry_toUpdate.get()))
 
     # Update the database
     # Create a database or connect to one that exists
@@ -683,20 +682,18 @@ def update_record():
     c.execute("""UPDATE TABLE_Conti SET
     		Anno = :Anno,
     		Mese = :Mese,
-    		Entrate_Uscite = :Entrate_Uscite,
+    		Nome = :Nome,
     		Categoria = :Categoria,
-    		Voce = :Voce,
-    		Euro = :Euro
+    		Numero = :Numero,
 
      		WHERE oid = :oid""",
               {
-                  'Anno': Anno_entry.get(),
-                  'Mese': Mese_entry.get(),
-                  'Entrate_Uscite': Entrate_Uscite_entry.get(),
-                  'Categoria': Categorie_Entrate_entry.get(),
-                  'Voce': Voce_entry.get(),
-                  'Euro': Euro_entry.get(),
-                  'oid': Id_entry.get()
+                  'Anno': anno_combo_update.get(),
+                  'Mese': mesi_combo_update.get(),
+                  'Nome': nomi_combo_update.get(),
+                  'Categoria': categorie_combo_update.get(),
+                  'Numero': numero_entry_toUpdate.get(),
+                  'oid': Id_entry_toUpdate.get()
               })
     #
     #    Commit changes
@@ -708,15 +705,14 @@ def update_record():
     messagebox.showinfo("Updated!", "Riga aggiornata!")
 
     #         # Clear entry boxes
-    Id_entry.delete(0, END)
-    Anno_entry.delete(0, END)
-    Mese_entry.delete(0, END)
-    Entrate_Uscite_entry.delete(0, END)
-    Categorie_Entrate_entry.delete(0, END)
-    Voce_entry.delete(0, END)
-    Euro_entry.delete(0, END)
+    Id_entry_toUpdate.delete(0, END)
+    anno_combo_update.delete(0, END)
+    mesi_combo_update.delete(0, END)
+    nomi_combo_update.delete(0, END)
+    categorie_combo_update.delete(0, END)
+    numero_entry_toUpdate.delete(0, END)
 
-
+'''
 ######
 def pick_Categoria_update(e):
     if my_combo_update.get() == "Entrate":
@@ -1941,11 +1937,12 @@ class Report():
 B_add = Button(Frame_combo, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).grid(row=12, column=1,
                                                                                                     pady=10)
 
-'''
-B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20,
+B_update = Button(Frame_update, text='aggiorna', width=10, command=update_record).grid(row=12, column=0, padx=20,
                                                                                               pady=15)
-B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20,
+B_delete = Button(Frame_update, text='cancella', width=10, command=remove_one).grid(row=12, column=1, padx=20,
                                                                                            pady=15)
+
+'''
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20,
                                                                                              pady=15)
 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
