@@ -36,7 +36,7 @@ def connessione():
     cur = conn.cursor()
     try:
         cur.execute('''CREATE TABLE TABLE_Messe(ID integer not null PRIMARY KEY ,
-                                                Anno TEXT not null ,
+                                                Anno integer not null ,
                                                 Mese TEXT not null ,
                                                 Nome TEXT not null ,
                                                 Categoria TEXT not null ,
@@ -80,16 +80,26 @@ title.pack(side=TOP, fill=X)
 ###################################
 
 # Frame Combo - left side Frame
-Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE) #azzurro fiordaliso
+Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_combo.place(x=20, y=75, width=450, height=450)
+# Frame IN Combo - left side Frame
+Frame_button_in_combo = Frame(Frame_combo, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_button_in_combo.place(y=400, width=445, height=42)
+
 
 # Frame Treeview - treeview right Frame
 Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_tree.place(x=475, y=75, width=730, height=450)
+# Frame IN Treeview - left side Frame
+Frame_button_in_Treeview = Frame(Frame_tree, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_button_in_Treeview.place(y=400, width=704, height=42)
 
 # Frame Update - update right Frame
 Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_update.place(x=1210, y=75, width=450, height=450)
+# Frame IN Update - left side Frame
+Frame_button_in_update = Frame(Frame_update, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_button_in_update.place(y=400, width=445, height=42)
 
 # Frame_bottom_left
 Frame_bottom_left = Frame(root, bd='4', bg=background_Blu, relief=RIDGE) #azzurro fiordaliso
@@ -162,11 +172,11 @@ Label_numero_messe_update.grid(row=7, padx=20, pady=12, sticky='w')
 ####### COMBOBOX ###########
 ############################
 
-# List Anno
-Anni = ["2022",
-        "2023",
-        "2024",
-        "2025",
+# List Anno _ se metti gli apici li legge come stringhe
+Anni = [2022,
+        2023,
+        2024,
+        2025,
         ]
 
 # List Mesi
@@ -431,64 +441,83 @@ def sqlite3_to_excel():
 
     df = pd.read_sql(query, conn)  # create dataframe
 
-    df.sort_values(by='index', ascending=False).to_excel('database_messe.xlsx', index=False, sheet_name='Dati')
+    df.sort_values(by='ID', ascending=False).to_excel('database_messe.xlsx', index=False, sheet_name='Dati')
 
     # Commit changes
     conn.commit()
+
+
 
     # Close our connection
     conn.close()
 
 
-''' 
+
 ###########################################################
 ################# Creo il Workbook con OPENPYXL############
 ###########################################################
-wb = Workbook()
-wb = load_workbook(filename="database_messe.xlsx")
-ws = wb.active  # Worksheet
 
-ws.row_dimensions[1].height = 40
-# openpyxl freeze first row
-ws.freeze_panes = 'A2'
-# openpyxl filter columns
-ws.auto_filter.ref = ws.dimensions
 
-############RED################
-red = NamedStyle(name="red")
-red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
-red.alignment = Alignment(horizontal="center", vertical="center")
-red.fill = PatternFill('solid', fgColor='d1d22e')
-wb.add_named_style(red)
+    wb = Workbook()
+    wb = load_workbook(filename="database_messe.xlsx")
+    ws = wb.active  # Worksheet
 
-ws['A1'].style = 'red'
-ws['B1'].style = 'red'
-ws['C1'].style = 'red'
-ws['D1'].style = 'red'
-ws['E1'].style = 'red'
-ws['F1'].style = 'red'
-ws['G1'].style = 'red'
+    ws.row_dimensions[1].height = 40
+    # openpyxl freeze first row
+    ws.freeze_panes = 'A2'
+    # openpyxl filter columns
+    ws.auto_filter.ref = ws.dimensions
 
-ws.column_dimensions['A'].width = 6
-ws.column_dimensions['B'].width = 8
-ws.column_dimensions['C'].width = 10
-ws.column_dimensions['D'].width = 11
-ws.column_dimensions['E'].width = 18
-ws.column_dimensions['F'].width = 21
-ws.column_dimensions['G'].width = 10
+    ############ RED ################
+    red = NamedStyle(name="red")
+    red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
+    red.alignment = Alignment(horizontal="center", vertical="center")
+    red.fill = PatternFill('solid', fgColor='d1d22e')
+    wb.add_named_style(red)
+
+    ############ BLACK ################
+    black = NamedStyle(name="black")
+    black.font = Font(name='Calibri', size=10, color='000000', bold=True)
+    black.alignment = Alignment(horizontal="left", vertical="center")
+    wb.add_named_style(black)
+
+    for row in ws[2:ws.max_row]:  # skip the header
+        print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
+        for cell in row: # il quarto valore della tuple
+            print(cell)  # <Cell 'multiple'.D7>
+            cell.style= 'black'
 
 
 
-# ws = wb.create_sheet('Dati')
-wb.save("database_conti_styled.xlsx")
 
-if sys.platform == "win32":
-    os.startfile('database_conti_styled.xlsx')
-else:
-    opener = "open" if sys.platform == "darwin" else "xdg-open"
-    subprocess.call([opener, 'database_conti_styled.xlsx'])
-root.mainloop()
+    ws['A1'].style = 'red'
+    ws['B1'].style = 'red'
+    ws['C1'].style = 'red'
+    ws['D1'].style = 'red'
+    ws['E1'].style = 'red'
+    ws['F1'].style = 'red'
+    #ws['G1'].style = 'red'
 
+    ws.column_dimensions['A'].width = 6
+    ws.column_dimensions['B'].width = 8
+    ws.column_dimensions['C'].width = 10
+    ws.column_dimensions['D'].width = 25
+    ws.column_dimensions['E'].width = 15
+    ws.column_dimensions['F'].width = 8
+    #ws.column_dimensions['G'].width = 10
+
+
+
+    # ws = wb.create_sheet('Dati')
+    wb.save("database_messe_styled.xlsx")
+
+    if sys.platform == "win32":
+        os.startfile('database_messe_styled.xlsx')
+    else:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, 'database_messe_styled.xlsx'])
+
+'''
 
 '''
 
@@ -1782,17 +1811,15 @@ class Report():
 
 # B_add = Button(Frame1in, text='add', width=10, command=lambda:[submit()]).grid(row=0, column=0, padx=20, pady=15)
 
-B_add = Button(Frame_combo, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).grid(row=12, column=1,
-                                                                                                    pady=10)
+B_add = Button(Frame_button_in_combo, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=RIGHT, padx=10)
 
-B_update = Button(Frame_update, text='aggiorna', width=10, command=update_record).grid(row=12, column=0, padx=20,
-                                                                                              pady=15)
-B_delete = Button(Frame_update, text='cancella', width=10, command=remove_one).grid(row=12, column=1, padx=20,
-                                                                                           pady=15)
+B_update = Button(Frame_button_in_update, text='aggiorna', width=10, command=update_record).pack(side=RIGHT, padx=10)
+B_delete = Button(Frame_button_in_update, text='cancella', width=10, command=remove_one).pack(side=RIGHT, padx=10)
+
+
+B_excel = Button(Frame_button_in_Treeview, text='Filtra con excel', width=10, command=sqlite3_to_excel).pack(side=RIGHT, padx=10)
 
 '''
-B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20,
-                                                                                             pady=15)
 # B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: print(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
 B_report = Button(Frame_excell_botton, text='report', width=10,
                   command=lambda: Report.report(Report.anno_report_func(anno_report_IntVar))).grid(row=0, column=2,
