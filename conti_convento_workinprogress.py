@@ -790,7 +790,7 @@ def sqlite3_to_excel():
 
     df = pd.read_sql(query, conn) # create dataframe
 
-    df.to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
+    df.sort_values(by='index', ascending = False).to_excel('database_conti.xlsx', index=False, sheet_name='Dati')
 
     ###########################################################
     ################# Creo il Workbook con OPENPYXL############
@@ -853,28 +853,52 @@ def sqlite3_to_excel():
 ###########################################################
 #################  EXCEL REPORT  ##########################
 ###########################################################
+
+
+
+### Titolo 'Visualizza dati:'
 Frame_excell_title = Label(Frame_excell, text='Visualizza dati:',
                             font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
 Frame_excell_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
-
-Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere l'anno di interesse",
+### Sottotitolo Scrivere prima
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Scrivere prima:",
                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
 Frame_excell_subtitle_anno.grid(row=1, columnspan=2, padx=10, pady=10, sticky='w')
-
-Anno_label_excell = Label(Frame_excell, text="Anno", font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Anno_label_excell.grid(row=2, column=0, padx=10, pady=10, sticky='w')
-Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Anno_entry_excell.grid(row=2, column=1)
-
-Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Scrivere il saldo iniziale",
+### Riga vuota
+Frame_excell_subtitle_anno = Label(Frame_excell, text="",
+                            font=('verdana', 1, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno.grid(row=2, columnspan=2, padx=10, pady=10, sticky='w')
+### Sottotitolo Anno
+Frame_excell_subtitle_anno = Label(Frame_excell, text="Anno di interesse:",
                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Frame_excell_subtitle_anno_saldo.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
-
-Saldo_label_excell = Label(Frame_excell, text="Saldo iniziale", font=('verdana', 10, 'bold'), bg='blue', fg='white')
-Saldo_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+Frame_excell_subtitle_anno.grid(row=3, columnspan=2, padx=10, pady=10, sticky='w')
+### Label Anno
+Anno_label_excell = Label(Frame_excell, text="(esempio: 2022)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Anno_label_excell.grid(row=4, column=0, padx=10, pady=10, sticky='w')
+### Entry Anno
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+Anno_entry_excell.grid(row=4, column=1)
+### Sottotitolo Saldo
+Frame_excell_subtitle_anno_saldo = Label(Frame_excell, text="Saldo ad inizio anno:",
+                            font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Frame_excell_subtitle_anno_saldo.grid(row=5, columnspan=2, padx=10, pady=10, sticky='w')
+### Label Saldo
+Saldo_label_excell = Label(Frame_excell, text="(esempio: 99.99 oppure -99.99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+Saldo_label_excell.grid(row=6, column=0, padx=10, pady=10, sticky='w')
+### Entry Anno
 Saldo_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
-Saldo_entry_excell.grid(row=4, column=1)
+Saldo_entry_excell.grid(row=6, column=1)
 
+### Sottotitolo Residuo Messe
+# Frame_excell_subtitle_residuo_messe = Label(Frame_excell, text="Dis/Avanzo Messe ad inizio anno",
+#                             font=('verdana', 10, 'bold'), bg='blue', fg='white')
+# Frame_excell_subtitle_residuo_messe.grid(row=7, columnspan=2, padx=10, pady=10, sticky='w')
+# ### Label Residuo Messe
+# Messe_residuo_label_excell = Label(Frame_excell, text="(esempio: 99 oppure -99)", font=('verdana', 10, 'bold'), bg='blue', fg='white')
+# Messe_residuo_label_excell.grid(row=8, column=0, padx=10, pady=10, sticky='w')
+# ### Entry Residuo Messe
+# Messe_residuo_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white', textvariable='')
+# Messe_residuo_excell.grid(row=8, column=1)
 
 ###########################################################
 ################# COMBOBOX UPDATE #########################
@@ -886,6 +910,8 @@ entrate_uscite_stringvar= StringVar()
 categoria_stringvar     = StringVar()
 voce_stringvar          = StringVar()
 euro_stringvar          = StringVar()
+
+
 
 Frame2_bottom_title = Label(Frame_combobox_ok, text='Correggi o Cancella:',
                             font=('verdana', 20, 'bold'), bg='blue', fg='#ffff66')
@@ -1199,10 +1225,34 @@ euro_update = Entry(Frame_combobox_ok, font=("Helvetica", 10, 'bold'), bd=5, rel
 euro_update.grid(row=8, column=1)
 
 ####
+
+# class Complex:
+#     def __init__(self, realpart, imagpart):
+#         self.r = realpart
+#         self.i = imagpart
+# x = Complex(3.0, -4.5)
+# x.r, x.i
+
+anno_report_Stringvar = StringVar()
+
+Anno_entry_excell = Entry(Frame_excell, font=('verdana', 10, 'bold'), bg='blue', fg='white',
+                                        textvariable=anno_report_Stringvar)
+Anno_entry_excell.grid(row=4, column=1)
+#global anno_report
+
+#################################################################
+#########################    Class    ###########################
+#################################################################
+
 class Report():
     # if __name__ == '__main__':
+
         def __int__(self, anno):
-            self.anno = anno
+            self.anno_report = anno
+
+        def anno_report_func(self):
+                self.anno_report = anno_report_Stringvar.get()
+                return self.anno_report
 
         def report(self):
 
@@ -1226,12 +1276,12 @@ class Report():
                 cur = conn.cursor()
 
                 #MI ASSIOCURO DI ESSERE CONNESSO
-                print(conn)
-                print('Sei connesso al database_conti')
+                # print(conn)
+                # print('Sei connesso al database_conti')
 
                 #CREO DATAFRAME df_database_conti
                 df_database_conti = pd.read_sql("select * from TABLE_Conti", conn)
-                print(df_database_conti.info(verbose=True))
+                #print(df_database_conti.info(verbose=True))
 
 
                 #COMMIT e CLOSE
@@ -1282,8 +1332,8 @@ class Report():
                              'dicembre'
                              ]
 
-                #imposto anno
-                anno = 2012
+                ########### imposto anno ##############
+                anno = Report.anno_report_func(anno_report_Stringvar)
                 i = 0
                 for x in range (12):
                         list_df_conti_mese_entrate[i]= df_database_conti.loc[
@@ -1706,10 +1756,10 @@ class Report():
                                 #coordinate dell'ultima cella della colonna A di ogni foglio
 
                                 last_cell_coordiate = 'C' + str(sheet.max_row)
-                                print(last_cell_coordiate)
+                                #print(last_cell_coordiate)
                                 #attraverso le coordinate risalgo alla cella di excel
                                 cell=sheet[last_cell_coordiate]
-                                print(cell.value)
+                                #print(cell.value)
 
                                 #cell = sheet.cell(row=1, column=1)
                                 # last_cell = sheet[last_cell]
@@ -1861,7 +1911,7 @@ class Report():
 
 
 
-                anno = 2012
+                anno = Report.anno_report_func(anno_report_Stringvar)
                 df_conti_camerino_TOT_entrate= df_database_conti.loc[
                             (df_database_conti['Anno'] == anno) &
                             (df_database_conti['Entrate_Uscite'] == 'Entrate')]
@@ -2206,7 +2256,10 @@ B_add = Button(Frame1in, text='aggiungi', width=10, command=lambda:[submit(), qu
 B_update = Button(Frame_update_botton, text='aggiorna', width=10, command=update_record).grid(row=0, column=1, padx=20, pady=15)
 B_delete = Button(Frame_update_botton, text='cancella', width=10, command=remove_one).grid(row=0, column=2, padx=20, pady=15)
 B_excel = Button(Frame_excell_botton, text='excel', width=10, command=sqlite3_to_excel).grid(row=0, column=1, padx=20, pady=15)
-B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2021)).grid(row=0, column=2, padx=20, pady=15)
+#B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: Report.anno_report_func(anno_report_Stringvar)).grid(row=0, column=2, padx=20, pady=15)
+B_report = Button(Frame_excell_botton, text='report', width=10, command= lambda: Report.report(Report.anno_report_func(anno_report_Stringvar))).grid(row=0, column=2, padx=20, pady=15)
+
+#B_report = Button(Frame_excell_botton, text='report', width=10, command=lambda: Report.report(2012)).grid(row=0, column=2, padx=20, pady=15)
 B_esporta = Button(Frame_excell_botton, text='esporta', width=10, command='').grid(row=0, column=3, padx=20, pady=15)
 B_importa = Button(Frame_excell_botton, text='importa', width=10, command='').grid(row=0, column=4, padx=20, pady=15)
 #####
