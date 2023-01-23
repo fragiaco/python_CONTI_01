@@ -172,13 +172,11 @@ Label_combo_Benefattori.grid        (row=1, column=10, padx=10, pady=20, sticky=
 Label_combo_Pro_Populo = Label(Frame_combo, text='Pro_Populo', font=('verdana', 10, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_combo_Pro_Populo.grid         (row=1, column=11, padx=10, pady=20, sticky='w')
 
-#LABEL TOTALE MESSE
-Label_Riga_Vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_Riga_Vuota.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
+
+# Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
+# Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
 
 
 
@@ -201,14 +199,60 @@ Entry_Devozione_combo_IntVar    = IntVar()
 Entry_Benefattori_combo_IntVar  = IntVar()
 Entry_Pro_Populo_combo_IntVar   = IntVar()
 
+# label = Label(Frame_update)
+# label.pack()
+# def trace_when_Entry_widget_is_updated(self, *args):
+#     try:
+#         #value = Entry_Anno_combo_IntVar.set("0")
+#         label.config(text= ' ')
+#         value = Entry_Anno_combo_IntVar.get()
+#         text = "Hello, {}!".format(value) if value else " "
+#         label.config(text=text)
+#
+#     except:
+#         pass
+
+Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOTALE Messe celebrate: ', font=('verdana', 10, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
+def trace_when_Entry_widget_is_updated(self, *args):
+    try:
+        Label_STRING_Totale_Messe_Celebrate.config(text= 'TOTALE Messe celebrate: ', font=('verdana', 10, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+        value = Entry_Ad_Mentem_combo_IntVar.get()+\
+                Entry_Binate_combo_IntVar.get()+\
+                Entry_Binate_Conc_combo_IntVar.get()+\
+                Entry_Trinate_combo_IntVar.get()+\
+                Entry_Suffragi_Comunitari_combo_IntVar.get()+\
+                Entry_Suffragi_Personali_combo_IntVar.get()+\
+                Entry_Devozione_combo_IntVar.get()+\
+                Entry_Benefattori_combo_IntVar.get()+\
+                Entry_Pro_Populo_combo_IntVar.get()
+
+        text = "TOTALE MEsse celebrate: {}".format(value) if value else "TOTALE Messe celebrate: "
+        Label_STRING_Totale_Messe_Celebrate.config(text=text)
+
+    except:
+        pass
+
+
+Entry_Anno_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Mese_combo_StringVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Nome_Celebrante_combo_StringVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Ad_Mentem_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Binate_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Binate_Conc_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Trinate_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Suffragi_Comunitari_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Suffragi_Personali_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Devozione_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Benefattori_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+Entry_Pro_Populo_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
+
 # Dropbox Anno
 Entry_Anno_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Anno_combo_IntVar)
 Entry_Anno_combo.grid\
     (row=2, columnspan=1, column=0)
 
-# Entry_Mese_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Mese_combo_StringVar)
-# Entry_Mese_combo.grid\
-#     (row=2, columnspan=1, column=1)
+
 
 # List Mesi
 Mesi = ["gennaio",
@@ -261,6 +305,15 @@ Entry_Pro_Populo_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5,
 Entry_Pro_Populo_combo.grid\
     (row=2, column=11)
 
+
+
+
+
+#LABEL TOTALE MESSE
+Label_Riga_Vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Label_Riga_Vuota.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky='w')
+# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, textvariable=Entry_Anno_combo_IntVar)
+# Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
 
 
 
