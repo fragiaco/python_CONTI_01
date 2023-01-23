@@ -91,7 +91,7 @@ title.pack(side=TOP, fill=X)
 
 # Frame Combo - left side Frame
 Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_combo.place(x=50, y=75, width=1600, height=250)
+Frame_combo.place(x=5, y=75, width=1670, height=250)
 # Frame IN Combo - left side Frame
 # Frame_button_in_combo = Frame(Frame_combo, bd='4', bg=background_Blu, relief=RIDGE)
 # Frame_button_in_combo.place(y=400, width=445, height=42)
@@ -312,8 +312,8 @@ Entry_Pro_Populo_combo.grid\
 #LABEL TOTALE MESSE
 Label_Riga_Vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_Riga_Vuota.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, textvariable=Entry_Anno_combo_IntVar)
-# Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
+Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, textvariable=Entry_Anno_combo_IntVar)
+Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
 
 
 
