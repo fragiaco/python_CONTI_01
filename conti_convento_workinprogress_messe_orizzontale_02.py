@@ -91,7 +91,7 @@ title.pack(side=TOP, fill=X)
 
 # Frame Combo - left side Frame
 Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_combo.place(x=50, y=75, width=1600, height=250)
+Frame_combo.place(x=5, y=75, width=1670, height=250)
 # Frame IN Combo - left side Frame
 # Frame_button_in_combo = Frame(Frame_combo, bd='4', bg=background_Blu, relief=RIDGE)
 # Frame_button_in_combo.place(y=400, width=445, height=42)
@@ -247,11 +247,14 @@ Entry_Devozione_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_upda
 Entry_Benefattori_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
 Entry_Pro_Populo_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated)
 
-# Dropbox Anno
-Entry_Anno_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Anno_combo_IntVar)
-Entry_Anno_combo.grid\
-    (row=2, columnspan=1, column=0)
+# List Anni
+Anni = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
 
+# Dropbox Anno
+Entry_Anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Anni, textvariable=Entry_Anno_combo_IntVar)
+Entry_Anno_combo.current(0)
+Entry_Anno_combo.grid(row=2, columnspan=1, column=0)
+Entry_Anno_combo['state'] = 'readonly'
 
 
 # List Mesi
@@ -269,39 +272,39 @@ Mesi = ["gennaio",
         "dicembre",
         ]
 # Dropbox Mesi
-Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 12), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
+Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
 Entry_Mese_combo.current(0)
 Entry_Mese_combo.grid(row=2, columnspan=1, column=1)
 Entry_Mese_combo['state'] = 'readonly'
 
-Entry_Nome_Celebrante_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Nome_Celebrante_combo_StringVar)
+Entry_Nome_Celebrante_combo = Entry(Frame_combo, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Nome_Celebrante_combo_StringVar)
 Entry_Nome_Celebrante_combo.grid\
     (row=2, column=2)
-Entry_Ad_Mentem_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
+Entry_Ad_Mentem_combo = Spinbox(Frame_combo, from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
 Entry_Ad_Mentem_combo.grid\
     (row=2, column=3)
-Entry_Binate_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_IntVar)
+Entry_Binate_combo = Spinbox(Frame_combo,from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_IntVar)
 Entry_Binate_combo.grid\
     (row=2, column=4)
-Entry_Binate_Conc_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_combo_IntVar)
+Entry_Binate_Conc_combo = Spinbox(Frame_combo,from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_combo_IntVar)
 Entry_Binate_Conc_combo.grid\
     (row=2, column=5)
-Entry_Trinate_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_IntVar)
+Entry_Trinate_combo = Spinbox(Frame_combo,from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_IntVar)
 Entry_Trinate_combo.grid\
     (row=2, column=6)
-Entry_Suffragi_Comunitari_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_IntVar)
+Entry_Suffragi_Comunitari_combo = Spinbox(Frame_combo, from_=0, to=31,font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_IntVar)
 Entry_Suffragi_Comunitari_combo.grid\
     (row=2, column=7)
-Entry_Suffragi_Personali_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_IntVar)
+Entry_Suffragi_Personali_combo = Spinbox(Frame_combo, from_=0, to=31,font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_IntVar)
 Entry_Suffragi_Personali_combo.grid\
     (row=2, column=8)
-Entry_Devozione_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_IntVar)
+Entry_Devozione_combo = Spinbox(Frame_combo,from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_IntVar)
 Entry_Devozione_combo.grid\
     (row=2, column=9)
-Entry_Benefattori_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_IntVar)
+Entry_Benefattori_combo = Spinbox(Frame_combo, from_=0, to=31,font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_IntVar)
 Entry_Benefattori_combo.grid\
     (row=2, column=10)
-Entry_Pro_Populo_combo = Entry(Frame_combo, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_IntVar)
+Entry_Pro_Populo_combo = Spinbox(Frame_combo,from_=0, to=31, font=("Helvetica", 8, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_IntVar)
 Entry_Pro_Populo_combo.grid\
     (row=2, column=11)
 
