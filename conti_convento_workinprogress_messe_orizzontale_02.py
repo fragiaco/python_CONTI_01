@@ -89,17 +89,19 @@ title.pack(side=TOP, fill=X)
 ######## TKINTER frames ###########
 ###################################
 
-# Frame Combo - left side Frame
+# Frame Combo - Top
 Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_combo.place(x=5, y=73, width=1670, height=250)
+Frame_combo.place(x=5, y=73, width=1670, height=180)
 # Frame IN Combo - left side Frame
 # Frame_button_in_combo = Frame(Frame_combo, bd='4', bg=background_Blu, relief=RIDGE)
 # Frame_button_in_combo.place(y=400, width=445, height=42)
 
-
 # Frame Treeview - treeview right Frame
 Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_tree.place(x=5, y=325, width=1120, height=335)
+Frame_tree.place(x=5, y=253, width=1500, height=335)
+Frame_tree_Buttons= Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_tree_Buttons.place(x=1507, y=253, width=168, height=335)
+
 # Frame IN Treeview - left side Frame
 # Frame_button_in_Treeview = Frame(Frame_tree, bd='4', bg=background_Blu, relief=RIDGE)
 #Frame_button_in_Treeview.place(y=400, width=704, height=42)
@@ -212,7 +214,7 @@ Entry_Pro_Populo_combo_IntVar   = IntVar()
 #     except:
 #         pass
 
-Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
 Label_TOTALE_Numero_Messe= Label(Frame_combo, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_TOTALE_Numero_Messe.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
@@ -275,15 +277,25 @@ Mesi = ["gennaio",
         "novembre",
         "dicembre",
         ]
+
+Celebranti = ["fra Antonio Porfiri",
+        "fra Giacomo Rotunno",
+        "fra Gabriele Giobbi",
+        "Fra Alberto Dos Santos",
+        "Ospite"]
+
 # Dropbox Mesi
 Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
 Entry_Mese_combo.current(0)
 Entry_Mese_combo.grid(row=2, columnspan=1, column=1)
 Entry_Mese_combo['state'] = 'readonly'
 
-Entry_Nome_Celebrante_combo = Entry(Frame_combo, font=("Helvetica", 10, 'bold'), bd=1, relief=GROOVE, textvariable=Entry_Nome_Celebrante_combo_StringVar)
-Entry_Nome_Celebrante_combo.grid\
-    (row=2, column=2)
+
+Entry_Nome_Celebrante_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Celebranti, textvariable=Entry_Nome_Celebrante_combo_StringVar)
+Entry_Nome_Celebrante_combo.current(1)
+Entry_Nome_Celebrante_combo.grid(row=2, column=2)
+
+
 Entry_Ad_Mentem_combo = Spinbox(Frame_combo, from_=0, to=31, wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
 Entry_Ad_Mentem_combo.grid\
     (row=2, column=3)
@@ -380,19 +392,19 @@ my_tree['columns'] = ("ID", "Anno", "Mese", "Nome_Celebrante", "Ad_Mentem", "Bin
 
 # Formate Our Columns
 my_tree.column("#0", width=0, stretch=NO)
-my_tree.column("ID", anchor=W, width=50)
-my_tree.column("Anno", anchor=W, width=100)
-my_tree.column("Mese", anchor=W, width=85)
-my_tree.column("Nome_Celebrante", anchor=W, width=120)
-my_tree.column("Ad_Mentem", anchor=W, width=85)
-my_tree.column("Binate", anchor=W, width=85)
-my_tree.column("Binate_Concelebrate", anchor=W, width=85)
-my_tree.column("Trinate", anchor=W, width=85)
-my_tree.column("Suffragi_Comunitari", anchor=W, width=85)
-my_tree.column("Suffragi_Personali", anchor=W, width=81)
-my_tree.column("Devozione", anchor=W, width=85)
-my_tree.column("Benefattori", anchor=W, width=85)
-my_tree.column("Pro_Populo", anchor=W, width=85)
+my_tree.column("ID", anchor=W, width=70)
+my_tree.column("Anno", anchor=W, width=110)
+my_tree.column("Mese", anchor=W, width=130)
+my_tree.column("Nome_Celebrante", anchor=W, width=157)
+my_tree.column("Ad_Mentem", anchor=W, width=115)
+my_tree.column("Binate", anchor=W, width=115)
+my_tree.column("Binate_Concelebrate", anchor=W, width=115)
+my_tree.column("Trinate", anchor=W, width=118)
+my_tree.column("Suffragi_Comunitari", anchor=W, width=115)
+my_tree.column("Suffragi_Personali", anchor=W, width=115)
+my_tree.column("Devozione", anchor=W, width=115)
+my_tree.column("Benefattori", anchor=W, width=115)
+my_tree.column("Pro_Populo", anchor=W, width=115)
 
 
 # Create Headings
