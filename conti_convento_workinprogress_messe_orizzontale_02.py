@@ -40,15 +40,14 @@ def connessione():
                                                 Mese TEXT not null ,
                                                 Nome_Celebrante TEXT not null ,
                                                 Ad_Mentem integer not null ,
-                                                Binate integer not null ,
-                                                Binate_Concelebrate integer not null ,
-                                                Trinate integer not null ,
-                                                Suffragi_Comunitari integer not null ,
-                                                Suffragi_Personali integer not null ,
-                                                Devozione integer not null ,
-                                                Benefattori integer not null ,
-                                                Pro_Populo integer not null ,
-                                                Numero integer not null )''')
+                                                Binate integer,
+                                                Binate_Concelebrate integer,
+                                                Trinate integer,
+                                                Suffragi_Comunitari integer,
+                                                Suffragi_Personali integer,
+                                                Devozione integer,
+                                                Benefattori integer,
+                                                Pro_Populo integer)''')
 
 
 
@@ -91,24 +90,17 @@ title.pack(side=TOP, fill=X)
 
 # Frame Combo - Top
 Frame_combo = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_combo.place(x=5, y=73, width=1670, height=180)
-# Frame IN Combo - left side Frame
-# Frame_button_in_combo = Frame(Frame_combo, bd='4', bg=background_Blu, relief=RIDGE)
-# Frame_button_in_combo.place(y=400, width=445, height=42)
+Frame_combo.place(x=5, y=73, width=1670, height=60)
 
 # Frame Treeview - treeview right Frame
 Frame_tree = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_tree.place(x=5, y=253, width=1500, height=335)
+Frame_tree.place(x=5, y=132, width=1570, height=335)
 Frame_tree_Buttons= Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_tree_Buttons.place(x=1507, y=253, width=168, height=335)
-
-# Frame IN Treeview - left side Frame
-# Frame_button_in_Treeview = Frame(Frame_tree, bd='4', bg=background_Blu, relief=RIDGE)
-#Frame_button_in_Treeview.place(y=400, width=704, height=42)
+Frame_tree_Buttons.place(x=1575, y=132, width=100, height=335)
 
 # Frame Update - update right Frame
 Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_update.place(x=50, y=675, width=1600, height=200)
+Frame_update.place(x=5, y=465, width=1670, height=60)
 
 
 ###############################################
@@ -130,55 +122,57 @@ Frame_update.place(x=50, y=675, width=1600, height=200)
 # Frame_bottom_right = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 # Frame_bottom_right.place(x=1210, y=528, width=450, height=415)
 
-
-#Labels in Frame Combo_insert
-Label_combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
-
-# Label_riga_vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_riga_vuota.grid(row=1)
-
-Label_combo_anno = Label(Frame_combo, text='Anno', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_anno.grid(row=1, column=0, columnspan=1, padx=10, pady=10, sticky='w')
-
-Label_combo_mese = Label(Frame_combo, text='Mese', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_mese.grid               (row=1, column=1, columnspan=1, padx=10, pady=10, sticky='w')
-
-Label_combo_Nome_celebrante = Label(Frame_combo, text='Celebrante', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Nome_celebrante.grid    (row=1, column=2, padx=10, pady=10, sticky='w')
-
-Label_combo_Ad_Mentem = Label(Frame_combo, text='Ad_Mentem', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Ad_Mentem.grid          (row=1, column=3, padx=10, pady=10, sticky='w')
-
-Label_combo_Binate = Label(Frame_combo, text='Binate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Binate.grid             (row=1, column=4, padx=10, pady=10, sticky='w')
-
-Label_combo_Binate_Concelebrate = Label(Frame_combo, text='Binate_Conc.', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Binate_Concelebrate.grid(row=1, column=5, padx=10, pady=20, sticky='w')
-
-Label_combo_Trinate = Label(Frame_combo, text='Trinate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Trinate.grid            (row=1, column=6, padx=10, pady=20, sticky='w')
-
-Label_combo_Suffragi_Comunitari = Label(Frame_combo, text='Suffr_Comuntà', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Suffragi_Comunitari.grid(row=1, column=7, padx=10, pady=20, sticky='w')
-
-Label_combo_Suffragi_Personali = Label(Frame_combo, text='Suffr_Personali', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Suffragi_Personali.grid(row=1, column=8, padx=10, pady=20, sticky='w')
-
-Label_combo_Devozione = Label(Frame_combo, text='Devozione', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Devozione.grid          (row=1, column=9, padx=10, pady=20, sticky='w')
-
-Label_combo_Benefattori = Label(Frame_combo, text='Benefattori', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Benefattori.grid        (row=1, column=10, padx=10, pady=20, sticky='w')
-
-Label_combo_Pro_Populo = Label(Frame_combo, text='Pro_Populo', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_combo_Pro_Populo.grid         (row=1, column=11, padx=10, pady=20, sticky='w')
+#
+# #Labels in Frame Combo_insert
+# Label_combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
+#
+# # Label_riga_vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# # Label_riga_vuota.grid(row=1)
+#
+# Label_combo_anno = Label(Frame_combo, text='Anno', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_anno.grid(row=1, column=0, columnspan=1, padx=10, pady=10, sticky='w')
+#
+# Label_combo_mese = Label(Frame_combo, text='Mese', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_mese.grid               (row=1, column=1, columnspan=1, padx=10, pady=10, sticky='w')
+#
+# Label_combo_Nome_celebrante = Label(Frame_combo, text='Celebrante', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Nome_celebrante.grid    (row=1, column=2, padx=10, pady=10, sticky='w')
+#
+# Label_combo_Ad_Mentem = Label(Frame_combo, text='Ad_Mentem', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Ad_Mentem.grid          (row=1, column=3, padx=10, pady=10, sticky='w')
+#
+# Label_combo_Binate = Label(Frame_combo, text='Binate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Binate.grid             (row=1, column=4, padx=10, pady=10, sticky='w')
+#
+# Label_combo_Binate_Concelebrate = Label(Frame_combo, text='Binate_Conc.', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Binate_Concelebrate.grid(row=1, column=5, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Trinate = Label(Frame_combo, text='Trinate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Trinate.grid            (row=1, column=6, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Suffragi_Comunitari = Label(Frame_combo, text='Suffr_Comuntà', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Suffragi_Comunitari.grid(row=1, column=7, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Suffragi_Personali = Label(Frame_combo, text='Suffr_Personali', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Suffragi_Personali.grid(row=1, column=8, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Devozione = Label(Frame_combo, text='Devozione', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Devozione.grid          (row=1, column=9, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Benefattori = Label(Frame_combo, text='Benefattori', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Benefattori.grid        (row=1, column=10, padx=10, pady=20, sticky='w')
+#
+# Label_combo_Pro_Populo = Label(Frame_combo, text='Pro_Populo', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_combo_Pro_Populo.grid         (row=1, column=11, padx=10, pady=20, sticky='w')
 
 
 # Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 # Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
 # Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 # Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
+
+
 
 
 
@@ -214,8 +208,8 @@ Entry_Pro_Populo_combo_IntVar   = IntVar()
 #     except:
 #         pass
 
-Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
+# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
 Label_TOTALE_Numero_Messe= Label(Frame_combo, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_TOTALE_Numero_Messe.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
 
@@ -296,34 +290,33 @@ Entry_Nome_Celebrante_combo.current(1)
 Entry_Nome_Celebrante_combo.grid(row=2, column=2)
 
 
-Entry_Ad_Mentem_combo = Spinbox(Frame_combo, from_=0, to=31, wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
+Entry_Ad_Mentem_combo = Spinbox(Frame_combo, from_=0, to=31, wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
 Entry_Ad_Mentem_combo.grid\
     (row=2, column=3)
 Entry_Binate_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_IntVar)
 Entry_Binate_combo.grid\
     (row=2, column=4)
-Entry_Binate_Conc_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_combo_IntVar)
+Entry_Binate_Conc_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_combo_IntVar)
 Entry_Binate_Conc_combo.grid\
     (row=2, column=5)
 Entry_Trinate_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_IntVar)
 Entry_Trinate_combo.grid\
     (row=2, column=6)
-Entry_Suffragi_Comunitari_combo = Spinbox(Frame_combo, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_IntVar)
+Entry_Suffragi_Comunitari_combo = Spinbox(Frame_combo, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_IntVar)
 Entry_Suffragi_Comunitari_combo.grid\
     (row=2, column=7)
 Entry_Suffragi_Personali_combo = Spinbox(Frame_combo, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_IntVar)
 Entry_Suffragi_Personali_combo.grid\
     (row=2, column=8)
-Entry_Devozione_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_IntVar)
+Entry_Devozione_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_IntVar)
 Entry_Devozione_combo.grid\
     (row=2, column=9)
-Entry_Benefattori_combo = Spinbox(Frame_combo, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_IntVar)
+Entry_Benefattori_combo = Spinbox(Frame_combo, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_IntVar)
 Entry_Benefattori_combo.grid\
     (row=2, column=10)
-Entry_Pro_Populo_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_IntVar)
+Entry_Pro_Populo_combo = Spinbox(Frame_combo,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_IntVar)
 Entry_Pro_Populo_combo.grid\
     (row=2, column=11)
-
 
 
 
@@ -335,7 +328,144 @@ Entry_Pro_Populo_combo.grid\
 # Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
 
 
+###############################################
+######## TKINTER UPDATE Frame_UPDATE ############
+###############################################
+Entry_Anno_combo_update_IntVar         = IntVar()
+Entry_Mese_combo_update_StringVar      = StringVar()
+Entry_Nome_Celebrante_combo_update_StringVar = StringVar()
+Entry_Ad_Mentem_combo_update_IntVar    = IntVar()
+Entry_Binate_combo_update_update_IntVar= IntVar()
+Entry_Binate_Conc_update_combo_IntVar  = IntVar()
+Entry_Trinate_combo_update_IntVar      = IntVar()
+Entry_Suffragi_Comunitari_combo_update_IntVar = IntVar()
+Entry_Suffragi_Personali_combo_update_IntVar = IntVar()
+Entry_Devozione_combo_update_IntVar    = IntVar()
+Entry_Benefattori_combo_update_IntVar  = IntVar()
+Entry_Pro_Populo_combo_update_IntVar   = IntVar()
 
+# label = Label(Frame_update)
+# label.pack()
+# def trace_when_Entry_widget_is_updated(self, *args):
+#     try:
+#         #value = Entry_Anno_combo_IntVar.set("0")
+#         label.config(text= ' ')
+#         value = Entry_Anno_combo_IntVar.get()
+#         text = "Hello, {}!".format(value) if value else " "
+#         label.config(text=text)
+#
+#     except:
+#         pass
+
+# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+# Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
+Label_TOTALE_Numero_Messe_update= Label(Frame_update, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Label_TOTALE_Numero_Messe_update.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
+
+
+def trace_when_Entry_widget_is_updated_UPDATE(self, *args):
+    try:
+        Label_TOTALE_Numero_Messe_update.config(text=' ', font=('verdana', 16, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+        value = Entry_Ad_Mentem_combo_update_IntVar.get()+\
+                Entry_Binate_combo_update_update_IntVar.get()+\
+                Entry_Binate_Conc_update_combo_IntVar.get()+\
+                Entry_Trinate_combo_update_IntVar.get()+\
+                Entry_Suffragi_Comunitari_combo_update_IntVar.get()+\
+                Entry_Suffragi_Personali_combo_update_IntVar.get()+\
+                Entry_Devozione_combo_update_IntVar.get()+\
+                Entry_Benefattori_combo_update_IntVar.get()+\
+                Entry_Pro_Populo_combo_update_IntVar.get()
+
+        text = "{}".format(value) if value else " "
+        Label_TOTALE_Numero_Messe_update.config(text=text)
+
+    except:
+        pass
+
+
+Entry_Anno_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Mese_combo_update_StringVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Nome_Celebrante_combo_update_StringVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Ad_Mentem_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Binate_combo_update_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Binate_Conc_update_combo_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Trinate_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Suffragi_Comunitari_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Suffragi_Personali_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Devozione_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Benefattori_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+Entry_Pro_Populo_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
+
+# List Anni
+Anni = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+
+# Dropbox Anno
+Entry_Anno_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Anni, textvariable=Entry_Anno_combo_update_IntVar)
+Entry_Anno_combo.current(4)
+Entry_Anno_combo.grid(row=2, columnspan=1, column=0)
+Entry_Anno_combo['state'] = 'readonly'
+
+
+# List Mesi
+Mesi = ["gennaio",
+        "febbraio",
+        "marzo",
+        "aprile",
+        "maggio",
+        "giugno",
+        "luglio",
+        "agosto",
+        "settembre",
+        "ottobre",
+        "novembre",
+        "dicembre",
+        ]
+
+Celebranti = ["fra Antonio Porfiri",
+        "fra Giacomo Rotunno",
+        "fra Gabriele Giobbi",
+        "Fra Alberto Dos Santos",
+        "Ospite"]
+
+# Dropbox Mesi
+Entry_Mese_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_update_StringVar)
+Entry_Mese_combo.current(0)
+Entry_Mese_combo.grid(row=2, columnspan=1, column=1)
+Entry_Mese_combo['state'] = 'readonly'
+
+
+Entry_Nome_Celebrante_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Celebranti, textvariable=Entry_Nome_Celebrante_combo_update_StringVar)
+Entry_Nome_Celebrante_combo.current(1)
+Entry_Nome_Celebrante_combo.grid(row=2, column=2)
+
+
+Entry_Ad_Mentem_combo = Spinbox(Frame_update, from_=0, to=31, wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_update_IntVar)
+Entry_Ad_Mentem_combo.grid\
+    (row=2, column=3)
+Entry_Binate_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_update_update_IntVar)
+Entry_Binate_combo.grid\
+    (row=2, column=4)
+Entry_Binate_Conc_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_update_combo_IntVar)
+Entry_Binate_Conc_combo.grid\
+    (row=2, column=5)
+Entry_Trinate_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_update_IntVar)
+Entry_Trinate_combo.grid\
+    (row=2, column=6)
+Entry_Suffragi_Comunitari_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_update_IntVar)
+Entry_Suffragi_Comunitari_combo.grid\
+    (row=2, column=7)
+Entry_Suffragi_Personali_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_update_IntVar)
+Entry_Suffragi_Personali_combo.grid\
+    (row=2, column=8)
+Entry_Devozione_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_update_IntVar)
+Entry_Devozione_combo.grid\
+    (row=2, column=9)
+Entry_Benefattori_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_update_IntVar)
+Entry_Benefattori_combo.grid\
+    (row=2, column=10)
+Entry_Pro_Populo_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_update_IntVar)
+Entry_Pro_Populo_combo.grid\
+    (row=2, column=11)
 #######################################################
 
 
@@ -393,18 +523,18 @@ my_tree['columns'] = ("ID", "Anno", "Mese", "Nome_Celebrante", "Ad_Mentem", "Bin
 # Formate Our Columns
 my_tree.column("#0", width=0, stretch=NO)
 my_tree.column("ID", anchor=W, width=70)
-my_tree.column("Anno", anchor=W, width=110)
-my_tree.column("Mese", anchor=W, width=130)
-my_tree.column("Nome_Celebrante", anchor=W, width=157)
-my_tree.column("Ad_Mentem", anchor=W, width=115)
-my_tree.column("Binate", anchor=W, width=115)
-my_tree.column("Binate_Concelebrate", anchor=W, width=115)
-my_tree.column("Trinate", anchor=W, width=118)
-my_tree.column("Suffragi_Comunitari", anchor=W, width=115)
-my_tree.column("Suffragi_Personali", anchor=W, width=115)
-my_tree.column("Devozione", anchor=W, width=115)
-my_tree.column("Benefattori", anchor=W, width=115)
-my_tree.column("Pro_Populo", anchor=W, width=115)
+my_tree.column("Anno", anchor=W, width=120)
+my_tree.column("Mese", anchor=W, width=120)
+my_tree.column("Nome_Celebrante", anchor=W, width=165)
+my_tree.column("Ad_Mentem", anchor=W, width=120)
+my_tree.column("Binate", anchor=W, width=120)
+my_tree.column("Binate_Concelebrate", anchor=W, width=120)
+my_tree.column("Trinate", anchor=W, width=120)
+my_tree.column("Suffragi_Comunitari", anchor=W, width=120)
+my_tree.column("Suffragi_Personali", anchor=W, width=120)
+my_tree.column("Devozione", anchor=W, width=120)
+my_tree.column("Benefattori", anchor=W, width=120)
+my_tree.column("Pro_Populo", anchor=W, width=120)
 
 
 # Create Headings
@@ -424,23 +554,88 @@ my_tree.heading("Benefattori", text="Benefattori", anchor=W)
 my_tree.heading("Pro_Populo", text="Pro_Populo", anchor=W)
 #
 
+############################
+######## SQLITE3 ###########
+############################
 
-#                                                 ID integer not null PRIMARY KEY ,
-#                                                 Anno integer not null ,
-#                                                 Mese TEXT not null ,
-#                                                 Nome_Celebrante TEXT not null ,
-#                                                 Ad_Mentem integer not null ,
-#                                                 Binate integer not null ,
-#                                                 Binate_Concelebrate integer not null ,
-#                                                 Trinate integer not null ,
-#                                                 Suffragi_Comunitari integer not null ,
-#                                                 Suffragi_Personali integer not null ,
-#                                                 Devozione integer not null ,
-#                                                 Benefattori integer not null ,
-#                                                 Pro_Populo integer not null ,
-#                                                 Numero integer
+# Insert into TABLE_Conti
+def submit():
+    conn = sqlite3.connect('database_messe_orizzontale')
+    cur = conn.cursor()
+
+    #dati presi dalla combo di inserimento (non update)
+    dati = [(Entry_Anno_combo_IntVar.get(),
+             Entry_Mese_combo_StringVar.get(),
+             Entry_Nome_Celebrante_combo_StringVar.get(),
+             Entry_Ad_Mentem_combo_IntVar.get(),
+             Entry_Binate_combo_IntVar.get(),
+             Entry_Binate_Conc_combo_IntVar.get(),
+             Entry_Trinate_combo_IntVar.get(),
+             Entry_Suffragi_Comunitari_combo_IntVar.get(),
+             Entry_Suffragi_Personali_combo_IntVar.get(),
+             Entry_Devozione_combo_IntVar.get(),
+             Entry_Benefattori_combo_IntVar.get(),
+             Entry_Pro_Populo_combo_IntVar.get()
+             )]
+
+
+    cur.executemany(
+        'INSERT INTO TABLE_Messe (Anno, Mese, Nome_Celebrante, Ad_Mentem, Binate, Binate_Concelebrate, Trinate, Suffragi_Comunitari, Suffragi_Personali, Devozione, Benefattori, Pro_Populo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', dati)
 
 
 
+    conn.commit()
+    # Close our connection
+    conn.close()
 
+def query_database():
+    # Clear the Treeview
+    for record in my_tree.get_children():
+        my_tree.delete(record)
+
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_messe_orizzontale')
+
+    # Create a cursor instance
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM TABLE_Messe")
+    records = c.fetchall()
+
+    # for record in records:
+    #     print(record)
+    # record[0] = id key
+
+    # COLORI RIGHE pari e dispari
+    count = 0
+    # Create striped row tags
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="lightblue")
+
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        else:
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
+                           tags = ('oddrow'))
+        count += 1
+
+    # Al termine del processo la prima riga risulta evidenziata
+    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+    my_tree.focus(child_id)  # evidenziata
+    my_tree.selection_set(child_id)
+
+    # Commit changes
+    conn.commit()
+
+    # Close our connection
+    conn.close()
+
+B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP)
+
+
+query_database()
 root.mainloop()
