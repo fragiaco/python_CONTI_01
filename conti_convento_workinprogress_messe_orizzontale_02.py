@@ -714,11 +714,27 @@ def update_record():
     selected = my_tree.focus()
     #print(selected)
     # Update record
-    '''
-    my_tree.item(selected, text="", values=(
-    Id_entry_toUpdate.get(), anno_combo_update.get(), mesi_combo_update.get(), nomi_combo_update.get(), categorie_combo_update.get(),
-    numero_entry_toUpdate.get()))
 
+    #Assegno i valori al Treeview
+    my_tree.item(selected, text="", values=(
+    Entry_Id_combo_update.get(),
+    Entry_Anno_combo_update.get(),
+    Entry_Mese_combo_update.get(),
+    Entry_Nome_Celebrante_combo_update.get(),
+    Entry_Ad_Mentem_combo_update.get(),
+    Entry_Binate_combo_update.get(),
+    Entry_Binate_Conc_combo_update.get(),
+    Entry_Trinate_combo_update.get(),
+    Entry_Suffragi_Comunitari_combo_update.get(),
+    Entry_Suffragi_Personali_combo_update.get(),
+    Entry_Devozione_combo_update.get(),
+    Entry_Benefattori_combo_update.get(),
+    Entry_Pro_Populo_combo_update.get()
+    ))
+
+
+
+    '''
     # Update the database
     # Create a database or connect to one that exists
     conn = sqlite3.connect('database_messe_orizzontale')
