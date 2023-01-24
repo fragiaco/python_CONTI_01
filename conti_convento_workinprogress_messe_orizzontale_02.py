@@ -293,7 +293,7 @@ Entry_Pro_Populo_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget
 
 
 
-Entry_Id_combo_update = Label(Frame_update, text=' ', font=('verdana', 8, 'bold'),wrap=True, width=4, bg=background_Blu, fg=foreground_Bianco)
+Entry_Id_combo_update = Entry(Frame_update, text=' ', font=('verdana', 8, 'bold'), width=5,bg=background_Blu, fg=foreground_Bianco)
 Entry_Id_combo_update.grid(row=2, column=0)
 
 # List Anni
@@ -339,16 +339,16 @@ Entry_Nome_Celebrante_combo_update.current(1)
 Entry_Nome_Celebrante_combo_update.grid(row=2, column=3)
 
 
-Entry_Ad_Mentem_combo_update = Spinbox(Frame_update, from_=0, to=31, wrap=True, width=9, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_update_IntVar)
+Entry_Ad_Mentem_combo_update = Spinbox(Frame_update, from_=0, to=31, wrap=True, width=7, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_update_IntVar)
 Entry_Ad_Mentem_combo_update.grid\
     (row=2, column=4)
-Entry_Binate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_update_update_IntVar)
+Entry_Binate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_update_update_IntVar)
 Entry_Binate_combo_update.grid\
     (row=2, column=5)
 Entry_Binate_Conc_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_update_combo_IntVar)
 Entry_Binate_Conc_combo_update.grid\
     (row=2, column=6)
-Entry_Trinate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_update_IntVar)
+Entry_Trinate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_update_IntVar)
 Entry_Trinate_combo_update.grid\
     (row=2, column=7)
 Entry_Suffragi_Comunitari_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_update_IntVar)
@@ -360,7 +360,7 @@ Entry_Suffragi_Personali_combo_update.grid\
 Entry_Devozione_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_update_IntVar)
 Entry_Devozione_combo_update.grid\
     (row=2, column=10)
-Entry_Benefattori_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_update_IntVar)
+Entry_Benefattori_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_update_IntVar)
 Entry_Benefattori_combo_update.grid\
     (row=2, column=11)
 Entry_Pro_Populo_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_update_IntVar)
@@ -635,44 +635,138 @@ def sqlite3_to_excel():
         opener = "open" if sys.platform == "darwin" else "xdg-open"
         subprocess.call([opener, 'database_messe_orizzontale_styled.xlsx'])
 
-# def select_record(e):
-#     # Clear entry boxes
-#     Entry_Id_combo_update.delete(0, END)
-#     Entry_A.delete(0, END)
-#     mesi_combo_update.delete(0, END)
-#     nomi_combo_update.delete(0, END)
-#     categorie_combo_update.delete(0, END)
-#     numero_entry_toUpdate.delete(0, END)
-#
-#     # Grab record Number
-#     selected = my_tree.focus()  # focus restituisce l'ID key
-#     # print(selected) #esempio 38
-#     # Grab record values
-#     values = my_tree.item(selected, 'values')
-#     print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
-#
-#     # outpus to entry boxes
-#     Id_entry_toUpdate.insert(0, values[0])  # 0 penso significa all'inizio
-#     anno_combo_update.insert(0, values[1])
-#     mesi_combo_update.insert(0, values[2])
-#     nomi_combo_update.insert(0, values[3])
-#     categorie_combo_update.insert(0, values[4])
-#     numero_entry_toUpdate.insert(0, values[5])
-#
+def select_record(e):
+    # Clear entry boxes
+    Entry_Id_combo_update.delete(0, END)
+    Entry_Anno_combo_update.delete(0, END)
+    Entry_Mese_combo_update.delete(0, END)
+    Entry_Nome_Celebrante_combo_update.delete(0, END)
+    Entry_Ad_Mentem_combo_update.delete(0, END)
+    Entry_Binate_combo_update.delete(0, END)
+    Entry_Binate_Conc_combo_update.delete(0, END)
+    Entry_Trinate_combo_update.delete(0, END)
+    Entry_Suffragi_Comunitari_combo_update.delete(0, END)
+    Entry_Suffragi_Personali_combo_update.delete(0, END)
+    Entry_Devozione_combo_update.delete(0, END)
+    Entry_Benefattori_combo_update.delete(0, END)
+    Entry_Pro_Populo_combo_update.delete(0, END)
 
-    # print(Anno_entry.get())
+    # Grab record Number
+    selected = my_tree.focus()  # focus restituisce l'ID key
+    # print(selected) #esempio 38
+    # Grab record values
+    values = my_tree.item(selected, 'values')
+    print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
 
-#
-# # Bind the treeview ogni volta che seleziono una riga parte la funzione select_record
-# my_tree.bind("<ButtonRelease-1>", select_record)
+    # outpus to entry boxes
+    Entry_Id_combo_update.insert(0, values[0])  # 0 penso significa all'inizio
+    Entry_Anno_combo_update.insert(0, values[1])
+    Entry_Mese_combo_update.insert(0, values[2])
+    Entry_Nome_Celebrante_combo_update.insert(0, values[3])
+    Entry_Ad_Mentem_combo_update.insert(0, values[4])
+    Entry_Binate_combo_update.insert(0, values[5])
+    Entry_Binate_Conc_combo_update.insert(0, values[6])  # 0 penso significa all'inizio
+    Entry_Trinate_combo_update.insert(0, values[7])
+    Entry_Suffragi_Comunitari_combo_update.insert(0, values[8])
+    Entry_Suffragi_Personali_combo_update.insert(0, values[9])
+    Entry_Devozione_combo_update.insert(0, values[10])
+    Entry_Benefattori_combo_update.insert(0, values[11])
+    Entry_Pro_Populo_combo_update.insert(0, values[12])
 
 
 
 
+# Bind the treeview ogni volta che seleziono una riga parte la funzione select_record
+my_tree.bind("<ButtonRelease-1>", select_record)
 
 
-B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP)
+#######################
+def remove_one():
+    # x = my_tree.selection()[0] #restituisce l'Id key
+    x = my_tree.focus()
+    my_tree.delete(x)
+
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_messe_orizzontale')
+
+    # Create a cursor instance
+    c = conn.cursor()
+
+    # Delete From Database
+    c.execute("DELETE from TABLE_Messe WHERE oid=" + Entry_Id_combo_update.get())
+
+    # Commit changes
+    conn.commit()
+
+    # Close our connection
+    conn.close()
+
+    # Add a little message box for fun
+    messagebox.showinfo("Deleted", "Riga Cancellata!")
+
+
+#######################
+######
+# Update record
+def update_record():
+    # Grab the record number
+    #print('update')
+    selected = my_tree.focus()
+    #print(selected)
+    # Update record
+    '''
+    my_tree.item(selected, text="", values=(
+    Id_entry_toUpdate.get(), anno_combo_update.get(), mesi_combo_update.get(), nomi_combo_update.get(), categorie_combo_update.get(),
+    numero_entry_toUpdate.get()))
+
+    # Update the database
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_messe_orizzontale')
+    #
+    # Create a cursor instance
+    c = conn.cursor()
+
+    #
+    c.execute("""UPDATE TABLE_Messe SET
+    		Anno = :Anno,
+    		Mese = :Mese,
+    		Nome = :Nome,
+    		Categoria = :Categoria,
+    		Numero = :Numero
+
+     		WHERE oid = :oid""",
+              {
+                  'Anno': anno_combo_update.get(),
+                  'Mese': mesi_combo_update.get(),
+                  'Nome': nomi_combo_update.get(),
+                  'Categoria': categorie_combo_update.get(),
+                  'Numero': numero_entry_toUpdate.get(),
+                  'oid': Id_entry_toUpdate.get()
+              })
+    #
+    #    Commit changes
+    conn.commit()
+    #
+    #         # Close our connection
+    conn.close()
+    # Add a little message box for fun
+    messagebox.showinfo("Updated!", "Riga aggiornata!")
+
+    #         # Clear entry boxes
+    Id_entry_toUpdate.delete(0, END)
+    anno_combo_update.delete(0, END)
+    mesi_combo_update.delete(0, END)
+    nomi_combo_update.delete(0, END)
+    categorie_combo_update.delete(0, END)
+    numero_entry_toUpdate.delete(0, END)
+
+'''
+
+B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
 B_excel = Button(Frame_tree_Buttons, text='Filtro_excel', width=10, command=sqlite3_to_excel).pack(side=TOP, pady=20)
+B_update = Button(Frame_tree_Buttons, text='aggiorna', width=10, command=update_record).pack(side=TOP, pady=20)
+B_delete = Button(Frame_tree_Buttons, text='cancella', width=10, command=remove_one).pack(side=TOP, pady=20)
+
 
 query_database()
 root.mainloop()
