@@ -103,79 +103,6 @@ Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_update.place(x=5, y=465, width=1670, height=60)
 
 
-###############################################
-######## TKINTER LABELS Frame_combo ###########
-###############################################
-# Frame IN Update - left side Frame
-# Frame_button_in_update = Frame(Frame_update, bd='4', bg=background_Blu, relief=RIDGE)
-# Frame_button_in_update.place(y=400, width=445, height=42)
-#
-# # Frame_bottom_left
-# Frame_bottom_left = Frame(root, bd='4', bg=background_Blu, relief=RIDGE) #azzurro fiordaliso
-# Frame_bottom_left.place(x=20, y=528, width=450, height=415)
-#
-# # Frame Tabella - Tabella bottom Frame
-# Frame_tabella = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-# Frame_tabella.place(x=475, y=528, width=730, height=415)
-#
-# # Frame_bottom_right
-# Frame_bottom_right = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-# Frame_bottom_right.place(x=1210, y=528, width=450, height=415)
-
-#
-# #Labels in Frame Combo_insert
-# Label_combo_title = Label(Frame_combo, text='Inserisci Dati:', font=('verdana', 15, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_title.grid(row=0, columnspan=2, padx=10, pady=10, sticky='w')
-#
-# # Label_riga_vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# # Label_riga_vuota.grid(row=1)
-#
-# Label_combo_anno = Label(Frame_combo, text='Anno', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_anno.grid(row=1, column=0, columnspan=1, padx=10, pady=10, sticky='w')
-#
-# Label_combo_mese = Label(Frame_combo, text='Mese', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_mese.grid               (row=1, column=1, columnspan=1, padx=10, pady=10, sticky='w')
-#
-# Label_combo_Nome_celebrante = Label(Frame_combo, text='Celebrante', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Nome_celebrante.grid    (row=1, column=2, padx=10, pady=10, sticky='w')
-#
-# Label_combo_Ad_Mentem = Label(Frame_combo, text='Ad_Mentem', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Ad_Mentem.grid          (row=1, column=3, padx=10, pady=10, sticky='w')
-#
-# Label_combo_Binate = Label(Frame_combo, text='Binate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Binate.grid             (row=1, column=4, padx=10, pady=10, sticky='w')
-#
-# Label_combo_Binate_Concelebrate = Label(Frame_combo, text='Binate_Conc.', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Binate_Concelebrate.grid(row=1, column=5, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Trinate = Label(Frame_combo, text='Trinate', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Trinate.grid            (row=1, column=6, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Suffragi_Comunitari = Label(Frame_combo, text='Suffr_Comuntà', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Suffragi_Comunitari.grid(row=1, column=7, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Suffragi_Personali = Label(Frame_combo, text='Suffr_Personali', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Suffragi_Personali.grid(row=1, column=8, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Devozione = Label(Frame_combo, text='Devozione', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Devozione.grid          (row=1, column=9, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Benefattori = Label(Frame_combo, text='Benefattori', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Benefattori.grid        (row=1, column=10, padx=10, pady=20, sticky='w')
-#
-# Label_combo_Pro_Populo = Label(Frame_combo, text='Pro_Populo', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_combo_Pro_Populo.grid         (row=1, column=11, padx=10, pady=20, sticky='w')
-
-
-# Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-# Label_Totale_Messe_Celebrate = Label(Frame_combo, text='Totale Messe celebrate', font=('verdana', 13, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-
-
-
-
-
 
 
 
@@ -195,21 +122,7 @@ Entry_Devozione_combo_IntVar    = IntVar()
 Entry_Benefattori_combo_IntVar  = IntVar()
 Entry_Pro_Populo_combo_IntVar   = IntVar()
 
-# label = Label(Frame_update)
-# label.pack()
-# def trace_when_Entry_widget_is_updated(self, *args):
-#     try:
-#         #value = Entry_Anno_combo_IntVar.set("0")
-#         label.config(text= ' ')
-#         value = Entry_Anno_combo_IntVar.get()
-#         text = "Hello, {}!".format(value) if value else " "
-#         label.config(text=text)
-#
-#     except:
-#         pass
 
-# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
 Label_TOTALE_Numero_Messe= Label(Frame_combo, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_TOTALE_Numero_Messe.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
 
@@ -321,12 +234,6 @@ Entry_Pro_Populo_combo.grid\
 
 
 
-#LABEL TOTALE MESSE
-# Label_Riga_Vuota = Label(Frame_combo, text='', font=('verdana', 5, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_Riga_Vuota.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky='w')
-# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, textvariable=Entry_Anno_combo_IntVar)
-# Label_STRING_Totale_Messe_Celebrate.grid(row=4, column=0, columnspan=5, padx=10, pady=10, sticky='w')
-
 
 ###############################################
 ######## TKINTER UPDATE Frame_UPDATE ############
@@ -344,21 +251,7 @@ Entry_Devozione_combo_update_IntVar    = IntVar()
 Entry_Benefattori_combo_update_IntVar  = IntVar()
 Entry_Pro_Populo_combo_update_IntVar   = IntVar()
 
-# label = Label(Frame_update)
-# label.pack()
-# def trace_when_Entry_widget_is_updated(self, *args):
-#     try:
-#         #value = Entry_Anno_combo_IntVar.set("0")
-#         label.config(text= ' ')
-#         value = Entry_Anno_combo_IntVar.get()
-#         text = "Hello, {}!".format(value) if value else " "
-#         label.config(text=text)
-#
-#     except:
-#         pass
 
-# Label_STRING_Totale_Messe_Celebrate = Label(Frame_combo, text='TOT Messe celebrate: ', font=('verdana', 7, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-# Label_STRING_Totale_Messe_Celebrate.grid(row=1, column=12, columnspan=2, padx=10, pady=10, sticky='w')
 Label_TOTALE_Numero_Messe_update= Label(Frame_update, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
 Label_TOTALE_Numero_Messe_update.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
 
@@ -634,8 +527,110 @@ def query_database():
     # Close our connection
     conn.close()
 
-B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP)
+def sqlite3_to_excel():
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_messe_orizzontale')
 
+    # Create a cursor instance
+    c = conn.cursor()
+
+    query = "SELECT * FROM TABLE_Messe"  # query to collect recors
+
+    df = pd.read_sql(query, conn)  # create dataframe
+
+    df.sort_values(by='ID', ascending=False).to_excel('database_messe_orizzontale.xlsx', index=False, sheet_name='Dati')
+
+    # Commit changes
+    conn.commit()
+
+
+
+    # Close our connection
+    conn.close()
+
+
+    ###########################################################
+    ################# Creo il Workbook con OPENPYXL############
+    ###########################################################
+
+
+    wb = Workbook()
+    wb = load_workbook(filename="database_messe_orizzontale.xlsx")
+    ws = wb.active  # Worksheet
+    ws.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
+    ws.row_dimensions[1].height = 75
+    # openpyxl freeze first row
+    ws.freeze_panes = 'A2'
+    # openpyxl filter columns
+    ws.auto_filter.ref = ws.dimensions
+
+    ############ RED ################
+    red = NamedStyle(name="red")
+    red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
+    red.alignment = Alignment(horizontal="center", vertical="center")
+    red.fill = PatternFill('solid', fgColor='d1d22e')
+    red.alignment = Alignment(textRotation=45)
+    wb.add_named_style(red)
+
+    ############ BLACK ################
+    black = NamedStyle(name="black")
+    black.font = Font(name='Calibri', size=10, color='000000', bold=True)
+    black.alignment = Alignment(horizontal="left", vertical="center")
+    wb.add_named_style(black)
+
+    for row in ws[2:ws.max_row]:  # skip the header
+        print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
+        for cell in row: # il quarto valore della tuple
+            #print(cell)  # <Cell 'multiple'.D7>
+            cell.style= 'black'
+
+
+
+
+    ws['A1'].style = 'red'
+    ws['B1'].style = 'red'
+    ws['C1'].style = 'red'
+    ws['D1'].style = 'red'
+    ws['E1'].style = 'red'
+    ws['F1'].style = 'red'
+    ws['G1'].style = 'red'
+    ws['H1'].style = 'red'
+    ws['I1'].style = 'red'
+    ws['J1'].style = 'red'
+    ws['K1'].style = 'red'
+    ws['L1'].style = 'red'
+    ws['M1'].style = 'red'
+    ws['N1'].style = 'red'
+
+
+    ws.column_dimensions['A'].width = 8
+    ws.column_dimensions['B'].width = 8
+    ws.column_dimensions['C'].width = 8
+    ws.column_dimensions['D'].width = 25
+    ws.column_dimensions['E'].width = 8
+    ws.column_dimensions['F'].width = 8
+    ws.column_dimensions['G'].width = 8
+    ws.column_dimensions['H'].width = 8
+    ws.column_dimensions['I'].width = 8
+    ws.column_dimensions['J'].width = 8
+    ws.column_dimensions['K'].width = 8
+    ws.column_dimensions['L'].width = 8
+    ws.column_dimensions['M'].width = 8
+    ws.column_dimensions['N'].width = 8
+
+
+    # ws = wb.create_sheet('Dati')
+    wb.save("database_messe_orizzontale_styled.xlsx")
+
+    if sys.platform == "win32":
+        os.startfile('database_messe_orizzontale_styled.xlsx')
+    else:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, 'database_messe_orizzontale_styled.xlsx'])
+
+
+B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP)
+B_excel = Button(Frame_tree_Buttons, text='Filtro_excel', width=10, command=sqlite3_to_excel).pack(side=TOP, pady=20)
 
 query_database()
 root.mainloop()
