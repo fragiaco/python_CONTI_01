@@ -25,7 +25,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.worksheet.worksheet import Worksheet
 
 from xlsxwriter.utility import xl_rowcol_to_cell
-
+from pandastable import Table
 
 ######################################################################
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
@@ -102,7 +102,8 @@ Frame_tree_Buttons.place(x=1575, y=132, width=100, height=335)
 Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_update.place(x=5, y=465, width=1670, height=60)
 
-
+Frame_pandastable = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_pandastable.place(x=5, y=525, width=800, height=420)
 
 
 
@@ -738,48 +739,39 @@ def update_record():
     #
     # Create a cursor instance
     c = conn.cursor()
+    print(conn)
 
-'''
-Anno integer not null ,
-Mese TEXT not null ,
-Nome_Celebrante TEXT not null ,
-Ad_Mentem integer not null ,
-    Binate integer,
-    Binate_Concelebrate integer,
-     Trinate integer,
-     Suffragi_Comunitari integer,
-     Suffragi_Personali integer,
-    Devozione integer,
-    Benefattori integer,
-    Pro_Populo
-
-
-    #
     c.execute("""UPDATE TABLE_Messe SET
     		Anno = :Anno,
     		Mese = :Mese,
     		Nome_Celebrante = :Nome_Celebrante,
     		Ad_Mentem = :Ad_Mentem,
-    		Binate = :Binate
+    		Binate = :Binate,
             Binate_Concelebrate = :Binate_Concelebrate,
     		Trinate = :Trinate,
     		Suffragi_Comunitari = :Suffragi_Comunitari,
     		Suffragi_Personali = :Suffragi_Personali,
-    		Devozione = :Devozione
-            Suffragi_Comunitari = :Suffragi_Comunitari,
-    		Suffragi_Personali = :Suffragi_Personali,
-    		Devozione = :Devozione
+    		Devozione = :Devozione,
+            Benefattori = :Benefattori,
+    		Pro_Populo = :Pro_Populo
+
 
      		WHERE oid = :oid""",
               {
-                  'Anno': anno_combo_update.get(),
-                  'Mese': mesi_combo_update.get(),
-                  'Nome': nomi_combo_update.get(),
-                  'Categoria': categorie_combo_update.get(),
-                  'Numero': numero_entry_toUpdate.get(),
-                  'oid': Id_entry_toUpdate.get()
+                    'Anno':             Entry_Anno_combo_update.get(),
+                    'Mese':             Entry_Mese_combo_update.get(),
+                    'Nome_Celebrante':  Entry_Nome_Celebrante_combo_update.get(),
+    		        'Ad_Mentem':        Entry_Ad_Mentem_combo_update.get(),
+    		        'Binate':           Entry_Binate_combo_update.get(),
+                    'Binate_Concelebrate': Entry_Binate_Conc_combo_update.get(),
+    		        'Trinate':          Entry_Trinate_combo_update.get(),
+    		        'Suffragi_Comunitari': Entry_Suffragi_Comunitari_combo_update.get(),
+    		        'Suffragi_Personali': Entry_Suffragi_Personali_combo_update.get(),
+    		        'Devozione':        Entry_Devozione_combo_update.get(),
+                    'Benefattori':      Entry_Benefattori_combo_update.get(),
+                    'Pro_Populo':       Entry_Pro_Populo_combo_update.get()
               })
-    #
+
     #    Commit changes
     conn.commit()
     #
@@ -789,14 +781,26 @@ Ad_Mentem integer not null ,
     messagebox.showinfo("Updated!", "Riga aggiornata!")
 
     #         # Clear entry boxes
-    Id_entry_toUpdate.delete(0, END)
-    anno_combo_update.delete(0, END)
-    mesi_combo_update.delete(0, END)
-    nomi_combo_update.delete(0, END)
-    categorie_combo_update.delete(0, END)
-    numero_entry_toUpdate.delete(0, END)
+    Entry_Id_combo_update.delete(0, END)
+    Entry_Anno_combo_update.delete(0, END)
+    Entry_Mese_combo_update.delete(0, END)
+    Entry_Nome_Celebrante_combo_update.delete(0, END)
+    Entry_Ad_Mentem_combo_update.delete(0, END)
+    Entry_Binate_combo_update.delete(0, END)
+    Entry_Binate_Conc_combo_update.delete(0, END)
+    Entry_Trinate_combo_update.delete(0, END)
+    Entry_Suffragi_Comunitari_combo_update.delete(0, END)
+    Entry_Suffragi_Personali_combo_update.delete(0, END)
+    Entry_Devozione_combo_update.delete(0, END)
+    Entry_Benefattori_combo_update.delete(0, END)
+    Entry_Pro_Populo_combo_update.delete(0, END)
 
-'''
+
+
+
+table = Table(Frame_pandastable, width=300, height=100, showtoolbar=True, showstatusbar=True)
+table.show()
+
 
 B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
 B_excel = Button(Frame_tree_Buttons, text='Filtro_excel', width=10, command=sqlite3_to_excel).pack(side=TOP, pady=20)

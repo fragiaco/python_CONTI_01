@@ -25,7 +25,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.worksheet.worksheet import Worksheet
 
 from xlsxwriter.utility import xl_rowcol_to_cell
-
+from pandastable import Table
 
 ######################################################################
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
