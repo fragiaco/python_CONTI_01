@@ -109,21 +109,22 @@ Frame_update.place(x=5, y=465, width=1670, height=60)
 ###############################################
 ######## TKINTER ENTRY Frame_combo ############
 ###############################################
-Entry_Anno_combo_IntVar         = IntVar()
-Entry_Mese_combo_StringVar      = StringVar()
-Entry_Nome_Celebrante_combo_StringVar = StringVar()
-Entry_Ad_Mentem_combo_IntVar    = IntVar()
-Entry_Binate_combo_IntVar       = IntVar()
-Entry_Binate_Conc_combo_IntVar  = IntVar()
-Entry_Trinate_combo_IntVar      = IntVar()
-Entry_Suffragi_Comunitari_combo_IntVar = IntVar()
-Entry_Suffragi_Personali_combo_IntVar = IntVar()
-Entry_Devozione_combo_IntVar    = IntVar()
-Entry_Benefattori_combo_IntVar  = IntVar()
-Entry_Pro_Populo_combo_IntVar   = IntVar()
+Entry_Anno_combo_IntVar                 = IntVar()
+Entry_Mese_combo_StringVar              = StringVar()
+Entry_Nome_Celebrante_combo_StringVar   = StringVar()
+Entry_Ad_Mentem_combo_IntVar            = IntVar()
+Entry_Binate_combo_IntVar               = IntVar()
+Entry_Binate_Conc_combo_IntVar          = IntVar()
+Entry_Trinate_combo_IntVar              = IntVar()
+Entry_Suffragi_Comunitari_combo_IntVar  = IntVar()
+Entry_Suffragi_Personali_combo_IntVar   = IntVar()
+Entry_Devozione_combo_IntVar            = IntVar()
+Entry_Benefattori_combo_IntVar          = IntVar()
+Entry_Pro_Populo_combo_IntVar           = IntVar()
 
 
-Label_TOTALE_Numero_Messe= Label(Frame_combo, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+Label_TOTALE_Numero_Messe= Label(Frame_combo, text=' ', font=('verdana', 8, 'bold'),
+                                                bg=background_Blu, fg=foreground_Bianco)
 Label_TOTALE_Numero_Messe.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
 
 
@@ -166,7 +167,7 @@ Anni = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
 # Dropbox Anno
 Entry_Anno_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Anni, textvariable=Entry_Anno_combo_IntVar)
 Entry_Anno_combo.current(4)
-Entry_Anno_combo.grid(row=2, columnspan=1, column=0)
+Entry_Anno_combo.grid(row=2, column=0)
 Entry_Anno_combo['state'] = 'readonly'
 
 
@@ -194,7 +195,7 @@ Celebranti = ["fra Antonio Porfiri",
 # Dropbox Mesi
 Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
 Entry_Mese_combo.current(0)
-Entry_Mese_combo.grid(row=2, columnspan=1, column=1)
+Entry_Mese_combo.grid(row=2, column=1)
 Entry_Mese_combo['state'] = 'readonly'
 
 
@@ -238,22 +239,23 @@ Entry_Pro_Populo_combo.grid\
 ###############################################
 ######## TKINTER UPDATE Frame_UPDATE ############
 ###############################################
-Entry_Anno_combo_update_IntVar         = IntVar()
-Entry_Mese_combo_update_StringVar      = StringVar()
-Entry_Nome_Celebrante_combo_update_StringVar = StringVar()
-Entry_Ad_Mentem_combo_update_IntVar    = IntVar()
-Entry_Binate_combo_update_update_IntVar= IntVar()
-Entry_Binate_Conc_update_combo_IntVar  = IntVar()
-Entry_Trinate_combo_update_IntVar      = IntVar()
-Entry_Suffragi_Comunitari_combo_update_IntVar = IntVar()
+Entry_Anno_combo_update_IntVar              = IntVar()
+Entry_Mese_combo_update_StringVar           = StringVar()
+Entry_Nome_Celebrante_combo_update_StringVar= StringVar()
+Entry_Ad_Mentem_combo_update_IntVar         = IntVar()
+Entry_Binate_combo_update_update_IntVar     = IntVar()
+Entry_Binate_Conc_update_combo_IntVar       = IntVar()
+Entry_Trinate_combo_update_IntVar           = IntVar()
+Entry_Suffragi_Comunitari_combo_update_IntVar= IntVar()
 Entry_Suffragi_Personali_combo_update_IntVar = IntVar()
-Entry_Devozione_combo_update_IntVar    = IntVar()
-Entry_Benefattori_combo_update_IntVar  = IntVar()
-Entry_Pro_Populo_combo_update_IntVar   = IntVar()
+Entry_Devozione_combo_update_IntVar         = IntVar()
+Entry_Benefattori_combo_update_IntVar       = IntVar()
+Entry_Pro_Populo_combo_update_IntVar        = IntVar()
+
 
 
 Label_TOTALE_Numero_Messe_update= Label(Frame_update, text=' ', font=('verdana', 8, 'bold'), bg=background_Blu, fg=foreground_Bianco)
-Label_TOTALE_Numero_Messe_update.grid(row=2, column=12, columnspan=2, padx=40, pady=10)
+Label_TOTALE_Numero_Messe_update.grid(row=2, column=13, columnspan=2, padx=40, pady=10)
 
 
 def trace_when_Entry_widget_is_updated_UPDATE(self, *args):
@@ -289,14 +291,19 @@ Entry_Devozione_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_
 Entry_Benefattori_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
 Entry_Pro_Populo_combo_update_IntVar.trace_variable('w', trace_when_Entry_widget_is_updated_UPDATE)
 
+
+
+Entry_Id_combo_update = Label(Frame_update, text=' ', font=('verdana', 8, 'bold'),wrap=True, width=4, bg=background_Blu, fg=foreground_Bianco)
+Entry_Id_combo_update.grid(row=2, column=0)
+
 # List Anni
 Anni = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
 
 # Dropbox Anno
-Entry_Anno_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Anni, textvariable=Entry_Anno_combo_update_IntVar)
-Entry_Anno_combo.current(4)
-Entry_Anno_combo.grid(row=2, columnspan=1, column=0)
-Entry_Anno_combo['state'] = 'readonly'
+Entry_Anno_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Anni, textvariable=Entry_Anno_combo_update_IntVar)
+Entry_Anno_combo_update.current(4)
+Entry_Anno_combo_update.grid(row=2, column=1)
+Entry_Anno_combo_update['state'] = 'readonly'
 
 
 # List Mesi
@@ -321,44 +328,44 @@ Celebranti = ["fra Antonio Porfiri",
         "Ospite"]
 
 # Dropbox Mesi
-Entry_Mese_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_update_StringVar)
-Entry_Mese_combo.current(0)
-Entry_Mese_combo.grid(row=2, columnspan=1, column=1)
-Entry_Mese_combo['state'] = 'readonly'
+Entry_Mese_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_update_StringVar)
+Entry_Mese_combo_update.current(0)
+Entry_Mese_combo_update.grid(row=2, column=2)
+Entry_Mese_combo_update['state'] = 'readonly'
 
 
-Entry_Nome_Celebrante_combo = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Celebranti, textvariable=Entry_Nome_Celebrante_combo_update_StringVar)
-Entry_Nome_Celebrante_combo.current(1)
-Entry_Nome_Celebrante_combo.grid(row=2, column=2)
+Entry_Nome_Celebrante_combo_update = ttk.Combobox(Frame_update, font=("Helvetica", 10), values=Celebranti, textvariable=Entry_Nome_Celebrante_combo_update_StringVar)
+Entry_Nome_Celebrante_combo_update.current(1)
+Entry_Nome_Celebrante_combo_update.grid(row=2, column=3)
 
 
-Entry_Ad_Mentem_combo = Spinbox(Frame_update, from_=0, to=31, wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_update_IntVar)
-Entry_Ad_Mentem_combo.grid\
-    (row=2, column=3)
-Entry_Binate_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_update_update_IntVar)
-Entry_Binate_combo.grid\
+Entry_Ad_Mentem_combo_update = Spinbox(Frame_update, from_=0, to=31, wrap=True, width=9, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_update_IntVar)
+Entry_Ad_Mentem_combo_update.grid\
     (row=2, column=4)
-Entry_Binate_Conc_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_update_combo_IntVar)
-Entry_Binate_Conc_combo.grid\
+Entry_Binate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_combo_update_update_IntVar)
+Entry_Binate_combo_update.grid\
     (row=2, column=5)
-Entry_Trinate_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_update_IntVar)
-Entry_Trinate_combo.grid\
+Entry_Binate_Conc_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Binate_Conc_update_combo_IntVar)
+Entry_Binate_Conc_combo_update.grid\
     (row=2, column=6)
-Entry_Suffragi_Comunitari_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_update_IntVar)
-Entry_Suffragi_Comunitari_combo.grid\
+Entry_Trinate_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Trinate_combo_update_IntVar)
+Entry_Trinate_combo_update.grid\
     (row=2, column=7)
-Entry_Suffragi_Personali_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_update_IntVar)
-Entry_Suffragi_Personali_combo.grid\
+Entry_Suffragi_Comunitari_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Comunitari_combo_update_IntVar)
+Entry_Suffragi_Comunitari_combo_update.grid\
     (row=2, column=8)
-Entry_Devozione_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_update_IntVar)
-Entry_Devozione_combo.grid\
+Entry_Suffragi_Personali_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Suffragi_Personali_combo_update_IntVar)
+Entry_Suffragi_Personali_combo_update.grid\
     (row=2, column=9)
-Entry_Benefattori_combo = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=11,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_update_IntVar)
-Entry_Benefattori_combo.grid\
+Entry_Devozione_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Devozione_combo_update_IntVar)
+Entry_Devozione_combo_update.grid\
     (row=2, column=10)
-Entry_Pro_Populo_combo = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_update_IntVar)
-Entry_Pro_Populo_combo.grid\
+Entry_Benefattori_combo_update = Spinbox(Frame_update, from_=0, to=31,wrap=True, width=10,font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Benefattori_combo_update_IntVar)
+Entry_Benefattori_combo_update.grid\
     (row=2, column=11)
+Entry_Pro_Populo_combo_update = Spinbox(Frame_update,from_=0, to=31,wrap=True, width=10, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Pro_Populo_combo_update_IntVar)
+Entry_Pro_Populo_combo_update.grid\
+    (row=2, column=12)
 #######################################################
 
 
@@ -627,6 +634,41 @@ def sqlite3_to_excel():
     else:
         opener = "open" if sys.platform == "darwin" else "xdg-open"
         subprocess.call([opener, 'database_messe_orizzontale_styled.xlsx'])
+
+# def select_record(e):
+#     # Clear entry boxes
+#     Entry_Id_combo_update.delete(0, END)
+#     Entry_A.delete(0, END)
+#     mesi_combo_update.delete(0, END)
+#     nomi_combo_update.delete(0, END)
+#     categorie_combo_update.delete(0, END)
+#     numero_entry_toUpdate.delete(0, END)
+#
+#     # Grab record Number
+#     selected = my_tree.focus()  # focus restituisce l'ID key
+#     # print(selected) #esempio 38
+#     # Grab record values
+#     values = my_tree.item(selected, 'values')
+#     print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
+#
+#     # outpus to entry boxes
+#     Id_entry_toUpdate.insert(0, values[0])  # 0 penso significa all'inizio
+#     anno_combo_update.insert(0, values[1])
+#     mesi_combo_update.insert(0, values[2])
+#     nomi_combo_update.insert(0, values[3])
+#     categorie_combo_update.insert(0, values[4])
+#     numero_entry_toUpdate.insert(0, values[5])
+#
+
+    # print(Anno_entry.get())
+
+#
+# # Bind the treeview ogni volta che seleziono una riga parte la funzione select_record
+# my_tree.bind("<ButtonRelease-1>", select_record)
+
+
+
+
 
 
 B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP)
