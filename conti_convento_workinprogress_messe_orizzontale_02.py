@@ -732,9 +732,6 @@ def update_record():
     Entry_Pro_Populo_combo_update.get()
     ))
 
-
-
-    '''
     # Update the database
     # Create a database or connect to one that exists
     conn = sqlite3.connect('database_messe_orizzontale')
@@ -742,13 +739,36 @@ def update_record():
     # Create a cursor instance
     c = conn.cursor()
 
+'''
+Anno integer not null ,
+Mese TEXT not null ,
+Nome_Celebrante TEXT not null ,
+Ad_Mentem integer not null ,
+    Binate integer,
+    Binate_Concelebrate integer,
+     Trinate integer,
+     Suffragi_Comunitari integer,
+     Suffragi_Personali integer,
+    Devozione integer,
+    Benefattori integer,
+    Pro_Populo
+
+
     #
     c.execute("""UPDATE TABLE_Messe SET
     		Anno = :Anno,
     		Mese = :Mese,
-    		Nome = :Nome,
-    		Categoria = :Categoria,
-    		Numero = :Numero
+    		Nome_Celebrante = :Nome_Celebrante,
+    		Ad_Mentem = :Ad_Mentem,
+    		Binate = :Binate
+            Binate_Concelebrate = :Binate_Concelebrate,
+    		Trinate = :Trinate,
+    		Suffragi_Comunitari = :Suffragi_Comunitari,
+    		Suffragi_Personali = :Suffragi_Personali,
+    		Devozione = :Devozione
+            Suffragi_Comunitari = :Suffragi_Comunitari,
+    		Suffragi_Personali = :Suffragi_Personali,
+    		Devozione = :Devozione
 
      		WHERE oid = :oid""",
               {
