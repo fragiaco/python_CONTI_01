@@ -694,7 +694,7 @@ def remove_one():
     c = conn.cursor()
 
     # Delete From Database
-    c.execute("DELETE from TABLE_Messe WHERE oid=" + Entry_Id_combo_update.get())
+    c.execute("DELETE from TABLE_Messe WHERE oid =" + Entry_Id_combo_update.get())
 
     # Commit changes
     conn.commit()
@@ -741,22 +741,23 @@ def update_record():
     c = conn.cursor()
     print(conn)
 
-    c.execute("""UPDATE TABLE_Messe SET
-    		Anno = :Anno,
-    		Mese = :Mese,
-    		Nome_Celebrante = :Nome_Celebrante,
-    		Ad_Mentem = :Ad_Mentem,
-    		Binate = :Binate,
-            Binate_Concelebrate = :Binate_Concelebrate,
-    		Trinate = :Trinate,
-    		Suffragi_Comunitari = :Suffragi_Comunitari,
-    		Suffragi_Personali = :Suffragi_Personali,
-    		Devozione = :Devozione,
-            Benefattori = :Benefattori,
-    		Pro_Populo = :Pro_Populo
+    c.execute("""   UPDATE TABLE_Messe 
+                    SET
+                    Anno = :Anno,
+                    Mese = :Mese,
+                    Nome_Celebrante = :Nome_Celebrante,
+                    Ad_Mentem = :Ad_Mentem,
+                    Binate = :Binate,
+                    Binate_Concelebrate = :Binate_Concelebrate,
+                    Trinate = :Trinate,
+                    Suffragi_Comunitari = :Suffragi_Comunitari,
+                    Suffragi_Personali = :Suffragi_Personali,
+                    Devozione = :Devozione,
+                    Benefattori = :Benefattori,
+                    Pro_Populo = :Pro_Populo
 
 
-     		WHERE oid = :oid""",
+     		        WHERE oid =""" + Entry_Id_combo_update.get(),
               {
                     'Anno':             Entry_Anno_combo_update.get(),
                     'Mese':             Entry_Mese_combo_update.get(),
