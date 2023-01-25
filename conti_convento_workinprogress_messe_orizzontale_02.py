@@ -804,8 +804,9 @@ df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
 # # Verify that result of SQL query is stored in the dataframe
 # print(df.head())
 
-table = Table(Frame_pandastable, dataframe=df, width=200, height=100)
-table.show()
+pt = Table(Frame_pandastable, dataframe=df, width=100, height=100)
+# table.redraw()
+pt.show()
 con.close()
 
 B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
