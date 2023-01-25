@@ -103,7 +103,7 @@ Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_update.place(x=5, y=465, width=1670, height=60)
 
 Frame_pandastable = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_pandastable.place(x=5, y=525, width=800, height=420)
+Frame_pandastable.place(x=5, y=525, width=1580, height=220)
 
 
 
@@ -797,11 +797,16 @@ def update_record():
     Entry_Pro_Populo_combo_update.delete(0, END)
 
 
+# Read sqlite query results into a pandas DataFrame
+con = sqlite3.connect("database_messe_orizzontale")
+df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
 
+# # Verify that result of SQL query is stored in the dataframe
+# print(df.head())
 
-table = Table(Frame_pandastable, width=300, height=100, showtoolbar=True, showstatusbar=True)
+table = Table(Frame_pandastable, dataframe=df, width=200, height=100)
 table.show()
-
+con.close()
 
 B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
 B_excel = Button(Frame_tree_Buttons, text='Filtro_excel', width=10, command=sqlite3_to_excel).pack(side=TOP, pady=20)
