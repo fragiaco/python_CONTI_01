@@ -103,7 +103,7 @@ Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_update.place(x=5, y=465, width=1670, height=60)
 
 Frame_pandastable = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_pandastable.place(x=5, y=525, width=1580, height=220)
+Frame_pandastable.place(x=5, y=525, width=1210, height=220)
 
 
 
@@ -800,7 +800,21 @@ def update_record():
 # Read sqlite query results into a pandas DataFrame
 con = sqlite3.connect("database_messe_orizzontale")
 df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
+# df = df.loc[(df['Anno']==Entry_Anno_combo_update_IntVar.get()) &
+#         (df['Mese']==Entry_Mese_combo_update_StringVar.get())
+#        ]
+df=df.pivot(columns='Mese')
 
+#print(df.to_markdown())
+#print(df.nunique())
+#IMPORTANTE
+# v0, v1= df.shape
+# v2 = df.size
+# print(f'In the df there are {v0} rows and {v1} columns and {v2} elements')
+# print(f'Infatti {v0} x {v1} = {v2}')
+# print(f"Nella colonna ID ci sono {df['ID'].size} righe")
+#
+# print(f"Nella conna mese compaiono {df['Mese'].unique()} come valori unici")
 # # Verify that result of SQL query is stored in the dataframe
 # print(df.head())
 
