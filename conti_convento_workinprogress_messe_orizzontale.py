@@ -25,23 +25,33 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.worksheet.worksheet import Worksheet
 
 from xlsxwriter.utility import xl_rowcol_to_cell
-from pandastable import Table
+
 
 ######################################################################
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
 ######################################################################
 def connessione():
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
 
     cur = conn.cursor()
     try:
         cur.execute('''CREATE TABLE TABLE_Messe(ID integer not null PRIMARY KEY ,
                                                 Anno integer not null ,
                                                 Mese TEXT not null ,
-                                                Nome TEXT not null ,
-                                                Categoria TEXT not null ,
-                                                
+                                                Nome_Celebrante TEXT not null ,
+                                                Ad_Mentem integer not null ,
+                                                Binate integer not null ,
+                                                Binate_Concelebrate integer not null ,
+                                                Trinate integer not null ,
+                                                Suffragi_Comunitari integer not null ,
+                                                Suffragi_Personali integer not null ,
+                                                Devozione integer not null ,
+                                                Benefattori integer not null ,
+                                                Pro_Populo integer not null ,
                                                 Numero integer not null )''')
+
+
+
     except:
         pass
 
@@ -368,7 +378,7 @@ my_tree.heading("Numero", text="Numero", anchor=W)
 
 # Insert into TABLE_Conti
 def submit():
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
     cur = conn.cursor()
 
     #dati presi dalla combo di inserimento (non update)
@@ -388,7 +398,7 @@ def query_database():
         my_tree.delete(record)
 
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
 
     # Create a cursor instance
     c = conn.cursor()
@@ -432,7 +442,7 @@ def query_database():
 
 def sqlite3_to_excel():
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
 
     # Create a cursor instance
     c = conn.cursor()
@@ -441,7 +451,7 @@ def sqlite3_to_excel():
 
     df = pd.read_sql(query, conn)  # create dataframe
 
-    df.sort_values(by='ID', ascending=False).to_excel('database_messe.xlsx', index=False, sheet_name='Dati')
+    df.sort_values(by='ID', ascending=False).to_excel('database_messe_orizzontale.xlsx', index=False, sheet_name='Dati')
 
     # Commit changes
     conn.commit()
@@ -459,7 +469,7 @@ def sqlite3_to_excel():
 
 
     wb = Workbook()
-    wb = load_workbook(filename="database_messe.xlsx")
+    wb = load_workbook(filename="databasedatabase_messe_orizzontale.xlsx")
     ws = wb.active  # Worksheet
 
     ws.row_dimensions[1].height = 40
@@ -509,13 +519,13 @@ def sqlite3_to_excel():
 
 
     # ws = wb.create_sheet('Dati')
-    wb.save("database_messe_styled.xlsx")
+    wb.save("database_messe_orizzontale_styled.xlsx")
 
     if sys.platform == "win32":
-        os.startfile('database_messe_styled.xlsx')
+        os.startfile('database_messe_orizzontale_styled.xlsx')
     else:
         opener = "open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'database_messe_styled.xlsx'])
+        subprocess.call([opener, 'database_messe_orizzontale_styled.xlsx'])
 
 '''
 
@@ -670,7 +680,7 @@ def remove_one():
     my_tree.delete(x)
 
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
 
     # Create a cursor instance
     c = conn.cursor()
@@ -703,7 +713,7 @@ def update_record():
 
     # Update the database
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_messe')
+    conn = sqlite3.connect('database_messe_orizzontale')
     #
     # Create a cursor instance
     c = conn.cursor()
@@ -741,6 +751,10 @@ def update_record():
     nomi_combo_update.delete(0, END)
     categorie_combo_update.delete(0, END)
     numero_entry_toUpdate.delete(0, END)
+
+
+#da qui in su
+
 
 '''
 
