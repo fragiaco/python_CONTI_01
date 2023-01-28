@@ -25,7 +25,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.worksheet.worksheet import Worksheet
 
 from xlsxwriter.utility import xl_rowcol_to_cell
-from pandastable import Table
+from pandastable import Table, TableModel, config
 
 ######################################################################
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
@@ -800,26 +800,54 @@ def update_record():
 # Read sqlite query results into a pandas DataFrame
 con = sqlite3.connect("database_messe_orizzontale")
 df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
-# df = df.loc[(df['Anno']==Entry_Anno_combo_update_IntVar.get()) &
-#         (df['Mese']==Entry_Mese_combo_update_StringVar.get())
-#        ]
-df=df.pivot(columns='Mese')
 
-#print(df.to_markdown())
-#print(df.nunique())
-#IMPORTANTE
+
+
+# Grab record Number
+#selected = my_tree.focus()  # focus restituisce l'ID key
+    # print(selected) #esempio 38
+    # Grab record values
+#values = my_tree.item(selected, 'values')
+#print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
+#values_list = list(values)
+#print(values_list)
+
+def aggiorna_dataframe_String_Int_Var():
+        # Read sqlite query results into a pandas DataFrame
+        con = sqlite3.connect("database_messe_orizzontale")
+        df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
+        df = df.loc[(df['Anno']==Entry_Anno_combo_update_IntVar.get()) &
+                    (df['Mese']==Entry_Mese_combo_update_StringVar.get())
+                   ]
+        return df
+        con.close()
+
+
+# print(df.to_markdown())
+# print(df.nunique())
+# #IMPORTANTE
 # v0, v1= df.shape
 # v2 = df.size
 # print(f'In the df there are {v0} rows and {v1} columns and {v2} elements')
 # print(f'Infatti {v0} x {v1} = {v2}')
 # print(f"Nella colonna ID ci sono {df['ID'].size} righe")
 #
-# print(f"Nella conna mese compaiono {df['Mese'].unique()} come valori unici")
-# # Verify that result of SQL query is stored in the dataframe
-# print(df.head())
+# print(f"Nella colonna mese compaiono {df['Mese'].unique()} come valori unici")
+# Verify that result of SQL query is stored in the dataframe
 
-pt = Table(Frame_pandastable, dataframe=df, width=100, height=100)
-# table.redraw()
+#df.drop(columns=['ID'])
+
+pt = Table(Frame_pandastable, dataframe=aggiorna_dataframe_String_Int_Var(), width=100, height=100)
+
+
+
+# df = pt.model.df
+# df.drop(0)
+pt.textcolor = 'blue'
+pt.redraw()
+
+options = {'colheadercolor':'blue','floatprecision': 1}
+config.apply_options(options, pt)
 pt.show()
 con.close()
 
