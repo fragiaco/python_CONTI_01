@@ -801,13 +801,13 @@ def update_record():
 con = sqlite3.connect("database_messe_orizzontale")
 df = pd.read_sql_query("SELECT * from TABLE_Messe", con)
 
+# Al termine del processo la prima riga risulta evidenziata
+# child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+# my_tree.focus(child_id)  # evidenziata
+# my_tree.selection_set(child_id)
 
-
-# Grab record Number
-#selected = my_tree.focus()  # focus restituisce l'ID key
-    # print(selected) #esempio 38
-    # Grab record values
-#values = my_tree.item(selected, 'values')
+#Grab record Number
+#  
 #print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
 #values_list = list(values)
 #print(values_list)
@@ -820,8 +820,11 @@ def aggiorna_dataframe_String_Int_Var():
                     (df['Mese']==Entry_Mese_combo_update_StringVar.get())
                    ]
         return df
+
         con.close()
 
+# Bind the treeview ogni volta che seleziono una riga parte la funzione select_record
+#my_tree.bind("<ButtonRelease-1>", aggiorna_dataframe_String_Int_Var)
 
 # print(df.to_markdown())
 # print(df.nunique())
@@ -837,7 +840,7 @@ def aggiorna_dataframe_String_Int_Var():
 
 #df.drop(columns=['ID'])
 
-pt = Table(Frame_pandastable, dataframe=aggiorna_dataframe_String_Int_Var(), width=100, height=100)
+pt = Table(Frame_pandastable, dataframe=df, width=100, height=100)
 
 
 
