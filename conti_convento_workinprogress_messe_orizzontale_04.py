@@ -511,7 +511,27 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-    c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese WHEN 'gennaio' THEN 1 WHEN 'febbraio' THEN 2 WHEN 'marzo' THEN 3 WHEN 'aprile' THEN 4 WHEN 'maggio' THEN 5 WHEN 'giugno' THEN 6 WHEN 'luglio' THEN 7 WHEN 'agosto' THEN 8 WHEN 'settembre' THEN 9 WHEN 'ottobre' THEN 10 WHEN 'novembre' THEN 11 WHEN 'dicembre' THEN 12 END);")
+    sql_select_query = """select * from TABLE_Messe where Mese = ?"""
+    c.execute(sql_select_query, ('febbraio',))
+    records = c.fetchall()
+    for x in records:
+        print(x)
+    print('##################################################')
+
+    c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese\
+                                                                WHEN 'gennaio' THEN 1\
+                                                                WHEN 'febbraio' THEN 2\
+                                                                WHEN 'marzo' THEN 3\
+                                                                WHEN 'aprile' THEN 4\
+                                                                WHEN 'maggio' THEN 5\
+                                                                WHEN 'giugno' THEN 6\
+                                                                WHEN 'luglio' THEN 7\
+                                                                WHEN 'agosto' THEN 8\
+                                                                WHEN 'settembre' THEN 9\
+                                                                WHEN 'ottobre' THEN 10\
+                                                                WHEN 'novembre' THEN 11\
+                                                                WHEN 'dicembre' THEN 12\
+                                                                END);")
     records = c.fetchall()
     for x in records:
         print(x)
