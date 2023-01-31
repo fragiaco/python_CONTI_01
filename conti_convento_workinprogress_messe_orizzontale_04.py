@@ -511,10 +511,10 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-    c.execute("SELECT * FROM TABLE_Messe")
+    c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, Mese ASC")
     records = c.fetchall()
-    # for x in records:
-    #     print(x)
+    for x in records:
+        print(x)
 
 
     # for record in records:
