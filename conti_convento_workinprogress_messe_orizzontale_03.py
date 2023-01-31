@@ -521,7 +521,7 @@ def on_double_click(event):
         selected_iid = event.widget.editing_item_iid #numero di riga
         # print('#############')
         # print(selected_iid)
-        column_index=event.widget.editing_column_index #numero di colonna. la prima colonna è 0
+        column_index = event.widget.editing_column_index #numero di colonna. la prima colonna è 0
         # print('#############')
         # print(column_index)
         if column_index == 0: # l'ID non si deve cambiare
