@@ -453,7 +453,51 @@ my_tree.heading("Suffragi_Personali", text="Suffr_Pers", anchor=W)
 my_tree.heading("Devozione", text="Devozione", anchor=W)
 my_tree.heading("Benefattori", text="Benefattori", anchor=W)
 my_tree.heading("Pro_Populo", text="Pro_Populo", anchor=W)
-#
+
+def on_double_click(event):
+    region_clicked = my_tree.identify_region(event.x, event.y)
+    #print(region_clicked) >cell oppure >header
+
+    # numero di colonna della riga su cui faccio doppio click
+    column = my_tree.identify_column(event.x)
+    #print(column) # esempio #4
+    # numero colonna senza # davanti: numero intero
+    #la prima colonna del treeview è = 1
+    # sottraggo -1 perchè nelle touple primo valore è 0
+    column_index = int(column[1:])-1
+    #print(column_index)
+
+    #mi da l'ID della riga su cui faccio doppio click
+    selected_iid=my_tree.focus()
+    #print(selected_iid) #esempio 16
+
+    selected_values = my_tree.item(selected_iid) #('11', '2024', 'febbraio', 'fra Giacomo Rotunno', '0', '0', '0', '0', '0', '0', '0', '0', '0')
+
+    if column_index == '0':
+        selected_text = selected_values.get('text')
+        #print(selected_text)
+    else:
+        selected_text = selected_values.get('values')[column_index]
+        print(selected_text)
+
+    column_box = my_tree.bbox(selected_iid, column)
+    print(column_box) #(1, 112, 70, 30) (x_position, y_position, Width, Height)
+
+    entry_edit = ttk.Entry(Frame_tree, width=column_box[2])
+    entry_edit.place(x = column_box[0],
+                     y = column_box[1],
+                     w = column_box[2],
+                     h = column_box[3])
+
+    # mi inserisce il valore della casella selezionata
+    entry_edit.insert(0, selected_text)
+    #seleziona il testo
+    entry_edit.select_range(0, END)
+    #place the focus on the widget
+    entry_edit.focus()
+
+my_tree.bind("<Double-1>", on_double_click)
+
 
 ############################
 ######## SQLITE3 ###########
@@ -657,7 +701,7 @@ def select_record(e):
     # print(selected) #esempio 38
     # Grab record values
     values = my_tree.item(selected, 'values')
-    print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
+    #print(values) #esempio ('16', '2023', 'febbraio', 'fra Giacomo', 'Suffragi personali', '2')
 
     # outpus to entry boxes
     Entry_Id_combo_update.insert(0, values[0])  # 0 penso significa all'inizio
