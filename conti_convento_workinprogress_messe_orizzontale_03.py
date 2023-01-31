@@ -531,10 +531,61 @@ def on_double_click(event):
             #print(current_values) # [13, 2024, 'gennaio', 'Fra Alberto Dos Santos', 11, 0, 0, 0, 0, 0, 0, 0, 0]
             # {'text': '', 'image': '', 'values': [15, 2024, 'gennaio', 'Ospite', 28, 0, 0, 0, 0, 0, 0, 0, 0], 'open': 0, 'tags': ['oddrow']}
 
+            print(current_values)
             current_values[column_index]=new_text
+            print(current_values)
             my_tree.item(selected_iid, values=current_values)
 
+
         event.widget.destroy()
+
+        # Update the database
+        # Create a database or connect to one that exists
+        conn = sqlite3.connect('database_messe_orizzontale')
+        #
+        # Create a cursor instance
+        c = conn.cursor()
+        print(conn)
+
+        c.execute("""   UPDATE TABLE_Messe 
+                            SET
+                            Anno = :Anno,
+                            Mese = :Mese,
+                            Nome_Celebrante = :Nome_Celebrante,
+                            Ad_Mentem = :Ad_Mentem,
+                            Binate = :Binate,
+                            Binate_Concelebrate = :Binate_Concelebrate,
+                            Trinate = :Trinate,
+                            Suffragi_Comunitari = :Suffragi_Comunitari,
+                            Suffragi_Personali = :Suffragi_Personali,
+                            Devozione = :Devozione,
+                            Benefattori = :Benefattori,
+                            Pro_Populo = :Pro_Populo
+
+
+             		        WHERE oid =""" + selected_iid,
+                  {
+                      'Anno': current_values[1],
+                      'Mese': current_values[2],
+                      'Nome_Celebrante': current_values[3],
+                      'Ad_Mentem': current_values[4],
+                      'Binate': current_values[5],
+                      'Binate_Concelebrate': current_values[6],
+                      'Trinate': current_values[7],
+                      'Suffragi_Comunitari': current_values[8],
+                      'Suffragi_Personali': current_values[8],
+                      'Devozione': current_values[10],
+                      'Benefattori': current_values[11],
+                      'Pro_Populo': current_values[12]
+                  })
+
+        #    Commit changes
+        conn.commit()
+        #
+        #         # Close our connection
+        conn.close()
+        # Add a little message box for fun
+        messagebox.showinfo("Updated!", "Riga aggiornata!")
 
     #when I click outside I want the widget to disappear
     entry_edit.bind("<FocusOut>", on_focus_out)
