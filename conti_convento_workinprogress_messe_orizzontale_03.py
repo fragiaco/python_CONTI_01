@@ -464,11 +464,12 @@ def on_double_click(event):
     # numero colonna senza # davanti: numero intero
     #la prima colonna del treeview è = 1
     # sottraggo -1 perchè nelle touple primo valore è 0
-    column_index = int(column[1:])-1
+    # [1:] inizia dal secondo carattere (dunque salta #)
+    column_index = int(column[1:])-1                    #NUMERO COLONNA
     #print(column_index)
 
     #mi da l'ID della riga su cui faccio doppio click
-    selected_iid=my_tree.focus()
+    selected_iid=my_tree.focus()                        #ID RIGA
     #print(selected_iid) #esempio 16
 
     selected_values = my_tree.item(selected_iid) #('11', '2024', 'febbraio', 'fra Giacomo Rotunno', '0', '0', '0', '0', '0', '0', '0', '0', '0')
@@ -478,12 +479,22 @@ def on_double_click(event):
         #print(selected_text)
     else:
         selected_text = selected_values.get('values')[column_index]
-        print(selected_text)
+        #print(selected_text)
 
-    column_box = my_tree.bbox(selected_iid, column)
-    print(column_box) #(1, 112, 70, 30) (x_position, y_position, Width, Height)
+    #posizione e dimensioni cella selezionata
+    column_box = my_tree.bbox(selected_iid, column) #print(column)  esempio '#4'
+    #print(column_box) #(1, 112, 70, 30) (x_position, y_position, Width, Height)
 
     entry_edit = ttk.Entry(Frame_tree, width=column_box[2])
+
+    #salvo valori di colonna e riga in variabili
+    #Record column index and item iid
+    entry_edit.editing_column_index = column_index
+    #print(entry_edit.editing_column_index) #     esempio 1
+    entry_edit.editing_item_iid = selected_iid
+    #print(entry_edit.editing_item_id)         #esempio 9
+
+
     entry_edit.place(x = column_box[0],
                      y = column_box[1],
                      w = column_box[2],
@@ -495,6 +506,44 @@ def on_double_click(event):
     entry_edit.select_range(0, END)
     #place the focus on the widget
     entry_edit.focus()
+
+    #event.widget reference the entry widget
+    def on_focus_out(event):
+        event.widget.destroy()
+
+    #ricorda che funziona solo se premi ENTER
+    def on_enter_pressed(event):
+        # event.widget reference the entry widget
+        new_text = event.widget.get() #salva in new_text il testo modificato
+        # print('°°°°°°')
+        # print(new_text)
+        #We also want to know the item ID
+        selected_iid = event.widget.editing_item_iid #numero di riga
+        # print('#############')
+        # print(selected_iid)
+        column_index=event.widget.editing_column_index #numero di colonna. la prima colonna è 0
+        # print('#############')
+        # print(column_index)
+        if column_index == 0: # l'ID non si deve cambiare
+             pass
+        else:
+            current_values = my_tree.item(selected_iid).get("values")
+            #print(current_values) # [13, 2024, 'gennaio', 'Fra Alberto Dos Santos', 11, 0, 0, 0, 0, 0, 0, 0, 0]
+            # {'text': '', 'image': '', 'values': [15, 2024, 'gennaio', 'Ospite', 28, 0, 0, 0, 0, 0, 0, 0, 0], 'open': 0, 'tags': ['oddrow']}
+
+            current_values[column_index]=new_text
+            my_tree.item(selected_iid, values=current_values)
+
+        event.widget.destroy()
+
+    #when I click outside I want the widget to disappear
+    entry_edit.bind("<FocusOut>", on_focus_out)
+
+    #When I click enter UPDATE tree
+    entry_edit.bind("<Return>", on_enter_pressed)
+
+
+
 
 my_tree.bind("<Double-1>", on_double_click)
 
