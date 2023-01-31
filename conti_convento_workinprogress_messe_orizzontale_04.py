@@ -511,10 +511,10 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-    c.execute("SELECT * FROM TABLE_Messe ORDER BY 'Mese' ASC")
+    c.execute("SELECT * FROM TABLE_Messe")
     records = c.fetchall()
-    for x in records:
-        print(x)
+    # for x in records:
+    #     print(x)
 
 
     # for record in records:
@@ -549,108 +549,8 @@ def query_database():
     # Close our connection
     conn.close()
 
-def sqlite3_to_excel():
-    # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_messe_orizzontale')
-
-    # Create a cursor instance
-    c = conn.cursor()
-
-    query = "SELECT * FROM TABLE_Messe"  # query to collect recors
-
-    df = pd.read_sql(query, conn)  # create dataframe
-
-    df.sort_values(by='ID', ascending=False).to_excel('database_messe_orizzontale.xlsx', index=False, sheet_name='Dati')
-
-    # Commit changes
-    conn.commit()
 
 
-
-    # Close our connection
-    conn.close()
-
-'''
-    ###########################################################
-    ################# Creo il Workbook con OPENPYXL############
-    ###########################################################
-
-
-    wb = Workbook()
-    wb = load_workbook(filename="database_messe_orizzontale.xlsx")
-    ws = wb.active  # Worksheet
-    ws.set_printer_settings(Worksheet.PAPERSIZE_A4, Worksheet.ORIENTATION_LANDSCAPE)
-    ws.row_dimensions[1].height = 75
-    # openpyxl freeze first row
-    ws.freeze_panes = 'A2'
-    # openpyxl filter columns
-    ws.auto_filter.ref = ws.dimensions
-
-    ############ RED ################
-    red = NamedStyle(name="red")
-    red.font = Font(name='Calibri', size=10, color='a81a1a', bold=True)
-    red.alignment = Alignment(horizontal="center", vertical="center")
-    red.fill = PatternFill('solid', fgColor='d1d22e')
-    red.alignment = Alignment(textRotation=45)
-    wb.add_named_style(red)
-
-    ############ BLACK ################
-    black = NamedStyle(name="black")
-    black.font = Font(name='Calibri', size=10, color='000000', bold=True)
-    black.alignment = Alignment(horizontal="left", vertical="center")
-    wb.add_named_style(black)
-
-    for row in ws[2:ws.max_row]:  # skip the header
-        print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
-        for cell in row: # il quarto valore della tuple
-            #print(cell)  # <Cell 'multiple'.D7>
-            cell.style= 'black'
-
-
-
-
-    ws['A1'].style = 'red'
-    ws['B1'].style = 'red'
-    ws['C1'].style = 'red'
-    ws['D1'].style = 'red'
-    ws['E1'].style = 'red'
-    ws['F1'].style = 'red'
-    ws['G1'].style = 'red'
-    ws['H1'].style = 'red'
-    ws['I1'].style = 'red'
-    ws['J1'].style = 'red'
-    ws['K1'].style = 'red'
-    ws['L1'].style = 'red'
-    ws['M1'].style = 'red'
-    ws['N1'].style = 'red'
-
-
-    ws.column_dimensions['A'].width = 8
-    ws.column_dimensions['B'].width = 8
-    ws.column_dimensions['C'].width = 8
-    ws.column_dimensions['D'].width = 25
-    ws.column_dimensions['E'].width = 8
-    ws.column_dimensions['F'].width = 8
-    ws.column_dimensions['G'].width = 8
-    ws.column_dimensions['H'].width = 8
-    ws.column_dimensions['I'].width = 8
-    ws.column_dimensions['J'].width = 8
-    ws.column_dimensions['K'].width = 8
-    ws.column_dimensions['L'].width = 8
-    ws.column_dimensions['M'].width = 8
-    ws.column_dimensions['N'].width = 8
-
-
-    # ws = wb.create_sheet('Dati')
-    wb.save("database_messe_orizzontale_styled.xlsx")
-
-    if sys.platform == "win32":
-        os.startfile('database_messe_orizzontale_styled.xlsx')
-    else:
-        opener = "open" if sys.platform == "darwin" else "xdg-open"
-        subprocess.call([opener, 'database_messe_orizzontale_styled.xlsx'])
-
-'''
 
 #######################
 def remove_one():
