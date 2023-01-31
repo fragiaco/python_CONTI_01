@@ -511,8 +511,8 @@ def query_database():
     # Create a cursor instance
     c = conn.cursor()
 
-    sql_select_query = """select * from TABLE_Messe where Mese = ?"""
-    c.execute(sql_select_query, ('febbraio',))
+    sql_select_query = """select * from TABLE_Messe where Anno = ? and Mese = ? order by ID DESC """
+    c.execute(sql_select_query, (2023, 'gennaio',))
     records = c.fetchall()
     for x in records:
         print(x)
