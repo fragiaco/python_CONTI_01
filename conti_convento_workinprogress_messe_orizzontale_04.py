@@ -416,9 +416,9 @@ def on_double_click(event):
             #print(current_values) # [13, 2024, 'gennaio', 'Fra Alberto Dos Santos', 11, 0, 0, 0, 0, 0, 0, 0, 0]
             # {'text': '', 'image': '', 'values': [15, 2024, 'gennaio', 'Ospite', 28, 0, 0, 0, 0, 0, 0, 0, 0], 'open': 0, 'tags': ['oddrow']}
 
-            print(current_values)
+            #print(current_values)
             current_values[column_index]=new_text
-            print(current_values)
+            #print(current_values)
             my_tree.item(selected_iid, values=current_values)
 
 
