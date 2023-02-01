@@ -6,6 +6,13 @@ import sqlite3
 import pandas as pd
 import os, sys, subprocess
 
+
+from tkinter import ttk
+#importare prima ttkwidgets
+from ttkwidgets.autocomplete import AutocompleteEntry
+from ttkwidgets.autocomplete import AutocompleteCombobox
+
+
 from openpyxl.styles import Font, Alignment
 from openpyxl.styles import Side, Border
 
@@ -196,10 +203,12 @@ Mesi = ["gennaio",
 
 
 # Dropbox Mesi
-Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
+#Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
+Entry_Mese_combo = AutocompleteCombobox(Frame_combo, font=("Helvetica", 10), completevalues=Mesi, textvariable=Entry_Mese_combo_StringVar)
+
 Entry_Mese_combo.current(0)
 Entry_Mese_combo.grid(row=2, column=1)
-Entry_Mese_combo['state'] = 'readonly'
+#Entry_Mese_combo['state'] = 'readonly'
 
 conn = sqlite3.connect('database_messe_orizzontale')
 cur = conn.cursor()
@@ -828,9 +837,9 @@ def Top_W_Celebranti():
 
         c.execute("SELECT * FROM TABLE_Celebranti;")
         records = c.fetchall()
-        for x in records:
-            print('Table Messe')
-            print(x)
+        # for x in records:
+        #     print('Table Messe')
+        #     print(x)
 
         # COLORI RIGHE pari e dispari
         count = 0
