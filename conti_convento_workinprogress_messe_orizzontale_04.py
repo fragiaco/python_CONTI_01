@@ -610,11 +610,11 @@ def query_database_BY_DATE():
                                                                 WHEN 'ottobre' THEN 10\
                                                                 WHEN 'novembre' THEN 11\
                                                                 WHEN 'dicembre' THEN 12\
-                                                                END);")
+                                                                END), Nome_Celebrante;")
 
     records = c.fetchall()
-    for x in records:
-        print(x)
+    # for x in records:
+    #     print(x)
 
 
     # for record in records:
@@ -622,21 +622,50 @@ def query_database_BY_DATE():
     # record[0] = id key
 
     # COLORI RIGHE pari e dispari
-    count = 0
+    #count = 0
     # Create striped row tags
     my_tree.tag_configure('oddrow', background="white")
     my_tree.tag_configure('evenrow', background="lightblue")
 
     for record in records:
-        if count % 2 == 0:
+        if record[2] == 'gennaio':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9], record[10], record[11], record[12]),
                            tags=('evenrow'))
+        elif record[2] == 'marzo':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        elif record[2] == 'maggio':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                           record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                           record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        elif record[2] == 'luglio':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                           record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                           record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        elif record[2] == 'settembre':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                               record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                               record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        elif record[2] == 'novembre':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                               record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                               record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+
         else:
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
                            tags = ('oddrow'))
-        count += 1
+        #count += 1
 
     # Al termine del processo la prima riga risulta evidenziata
     child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
