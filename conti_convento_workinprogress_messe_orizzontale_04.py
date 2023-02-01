@@ -671,7 +671,7 @@ def Top_W_Celebranti():
     # Formate Our Columns
     my_tree.column("#0", width=0, stretch=NO)
     my_tree.column("ID", anchor=W, width=70)
-    my_tree.column("Celebranti", anchor=W, width=150)
+    my_tree.column("Celebranti", anchor=W, width=200)
 
 
     # Create Headings
@@ -730,18 +730,40 @@ def Top_W_Celebranti():
         # Close our connection
         conn.close()
 
-    
+    def remove_one():
+        # my_tree.focus() restituisce l'ID della riga selezionata
+        row_id = my_tree.focus()
+        my_tree.delete(row_id)
+
+        # Create a database or connect to one that exists
+        conn = sqlite3.connect('database_messe_orizzontale')
+
+        # Create a cursor instance
+        c = conn.cursor()
+
+        # Delete From Database
+        c.execute("DELETE from TABLE_Celebranti WHERE oid =" + row_id)
+
+        # Commit changes
+        conn.commit()
+
+        # Close our connection
+        conn.close()
+
 
     def submit():
         conn = sqlite3.connect('database_messe_orizzontale')
         cur = conn.cursor()
-        cur.execute("insert into TABLE_Celebranti (Celebranti) values ('Entry_Celebranti_StringVar.get()')")
+        dati = [Entry_Celebranti_StringVar.get()]
+        cur.execute('INSERT INTO TABLE_Celebranti (Celebranti) VALUES (?)', dati)
+        #cur.execute("insert into TABLE_Celebranti (Celebranti) values ('?'), dati")
         #cur.execute('''INSERT INTO TABLE_Celebranti (Celebranti) VALUES ("Entry_Celebranti_StringVar.get()")''')
         conn.commit()
         # Close our connection
         conn.close()
 
     B_add_celebranti = Button(top, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
+    B_delete_celebranti = Button(top, text='cancella', width=10, command=remove_one).pack(side=TOP, pady=20)
 
     query_database()
     top.mainloop()
