@@ -624,47 +624,79 @@ def query_database_BY_DATE():
     # COLORI RIGHE pari e dispari
     #count = 0
     # Create striped row tags
-    my_tree.tag_configure('oddrow', background="white")
-    my_tree.tag_configure('evenrow', background="lightblue")
+    my_tree.tag_configure('white', background="pink")
+    my_tree.tag_configure('blue', background="salmon")
+    my_tree.tag_configure('yellow', background="lightyellow")
+    my_tree.tag_configure('violet', background="khaki")
 
     for record in records:
         if record[2] == 'gennaio':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
-        elif record[2] == 'marzo':
+                           tags=('white'))
+        elif record[2] == 'febbraio':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
-        elif record[2] == 'maggio':
+                           tags=('blue'))
+        elif record[2] == 'marzo':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(
                            record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
                            record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
+                           tags=('yellow'))
+        elif record[2] == 'aprile':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                           record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                           record[8], record[9], record[10], record[11], record[12]),
+                           tags=('violet'))
+        elif record[2] == 'maggio':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                               record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                               record[8], record[9], record[10], record[11], record[12]),
+                           tags=('white'))
+        elif record[2] == 'giugno':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                               record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                               record[8], record[9], record[10], record[11], record[12]),
+                           tags=('blue'))
         elif record[2] == 'luglio':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(
                            record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
                            record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
+                           tags=('yellow'))
+        elif record[2] == 'agosto':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                           record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                           record[8], record[9], record[10], record[11], record[12]),
+                           tags=('violet'))
         elif record[2] == 'settembre':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(
                                record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
                                record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
+                           tags=('white'))
+        elif record[2] == 'ottobre':
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(
+                               record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
+                               record[8], record[9], record[10], record[11], record[12]),
+                           tags=('blue'))
+
         elif record[2] == 'novembre':
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(
                                record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],
                                record[8], record[9], record[10], record[11], record[12]),
-                           tags=('evenrow'))
-
+                           tags=('yellow'))
         else:
             my_tree.insert(parent='', index=0, iid=record[0], text='',
                            values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
-                           tags = ('oddrow'))
+                           tags = ('violet'))
         #count += 1
 
     # Al termine del processo la prima riga risulta evidenziata
