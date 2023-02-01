@@ -193,11 +193,7 @@ Mesi = ["gennaio",
         "dicembre",
         ]
 
-Celebranti = ["fra Antonio Porfiri",
-        "fra Giacomo Rotunno",
-        "fra Gabriele Giobbi",
-        "Fra Alberto Dos Santos",
-        "Ospite"]
+
 
 # Dropbox Mesi
 Entry_Mese_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_combo_StringVar)
@@ -205,11 +201,18 @@ Entry_Mese_combo.current(0)
 Entry_Mese_combo.grid(row=2, column=1)
 Entry_Mese_combo['state'] = 'readonly'
 
-
-Entry_Nome_Celebrante_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Celebranti, textvariable=Entry_Nome_Celebrante_combo_StringVar)
+conn = sqlite3.connect('database_messe_orizzontale')
+cur = conn.cursor()
+query = "SELECT DISTINCT (Celebranti) as Celebranti FROM TABLE_Celebranti"
+my_Data = cur.execute(query)
+Nomi_Celebranti = [r for r, in my_Data]
+Entry_Nome_Celebrante_combo = ttk.Combobox(Frame_combo, font=("Helvetica", 10), values=Nomi_Celebranti, textvariable=Entry_Nome_Celebrante_combo_StringVar)
 Entry_Nome_Celebrante_combo.current(1)
 Entry_Nome_Celebrante_combo.grid(row=2, column=2)
-
+# Commit changes
+conn.commit()
+# Close our connection
+conn.close()
 
 Entry_Ad_Mentem_combo = Spinbox(Frame_combo, from_=0, to=31, wrap=True, width=11, font=("Helvetica", 12, 'bold'), bd=5, relief=GROOVE, textvariable=Entry_Ad_Mentem_combo_IntVar)
 Entry_Ad_Mentem_combo.grid\
@@ -520,9 +523,9 @@ def query_database():
     sql_select_query = """select * from TABLE_Messe where Anno = ? and Mese = ? order by ID DESC """
     c.execute(sql_select_query, (2024, 'gennaio',))
     records = c.fetchall()
-    for x in records:
-        print(x)
-    print('##################################################')
+    # for x in records:
+    #     print(x)
+    # print('##################################################')
 
     c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese\
                                                                 WHEN 'gennaio' THEN 1\
@@ -539,8 +542,8 @@ def query_database():
                                                                 WHEN 'dicembre' THEN 12\
                                                                 END);")
     records = c.fetchall()
-    for x in records:
-        print(x)
+    # for x in records:
+    #     print(x)
 
 
     # for record in records:
