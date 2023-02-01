@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-
+import reportlab
 import sqlite3
 import pandas as pd
 import os, sys, subprocess
@@ -527,20 +527,21 @@ def query_database():
     #     print(x)
     # print('##################################################')
 
-    c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese\
-                                                                WHEN 'gennaio' THEN 1\
-                                                                WHEN 'febbraio' THEN 2\
-                                                                WHEN 'marzo' THEN 3\
-                                                                WHEN 'aprile' THEN 4\
-                                                                WHEN 'maggio' THEN 5\
-                                                                WHEN 'giugno' THEN 6\
-                                                                WHEN 'luglio' THEN 7\
-                                                                WHEN 'agosto' THEN 8\
-                                                                WHEN 'settembre' THEN 9\
-                                                                WHEN 'ottobre' THEN 10\
-                                                                WHEN 'novembre' THEN 11\
-                                                                WHEN 'dicembre' THEN 12\
-                                                                END);")
+    # c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese\
+    #                                                             WHEN 'gennaio' THEN 1\
+    #                                                             WHEN 'febbraio' THEN 2\
+    #                                                             WHEN 'marzo' THEN 3\
+    #                                                             WHEN 'aprile' THEN 4\
+    #                                                             WHEN 'maggio' THEN 5\
+    #                                                             WHEN 'giugno' THEN 6\
+    #                                                             WHEN 'luglio' THEN 7\
+    #                                                             WHEN 'agosto' THEN 8\
+    #                                                             WHEN 'settembre' THEN 9\
+    #                                                             WHEN 'ottobre' THEN 10\
+    #                                                             WHEN 'novembre' THEN 11\
+    #                                                             WHEN 'dicembre' THEN 12\
+    #                                                             END);")
+    c.execute("SELECT * FROM TABLE_Messe")
     records = c.fetchall()
     # for x in records:
     #     print(x)
@@ -578,6 +579,75 @@ def query_database():
     # Close our connection
     conn.close()
 
+def query_database_BY_DATE():
+    # Clear the Treeview
+    for record in my_tree.get_children():
+        my_tree.delete(record)
+
+    # Create a database or connect to one that exists
+    conn = sqlite3.connect('database_messe_orizzontale')
+
+    # Create a cursor instance
+    c = conn.cursor()
+
+    # sql_select_query = """select * from TABLE_Messe where Anno = ? and Mese = ? order by ID DESC """
+    # c.execute(sql_select_query, (2024, 'gennaio',))
+    # records = c.fetchall()
+    # for x in records:
+    #     print(x)
+    # print('##################################################')
+
+    c.execute("SELECT * FROM TABLE_Messe ORDER BY Anno, (CASE Mese\
+                                                                WHEN 'gennaio' THEN 1\
+                                                                WHEN 'febbraio' THEN 2\
+                                                                WHEN 'marzo' THEN 3\
+                                                                WHEN 'aprile' THEN 4\
+                                                                WHEN 'maggio' THEN 5\
+                                                                WHEN 'giugno' THEN 6\
+                                                                WHEN 'luglio' THEN 7\
+                                                                WHEN 'agosto' THEN 8\
+                                                                WHEN 'settembre' THEN 9\
+                                                                WHEN 'ottobre' THEN 10\
+                                                                WHEN 'novembre' THEN 11\
+                                                                WHEN 'dicembre' THEN 12\
+                                                                END);")
+
+    records = c.fetchall()
+    for x in records:
+        print(x)
+
+
+    # for record in records:
+    #     print(record)
+    # record[0] = id key
+
+    # COLORI RIGHE pari e dispari
+    count = 0
+    # Create striped row tags
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="lightblue")
+
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9], record[10], record[11], record[12]),
+                           tags=('evenrow'))
+        else:
+            my_tree.insert(parent='', index=0, iid=record[0], text='',
+                           values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7],record[8], record[9], record[10], record[11], record[12]),
+                           tags = ('oddrow'))
+        count += 1
+
+    # Al termine del processo la prima riga risulta evidenziata
+    child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+    my_tree.focus(child_id)  # evidenziata
+    my_tree.selection_set(child_id)
+
+    # Commit changes
+    conn.commit()
+
+    # Close our connection
+    conn.close()
 
 
 
@@ -777,6 +847,9 @@ B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [s
 #B_update = Button(Frame_tree_Buttons, text='aggiorna', width=10, command='').pack(side=TOP, pady=20)
 B_delete = Button(Frame_tree_Buttons, text='cancella', width=10, command=remove_one).pack(side=TOP, pady=20)
 B_Nomi_Celebranti = Button(Frame_tree_Buttons, text='Celebranti', width=10, command=Top_W_Celebranti).pack(side=BOTTOM, pady=20)
+B_Tree_sort_by_ID=Button(Frame_tree_Buttons, text='Sort ID', width=10, command=query_database).pack(side=TOP, pady=20)
+B_Tree_sort_by_Date=Button(Frame_tree_Buttons, text='Sort Data', width=10, command=query_database_BY_DATE).pack(side=TOP, pady=20)
+
 
 query_database()
 root.mainloop()
