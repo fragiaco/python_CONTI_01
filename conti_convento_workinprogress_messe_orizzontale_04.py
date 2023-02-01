@@ -743,7 +743,6 @@ def Top_W_Celebranti():
 
     B_add_celebranti = Button(top, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
 
-
     query_database()
     top.mainloop()
 
