@@ -978,7 +978,7 @@ def Suffragi_Comunitari():
         Entry_Suffragi.grid(column=1, row=3, sticky="W", pady=5)
 
         Frame_suffragi_tree = Frame(Frame_Suffragi, bd='4', bg=background_Blu, relief=RIDGE)
-        Frame_suffragi_tree.grid(column=0, row=4, columnspan=4)
+        Frame_suffragi_tree.grid(column=0, row=4, columnspan=4, pady=12, padx=2)
 
 
         ############################
@@ -1014,7 +1014,7 @@ def Suffragi_Comunitari():
         tree_scroll.pack(side=RIGHT, fill=Y)
 
         # Create Treeview
-        my_tree = ttk.Treeview(Frame_suffragi_tree, yscrollcommand=tree_scroll.set, selectmode="extended")
+        my_tree = ttk.Treeview(Frame_suffragi_tree, yscrollcommand=tree_scroll.set, selectmode="extended", height=9)
         # Pack to the screen
         my_tree.pack()
 
@@ -1093,6 +1093,127 @@ def Suffragi_Comunitari():
             # Close our connection
             conn.close()
 
+        def query_Suffragi_database_BY_DATE():
+            # Clear the Treeview
+            for record in my_tree.get_children():
+                my_tree.delete(record)
+
+            # Create a database or connect to one that exists
+            conn = sqlite3.connect('database_messe_orizzontale')
+
+            # Create a cursor instance
+            c = conn.cursor()
+
+            # sql_select_query = """select * from TABLE_Messe where Anno = ? and Mese = ? order by ID DESC """
+            # c.execute(sql_select_query, (2024, 'gennaio',))
+            # records = c.fetchall()
+            # for x in records:
+            #     print(x)
+            # print('##################################################')
+
+            c.execute("SELECT * FROM TABLE_Suffragi ORDER BY Anno, (CASE Mese\
+                                                                        WHEN 'gennaio' THEN 1\
+                                                                        WHEN 'febbraio' THEN 2\
+                                                                        WHEN 'marzo' THEN 3\
+                                                                        WHEN 'aprile' THEN 4\
+                                                                        WHEN 'maggio' THEN 5\
+                                                                        WHEN 'giugno' THEN 6\
+                                                                        WHEN 'luglio' THEN 7\
+                                                                        WHEN 'agosto' THEN 8\
+                                                                        WHEN 'settembre' THEN 9\
+                                                                        WHEN 'ottobre' THEN 10\
+                                                                        WHEN 'novembre' THEN 11\
+                                                                        WHEN 'dicembre' THEN 12\
+                                                                        END), Suffragi;")
+
+            records = c.fetchall()
+            # for x in records:
+            #     print(x)
+
+            # for record in records:
+            #     print(record)
+            # record[0] = id key
+
+            # COLORI RIGHE pari e dispari
+            # count = 0
+            # Create striped row tags
+            my_tree.tag_configure('white', background="pink")
+            my_tree.tag_configure('blue', background="salmon")
+            my_tree.tag_configure('yellow', background="lightyellow")
+            my_tree.tag_configure('violet', background="khaki")
+
+            for record in records:
+                if record[2] == 'gennaio':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(record[0], record[1], record[2], record[3]),
+                                   tags=('white'))
+                elif record[2] == 'febbraio':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(record[0], record[1], record[2], record[3]),
+                                   tags=('blue'))
+                elif record[2] == 'marzo':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('yellow'))
+                elif record[2] == 'aprile':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('violet'))
+                elif record[2] == 'maggio':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('white'))
+                elif record[2] == 'giugno':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('blue'))
+                elif record[2] == 'luglio':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('yellow'))
+                elif record[2] == 'agosto':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('violet'))
+                elif record[2] == 'settembre':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('white'))
+                elif record[2] == 'ottobre':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('blue'))
+
+                elif record[2] == 'novembre':
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(
+                                       record[0], record[1], record[2], record[3]),
+                                   tags=('yellow'))
+                else:
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=(record[0], record[1], record[2], record[3]),
+                                   tags=('violet'))
+                # count += 1
+
+            # Al termine del processo la prima riga risulta evidenziata
+            child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+            my_tree.focus(child_id)  # evidenziata
+            my_tree.selection_set(child_id)
+
+            # Commit changes
+            conn.commit()
+
+            # Close our connection
+            conn.close()
+
         def remove_one():
             # my_tree.focus() restituisce l'ID della riga selezionata
             row_id = my_tree.focus()
@@ -1116,17 +1237,21 @@ def Suffragi_Comunitari():
         def submit():
             conn = sqlite3.connect('database_messe_orizzontale')
             cur = conn.cursor()
-            dati = [Entry_Anno_Suffragi.get(), Entry_Anno_Suffragi.get(), Entry_Suffragi_StringVar.get()]
+            dati = [Entry_Anno_Suffragi.get(), Entry_Mese_Suffragi.get(), Entry_Suffragi_StringVar.get()]
+            dati_suffragi = [Entry_Suffragi_StringVar.get()]
             cur.execute('INSERT INTO TABLE_Suffragi (Anno, Mese, Suffragi) VALUES (?,?,?)', dati)
+
             # cur.execute("insert into TABLE_Celebranti (Celebranti) values ('?'), dati")
             # cur.execute('''INSERT INTO TABLE_Celebranti (Celebranti) VALUES ("Entry_Celebranti_StringVar.get()")''')
             conn.commit()
             # Close our connection
             conn.close()
-    #
-        B_add_celebranti = Button(Frame_Suffragi, text='aggiungi', width=10, command=lambda: [submit(), query_suffragi_database()]).grid(row=1,column=3, sticky=W)
-        B_delete_celebranti = Button(Frame_Suffragi, text='cancella', width=10, command=remove_one).grid(row=2,column=3, sticky=W)
 
+
+        B_add_Suffragi = Button(Frame_Suffragi, text='aggiungi', width=10, command=lambda: [submit(), query_suffragi_database()]).grid(row=0,column=3, sticky=W, pady=5)
+        B_delete_Suffragi = Button(Frame_Suffragi, text='cancella', width=10, command=remove_one).grid(row=1,column=3, sticky=W)
+        B_Tree_Suffragi_sort_by_ID = Button(Frame_Suffragi, text='Sort ID', width=10, command=query_suffragi_database).grid(row=2,column=3, sticky=W)
+        B_Tree_Suffragi_sort_by_Date = Button(Frame_Suffragi, text='Sort Data', width=10, command=query_Suffragi_database_BY_DATE).grid(row=3,column=3, sticky=W)
         query_suffragi_database()
 
 
@@ -1137,7 +1262,7 @@ B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [s
 B_delete = Button(Frame_tree_Buttons, text='cancella', width=10, command=remove_one).pack(side=TOP, pady=20)
 B_Nomi_Celebranti = Button(Frame_tree_Buttons, text='Celebranti', width=10, command=Top_W_Celebranti).pack(side=BOTTOM, pady=20)
 B_Tree_sort_by_ID=Button(Frame_tree_Buttons, text='Sort ID', width=10, command=query_database).pack(side=TOP, pady=20)
-B_Tree_sort_by_Date=Button(Frame_tree_Buttons, text='Sort Data', width=10, command=query_database_BY_DATE).pack(side=TOP, pady=20)
+B_Tree_sort_by_Date=Button(Frame_tree_Buttons, text='Sort Data', width=10, command=lambda: [query_database_BY_DATE()]).pack(side=TOP, pady=20)
 
 Suffragi_Comunitari()
 query_database()
