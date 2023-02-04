@@ -923,187 +923,212 @@ def Top_W_Celebranti():
 ############  WINDOW Suffragi  ###############################
 ##############################################################
 
-class Suffragi_Comunitari:
-    def __init__(self):
+def Suffragi_Comunitari():
 
-        # Frame_suffragi_tree = Frame(Frame_Suffragi, bd='4', bg=background_Blu, relief=RIDGE)
-        # Frame_suffragi_tree.place(x=5, y=467, width=1670, height=480)
-        Label_Titolo_Suffragi= Label(Frame_Suffragi, text='Inserire i suffragi comunitari:', font=('verdana', 12, 'bold'),
-                                      bg=background_Blu, fg=foreground_Bianco)
-        Label_Titolo_Suffragi.grid(column=0,row=0, columnspan=2)
-        Label_Anno_Suffragi = Label(Frame_Suffragi, text='Anno:', font=('verdana', 12, 'bold'),
-                                      bg=background_Blu, fg=foreground_Bianco)
-        Label_Anno_Suffragi.grid(column=0,row=1)
+
+        Label_Titolo_Suffragi= Label(Frame_Suffragi, text='Inserire i suffragi comunitari:', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+        Label_Titolo_Suffragi.grid(column=0,row=0, columnspan=2, sticky="W")
+
+        # List Anni
+        Anni = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+
+        Label_Anno_Suffragi = Label(Frame_Suffragi, text='Anno:', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+        Label_Anno_Suffragi.grid(row=1, column=0, sticky="W",pady=5)
+
+        # Dropbox Anno
         Entry_Anno_Suffragi_StringVar = StringVar()
-        Entry_Anno_Suffragi = Entry(Frame_Suffragi, bd=5, textvariable=Entry_Anno_Suffragi_StringVar)
-        Entry_Anno_Suffragi.grid(column=1,row=1)
+        Entry_Anno_Suffragi = ttk.Combobox(Frame_Suffragi, font=("Helvetica", 10), values=Anni,
+                                        textvariable=Entry_Anno_Suffragi_StringVar)
+        #Entry_Anno_Suffragi.current(4)
+        Entry_Anno_Suffragi.grid(row=1, column=1, sticky="W",pady=5)
+        #Entry_Anno_combo['state'] = 'readonly'
 
-        Label_Mese_Celebranti = Label(Frame_Suffragi, text='Mese:', font=('verdana', 8, 'bold'), bg=background_Blu,
-                                 fg=foreground_Bianco)
-        Label_Mese_Celebranti.grid(column=0,row=2)
+        # List Mesi
+        Mesi = ["gennaio",
+                "febbraio",
+                "marzo",
+                "aprile",
+                "maggio",
+                "giugno",
+                "luglio",
+                "agosto",
+                "settembre",
+                "ottobre",
+                "novembre",
+                "dicembre",
+                ]
+
+        Label_Mese_Suffragi= Label(Frame_Suffragi, text='Mese:', font=('verdana', 12, 'bold'), bg=background_Blu, fg=foreground_Bianco)
+        Label_Mese_Suffragi.grid(column=0,row=2, sticky="W", pady=5)
+
+        # Dropbox Mesi
         Entry_Mese_Suffragi_StringVar = StringVar()
-        Entry_Mese_Suffragi = Entry(Frame_Suffragi, bd=5, textvariable=Entry_Mese_Suffragi_StringVar)
-        Entry_Mese_Suffragi.grid(column=1,row=2)
+        Entry_Mese_Suffragi = ttk.Combobox(Frame_Suffragi, font=("Helvetica", 10), values=Mesi, textvariable=Entry_Mese_Suffragi_StringVar)
 
 
-        Label_Celebranti = Label(Frame_Suffragi, text='Suffragi:', font=('verdana', 8, 'bold'), bg=background_Blu,
+        #Entry_Mese_Suffragi.current(0)
+        Entry_Mese_Suffragi.grid(row=2, column=1,  sticky="W", pady=5)
+
+
+        Label_Suffragi = Label(Frame_Suffragi, text='Suffragi:', font=('verdana', 12, 'bold'), bg=background_Blu,
                                  fg=foreground_Bianco)
-        Label_Celebranti.grid(column=0,row=3)
+        Label_Suffragi.grid(column=0,row=3, sticky="W", pady=5)
         Entry_Suffragi_StringVar = StringVar()
-        Entry_Celebranti = Entry(Frame_Suffragi, bd=5, textvariable=Entry_Suffragi_StringVar)
-        Entry_Celebranti.grid(column=1, row=3)
+        Entry_Suffragi = Entry(Frame_Suffragi, bd=5, textvariable=Entry_Suffragi_StringVar)
+        Entry_Suffragi.grid(column=1, row=3, sticky="W", pady=5)
+
+        Frame_suffragi_tree = Frame(Frame_Suffragi, bd='4', bg=background_Blu, relief=RIDGE)
+        Frame_suffragi_tree.grid(column=0, row=4, columnspan=4)
 
 
+        ############################
+        ####### TREEVIEW ###########
+        ############################
 
+        # Add some style
+        style = ttk.Style()
+        # Pick a theme
+        style.theme_use("default")
 
-    #     ############################
-    #     ####### TREEVIEW ###########
-    #     ############################
+        # Configure our treeview colors
+        style.configure("Treeview",
+                        background="#D3D3D3",
+                        foreground="black",
+                        rowheight=30,
+                        fieldbackground="#D3D3D3",
+                        font=('Calibri', 12)
+                        )
+
+        # Headings
+        style.configure("Treeview.Heading",
+                        font=('Calibri', 12, 'bold')
+                        )
+
+        # Change selected color
+        style.map('Treeview',
+                  background=[('selected', 'blue')]
+                  )
+
+        # Treeview Scrollbar
+        tree_scroll = Scrollbar(Frame_suffragi_tree)
+        tree_scroll.pack(side=RIGHT, fill=Y)
+
+        # Create Treeview
+        my_tree = ttk.Treeview(Frame_suffragi_tree, yscrollcommand=tree_scroll.set, selectmode="extended")
+        # Pack to the screen
+        my_tree.pack()
+
+        # Configure the scrollbar
+        tree_scroll.config(command=my_tree.yview)
+
+        # Define Our Columns
+        my_tree['columns'] = ("ID", "Anno", "Mese", "Suffragi")
+
+        # Formate Our Columns
+        my_tree.column("#0", width=0, stretch=NO)
+        my_tree.column("ID", anchor=W, width=40)
+        my_tree.column("Anno", anchor=W, width=70)
+        my_tree.column("Mese", anchor=W, width=70)
+        my_tree.column("Suffragi", anchor=W, width=250)
+
+        # Create Headings
+        my_tree.heading("#0", text="", anchor=W)
+        my_tree.heading("ID", text="Id", anchor=W)
+        my_tree.heading("Anno", text="Anno", anchor=W)
+        my_tree.heading("Mese", text="Mese", anchor=W)
+        my_tree.heading("Suffragi", text="Suffragi", anchor=W)
+
+        def query_suffragi_database():
+            # Clear the Treeview
+            for record in my_tree.get_children():
+                my_tree.delete(record)
+
+            # Create a database or connect to one that exists
+            conn = sqlite3.connect('database_messe_orizzontale')
+
+            # Create a cursor instance
+            c = conn.cursor()
+
+            c.execute("SELECT * FROM TABLE_Suffragi;")
+            records = c.fetchall()
+            for x in records:
+                print('TABLE_Suffragi')
+                print(x)
+        #
+            # COLORI RIGHE pari e dispari
+            count = 0
+            # Create striped row tags
+            my_tree.tag_configure('oddrow', background="white")
+            my_tree.tag_configure('evenrow', background="lightblue")
+
+            for record in records:
+                if count % 2 == 0:
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=  (
+                                       record[0],
+                                       record[1],
+                                       record[2],
+                                       record[3]
+                                            ),
+                                   tags=('evenrow'))
+                else:
+                    my_tree.insert(parent='', index=0, iid=record[0], text='',
+                                   values=  (
+                                       record[0],
+                                       record[1],
+                                       record[2],
+                                       record[3]
+                                            ),
+                                   tags=('oddrow'))
+                count += 1
+
+            # Al termine del processo la prima riga risulta evidenziata
+            child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
+            my_tree.focus(child_id)  # evidenziata
+            my_tree.selection_set(child_id)
+
+            # Commit changes
+            conn.commit()
+
+            # Close our connection
+            conn.close()
+
+        def remove_one():
+            # my_tree.focus() restituisce l'ID della riga selezionata
+            row_id = my_tree.focus()
+            my_tree.delete(row_id)
+
+            # Create a database or connect to one that exists
+            conn = sqlite3.connect('database_messe_orizzontale')
+
+            # Create a cursor instance
+            c = conn.cursor()
+
+            # Delete From Database
+            c.execute("DELETE from TABLE_Suffragi WHERE oid =" + row_id)
+
+            # Commit changes
+            conn.commit()
+
+            # Close our connection
+            conn.close()
     #
-    #     # Add some style
-    #     style = ttk.Style()
-    #     # Pick a theme
-    #     style.theme_use("default")
+        def submit():
+            conn = sqlite3.connect('database_messe_orizzontale')
+            cur = conn.cursor()
+            dati = [Entry_Anno_Suffragi.get(), Entry_Anno_Suffragi.get(), Entry_Suffragi_StringVar.get()]
+            cur.execute('INSERT INTO TABLE_Suffragi (Anno, Mese, Suffragi) VALUES (?,?,?)', dati)
+            # cur.execute("insert into TABLE_Celebranti (Celebranti) values ('?'), dati")
+            # cur.execute('''INSERT INTO TABLE_Celebranti (Celebranti) VALUES ("Entry_Celebranti_StringVar.get()")''')
+            conn.commit()
+            # Close our connection
+            conn.close()
     #
-    #     # Configure our treeview colors
-    #     style.configure("Treeview",
-    #                     background="#D3D3D3",
-    #                     foreground="black",
-    #                     rowheight=30,
-    #                     fieldbackground="#D3D3D3",
-    #                     font=('Calibri', 12)
-    #                     )
-    #
-    #     # Headings
-    #     style.configure("Treeview.Heading",
-    #                     font=('Calibri', 12, 'bold')
-    #                     )
-    #
-    #     # Change selected color
-    #     style.map('Treeview',
-    #               background=[('selected', 'blue')]
-    #               )
-    #
-    #     # Treeview Scrollbar
-    #     tree_scroll = Scrollbar(Frame_suffragi_tree)
-    #     tree_scroll.pack(side=RIGHT, fill=Y)
-    #
-    #     # Create Treeview
-    #     my_tree = ttk.Treeview(Frame_suffragi_tree, yscrollcommand=tree_scroll.set, selectmode="extended")
-    #     # Pack to the screen
-    #     my_tree.pack()
-    #
-    #     # Configure the scrollbar
-    #     tree_scroll.config(command=my_tree.yview)
-    #
-    #     # Define Our Columns
-    #     my_tree['columns'] = ("ID", "Anno", "Mese", "Suffragi")
-    #
-    #     # Formate Our Columns
-    #     my_tree.column("#0", width=0, stretch=NO)
-    #     my_tree.column("ID", anchor=W, width=40)
-    #     my_tree.column("Anno", anchor=W, width=70)
-    #     my_tree.column("Mese", anchor=W, width=70)
-    #     my_tree.column("Suffragi", anchor=W, width=250)
-    #
-    #     # Create Headings
-    #     my_tree.heading("#0", text="", anchor=W)
-    #     my_tree.heading("ID", text="Id", anchor=W)
-    #     my_tree.heading("Anno", text="Anno", anchor=W)
-    #     my_tree.heading("Mese", text="Mese", anchor=W)
-    #     my_tree.heading("Suffragi", text="Suffragi", anchor=W)
-    #
-    # def query_database(self):
-    #     # Clear the Treeview
-    #     for record in my_tree.get_children():
-    #         my_tree.delete(record)
-    #
-    #     # Create a database or connect to one that exists
-    #     conn = sqlite3.connect('database_messe_orizzontale')
-    #
-    #     # Create a cursor instance
-    #     c = conn.cursor()
-    #
-    #     c.execute("SELECT * FROM TABLE_Suffragi;")
-    #     records = c.fetchall()
-    # #     # for x in records:
-    # #     #     print('Table Messe')
-    # #     #     print(x)
-    # #
-    #     # COLORI RIGHE pari e dispari
-    #     count = 0
-    #     # Create striped row tags
-    #     my_tree.tag_configure('oddrow', background="white")
-    #     my_tree.tag_configure('evenrow', background="lightblue")
-    #
-    #     for record in records:
-    #         if count % 2 == 0:
-    #             my_tree.insert(parent='', index=0, iid=record[0], text='',
-    #                            values=  (
-    #                                record[0],
-    #                                record[1],
-    #                                record[2],
-    #                                record[3]
-    #                                     ),
-    #                            tags=('evenrow'))
-    #         else:
-    #             my_tree.insert(parent='', index=0, iid=record[0], text='',
-    #                            values=  (
-    #                                record[0],
-    #                                record[1],
-    #                                record[2],
-    #                                record[3]
-    #                                     ),
-    #                            tags=('oddrow'))
-    #         count += 1
-    #
-    #     # Al termine del processo la prima riga risulta evidenziata
-    #     child_id = my_tree.get_children()[0]  # la prima riga dall'alto del treeview
-    #     my_tree.focus(child_id)  # evidenziata
-    #     my_tree.selection_set(child_id)
-    #
-    #     # Commit changes
-    #     conn.commit()
-    #
-    #     # Close our connection
-    #     conn.close()
-    # #
-    # def remove_one(self):
-    #     # my_tree.focus() restituisce l'ID della riga selezionata
-    #     row_id = my_tree.focus()
-    #     my_tree.delete(row_id)
-    #
-    #     # Create a database or connect to one that exists
-    #     conn = sqlite3.connect('database_messe_orizzontale')
-    #
-    #     # Create a cursor instance
-    #     c = conn.cursor()
-    #
-    #     # Delete From Database
-    #     c.execute("DELETE from TABLE_Suffragi WHERE oid =" + row_id)
-    #
-    #     # Commit changes
-    #     conn.commit()
-    #
-    #     # Close our connection
-    #     conn.close()
-    # #
-    # def submit(self):
-    #     conn = sqlite3.connect('database_messe_orizzontale')
-    #     cur = conn.cursor()
-    #     dati = [self.Entry_Anno_Suffragi.get(), self.Entry_Anno_Suffragi.get(), self.Entry_Suffragi_StringVar.get()]
-    #     cur.execute('INSERT INTO TABLE_Suffragi (Suffragi) VALUES (?,?,?)', dati)
-    #     # cur.execute("insert into TABLE_Celebranti (Celebranti) values ('?'), dati")
-    #     # cur.execute('''INSERT INTO TABLE_Celebranti (Celebranti) VALUES ("Entry_Celebranti_StringVar.get()")''')
-    #     conn.commit()
-    #     # Close our connection
-    #     conn.close()
-    # #
-    # B_add_celebranti = Button(Frame_Suffragi, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(
-    #     side=TOP, pady=20)
-    # B_delete_celebranti = Button(Frame_Suffragi, text='cancella', width=10, command=remove_one).pack(side=TOP, pady=20)
-    #
-    #
+        B_add_celebranti = Button(Frame_Suffragi, text='aggiungi', width=10, command=lambda: [submit(), query_suffragi_database()]).grid(row=1,column=3, sticky=W)
+        B_delete_celebranti = Button(Frame_Suffragi, text='cancella', width=10, command=remove_one).grid(row=2,column=3, sticky=W)
+
+        query_suffragi_database()
+
 
 
 B_add = Button(Frame_tree_Buttons, text='aggiungi', width=10, command=lambda: [submit(), query_database()]).pack(side=TOP, pady=20)
