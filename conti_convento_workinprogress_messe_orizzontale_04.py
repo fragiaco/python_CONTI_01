@@ -111,13 +111,14 @@ Frame_tree.place(x=5, y=132, width=1570, height=335)
 Frame_tree_Buttons= Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
 Frame_tree_Buttons.place(x=1575, y=132, width=100, height=335)
 
-# Frame Update - update right Frame
-Frame_update = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_update.place(x=5, y=465, width=1670, height=60)
 
+#
 Frame_pandastable = Frame(root, bd='4', bg=background_Blu, relief=RIDGE)
-Frame_pandastable.place(x=5, y=525, width=1670, height=420)
+Frame_pandastable.place(x=5, y=467, width=1670, height=480)
 
+# Frame Update - update right Frame
+Frame_update = Frame(Frame_pandastable, bd='4', bg=background_Blu, relief=RIDGE)
+Frame_update.place(x=0, y=0, width=470, height=473)
 
 
 ###############################################
