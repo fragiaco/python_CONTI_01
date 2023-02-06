@@ -165,9 +165,9 @@ class SettingsWindows:
             # Close our connection
             conn.close()
 
-        self.B_add_celebranti = tk.Button(self.frame, text='aggiungi', width=10, command=lambda: [submit(self), query_database(self)]).pack(
+        self.B_add_celebranti = tk.Button(self.frame, text='aggiungi', width=10, command=lambda: [query_database(self), submit(self), query_database(self)]).pack(
             side=tk.TOP, pady=20)
-        self.B_delete_celebranti = tk.Button(self.frame, text='cancella', width=10, command=remove_one(self)).pack(side=tk.TOP, pady=20)
+        self.B_delete_celebranti = tk.Button(self.frame, text='cancella', width=10, command=lambda: [remove_one(self)]).pack(side=tk.TOP, pady=20)
 
 class MainWindow:
     def __init__(self, master):
