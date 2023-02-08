@@ -6,6 +6,8 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 
+
+
 class SettingsWindows:
     def __init__(self):
         self.win = tk.Toplevel() # simile a root = tk.Tk()
@@ -168,6 +170,15 @@ class SettingsWindows:
         self.B_add_celebranti = tk.Button(self.frame, text='aggiungi', width=10, command=lambda: [query_database(self), submit(self), query_database(self)]).pack(
             side=tk.TOP, pady=20)
         self.B_delete_celebranti = tk.Button(self.frame, text='cancella', width=10, command=lambda: [remove_one(self)]).pack(side=tk.TOP, pady=20)
+
+
+
+class Settings_super(SettingsWindows):
+    def __init__(self):
+        super().__init__()
+        pass
+
+
 
 class MainWindow:
     def __init__(self, master):
