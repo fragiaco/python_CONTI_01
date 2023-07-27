@@ -30,7 +30,7 @@ from xlsxwriter.utility import xl_rowcol_to_cell
 ######## FUNZIONE CONNESSIONE AL DATABASE 'database_conti' ###########
 ######################################################################
 def connessione():
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_conti.db')
 
     cur = conn.cursor()
     try:
@@ -46,7 +46,7 @@ def connessione():
 
 
     print(conn)
-    print('Sei connesso al database_conti')
+    print('Sei connesso al database_conti.db')
     conn.commit()
     conn.close()
 
@@ -719,7 +719,7 @@ my_tree.heading("Euro", text="Euro", anchor=W)
 # Insert into TABLE_Conti
 def submit():
 
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_conti.db')
     cur = conn.cursor()
 
     dati = [(anno_combo.get(), mesi_combo.get(), my_combo.get(), categoria_combo.get(), voce_combo.get(), euro.get())]
@@ -735,7 +735,7 @@ def query_database():
         my_tree.delete(record)
 
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_conti.db')
 
     # Create a cursor instance
     c = conn.cursor()
@@ -780,7 +780,7 @@ def query_database():
 def sqlite3_to_excel():
 
     # Create a database or connect to one that exists
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_conti.db')
 
     # Create a cursor instance
     c = conn.cursor()
@@ -997,7 +997,7 @@ def remove_one():
     my_tree.delete(x)
 
 	# Create a database or connect to one that exists
-    conn = sqlite3.connect('database_conti')
+    conn = sqlite3.connect('database_conti.db')
 
 	# Create a cursor instance
     c = conn.cursor()
@@ -1592,15 +1592,18 @@ class Report():
 
 
 
-                # Colonna D :Formattazione degli euro in valuta euro
-                for sheet in list_ws_mese:
-                    for row in sheet[7:sheet.max_row]:  # skip the header
-                        #print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
-                        cell = row[3]  # il quarto valore della tuple
-                        print (cell)# <Cell 'multiple'.D7>
-                        cell.number_format = '#,##0.00 €'
-                        cell.alignment = Alignment(horizontal="right")
-                        cell.font = Font(bold=True)
+                # Colonna D :Formattazione degli euro in valuta euro (Mi METTE ERRORE SENZA Try)
+                try:
+                    for sheet in list_ws_mese:
+                        for row in sheet[7:sheet.max_row]:  # skip the header
+                            #print(row) #(<Cell 'gennaio'.A7>, <Cell 'gennaio'.B7>, <Cell 'gennaio'.C7>, <Cell 'gennaio'.D7>)
+                            cell = row[3]  # il quarto valore della tuple
+                            print (cell)# <Cell 'multiple'.D7>
+                            cell.number_format = '#,##0.00 €'
+                            cell.alignment = Alignment(horizontal="right")
+                            cell.font = Font(bold=True)
+                except:
+                    pass
 
                 # Aggiungo la scritta 'Totale =' alla tabella pivot davanti ai subtotali
                 for sheet in list_ws_mese:
